@@ -9,4 +9,5 @@
         </p>
 
     </div>
+    <div class="section-divider"></div>
 </section>
