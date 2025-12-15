@@ -1,0 +1,788 @@
+/* ==================================================
+   GLOBAL
+================================================== */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 16px;
+}
+
+/* ==================================================
+   TOPBAR
+================================================== */
+.topbar {
+    background: #f2f2f2;
+    font-size: 13px;
+    color: #555;
+}
+
+.topbar-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+}
+
+/* SOCIAL ICON */
+.social-icons {
+    display: flex;
+    gap: 8px;
+}
+
+.social-icons a {
+    width: 28px;
+    height: 28px;
+    background: #0485c7;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+/* ==================================================
+   HEADER MAIN
+================================================== */
+.header-main {
+    background: #fff;
+    border-bottom: 1px solid #eee;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+}
+
+.header-brand {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.header-brand img {
+    width: 90px;
+}
+
+.brand-text h1 {
+    font-size: 26px;
+    margin: 0;
+    font-weight: 800;
+}
+
+.brand-text h2 {
+    font-size: 16px;
+    margin: 0;
+    font-weight: 600;
+}
+
+.brand-text span,
+.brand-text small {
+    display: block;
+    font-size: 12px;
+    color: #555;
+}
+
+/* KONTAK */
+.header-contact {
+    display: flex;
+    gap: 30px;
+}
+
+.contact-item {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.contact-item i {
+    font-size: 26px;
+    color: #0b4ea2;
+}
+
+/* ==================================================
+   NAVBAR DESKTOP
+================================================== */
+.navbar {
+    background: #0485c7;
+}
+
+.nav-content {
+    display: flex;
+    align-items: center;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 26px;
+    padding: 14px 0;
+    margin: 0;
+    align-items: center;
+}
+
+.nav-menu a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/* ==================================================
+   MOBILE HEADER (riau STYLE)
+================================================== */
+.mobile-header {
+    display: none;
+    background: #0485c7;
+    padding: 10px 14px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.mobile-logo {
+    height: 38px;
+}
+
+.mobile-menu-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+/* MOBILE MENU (FULLSCREEN riau) */
+.nav-menu.mobile-show {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    inset: 0;
+    background: #0485c7;
+    padding: 70px 20px;
+    gap: 20px;
+    z-index: 9999;
+}
+
+/* ==================================================
+   TABLET (≤992px)
+================================================== */
+@media (max-width: 992px) {
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 16px;
+    }
+
+    .header-contact {
+        justify-content: center;
+    }
+}
+
+/* ==================================================
+   MOBILE riau MODE (≤768px) – FINAL OVERRIDE
+================================================== */
+@media (max-width: 768px) {
+    /* SEMBUNYIKAN HEADER DESKTOP */
+    .topbar,
+    .header-main,
+    .navbar {
+        display: none;
+    }
+
+    /* TAMPILKAN HEADER MOBILE */
+    .mobile-header {
+        display: flex;
+    }
+
+    /* MENU MOBILE */
+    .nav-menu {
+        display: none;
+    }
+}
+
+/* ==================================================
+   MOBILE KECIL (≤576px)
+================================================== */
+@media (max-width: 576px) {
+    main h1 {
+        font-size: 22px;
+        text-align: center;
+    }
+
+    main p {
+        font-size: 14px;
+        text-align: center;
+    }
+}
+
+/* ==================================================
+   DASHBOARD SECTION
+================================================== */
+.section {
+    padding: 50px 0;
+}
+
+.section h2 {
+    margin-bottom: 20px;
+    color: #0b4ea2;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: #fff;
+    border: 1px solid #eee;
+    padding: 15px;
+}
+
+.card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+}
+
+.list li {
+    margin-bottom: 8px;
+}
+
+/* ===============================
+   KATA PENGANTAR – CLONE Riau
+=============================== */
+.kata-riau {
+    background: #fff;
+}
+
+.kata-riau-wrap {
+    max-width: 1100px;
+    margin: auto;
+
+    /* FIX UTAMA */
+    display: grid;
+    grid-template-columns: 1.4fr 0.6fr;
+    gap: 60px;
+    align-items: center;
+}
+
+/* TEKS */
+.kata-riau-text h2 {
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 28px;
+    color: #2f3438;
+    max-width: 620px;
+}
+
+.kata-lead {
+    font-size: 17px;
+    color: #6c757d;
+    margin-bottom: 22px;
+    line-height: 1.7;
+}
+
+.kata-riau-text p {
+    font-size: 15px;
+    line-height: 1.9;
+    color: #7a7a7a;
+    margin-bottom: 20px;
+    max-width: 620px;
+}
+
+.kata-nama {
+    margin-top: 28px;
+    font-size: 15px;
+    color: #555;
+}
+
+.kata-nama span {
+    color: #888;
+    font-size: 14px;
+}
+
+/* FOTO */
+.kata-riau-foto {
+    display: flex;
+    justify-content: center;
+}
+
+.kata-riau-foto img {
+    height: 420px;
+    width: auto;
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+    .kata-riau-wrap {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .kata-riau-foto img {
+        height: 360px;
+    }
+}
+
+@media (max-width: 576px) {
+    .kata-riau-text h2 {
+        font-size: 24px;
+    }
+
+    .kata-lead {
+        font-size: 15px;
+    }
+
+    .kata-riau-text p {
+        font-size: 14px;
+    }
+
+    .kata-riau-foto img {
+        height: 300px;
+    }
+}
+
+/* ===============================
+   BERITA TERBARU (CLONE riau)
+=============================== */
+.berita-terbaru {
+    background: #f8f9fb;
+}
+
+.judul-center {
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 30px;
+}
+
+.judul-center span {
+    font-weight: 700;
+}
+
+.berita-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.berita-card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.berita-img {
+    position: relative;
+}
+
+.berita-img img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+}
+
+.badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #0b4ea2;
+    color: #fff;
+    font-size: 11px;
+    padding: 4px 8px;
+    border-radius: 3px;
+}
+
+.berita-body {
+    padding: 14px;
+}
+
+.berita-body h4 {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.berita-body p {
+    font-size: 13px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.berita-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #777;
+}
+
+/* BUTTON */
+.btn-center {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.btn-berita {
+    background: #000;
+    color: #fff;
+    padding: 8px 14px;
+    font-size: 13px;
+    text-decoration: none;
+    border-radius: 3px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+    .berita-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .berita-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .btn-center {
+        text-align: center;
+    }
+}
+
+/* ===============================
+   ALINEA (riau STYLE)
+=============================== */
+.alinea-section {
+    background: #fff;
+    padding: 30px 0;
+}
+
+.alinea-text {
+    max-width: 900px;
+    margin: auto;
+    text-align: center;
+    font-size: 15px;
+    line-height: 1.8;
+    color: #444;
+}
+/* ===============================
+   PANTUN TERBARU (CLONE riau)
+=============================== */
+.pantun-terbaru {
+    background: #fff;
+}
+
+.judul-center {
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 30px;
+    font-weight: 400;
+}
+
+.judul-center span {
+    font-weight: 700;
+}
+
+/* GRID */
+.pantun-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+/* CARD */
+.pantun-card {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    background: #fff;
+}
+
+.pantun-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* BUTTON */
+.btn-right {
+    text-align: right;
+    margin-top: 25px;
+}
+
+.btn-pantun {
+    background: #111;
+    color: #fff;
+    padding: 8px 16px;
+    font-size: 13px;
+    text-decoration: none;
+    border-radius: 3px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+    .pantun-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .pantun-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .btn-right {
+        text-align: center;
+    }
+}
+
+/* ===============================
+   SECTION DIVIDER (riau STYLE)
+=============================== */
+.section-divider {
+    margin-top: 40px;
+    border-top: 1px solid #e5e5e5;
+}
+
+/* ===============================
+   PENGUMUMAN (riau STYLE)
+=============================== */
+.pengumuman-section {
+    background: #fff;
+}
+
+.judul-section {
+    font-size: 22px;
+    margin-bottom: 24px;
+    color: #0b4ea2;
+}
+
+/* WRAP */
+.pengumuman-wrap {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+}
+
+/* LIST KIRI */
+.pengumuman-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.pengumuman-item {
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #ddd;
+}
+
+.pengumuman-item .tanggal {
+    display: block;
+    font-size: 12px;
+    color: #777;
+    margin-bottom: 4px;
+}
+
+.pengumuman-item a {
+    font-size: 14px;
+    color: #333;
+    text-decoration: none;
+}
+
+.pengumuman-item a:hover {
+    color: #0b4ea2;
+    text-decoration: underline;
+}
+
+/* KANAN */
+.pengumuman-side {
+    background: #f8f9fb;
+    padding: 20px;
+    border: 1px solid #eee;
+}
+
+.pengumuman-side h4 {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.pengumuman-side p {
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+/* BUTTON */
+.btn-pengumuman {
+    display: inline-block;
+    background: #111;
+    color: #fff;
+    padding: 8px 14px;
+    font-size: 13px;
+    text-decoration: none;
+    border-radius: 3px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .pengumuman-wrap {
+        grid-template-columns: 1fr;
+    }
+
+    .pengumuman-side {
+        margin-top: 20px;
+    }
+}
+
+/* ===============================
+   MASKOT riau STYLE (CLONE)
+=============================== */
+.maskot-riau {
+    background: #fff;
+}
+
+.maskot-riau-wrap {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+/* GAMBAR */
+.maskot-riau-image {
+    display: flex;
+    justify-content: center;
+}
+
+.maskot-circle {
+    width: 260px;
+    height: 260px;
+    background: #0b8fd6;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.maskot-circle img {
+    width: 75%;
+    height: auto;
+}
+
+/* TEKS */
+.maskot-riau-text h2 {
+    font-size: 28px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.maskot-riau-text h2 strong {
+    font-weight: 700;
+}
+
+.maskot-riau-text p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #666;
+    margin-bottom: 16px;
+    max-width: 720px;
+}
+
+.maskot-salam {
+    margin-top: 20px;
+    font-size: 15px;
+    color: #444;
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+    .maskot-riau-wrap {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 40px;
+    }
+
+    .maskot-riau-text p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+/* ==================================================
+   RESPONSIVE FIX – ANDROID & IOS (SAFE PATCH)
+================================================== */
+
+/* FIX VIEWPORT IOS */
+html,
+body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+/* PUSATKAN NAVBAR DI SEMUA UKURAN */
+.nav-content {
+    justify-content: center;
+    width: 100%;
+}
+
+/* AMANKAN MENU MOBILE FULLSCREEN (IOS SAFARI) */
+.nav-menu.mobile-show {
+    height: 100dvh; /* FIX iOS */
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* AMANKAN SECTION DI MOBILE */
+@media (max-width: 768px) {
+    .section {
+        padding: 36px 0;
+    }
+
+    .container {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+}
+
+/* KATA PENGANTAR – MOBILE FIX */
+@media (max-width: 768px) {
+    .kata-riau-text,
+    .kata-riau-text p,
+    .kata-lead {
+        text-align: center;
+        max-width: 100%;
+    }
+}
+
+/* BERITA, PANTUN, PENGUMUMAN – MOBILE FIX */
+@media (max-width: 576px) {
+    .berita-grid,
+    .pantun-grid {
+        row-gap: 20px;
+    }
+
+    .btn-right,
+    .btn-center {
+        text-align: center;
+    }
+}
+
+/* MASKOT – IOS ALIGNMENT FIX */
+@media (max-width: 768px) {
+    .maskot-circle {
+        margin: auto;
+    }
+}
