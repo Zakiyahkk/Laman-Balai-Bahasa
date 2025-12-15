@@ -2,4 +2,6 @@
 
 use App\Http\Controllers\User\BerandaController;
 
-Route::get('/', [BerandaController::class, 'dashboard']);
+Route::get('/', function () {
+    return view('welcome');
+});
