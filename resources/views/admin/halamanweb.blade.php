@@ -4,7 +4,7 @@
 <!-- =================  SECTION LAYOUT ATAS ================= -->
 <div class="page-header d-flex justify-content-between align-items-center mb-4">
     <div>
-        <h3 class="mb-1">Publikasi</h3>
+        <h3 class="mb-1">Halaman Web</h3>
         <p class="text-muted mb-0">
             Halaman ini untuk mengelola alinea yang dipublikasikan di Balai Bahasa Provinsi Riau
         </p>
