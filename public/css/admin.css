@@ -155,3 +155,218 @@ body {
     font-size: 20px;
     line-height: 1;
 }
+
+/* css halaman galery */
+/* Variabel Warna */
+:root {
+    --primary-color: #007bff; /* Biru umum */
+    --light-teal: #e0f7fa; /* Hijau muda/teal untuk placeholder */
+    --teal-border: #80cbc4; /* Border sedikit lebih gelap */
+    --upload-button-bg: #28a745; /* Hijau untuk tombol upload */
+    --delete-button-bg: #dc3545; /* Merah untuk tombol hapus (di hover) */
+    --text-dark: #333;
+    --text-secondary: #6c757d;
+    --tag-bg-photo: #a3e6a3; /* Tag Foto: Hijau muda */
+    --tag-bg-video: #c6e0ff; /* Tag Video: Biru muda */
+    --tag-text: #1a5e1a;
+}
+
+/* Reset dan Body Dasar */
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f8f9fa;
+    color: var(--text-dark);
+}
+
+.gallery-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header */
+.gallery-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.gallery-header h1 {
+    margin: 0;
+    font-size: 2em;
+    font-weight: 600;
+}
+
+.gallery-header p {
+    margin: 0;
+    color: var(--text-secondary);
+}
+
+.upload-button {
+    background-color: var(--upload-button-bg);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+.upload-button i {
+    margin-right: 8px;
+    font-size: 1.1em;
+}
+
+.upload-button:hover {
+    background-color: #218838;
+}
+
+/* Filter dan Pencarian */
+.gallery-filters {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.search-box {
+    flex-grow: 1;
+    position: relative;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 10px 10px 10px 40px; /* Ruang untuk ikon */
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+.search-box i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+}
+
+.filter-select {
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    background-color: white;
+    appearance: none; /* Menghilangkan style default select */
+    min-width: 180px;
+    cursor: pointer;
+}
+
+/* Grid Item Galeri */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.gallery-item {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Placeholder Media (Warna Teal) */
+.media-preview {
+    height: 180px;
+    background-color: var(--light-teal);
+    border-bottom: 1px solid var(--teal-border);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.media-preview i {
+    font-size: 4em;
+    color: var(--teal-border);
+}
+
+/* Tag Tipe Media (Foto/Video) */
+.media-type-tag {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.photo-tag {
+    background-color: var(--tag-bg-photo);
+    color: var(--tag-text);
+}
+
+.video-tag {
+    background-color: var(--tag-bg-video);
+    color: var(--primary-color);
+}
+
+/* Detail Item */
+.item-details {
+    padding: 15px;
+    flex-grow: 1;
+}
+
+.item-title {
+    margin-top: 0;
+    font-size: 1.1em;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 10px;
+}
+
+.item-details p {
+    margin: 4px 0;
+    font-size: 0.9em;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+}
+
+.item-details p i {
+    margin-right: 5px;
+    font-size: 0.8em;
+}
+
+/* Tombol Hapus */
+.delete-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #f8d7da; /* Latar belakang merah muda */
+    color: var(--delete-button-bg);
+    border: 1px solid #f5c6cb;
+    border-radius: 0 0 8px 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1em;
+}
+
+.delete-button i {
+    margin-right: 5px;
+}
+
+.delete-button:hover {
+    background-color: var(--delete-button-bg);
+    color: white;
+}
