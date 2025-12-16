@@ -10,14 +10,15 @@
 
 <body>
 
-    @include('user.partials.navbar')
-
+    @include('user.partials.header')
     <main>
         @yield('content')
     </main>
 
     @include('user.partials.footer')
 
+    <script src="{{ asset('js/user.js') }}"></script>
 </body>
+
 
 </html>

@@ -30,6 +30,6 @@
         <div class="kata-riau-foto">
             <img src="/img/kepala-balai.png" alt="Kepala Balai Bahasa Provinsi Riau">
         </div>
-
     </div>
+    <div class="section-divider"></div>
 </section>
