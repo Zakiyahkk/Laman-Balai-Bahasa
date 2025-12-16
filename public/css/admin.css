@@ -124,3 +124,22 @@ body {
     object-fit: cover; /* Memastikan gambar menutupi area tanpa terdistorsi */
     border: 2px solid var(--active-bg); /* Opsi: Tambahkan border untuk menonjolkan */
 }
+
+    <style>
+        /* Gaya Inline (Sebaiknya dipindahkan ke admin.css) */
+        .table-responsive .table {
+            white-space: nowrap; 
+        }
+        .badge {
+            padding: 0.5em 0.8em;
+            font-weight: 500;
+        }
+        .form-control:focus, .btn:focus {
+            box-shadow: none !important;
+            border-color: initial !important; 
+        }
+        /* CSS tambahan untuk memastikan tombol kecil dan icon kecil */
+        .btn-sm i.bi {
+            font-size: 1rem; /* Ukuran icon dikecilkan */
+        }
+    </style>
