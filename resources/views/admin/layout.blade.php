@@ -25,75 +25,76 @@
 </div>
         <hr class="sidebar-hr">
         <ul class="nav flex-column menu-list flex-grow-1">
-            <li class="nav-item">
-                <a class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}"
-                href="{{ route('admin.dashboard') }}">
-                    <i class="bi bi-grid-fill me-2"></i>
-                    Dashboard
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ request()->routeIs('admin.artikel-berita') ? 'active' : '' }}"
-                href="{{ route('admin.artikel-berita') }}">
-                    <i class="bi bi-grid-fill me-2"></i>
-                    Artikel & Berita
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ request()->routeIs('admin.kegiatan') ? 'active' : '' }}"
-                href="{{ route('admin.kegiatan') }}">
-                    <i class="bi bi-grid-fill me-2"></i>
-                    Kegiatan
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ request()->routeIs('admin.publikasi') ? 'active' : '' }}"
-                href="{{ route('admin.publikasi') }}">
-                    <i class="bi bi-book-fill me-2"></i>
-                    Publikasi
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ request()->routeIs('admin.pendaftaran') ? 'active' : '' }}"
-                href="{{ route('admin.pendaftaran') }}">
-                    <i class="bi bi-grid-fill me-2"></i>
-                    Pendaftaran
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ request()->routeIs('admin.galeri') ? 'active' : '' }}"
-                href="{{ route('admin.galeri') }}">
-                    <i class="bi bi-grid-fill me-2"></i>
-                    Galeri
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ request()->routeIs('admin.halamanweb') ? 'active' : '' }}"
-                href="{{ route('admin.halamanweb') }}">
-                    <i class="bi bi-grid-fill me-2"></i>
-                    Halaman Web
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ request()->routeIs('admin.pengaturan') ? 'active' : '' }}"
-                href="{{ route('admin.pengaturan') }}">
-                    <i class="bi bi-grid-fill me-2"></i>
-                    Pengaturan
-                </a>
-            </li>
-            <a href="/logout" class="nav-link logout-link">
-                <i class="bi bi-box-arrow-right me-2"></i>
-                Logout
-            </a>
-        </ul>
 
-        <!-- <div class="p-3 mt-auto">
-            <hr class="sidebar-hr">
-            <a href="/logout" class="nav-link logout-link">
+    <li class="nav-item">
+        <a class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}"
+           href="{{ route('admin.dashboard') }}">
+            <i class="bi bi-speedometer2 me-2"></i>
+            Dashboard
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link {{ request()->routeIs('admin.artikel-berita') ? 'active' : '' }}"
+           href="{{ route('admin.artikel-berita') }}">
+            <i class="bi bi-newspaper me-2"></i>
+            Artikel & Berita
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link {{ request()->routeIs('admin.kegiatan') ? 'active' : '' }}"
+           href="{{ route('admin.kegiatan') }}">
+            <i class="bi bi-calendar-event me-2"></i>
+            Kegiatan
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link {{ request()->routeIs('admin.publikasi') ? 'active' : '' }}"
+           href="{{ route('admin.publikasi') }}">
+            <i class="bi bi-journal-text me-2"></i>
+            Publikasi
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link {{ request()->routeIs('admin.pendaftaran') ? 'active' : '' }}"
+           href="{{ route('admin.pendaftaran') }}">
+            <i class="bi bi-clipboard-check me-2"></i>
+            Pendaftaran
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link {{ request()->routeIs('admin.galeri') ? 'active' : '' }}"
+           href="{{ route('admin.galeri') }}">
+            <i class="bi bi-images me-2"></i>
+            Galeri
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link {{ request()->routeIs('admin.halamanweb') ? 'active' : '' }}"
+           href="{{ route('admin.halamanweb') }}">
+            <i class="bi bi-globe me-2"></i>
+            Halaman Web
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link {{ request()->routeIs('admin.pengaturan') ? 'active' : '' }}"
+           href="{{ route('admin.pengaturan') }}">
+            <i class="bi bi-gear me-2"></i>
+            Pengaturan
+        </a>
+    </li>
+
+    <a href="/logout" class="nav-link logout-link">
                 <i class="bi bi-box-arrow-right me-2"></i>
                 Logout
-            </a>
-        </div> -->
+    </a>
+</ul>
 
     </aside>
 
