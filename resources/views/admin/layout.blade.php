@@ -11,14 +11,14 @@
 
 <div class="d-flex min-vh-100">
     <aside class="sidebar d-flex flex-column">
-       <div class="admin-profile p-3">
-    <div class="d-flex align-items-center">
-        <img src="/img/AkunLogo.jpg" alt="Foto Profil Admin" class="avatar-circle me-3">
-        <div>
-            <div class="fw-bold">Admin</div>
-            <div class="small">admin@balaibahasa.go.id</div>
+       <div class="admin-profile px-2 py-1">
+        <div class="d-flex align-items-center">
+            <img src="/img/AkunLogo.jpg" alt="Foto Profil Admin" class="avatar-circle me-1">
+            <div>
+                <div class="fw-bold">Username</div>
+                <div class="small">Role</div>
+            </div>
         </div>
-    </div>
 </div>
         <hr class="sidebar-hr">
         <ul class="nav flex-column menu-list flex-grow-1">

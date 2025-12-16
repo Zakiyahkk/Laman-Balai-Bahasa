@@ -117,8 +117,8 @@ body {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 .avatar-circle {
-    width: 40px;
-    height: 40px;
+    width: 56px;
+    height: 56px;
     border-radius: 50%; /* Membuat gambar melingkar */
     object-fit: cover; /* Memastikan gambar menutupi area tanpa terdistorsi */
     border: 2px solid var(--active-bg); /* Opsi: Tambahkan border untuk menonjolkan */
