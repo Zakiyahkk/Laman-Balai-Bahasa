@@ -36,40 +36,45 @@
                     Dashboard
                 </a>
             </li>
+           <li class="nav-item">
+        <a class="nav-link" href="{{ url('/admin/artikel-berita') }}"> 
+        <i class="bi bi-file-earmark-text-fill me-2">
+        </i> Artikel & Berita </a>
+        </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="bi bi-file-earmark-text-fill me-2"></i>
-                    Artikel & Berita
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
+                 <a class="nav-link" href="/admin/kegiatan">
                     <i class="bi bi-calendar-check-fill me-2"></i>
                     Kegiatan
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                 <a class="nav-link" href="/admin/publikasi">
                     <i class="bi bi-book-fill me-2"></i>
                     Publikasi
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                 <a class="nav-link" href="/admin/pendaftaran">
                     <i class="bi bi-person-badge-fill me-2"></i>
                     Pendaftaran
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                 <a class="nav-link" href="/admin/galeri">
                     <i class="bi bi-images me-2"></i>
                     Galeri
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                 <a class="nav-link" href="/admin/halaman-web">
                     <i class="bi bi-globe me-2"></i>
                     Halaman Web
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/pengaturan"> 
+                    <i class="bi bi-gear-fill me-2"></i>
+                    Pengaturan
                 </a>
             </li>
         </ul>
