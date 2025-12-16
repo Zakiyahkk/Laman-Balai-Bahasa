@@ -7,8 +7,8 @@
 
 html,
 body {
-    width: 100%;
-    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
 }
 
 body {
@@ -24,21 +24,29 @@ body {
 }
 
 /* ==================================================
-   TOPBAR
+   TOPBAR (FIX RUANG KOSONG)
 ================================================== */
 .topbar {
-    background: #f2f2f2;
-    font-size: 13px;
-    color: #555;
+    background: #ffffff;
+    padding: 0;
+    margin: 0;
+}
+
+/* kalau tidak ada isi, benar-benar hilang */
+.topbar:empty {
+    display: none;
 }
 
 .topbar-content {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
-    padding: 6px 0;
+
+    /* FIX: jangan terlalu besar */
+    padding: 4px 0;
 }
 
+/* SOCIAL ICON */
 .social-icons {
     display: flex;
     gap: 8px;
@@ -56,6 +64,12 @@ body {
     text-decoration: none;
     font-size: 14px;
 }
+@media (max-width: 768px) {
+    .topbar-content {
+        justify-content: center;
+        padding: 4px 0;
+    }
+}
 
 .kata-riau-wrap {
     max-width: 1100px;
@@ -65,9 +79,70 @@ body {
     gap: 60px;
     align-items: center;
 }
+
+/* ===============================
+   MOBILE INFO HEADER
+================================ */
+.mobile-info {
+    background: #fff;
+    padding: 12px 16px;
+    border-bottom: 1px solid #e5e5e5;
+    text-align: left;
+}
+
+.mobile-contact,
+.mobile-ult {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    margin-bottom: 6px;
+    color: #333;
+}
+
+.mobile-contact i,
+.mobile-ult i {
+    color: #0b4ea2;
+    margin-right: 8px;
+    font-size: 16px;
+}
+
+/* sosial media */
+.mobile-social {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.mobile-social a {
+    width: 32px;
+    height: 32px;
+    background: #0485c7;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+/* ===============================
+   TAMPILKAN HANYA DI MOBILE
+================================ */
+@media (min-width: 769px) {
+    .mobile-info {
+        display: none;
+    }
+}
+
 /* ==================================================
    HEADER
 ================================================== */
+header:empty,
+.header:empty,
+.topbar:empty {
+    display: none !important;
+}
+
 .header-main {
     background: #fff;
     border-bottom: 1px solid #eee;
@@ -131,6 +206,26 @@ body {
 .navbar {
     background: #0485c7;
     min-height: 48px;
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1100;
+}
+
+/* ==================================================
+   NAVBAR SCROLL FIX
+================================================== */
+.navbar.is-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1100;
+}
+
+.navbar.is-fixed + * {
+    margin-top: 56px; /* sesuaikan tinggi navbar */
 }
 
 .nav-content {
@@ -598,21 +693,21 @@ body {
 }
 
 /* ==================================================
-   FOOTER MOBILE FIX
+   FOOTER MOBILE - TEXT LEFT
 ================================================== */
 @media (max-width: 768px) {
     .footer-main-wrap {
         grid-template-columns: 1fr;
         gap: 24px;
-        text-align: center;
+        text-align: left; /* INI YANG PENTING */
     }
 
     .footer-col {
-        max-width: 100%;
+        text-align: left;
     }
 
     .footer-logo {
-        margin: 0 auto 12px;
+        margin: 0 0 12px;
         display: block;
     }
 
@@ -621,9 +716,42 @@ body {
         height: 220px;
         border-radius: 6px;
     }
+}
 
-    .footer-bottom {
-        font-size: 13px;
-        padding: 12px 10px;
+/* ==================================================
+   HERO SLIDER
+================================================== */
+.hero-slider {
+    width: 100%;
+    overflow: hidden;
+}
+
+.slider {
+    position: relative;
+    height: 420px;
+}
+
+.slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+
+.slide.active {
+    opacity: 1;
+    z-index: 1;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .slider {
+        height: 220px;
     }
 }

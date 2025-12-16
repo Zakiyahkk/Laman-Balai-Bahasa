@@ -37,10 +37,8 @@ document.addEventListener("DOMContentLoaded", function () {
         link.addEventListener("click", function () {
             clearActive();
 
-            // aktifkan submenu
             this.parentElement.classList.add("active");
 
-            // aktifkan parent menu
             const parent = this.closest(".nav-item");
             if (parent) parent.classList.add("active");
         });
@@ -65,4 +63,17 @@ document.addEventListener("DOMContentLoaded", function () {
         navItems.forEach((i) => i.classList.remove("active"));
         subLinks.forEach((s) => s.parentElement.classList.remove("active"));
     }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const slides = document.querySelectorAll(".hero-slider .slide");
+    let index = 0;
+
+    if (!slides.length) return;
+
+    setInterval(() => {
+        slides[index].classList.remove("active");
+        index = (index + 1) % slides.length;
+        slides[index].classList.add("active");
+    }, 4000);
 });

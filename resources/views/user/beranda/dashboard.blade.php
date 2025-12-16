@@ -3,7 +3,7 @@
 @section('title', 'Beranda')
 
 @section('content')
-
+    @include('user.beranda.slider')
     @include('user.beranda.kata_pengantar')
     @include('user.beranda.berita_preview')
     @include('user.beranda.alinea')
