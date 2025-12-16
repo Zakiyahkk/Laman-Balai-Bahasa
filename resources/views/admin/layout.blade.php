@@ -14,11 +14,6 @@
 
 <div class="d-flex min-vh-100">
     <aside class="sidebar d-flex flex-column">
-
-      <!-- <div class="sidebar-header p-3 text-center">
-            <img src="/img/logo.png" alt="Logo Balai Bahasa Provinsi Riau"
-            class="img-fluid header-logo-full">
-        </div> -->
        <div class="admin-profile p-3">
     <div class="d-flex align-items-center">
         <img src="/img/AkunLogo.jpg" alt="Foto Profil Admin" class="avatar-circle me-3">
@@ -38,13 +33,13 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="bi bi-file-earmark-text-fill me-2"></i>
-                    Artikel & Berita
+                <a class="nav-link" href="{{ url('/admin/artikel-berita') }}">
+                    <i class="bi bi-file-earmark-text-fill me-2">
+                    </i> Artikel & Berita
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                 <a class="nav-link" href="/admin/kegiatan">
                     <i class="bi bi-calendar-check-fill me-2"></i>
                     Kegiatan
                 </a>
@@ -57,19 +52,19 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                 <a class="nav-link" href="/admin/pendaftaran">
                     <i class="bi bi-person-badge-fill me-2"></i>
                     Pendaftaran
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                 <a class="nav-link" href="/admin/galeri">
                     <i class="bi bi-images me-2"></i>
                     Galeri
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                 <a class="nav-link" href="/admin/halaman-web">
                     <i class="bi bi-globe me-2"></i>
                     Halaman Web
                 </a>
