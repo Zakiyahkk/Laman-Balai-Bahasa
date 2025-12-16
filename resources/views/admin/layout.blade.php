@@ -31,7 +31,8 @@
         <hr class="sidebar-hr">
         <ul class="nav flex-column menu-list flex-grow-1">
             <li class="nav-item">
-                <a class="nav-link active" href="/admin/dashboard">
+                <a class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}"
+                href="{{ route('admin.dashboard') }}">
                     <i class="bi bi-grid-fill me-2"></i>
                     Dashboard
                 </a>
@@ -49,7 +50,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link {{ request()->routeIs('admin.publikasi') ? 'active' : '' }}"
+                href="{{ route('admin.publikasi') }}">
                     <i class="bi bi-book-fill me-2"></i>
                     Publikasi
                 </a>
