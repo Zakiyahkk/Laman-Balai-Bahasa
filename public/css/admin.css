@@ -5,17 +5,30 @@ body {
     margin: 0;
 }
 
+.bg-content {
+    background-color: #e5f7ff;
+}
+
+
 /* ===== SIDEBAR ===== */
+
 .sidebar {
     width: 260px;
     min-height: 100vh;
-    background-color: #00897b;
+    background-color: white;
     padding: 16px;
+}
+
+/* LOGO DI HEADER HALAMAN (KANAN JUDUL) */
+.header-logo {
+    height: 56px;
+    width: auto;
+    object-fit: contain;
 }
 
 /* menu umum */
 .sidebar .nav-link {
-    color: #e0f2f1;
+    color: #0485c7;
     padding: 10px 14px;
     border-radius: 10px;
     margin-bottom: 6px;
@@ -26,8 +39,8 @@ body {
 /* hover & active (SATU SUMBER) */
 .sidebar .nav-link:hover,
 .sidebar .nav-link.active {
-    background-color: #00695c;
-    color: #ffffff;
+    background-color: #0485c7;
+    color: yellow;
 }
 
 
@@ -38,7 +51,7 @@ body {
 
 /* ===== CONTENT ===== */
 .content {
-    background-color: #f5f7fa;
+    background-color: #0060f0;
     padding: 24px;
     width: 100%;
 }
