@@ -43,7 +43,6 @@ body {
     color: yellow;
 }
 
-
 /* logout */
 .sidebar hr {
     opacity: 0.4;
@@ -118,9 +117,41 @@ body {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 .avatar-circle {
-    width: 40px;
-    height: 40px;
+    width: 56px;
+    height: 56px;
     border-radius: 50%; /* Membuat gambar melingkar */
     object-fit: cover; /* Memastikan gambar menutupi area tanpa terdistorsi */
     border: 2px solid var(--active-bg); /* Opsi: Tambahkan border untuk menonjolkan */
+}
+
+
+/* ===============================
+   CSS HALAMAN ARTIKEL & BERITA
+================================ */
+
+.btn-add-article {
+    background-color: #0485c7;
+    color: #ffffff;
+    border: none;
+    padding: 7px 18px;
+    border-radius: 10px;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* hover lebih gelap */
+.btn-add-article:hover {
+    background-color: #0369a1; /* lebih gelap dari #0485c7 */
+    color: #ffffff;
+}
+
+/* fokus (hapus efek bootstrap) */
+.btn-add-article:focus {
+    box-shadow: none;
+}
+
+/* tanda + lebih tebal */
+.icon-plus {
+    font-weight: 700;      /* SUPER BOLD */
+    font-size: 20px;
+    line-height: 1;
 }
