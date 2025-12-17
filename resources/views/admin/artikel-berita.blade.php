@@ -9,7 +9,7 @@
     <div>
         <h3 class="mb-1">Artikel dan Berita</h3>
         <p class="text-muted mb-0">
-            Total Artikel dan Berita
+            Total Artikel dan Berita: 2
         </p>
     </div>
 
@@ -54,7 +54,7 @@
     <!-- TOMBOL TAMBAH -->
     <button class="btn btn-add-article fw-semibold d-flex align-items-center ms-2">
         <span class="icon-plus me-2">+</span>
-        Tambah Artikel
+        Artikel
     </button>
 </div>
 
@@ -87,11 +87,13 @@
                         <span class="badge rounded-pill text-bg-success">Published</span>
                     </td>
                     <td class="text-end pe-4">
-                        <a href="#" class="text-muted me-2">
-                            <i class="bi bi-eye"></i>
-                        </a>
-                        <a href="#" class="text-primary">
+                        <a href="#" class="text-primary me-3" title="Edit">
                             <i class="bi bi-pencil"></i>
+                        </a>
+
+                        <a href="#" class="text-danger" title="Hapus"
+                        onclick="return confirm('Yakin ingin menghapus artikel ini?')">
+                            <i class="bi bi-trash"></i>
                         </a>
                     </td>
                 </tr>
@@ -111,11 +113,13 @@
                         <span class="badge rounded-pill text-bg-success">Published</span>
                     </td>
                     <td class="text-end pe-4">
-                        <a href="#" class="text-muted me-2">
-                            <i class="bi bi-eye"></i>
-                        </a>
-                        <a href="#" class="text-primary">
+                        <a href="#" class="text-primary me-3" title="Edit">
                             <i class="bi bi-pencil"></i>
+                        </a>
+
+                        <a href="#" class="text-danger" title="Hapus"
+                        onclick="return confirm('Yakin ingin menghapus artikel ini?')">
+                            <i class="bi bi-trash"></i>
                         </a>
                     </td>
                 </tr>
