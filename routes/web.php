@@ -31,15 +31,15 @@ Route::prefix('admin')->group(function () {
     })->name('admin.dashboard');
 
     Route::get('/artikel-berita', function () {
-        return view('admin.artikel-berita');
-    })->name('admin.artikel-berita');
+        return view('admin.artikel.index');
+    })->name('admin.artikel');
 
     Route::get('/kegiatan', function () {
-        return view('admin.kegiatan');
+        return view('admin.kegiatan.index');
     })->name('admin.kegiatan');
 
     Route::get('/publikasi', function () {
-        return view('admin.publikasi');
+        return view('admin.publikasi.index');
     })->name('admin.publikasi');
 
     Route::get('/pendaftaran', function () {
@@ -47,7 +47,7 @@ Route::prefix('admin')->group(function () {
     })->name('admin.pendaftaran');
 
     Route::get('/galeri', function () {
-        return view('admin.galeri');
+        return view('admin.galeri.index');
     })->name('admin.galeri');
 
     Route::get('/halamanweb', function () {

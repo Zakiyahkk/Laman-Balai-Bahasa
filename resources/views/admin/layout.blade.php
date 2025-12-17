@@ -32,15 +32,15 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('admin.artikel-berita') ? 'active' : '' }}"
-           href="{{ route('admin.artikel-berita') }}">
+        <a class="nav-link {{ request()->routeIs('admin.artikel*') ? 'active' : '' }}"
+           href="{{ route('admin.artikel') }}">
             <i class="bi bi-newspaper me-2"></i>
             Artikel & Berita
         </a>
     </li>
 
     <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('admin.kegiatan') ? 'active' : '' }}"
+        <a class="nav-link {{ request()->routeIs('admin.kegiatan*') ? 'active' : '' }}"
            href="{{ route('admin.kegiatan') }}">
             <i class="bi bi-calendar-event me-2"></i>
             Kegiatan
@@ -48,7 +48,7 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('admin.publikasi') ? 'active' : '' }}"
+        <a class="nav-link {{ request()->routeIs('admin.publikasi*') ? 'active' : '' }}"
            href="{{ route('admin.publikasi') }}">
             <i class="bi bi-journal-text me-2"></i>
             Publikasi
@@ -64,7 +64,7 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('admin.galeri') ? 'active' : '' }}"
+        <a class="nav-link {{ request()->routeIs('admin.galeri*') ? 'active' : '' }}"
            href="{{ route('admin.galeri') }}">
             <i class="bi bi-images me-2"></i>
             Galeri
