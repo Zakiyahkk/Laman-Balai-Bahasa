@@ -10,6 +10,7 @@
     @include('user.beranda.pantun')
     @include('user.beranda.pengumuman')
     @include('user.beranda.maskot')
+    @include('user.beranda.tokoh_bahasa_sastra')
 
 
 

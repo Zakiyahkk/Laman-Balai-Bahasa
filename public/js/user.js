@@ -77,3 +77,45 @@ document.addEventListener("DOMContentLoaded", function () {
         slides[index].classList.add("active");
     }, 4000);
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const cards = document.querySelectorAll(".tokoh-card");
+
+    filterButtons.forEach((btn) => {
+        btn.addEventListener("click", function () {
+            filterButtons.forEach((b) => b.classList.remove("active"));
+            this.classList.add("active");
+
+            const filter = this.dataset.filter;
+
+            cards.forEach((card) => {
+                card.style.display =
+                    filter === "all" || card.classList.contains(filter)
+                        ? "block"
+                        : "none";
+            });
+        });
+    });
+
+    const modal = document.getElementById("tokohModal");
+    const modalFoto = document.getElementById("modalFoto");
+    const modalNama = document.getElementById("modalNama");
+    const modalDeskripsi = document.getElementById("modalDeskripsi");
+
+    document.querySelectorAll(".tokoh-card").forEach((card) => {
+        card.addEventListener("click", function () {
+            modalFoto.src = this.dataset.foto;
+            modalNama.textContent = this.dataset.nama;
+            modalDeskripsi.textContent = this.dataset.deskripsi;
+            modal.classList.add("show");
+        });
+    });
+
+    document.querySelector(".tokoh-modal-close").onclick = () =>
+        modal.classList.remove("show");
+
+    modal.onclick = (e) => {
+        if (e.target === modal) modal.classList.remove("show");
+    };
+});
