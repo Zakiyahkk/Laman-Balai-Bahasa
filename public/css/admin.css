@@ -192,81 +192,76 @@ body {
     gap: 6px;
 }
 
-/* css halaman galery */
-/* Variabel Warna */
+/* ===============================
+   CSS HALAMAN GALERI
+================================ */
+/* Warna Dasar */
 :root {
-    --primary-color: #007bff; /* Biru umum */
-    --light-teal: #e0f7fa; /* Hijau muda/teal untuk placeholder */
-    --teal-border: #80cbc4; /* Border sedikit lebih gelap */
-    --upload-button-bg: #28a745; /* Hijau untuk tombol upload */
-    --delete-button-bg: #dc3545; /* Merah untuk tombol hapus (di hover) */
-    --text-dark: #333;
-    --text-secondary: #6c757d;
-    --tag-bg-photo: #a3e6a3; /* Tag Foto: Hijau muda */
-    --tag-bg-video: #c6e0ff; /* Tag Video: Biru muda */
-    --tag-text: #1a5e1a;
+    --color-primary: #1e7a46; /* Hijau untuk tombol Upload */
+    --color-bg-light: #f5f7fa; /* Latar belakang halaman */
+    --color-card-bg: #ffffff; /* Latar belakang kartu */
+    --color-preview-bg: #d4f7e5; /* Hijau muda untuk preview */
+    --color-delete: #d9534f; /* Merah untuk tombol Hapus */
 }
 
-/* Reset dan Body Dasar */
 body {
-    font-family: sans-serif;
+    font-family: Arial, sans-serif;
+    background-color: var(--color-bg-light);
     margin: 0;
     padding: 20px;
-    background-color: #f8f9fa;
-    color: var(--text-dark);
+    color: #333;
 }
 
-.gallery-container {
+.galeri-container {
     max-width: 1200px;
     margin: 0 auto;
 }
 
-/* Header */
-.gallery-header {
+/* HEADER STYLES */
+.galeri-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
-.gallery-header h1 {
+.galeri-header h1 {
     margin: 0;
     font-size: 2em;
-    font-weight: 600;
+    font-weight: bold;
 }
 
-.gallery-header p {
-    margin: 0;
-    color: var(--text-secondary);
+.galeri-header p {
+    margin: 5px 0 0;
+    color: #777;
 }
 
 .upload-button {
-    background-color: var(--upload-button-bg);
+    background-color: var(--color-primary);
     color: white;
     border: none;
     padding: 10px 20px;
-    border-radius: 6px;
+    border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
     display: flex;
     align-items: center;
-    transition: background-color 0.3s;
-}
-
-.upload-button i {
-    margin-right: 8px;
-    font-size: 1.1em;
+    gap: 8px;
 }
 
 .upload-button:hover {
-    background-color: #218838;
+    background-color: #1a633a;
 }
 
-/* Filter dan Pencarian */
-.gallery-filters {
+/* FILTER BAR STYLES */
+.filter-bar {
     display: flex;
-    gap: 20px;
+    gap: 15px;
     margin-bottom: 30px;
+    background-color: var(--color-card-bg);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
 .search-box {
@@ -276,133 +271,145 @@ body {
 
 .search-box input {
     width: 100%;
-    padding: 10px 10px 10px 40px; /* Ruang untuk ikon */
-    border: 1px solid #ced4da;
-    border-radius: 4px;
+    padding: 10px 10px 10px 35px; /* Padding kiri untuk ikon */
+    border: 1px solid #ccc;
+    border-radius: 5px;
     box-sizing: border-box;
-    font-size: 1em;
 }
 
 .search-box i {
     position: absolute;
-    left: 15px;
+    left: 10px;
     top: 50%;
     transform: translateY(-50%);
-    color: var(--text-secondary);
+    color: #777;
+}
+
+.dropdown-filter {
+    position: relative;
+    /* Lebar dropdown sesuai yang terlihat di gambar */
+    width: 200px; 
 }
 
 .filter-select {
-    padding: 10px;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    background-color: white;
-    appearance: none; /* Menghilangkan style default select */
-    min-width: 180px;
+    appearance: none; /* Menghilangkan style default browser */
+    background-color: var(--color-card-bg);
+    border: 1px solid #ccc;
+    padding: 10px 30px 10px 10px;
+    border-radius: 5px;
     cursor: pointer;
+    width: 100%;
 }
 
-/* Grid Item Galeri */
-.gallery-grid {
+/* Ikon panah ke bawah kustom untuk dropdown */
+.dropdown-filter::after {
+    content: '\f0d7'; /* Ikon panah ke bawah Font Awesome */
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #777;
+}
+
+/* MEDIA GRID STYLES */
+.media-grid {
     display: grid;
+    /* Grid 4 kolom, responsif pada layar kecil */
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
 }
 
-.gallery-item {
-    background-color: white;
+.media-card {
+    background-color: var(--color-card-bg);
     border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    display: flex;
-    flex-direction: column;
-}
-
-/* Placeholder Media (Warna Teal) */
-.media-preview {
-    height: 180px;
-    background-color: var(--light-teal);
-    border-bottom: 1px solid var(--teal-border);
-    display: flex;
-    justify-content: center;
-    align-items: center;
     position: relative;
+    padding-bottom: 10px; /* Ruang bawah untuk tombol hapus */
 }
 
-.media-preview i {
-    font-size: 4em;
-    color: var(--teal-border);
-}
-
-/* Tag Tipe Media (Foto/Video) */
-.media-type-tag {
+/* Badge Tipe Media (Foto/Video) */
+.media-type-badge {
     position: absolute;
     top: 10px;
     right: 10px;
     padding: 3px 8px;
     border-radius: 4px;
-    font-size: 0.8em;
+    font-size: 0.75em;
     font-weight: bold;
+    color: white;
 }
 
-.photo-tag {
-    background-color: var(--tag-bg-photo);
-    color: var(--tag-text);
+.media-type-badge.foto {
+    background-color: #3b9c67; /* Hijau gelap */
 }
 
-.video-tag {
-    background-color: var(--tag-bg-video);
-    color: var(--primary-color);
+.media-type-badge.video {
+    background-color: #5bc0de; /* Biru muda */
 }
 
-/* Detail Item */
-.item-details {
+/* Area Preview */
+.media-preview {
+    height: 150px;
+    background-color: var(--color-preview-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+    color: #66c891; /* Hijau ikon */
+}
+
+.media-info {
     padding: 15px;
-    flex-grow: 1;
 }
 
-.item-title {
-    margin-top: 0;
+.media-info h3 {
     font-size: 1.1em;
+    margin: 0 0 10px 0;
     font-weight: 600;
-    line-height: 1.3;
-    margin-bottom: 10px;
 }
 
-.item-details p {
-    margin: 4px 0;
+.media-info p {
     font-size: 0.9em;
-    color: var(--text-secondary);
+    color: #555;
+    margin: 3px 0;
     display: flex;
     align-items: center;
-}
-
-.item-details p i {
-    margin-right: 5px;
-    font-size: 0.8em;
+    gap: 5px;
 }
 
 /* Tombol Hapus */
 .delete-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #f8d7da; /* Latar belakang merah muda */
-    color: var(--delete-button-bg);
-    border: 1px solid #f5c6cb;
-    border-radius: 0 0 8px 8px;
+    width: calc(100% - 30px); /* 100% lebar dikurangi padding */
+    margin: 0 15px;
+    padding: 8px;
+    border: 1px solid var(--color-delete);
+    background-color: white;
+    color: var(--color-delete);
+    border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color 0.2s;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1em;
-}
-
-.delete-button i {
-    margin-right: 5px;
+    gap: 5px;
 }
 
 .delete-button:hover {
-    background-color: var(--delete-button-bg);
-    color: white;
+    background-color: #f2dede;
+}
+
+/* Responsif untuk Filter Bar */
+@media (max-width: 768px) {
+    .filter-bar {
+        flex-direction: column;
+    }
+
+    .dropdown-filter {
+        width: 100%;
+    }
 }
