@@ -104,7 +104,7 @@
 
         <div class="d-flex align-items-center flex-wrap gap-3 text-muted small mb-3">
             <span><i class="bi bi-calendar-event me-1"></i> 10 Desember 2025</span>
-            <span><i class="bi bi-person me-1"></i>Rian Lesamana Putra</span>
+            <span><i class="bi bi-person me-1"></i>Rian Lesmana Putra</span>
             <span><i class="bi bi-eye me-1"></i> 860 pembaca</span>
         </div>
 

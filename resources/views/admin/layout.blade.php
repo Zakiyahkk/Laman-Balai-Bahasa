@@ -15,7 +15,7 @@
         <div class="d-flex align-items-center">
             <img src="/img/AkunLogo.jpg" alt="Foto Profil Admin" class="avatar-circle me-1">
             <div>
-                <div class="fw-bold">Username</div>
+                <div class="fw-bold fs-6">Username</div>
                 <div class="small">Role</div>
             </div>
         </div>
