@@ -615,22 +615,117 @@ header:empty,
 .footer-riau {
     background: #9fd6ff;
     font-size: 14px;
+    line-height: 1.6; /* lebih nyaman dibaca */
+    color: #1f2d3d;
 }
 
 .footer-main {
-    padding: 40px 0;
+    padding: 48px 0 40px; /* lebih seimbang atas-bawah */
 }
 
 .footer-main-wrap {
     display: grid;
     grid-template-columns: 1.2fr 1fr 1fr;
-    gap: 40px;
+    gap: 48px; /* jarak kolom lebih lega & rapi */
+    align-items: flex-start;
+}
+/* Geser kolom Tentang Kami sedikit ke kanan */
+.footer-main-wrap > .footer-col:last-child {
+    padding-left: 150px;
 }
 
+/* Kolom umum */
+.footer-col p {
+    margin-bottom: 6px;
+}
+
+/* Logo */
+.footer-logo {
+    display: block;
+    margin-bottom: 16px;
+    max-width: 180px;
+}
+
+/* Judul kolom */
+.footer-col h4 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 14px;
+}
+
+/* List link */
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-col ul li {
+    margin-bottom: 8px;
+}
+
+.footer-col ul li a {
+    color: #003f6b;
+    text-decoration: none;
+}
+
+.footer-col ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Map */
+.footer-map iframe {
+    width: 100%;
+    height: 200px;
+    border-radius: 6px;
+    border: 0;
+}
+
+/* ==================================================
+   FOOTER BOTTOM
+================================================== */
 .footer-bottom {
     border-top: 1px solid rgba(0, 0, 0, 0.2);
     text-align: center;
-    padding: 14px 0;
+    padding: 16px 0;
+    font-size: 13px;
+}
+
+/* ==================================================
+   FOOTER MOBILE - TEXT LEFT
+================================================== */
+@media (max-width: 768px) {
+    .footer-main {
+        padding: 36px 0 32px;
+    }
+
+    .footer-main-wrap {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        text-align: left;
+    }
+
+    .footer-col {
+        text-align: left;
+    }
+
+    .footer-logo {
+        margin-bottom: 12px;
+    }
+
+    .footer-map iframe {
+        height: 220px;
+        border-radius: 6px;
+    }
+
+    .footer-main-wrap > .footer-col:last-child {
+        padding-left: 0; /* kunci: hilangkan geser */
+    }
+
+    .footer-main-wrap,
+    .footer-col {
+        text-align: left;
+    }
 }
 
 /* ==================================================
@@ -690,32 +785,6 @@ header:empty,
 .section-divider {
     margin: 40px 0;
     border-top: 1px solid #e5e5e5;
-}
-
-/* ==================================================
-   FOOTER MOBILE - TEXT LEFT
-================================================== */
-@media (max-width: 768px) {
-    .footer-main-wrap {
-        grid-template-columns: 1fr;
-        gap: 24px;
-        text-align: left; /* INI YANG PENTING */
-    }
-
-    .footer-col {
-        text-align: left;
-    }
-
-    .footer-logo {
-        margin: 0 0 12px;
-        display: block;
-    }
-
-    .footer-map iframe {
-        width: 100%;
-        height: 220px;
-        border-radius: 6px;
-    }
 }
 
 /* ==================================================
