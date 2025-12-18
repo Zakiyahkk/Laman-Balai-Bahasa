@@ -3,11 +3,19 @@ body {
     background-color: #f5f7fa;
     font-size: 14px;
     margin: 0;
+    font-family: "Montserrat", system-ui, -apple-system,
+                 "Segoe UI", Roboto, Arial, sans-serif;
 }
 
 .bg-content {
     background-color: #e5f7ff;
 }
+
+.page-header h3,
+.page-header p {
+    color: #000000;
+}
+
 
 
 /* ===== SIDEBAR ===== */
@@ -17,7 +25,7 @@ body {
     min-width: 220px;
     flex-shrink: 0;
     min-height: 100vh;
-    background-color: white;
+    background-color: #fef8eb;
     padding: 16px;
 }
 
@@ -31,19 +39,19 @@ body {
 
 /* menu umum */
 .sidebar .nav-link {
-    color: #0485c7;
+    color: #067ac1;
     padding: 10px 14px;
     border-radius: 10px;
     margin-bottom: 6px;
-    font-weight: 500;
+    font-weight: 600;
     transition: all 0.2s ease;
 }
 
 /* hover & active (SATU SUMBER) */
 .sidebar .nav-link:hover,
 .sidebar .nav-link.active {
-    background-color: #0485c7;
-    color: yellow;
+    background-color: #067ac1;
+    color: white;
 }
 
 /* logout */
@@ -53,7 +61,7 @@ body {
 
 /* ===== CONTENT ===== */
 .content {
-    background-color: #0060f0;
+    background-color: #067ac1;
     padding: 24px;
     width: 100%;
 }
@@ -132,22 +140,27 @@ body {
    CSS HALAMAN ARTIKEL & BERITA
 ================================ */
 
+/* ===============================
+   CSS TOMBOL
+================================ */
+
 .btn-add-article {
-    background-color: #0485c7;
+    background-color: #067ac1;
     color: #ffffff;
     border: none;
     height: 38px;
-    min-width: 120px;
-    padding: 0 18px;
+    width: clamp(110px, 130px, 160px);
+    padding: 0 12px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 3px;
+    gap: 6px;
     border-radius: 10px;
     transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
-
-
 
 /* hover lebih gelap */
 .btn-add-article:hover {
@@ -162,10 +175,82 @@ body {
 
 /* tanda + lebih tebal */
 .icon-plus {
-    font-weight: 700;      /* SUPER BOLD */
+    font-weight: 700;
     font-size: 20px;
     line-height: 1;
 }
+
+/* ukuran tombol aksi (SIMPAN & BATAL) */
+.btn-action {
+    width: 130px;          /* ukuran tetap & sama */
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    border-radius: 10px;
+    white-space: nowrap;
+}
+
+/* tombol SIMPAN (biru) */
+.btn-save {
+    background-color: #067ac1; /* biru */
+    color: #ffffff;
+    border: none;
+}
+
+.btn-save:hover {
+    background-color: #0369a1; /* biru lebih gelap */
+    color: #ffffff;
+}
+
+/* tombol BATAL (merah) */
+.btn-cancel {
+    background-color: #dc3545; /* merah */
+    color: #ffffff;
+    border: none;
+}
+
+.btn-cancel:hover {
+    background-color: #b02a37; /* merah lebih gelap */
+    color: #ffffff;
+}
+
+/* tombol DRAF (kuning) */
+.btn-draft {
+    background-color: #f9a703; /* kuning */
+    color: white;
+    border: none;
+}
+
+.btn-draft:hover {
+    background-color: rgb(195, 140, 0); /* kuning lebih gelap */
+    color: white;
+}
+
+/* ===============================
+   CSS STATUS
+================================ */
+
+/* badge status */
+.badge-draft {
+    background-color: #f9a703;
+    color: white;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.badge-published {
+    background-color: #0dbf4e;
+    color: #ffffff;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
 
 /* ===============================
    CSS HALAMAN PUBLIKASI
@@ -176,9 +261,40 @@ body {
     border-radius: 12px;
     padding: 16px;
     border: 1px solid #e5e7eb;
+
+    /* interaksi */
+    cursor: pointer;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+
+    /* animasi masuk */
+    animation: cardFadeUp 0.4s ease forwards;
 }
 
-.publication-thumb {
+/* efek timbul saat hover */
+.publication-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+}
+
+/* animasi saat halaman dibuka */
+@keyframes cardFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ================= THUMBNAIL ================= */
+
+.publication-thumb,
+.publication-thumb-lg {
     width: 140px;
     height: 100px;
     border-radius: 10px;
@@ -186,16 +302,23 @@ body {
     flex-shrink: 0;
 }
 
+/* ================= ACTION BUTTON (EDIT / DELETE) ================= */
+
 .publication-action {
     display: flex;
     align-items: flex-start;
     gap: 6px;
 }
 
-/* ===============================
-   CSS HALAMAN GALERI
-================================ */
-/* Warna Dasar */
+
+/* pastikan tombol tidak ikut klik card */
+.publication-action button {
+    cursor: pointer;
+}
+
+/* CSS HALAMAN GALERI */
+/* Variabel Warna */
+
 :root {
     --color-primary: #0485c7; /* Hijau untuk tombol Upload */
     --color-bg-light: #f5f7fa; /* Latar belakang halaman */
@@ -205,13 +328,14 @@ body {
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: var(--color-bg-light);
-    margin: 0;
-    padding: 20px;
-    color: #333;
-}
 
+    font-family: "Montserrat", system-ui, -apple-system,
+                 "Segoe UI", Roboto, Arial, sans-serif;
+    margin: 0;
+    padding: 0px;
+    background-color: #f8f9fa;
+    color: var(--text-dark);
+}
 .galeri-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -286,7 +410,8 @@ body {
 .dropdown-filter {
     position: relative;
     /* Lebar dropdown sesuai yang terlihat di gambar */
-    min-width: 180px; }
+    width: 200px;
+}
 
 .filter-select {
     appearance: none; /* Menghilangkan style default browser */
@@ -414,7 +539,8 @@ body {
 }
 
 .delete-button:hover {
-    background-color: #f2dede;
+    background-color: var(--delete-button-bg);
+    color: white;
 }
 
 /* Responsif untuk Filter Bar */
@@ -434,11 +560,11 @@ body {
         justify-content: center;
     }
 }
+
 /*================================
        HALAMAN UPLOAD MEDIA 
-==================================*/
+=================================*/
 
-    <style>
         /* CSS INTERNAL */
         * {
             margin: 0;
@@ -646,5 +772,3 @@ body {
                 width: 100%;
             }
         }
-    </style>
-</head>

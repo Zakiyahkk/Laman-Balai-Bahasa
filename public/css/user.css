@@ -272,7 +272,7 @@ header:empty,
     top: 100%;
     left: 0;
     min-width: 260px;
-    background: linear-gradient(135deg, #8e2de2, #4a00e0, #2ec4c9);
+    background: #0485c7;
     padding: 10px 0;
     list-style: none;
     z-index: 1000;
@@ -359,7 +359,7 @@ header:empty,
     /* dropdown mobile */
     .dropdown-menu {
         position: static;
-        background: #046aa0;
+        background: #0485c7;
         margin-top: 6px;
         border-radius: 4px;
         display: none;
@@ -615,22 +615,117 @@ header:empty,
 .footer-riau {
     background: #9fd6ff;
     font-size: 14px;
+    line-height: 1.6; /* lebih nyaman dibaca */
+    color: #1f2d3d;
 }
 
 .footer-main {
-    padding: 40px 0;
+    padding: 48px 0 40px; /* lebih seimbang atas-bawah */
 }
 
 .footer-main-wrap {
     display: grid;
     grid-template-columns: 1.2fr 1fr 1fr;
-    gap: 40px;
+    gap: 48px; /* jarak kolom lebih lega & rapi */
+    align-items: flex-start;
+}
+/* Geser kolom Tentang Kami sedikit ke kanan */
+.footer-main-wrap > .footer-col:last-child {
+    padding-left: 150px;
 }
 
+/* Kolom umum */
+.footer-col p {
+    margin-bottom: 6px;
+}
+
+/* Logo */
+.footer-logo {
+    display: block;
+    margin-bottom: 16px;
+    max-width: 180px;
+}
+
+/* Judul kolom */
+.footer-col h4 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 14px;
+}
+
+/* List link */
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-col ul li {
+    margin-bottom: 8px;
+}
+
+.footer-col ul li a {
+    color: #003f6b;
+    text-decoration: none;
+}
+
+.footer-col ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Map */
+.footer-map iframe {
+    width: 100%;
+    height: 200px;
+    border-radius: 6px;
+    border: 0;
+}
+
+/* ==================================================
+   FOOTER BOTTOM
+================================================== */
 .footer-bottom {
     border-top: 1px solid rgba(0, 0, 0, 0.2);
     text-align: center;
-    padding: 14px 0;
+    padding: 16px 0;
+    font-size: 13px;
+}
+
+/* ==================================================
+   FOOTER MOBILE - TEXT LEFT
+================================================== */
+@media (max-width: 768px) {
+    .footer-main {
+        padding: 36px 0 32px;
+    }
+
+    .footer-main-wrap {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        text-align: left;
+    }
+
+    .footer-col {
+        text-align: left;
+    }
+
+    .footer-logo {
+        margin-bottom: 12px;
+    }
+
+    .footer-map iframe {
+        height: 220px;
+        border-radius: 6px;
+    }
+
+    .footer-main-wrap > .footer-col:last-child {
+        padding-left: 0; /* kunci: hilangkan geser */
+    }
+
+    .footer-main-wrap,
+    .footer-col {
+        text-align: left;
+    }
 }
 
 /* ==================================================
@@ -693,32 +788,6 @@ header:empty,
 }
 
 /* ==================================================
-   FOOTER MOBILE - TEXT LEFT
-================================================== */
-@media (max-width: 768px) {
-    .footer-main-wrap {
-        grid-template-columns: 1fr;
-        gap: 24px;
-        text-align: left; /* INI YANG PENTING */
-    }
-
-    .footer-col {
-        text-align: left;
-    }
-
-    .footer-logo {
-        margin: 0 0 12px;
-        display: block;
-    }
-
-    .footer-map iframe {
-        width: 100%;
-        height: 220px;
-        border-radius: 6px;
-    }
-}
-
-/* ==================================================
    HERO SLIDER
 ================================================== */
 .hero-slider {
@@ -754,4 +823,409 @@ header:empty,
     .slider {
         height: 220px;
     }
+}
+
+/* ===== TOKOH BAHASA & SASTRA ===== */
+/* ===== TOKOH ===== */
+.tokoh-section {
+    padding: 60px 0;
+}
+
+.tokoh-title {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.tokoh-title span {
+    font-weight: 700;
+}
+
+/* FILTER */
+.tokoh-filter {
+    display: inline-flex;
+    gap: 8px;
+    padding: 6px;
+    background-color: #f5f7fa; /* abu terang, clean */
+    border-radius: 6px;
+    margin-bottom: 40px;
+}
+.filter-btn {
+    background: transparent;
+    border: none;
+    padding: 8px 14px;
+    font-size: 14px;
+    color: #0056b3;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.25s ease;
+}
+
+.filter-btn.active {
+    background-color: #0056b3;
+    color: #fff;
+}
+
+/* HOVER */
+.filter-btn:hover:not(.active) {
+    background-color: rgba(0, 86, 179, 0.1);
+}
+/* GRID */
+.tokoh-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+}
+
+.tokoh-card {
+    border: 1px solid #e5e5e5;
+    padding: 10px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.tokoh-card:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.tokoh-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.tokoh-card p {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+    .tokoh-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .tokoh-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .tokoh-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== POPUP / MODAL TOKOH ===== */
+.tokoh-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.tokoh-modal.show {
+    display: flex;
+}
+
+.tokoh-modal-content {
+    background: #ffffff;
+    max-width: 500px;
+    width: 100%;
+    border-radius: 6px;
+    padding: 20px;
+    position: relative;
+    text-align: center;
+    animation: popupFade 0.25s ease;
+}
+
+/* Image */
+.tokoh-modal-content img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+/* Title */
+.tokoh-modal-content h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+/* Description */
+.tokoh-modal-content p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #444;
+}
+
+/* Close button */
+.tokoh-modal-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 22px;
+    cursor: pointer;
+    color: #333;
+}
+
+/* Animation */
+@keyframes popupFade {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .tokoh-modal-content img {
+        height: 200px;
+    }
+}
+
+/* ==================================================
+   FASILITAS SLIDER (CLONE BALAI NTB)
+================================================== */
+.fasilitas-section {
+    padding: 60px 0;
+}
+
+.fasilitas-wrapper {
+    position: relative;
+}
+
+/* SLIDER */
+.fasilitas-slider {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: calc(33.333% - 20px);
+    gap: 30px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+}
+
+/* HILANGKAN SCROLLBAR */
+.fasilitas-slider::-webkit-scrollbar {
+    display: none;
+}
+.fasilitas-slider {
+    scrollbar-width: none;
+}
+
+/* CARD */
+.fasilitas-card {
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    transition: 0.3s ease;
+}
+
+.fasilitas-card:hover {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* IMAGE */
+.fasilitas-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+/* CONTENT */
+.fasilitas-card-content {
+    padding: 18px;
+}
+
+.fasilitas-card h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.fasilitas-card p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #555;
+}
+
+/* BUTTON */
+.btn-fasilitas {
+    margin: 0 18px 18px;
+    background: #1f2d3d;
+    color: #fff;
+    padding: 6px 14px;
+    font-size: 13px;
+    text-decoration: none;
+    width: fit-content;
+}
+
+/* PANAH */
+.fasilitas-nav {
+    position: absolute;
+    top: 45%;
+    width: 42px;
+    height: 42px;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    z-index: 5;
+}
+
+.fasilitas-nav.prev {
+    left: -20px;
+}
+
+.fasilitas-nav.next {
+    right: -20px;
+}
+
+.fasilitas-indicator {
+    display: none;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 15px;
+}
+
+.fasilitas-indicator span {
+    width: 18px;
+    height: 4px;
+    background: #d0d0d0;
+    border-radius: 2px;
+    transition: 0.3s ease;
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+    .fasilitas-slider {
+        grid-auto-columns: calc(50% - 15px);
+    }
+}
+
+@media (max-width: 576px) {
+    .fasilitas-slider {
+        grid-auto-columns: 100%;
+    }
+
+    .fasilitas-nav {
+        display: none;
+    }
+    .fasilitas-indicator {
+        display: flex;
+    }
+}
+
+/* ==================================================
+   PROFIL PAGE – ELEGAN & RESMI
+================================================== */
+.profil-page {
+    padding: 70px 0;
+    background: #f9fafb;
+}
+
+.profil-container {
+    max-width: 900px;
+}
+
+/* Header */
+.profil-header {
+    margin-bottom: 40px;
+}
+
+.profil-header h1 {
+    font-size: 34px;
+    font-weight: 700;
+    color: #1f2d3d;
+    margin-bottom: 8px;
+}
+
+.profil-subtitle {
+    font-size: 14px;
+    color: #6b7280;
+}
+
+/* Card Section */
+.profil-card {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 28px 32px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+.profil-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #0b5ed7;
+    margin-bottom: 14px;
+    border-left: 4px solid #0b5ed7;
+    padding-left: 12px;
+}
+
+.profil-card p {
+    font-size: 15px;
+    line-height: 1.9;
+    color: #374151;
+}
+
+.profil-card ol {
+    padding-left: 20px;
+}
+
+.profil-card ol li {
+    font-size: 15px;
+    line-height: 1.8;
+    margin-bottom: 8px;
+    color: #374151;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .profil-page {
+        padding: 40px 0;
+    }
+
+    .profil-header h1 {
+        font-size: 26px;
+    }
+
+    .profil-card {
+        padding: 22px;
+    }
+}
+
+/* ==================================================
+   ACTIVE SUBMENU (SIMPLE & ELEGAN)
+================================================== */
+.nav-item > a {
+    transition: background 0.2s ease;
+}
+
+.nav-item.active > a {
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.dropdown-menu li.active > a {
+    background: rgba(255, 255, 255, 0.2);
+    font-weight: 600;
 }
