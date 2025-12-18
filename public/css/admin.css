@@ -197,7 +197,7 @@ body {
 ================================ */
 /* Warna Dasar */
 :root {
-    --color-primary: #1e7a46; /* Hijau untuk tombol Upload */
+    --color-primary: #0485c7; /* Hijau untuk tombol Upload */
     --color-bg-light: #f5f7fa; /* Latar belakang halaman */
     --color-card-bg: #ffffff; /* Latar belakang kartu */
     --color-preview-bg: #d4f7e5; /* Hijau muda untuk preview */
@@ -219,9 +219,7 @@ body {
 
 /* HEADER STYLES */
 .galeri-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: block;
     margin-bottom: 25px;
 }
 
@@ -250,7 +248,7 @@ body {
 }
 
 .upload-button:hover {
-    background-color: #1a633a;
+    background-color: #034566;
 }
 
 /* FILTER BAR STYLES */
@@ -288,8 +286,7 @@ body {
 .dropdown-filter {
     position: relative;
     /* Lebar dropdown sesuai yang terlihat di gambar */
-    width: 200px; 
-}
+    min-width: 180px; }
 
 .filter-select {
     appearance: none; /* Menghilangkan style default browser */
@@ -299,6 +296,23 @@ body {
     border-radius: 5px;
     cursor: pointer;
     width: 100%;
+}
+.upload-button {
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    /* Menambahkan properti ini agar tombol tidak menyusut pada resolusi kecil */
+    flex-shrink: 0; 
+}
+.upload-button:hover {
+    background-color: #034566;
 }
 
 /* Ikon panah ke bawah kustom untuk dropdown */
@@ -407,9 +421,230 @@ body {
 @media (max-width: 768px) {
     .filter-bar {
         flex-direction: column;
-    }
+        /* Menyesuaikan align-items untuk tata letak kolom */
+         align-items: stretch;
+        }
 
-    .dropdown-filter {
+        .dropdown-filter {
+             width: 100%;
+            }
+    /* Menambahkan ini agar tombol upload juga mengambil lebar penuh pada mobile */
+    .upload-button {
         width: 100%;
+        justify-content: center;
     }
 }
+/*================================
+       HALAMAN UPLOAD MEDIA 
+==================================*/
+
+    <style>
+        /* CSS INTERNAL */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #e0f2fe; /* Warna background biru muda sesuai gambar */
+            padding: 20px;
+        }
+
+        /* Container dibuat lebar (wide) mengikuti area konten utama */
+        .container {
+            width: 100%;
+            max-width: 1200px; /* Ukuran maksimal lebar agar tetap proporsional */
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        .header {
+            padding: 30px 40px 10px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            color: #334155;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 14px;
+            color: #64748b;
+            margin-top: 4px;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #94a3b8;
+            cursor: pointer;
+        }
+
+        form {
+            padding: 20px 40px 40px 40px;
+        }
+
+        .label-title {
+            display: block;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 10px;
+        }
+
+        /* Area Upload Lebar */
+        .dropzone {
+            width: 100%;
+            border: 2px dashed #3b82f6;
+            background-color: #eff6ff;
+            border-radius: 12px;
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+            transition: 0.3s;
+            margin-bottom: 30px;
+        }
+
+        .dropzone.active {
+            background-color: #dbeafe;
+        }
+
+        .dropzone input[type="file"] {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .upload-icon {
+            font-size: 48px;
+            color: #94a3b8;
+            margin-bottom: 15px;
+        }
+
+        .dropzone p {
+            font-size: 18px;
+            color: #1e293b;
+            font-weight: 500;
+        }
+
+        .dropzone span {
+            font-size: 14px;
+            color: #94a3b8;
+        }
+
+        /* Form Card Section */
+        .form-card {
+            background: #fff;
+            border: 1px solid #f1f5f9;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 8px;
+        }
+
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .input-group input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        /* Custom Radio Buttons */
+        .radio-flex {
+            display: flex;
+            gap: 25px;
+            margin-top: 10px;
+        }
+
+        .radio-item {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-size: 15px;
+            color: #334155;
+        }
+
+        .radio-item input {
+            width: 18px;
+            height: 18px;
+            margin-right: 10px;
+        }
+
+        /* Buttons Area */
+        .button-group {
+            display: flex;
+            gap: 20px;
+            justify-content: flex-end;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+            min-width: 160px;
+        }
+
+        .btn-cancel {
+            background: white;
+            border: 1px solid #cbd5e1;
+            color: #64748b;
+        }
+
+        .btn-cancel:hover {
+            background: #f8fafc;
+        }
+
+        .btn-upload {
+            background: #0ea5e9; /* Warna biru sesuai tombol + Artikel */
+            color: white;
+            border: none;
+        }
+
+        .btn-upload:hover {
+            background: #0284c7;
+        }
+
+        /* Responsif untuk layar kecil */
+        @media (max-width: 768px) {
+            .button-group {
+                flex-direction: column;
+            }
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>

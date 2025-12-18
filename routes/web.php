@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\BerandaController;
 use App\Http\Controllers\User\BeritaController;
+use App\Http\Controllers\Admin\GaleriController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -11,7 +13,9 @@ use App\Http\Controllers\User\BeritaController;
 */
 
 Route::get('/', [BerandaController::class, 'dashboard']);
-
+Route::get('/admin/galeri', [GaleriController::class, 'index'])->name('admin.galeri.index');
+Route::get('/admin/galeri/create', [GaleriController::class, 'create'])->name('admin.galeri.create');
+Route::post('/admin/galeri', [GaleriController::class, 'store'])->name('admin.galeri.store');
 Route::get('/berita', [BeritaController::class, 'index'])
     ->name('berita.index');
 
