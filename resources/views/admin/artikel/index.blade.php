@@ -53,7 +53,7 @@
     </div>
     <!-- TOMBOL TAMBAH -->
     <button class="btn btn-add-article fw-semibold d-flex align-items-center ms-2">
-        <span class="icon-plus me-2">+</span>
+        <span class="icon-plus">+</span>
         Artikel
     </button>
 </div>
