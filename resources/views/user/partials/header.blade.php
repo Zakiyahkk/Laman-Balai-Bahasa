@@ -74,20 +74,24 @@
 
         <ul class="nav-menu" id="navMenu">
 
-            <li class="nav-item active">
-                <a href="/">Beranda</a>
+            <!-- BERANDA -->
+            <li class="nav-item {{ request()->path() === '/' ? 'active' : '' }}">
+                <a href="{{ url('/') }}">Beranda</a>
             </li>
 
-            <li class="nav-item dropdown">
+            <!-- PROFIL -->
+            <li class="nav-item dropdown {{ request()->is('profil*') ? 'active' : '' }}">
                 <a href="#">Profil ▾</a>
                 <ul class="dropdown-menu">
-                    <li><a href="#">Visi dan Misi</a></li>
-                    <li><a href="#">Tugas Pokok & Fungsi</a></li>
-                    <li><a href="#">Struktur Organisasi</a></li>
-                    <li><a href="#">Pegawai</a></li>
-                    <li><a href="#">Kontak Kami</a></li>
+                    <li class="{{ request()->is('profil/visi-misi') ? 'active' : '' }}">
+                        <a href="{{ url('/profil/visi-misi') }}">Visi dan Misi</a>
+                    </li>
+                    <li class="{{ request()->is('profil/kontak-kami') ? 'active' : '' }}">
+                        <a href="{{ url('/profil/kontak-kami') }}">Kontak Kami</a>
+                    </li>
                 </ul>
             </li>
+
 
             <li class="nav-item dropdown">
                 <a href="#">Produk ▾</a>

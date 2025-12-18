@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\BerandaController;
 use App\Http\Controllers\User\BeritaController;
+use App\Http\Controllers\user\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,8 +18,15 @@ Route::get('/berita', [BeritaController::class, 'index'])
 
 Route::get('/berita/{slug}', [BeritaController::class, 'show'])
     ->name('berita.show');
-
+    
+    Route::prefix('profil')->group(function () {
+        Route::get('/visi-misi', [ProfileController::class, 'visiMisi']);
+        Route::get('/kontak-kami', [ProfileController::class, 'kontakKami']);
+    });
+ 
 /*
+
+
 |--------------------------------------------------------------------------
 | ADMIN
 |--------------------------------------------------------------------------
