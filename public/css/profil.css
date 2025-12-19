@@ -1,0 +1,78 @@
+/* ==================================================
+   PROFIL PAGE – ELEGAN & RESMI
+================================================== */
+.profil-page {
+    padding: 70px 0;
+    background: #f9fafb;
+}
+
+.profil-container {
+    max-width: 900px;
+}
+
+/* Header */
+.profil-header {
+    margin-bottom: 40px;
+}
+
+.profil-header h1 {
+    font-size: 34px;
+    font-weight: 700;
+    color: #1f2d3d;
+    margin-bottom: 8px;
+}
+
+.profil-subtitle {
+    font-size: 14px;
+    color: #6b7280;
+}
+
+/* Card Section */
+.profil-card {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 28px 32px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+.profil-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #0b5ed7;
+    margin-bottom: 14px;
+    border-left: 4px solid #0b5ed7;
+    padding-left: 12px;
+}
+
+.profil-card p {
+    font-size: 15px;
+    line-height: 1.9;
+    color: #374151;
+}
+
+.profil-card ol {
+    padding-left: 20px;
+}
+
+.profil-card ol li {
+    font-size: 15px;
+    line-height: 1.8;
+    margin-bottom: 8px;
+    color: #374151;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .profil-page {
+        padding: 40px 0;
+    }
+
+    .profil-header h1 {
+        font-size: 26px;
+    }
+
+    .profil-card {
+        padding: 22px;
+    }
+}
