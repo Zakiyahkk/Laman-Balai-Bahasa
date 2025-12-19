@@ -52,7 +52,7 @@
         </div>
     </div>
     <!-- TOMBOL TAMBAH -->
-    <button class="btn btn-add-article fw-semibold d-flex align-items-center ms-2">
+    <button class="btn btn-add-article d-flex align-items-center ms-2">
         <span class="icon-plus">+</span>
         Artikel
     </button>
@@ -91,10 +91,14 @@
                             <i class="bi bi-pencil"></i>
                         </a>
 
-                        <a href="#" class="text-danger" title="Hapus"
-                        onclick="return confirm('Yakin ingin menghapus artikel ini?')">
-                            <i class="bi bi-trash"></i>
-                        </a>
+                    <button type="button"
+                            class="btn-icon-danger"
+                            title="Hapus"
+                            onclick="return confirm('Yakin ingin menghapus artikel ini?')">
+                        <i class="bi bi-trash"></i>
+                    </button>
+
+
                     </td>
                 </tr>
 
@@ -117,10 +121,13 @@
                             <i class="bi bi-pencil"></i>
                         </a>
 
-                        <a href="#" class="text-danger" title="Hapus"
-                        onclick="return confirm('Yakin ingin menghapus artikel ini?')">
+                       <button type="button"
+                                class="btn-icon-danger"
+                                title="Hapus"
+                                onclick="return confirm('Yakin ingin menghapus artikel ini?')">
                             <i class="bi bi-trash"></i>
-                        </a>
+                        </button>
+
                     </td>
                 </tr>
 

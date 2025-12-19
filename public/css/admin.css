@@ -5,6 +5,7 @@ body {
     margin: 0;
     font-family: "Montserrat", system-ui, -apple-system,
                  "Segoe UI", Roboto, Arial, sans-serif;
+    overflow-x: hidden;
 }
 
 .bg-content {
@@ -16,6 +17,9 @@ body {
     color: #000000;
 }
 
+main {
+    margin-left: 220px;
+}
 
 
 /* ===== SIDEBAR ===== */
@@ -27,6 +31,12 @@ body {
     min-height: 100vh;
     background-color: #fef8eb;
     padding: 16px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 1000;
 }
 
 
@@ -130,19 +140,29 @@ body {
 .avatar-circle {
     width: 56px;
     height: 56px;
-    border-radius: 50%; /* Membuat gambar melingkar */
-    object-fit: cover; /* Memastikan gambar menutupi area tanpa terdistorsi */
-    border: 2px solid var(--active-bg); /* Opsi: Tambahkan border untuk menonjolkan */
+    border-radius: 50%;
+    object-fit: cover;
 }
-
 
 /* ===============================
    CSS HALAMAN ARTIKEL & BERITA
 ================================ */
 
+
 /* ===============================
    CSS TOMBOL
 ================================ */
+.input-group,
+.input-group .form-control,
+.input-group .input-group-text,
+.input-group .btn {
+    height: 38px;
+}
+
+.input-group .form-control {
+    padding-top: 0;
+    padding-bottom: 0;
+}
 
 .btn-add-article {
     background-color: #067ac1;
@@ -160,6 +180,7 @@ body {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-weight: 600;
 }
 
 /* hover lebih gelap */
@@ -168,12 +189,10 @@ body {
     color: #ffffff;
 }
 
-/* fokus (hapus efek bootstrap) */
 .btn-add-article:focus {
     box-shadow: none;
 }
 
-/* tanda + lebih tebal */
 .icon-plus {
     font-weight: 700;
     font-size: 20px;
@@ -227,6 +246,37 @@ body {
     background-color: rgb(195, 140, 0); /* kuning lebih gelap */
     color: white;
 }
+
+/* ===============================
+   ICON ACTION (HAPUS) – GAYA SIDEBAR
+================================ */
+.btn-icon-danger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-weight: 600;
+
+    background-color: transparent;
+    color: #dc3545;
+
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.btn-icon-danger:hover {
+    background-color: #dc3545;
+    color: #ffffff;
+}
+
+.btn-icon-danger i {
+    font-size: 16px;
+    line-height: 1;
+}
+
+
 
 /* ===============================
    CSS STATUS
@@ -327,15 +377,6 @@ body {
     --color-delete: #d9534f; /* Merah untuk tombol Hapus */
 }
 
-body {
-
-    font-family: "Montserrat", system-ui, -apple-system,
-                 "Segoe UI", Roboto, Arial, sans-serif;
-    margin: 0;
-    padding: 0px;
-    background-color: #f8f9fa;
-    color: var(--text-dark);
-}
 .galeri-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -369,11 +410,13 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
+    flex-shrink: 0;    transition: background-color 0.2s ease;
 }
 
 .upload-button:hover {
     background-color: #034566;
 }
+
 
 /* FILTER BAR STYLES */
 .filter-bar {
@@ -422,28 +465,9 @@ body {
     cursor: pointer;
     width: 100%;
 }
-.upload-button {
-    background-color: var(--color-primary);
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    /* Menambahkan properti ini agar tombol tidak menyusut pada resolusi kecil */
-    flex-shrink: 0; 
-}
-.upload-button:hover {
-    background-color: #034566;
-}
 
 /* Ikon panah ke bawah kustom untuk dropdown */
-.dropdown-filter::after {
-    content: '\f0d7'; /* Ikon panah ke bawah Font Awesome */
-    font-family: 'Font Awesome 5 Free';
+.dropdown-filter:after {
     font-weight: 900;
     position: absolute;
     right: 10px;
@@ -456,10 +480,10 @@ body {
 /* MEDIA GRID STYLES */
 .media-grid {
     display: grid;
-    /* Grid 4 kolom, responsif pada layar kecil */
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
 }
+
 
 .media-card {
     background-color: var(--color-card-bg);
@@ -475,25 +499,25 @@ body {
     position: absolute;
     top: 10px;
     right: 10px;
-    padding: 3px 8px;
-    border-radius: 4px;
-    font-size: 0.75em;
-    font-weight: bold;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
     color: white;
 }
 
 .media-type-badge.foto {
-    background-color: #3b9c67; /* Hijau gelap */
+    background-color: #ad7300; /* Hijau gelap */
 }
 
 .media-type-badge.video {
-    background-color: #5bc0de; /* Biru muda */
+    background-color: #067ac1;
 }
 
 /* Area Preview */
 .media-preview {
     height: 150px;
-    background-color: var(--color-preview-bg);
+    background-color: #fef8eb;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -539,9 +563,10 @@ body {
 }
 
 .delete-button:hover {
-    background-color: var(--delete-button-bg);
+    background-color: var(--color-delete);
     color: white;
 }
+
 
 /* Responsif untuk Filter Bar */
 @media (max-width: 768px) {
@@ -562,21 +587,8 @@ body {
 }
 
 /*================================
-       HALAMAN UPLOAD MEDIA 
+       HALAMAN UPLOAD MEDIA
 =================================*/
-
-        /* CSS INTERNAL */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: #e0f2fe; /* Warna background biru muda sesuai gambar */
-            padding: 20px;
-        }
 
         /* Container dibuat lebar (wide) mengikuti area konten utama */
         .container {
@@ -606,14 +618,6 @@ body {
             font-size: 14px;
             color: #64748b;
             margin-top: 4px;
-        }
-
-        .close-btn {
-            background: none;
-            border: none;
-            font-size: 24px;
-            color: #94a3b8;
-            cursor: pointer;
         }
 
         form {
@@ -681,7 +685,7 @@ body {
         }
 
         .input-group {
-            margin-bottom: 20px;
+            margin-bottom: 0px;
         }
 
         .input-group label {
@@ -726,43 +730,6 @@ body {
             margin-right: 10px;
         }
 
-        /* Buttons Area */
-        .button-group {
-            display: flex;
-            gap: 20px;
-            justify-content: flex-end;
-        }
-
-        .btn {
-            padding: 12px 30px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.2s;
-            min-width: 160px;
-        }
-
-        .btn-cancel {
-            background: white;
-            border: 1px solid #cbd5e1;
-            color: #64748b;
-        }
-
-        .btn-cancel:hover {
-            background: #f8fafc;
-        }
-
-        .btn-upload {
-            background: #0ea5e9; /* Warna biru sesuai tombol + Artikel */
-            color: white;
-            border: none;
-        }
-
-        .btn-upload:hover {
-            background: #0284c7;
-        }
-
         /* Responsif untuk layar kecil */
         @media (max-width: 768px) {
             .button-group {
@@ -772,3 +739,49 @@ body {
                 width: 100%;
             }
         }
+
+
+
+
+
+
+
+/* ===== FIX FILTER BAR GALERI ===== */
+.filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* SEARCH PALING LEBAR */
+.filter-bar .search {
+    flex: 1;
+}
+
+/* DROPDOWN*/
+.filter-bar select {
+    width: 150px;
+    height: 38px;
+}
+
+/* tombol */
+.filter-bar .btn-add-article {
+    width: auto;
+}
+
+/* RAPAPIKAN INPUT SEARCH */
+.filter-bar .input-group,
+.filter-bar .input-group-text,
+.filter-bar .input-group .form-control {
+    height: 38px;
+}
+
+.filter-bar .input-group-text {
+    border-right: 0;
+}
+
+.filter-bar .input-group .form-control {
+    border-left: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}

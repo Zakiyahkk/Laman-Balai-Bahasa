@@ -48,7 +48,7 @@
 
     <!-- TOMBOL TAMBAH -->
     <a href="{{ route('admin.publikasi.create') }}"
-       class="btn btn-add-article fw-semibold d-flex align-items-center ms-2">
+       class="btn btn-add-article d-flex align-items-center ms-2">
         <span class="icon-plus">+</span>
         Publikasi
     </a>
