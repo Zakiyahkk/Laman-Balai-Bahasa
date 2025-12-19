@@ -2,6 +2,9 @@
 
 @section('title', 'Visi dan Misi')
 
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/profil.css') }}">
+@endsection
 @section('content')
     <section class="profil-page">
         <div class="container profil-container">

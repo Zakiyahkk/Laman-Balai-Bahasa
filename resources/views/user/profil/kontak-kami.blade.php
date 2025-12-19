@@ -1,7 +1,9 @@
 @extends('layouts.user')
 
 @section('title', 'Kontak Kami')
-
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/profil.css') }}">
+@endsection
 @section('content')
     <section class="profil-ntb">
         <div class="container">
