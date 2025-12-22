@@ -84,7 +84,19 @@
                 <a href="#">Profil ▾</a>
                 <ul class="dropdown-menu">
                     <li class="{{ request()->is('profil/visi-misi') ? 'active' : '' }}">
-                        <a href="{{ url('/profil/visi-misi') }}">Visi dan Misi</a>
+                        <a href="{{ url('/profil/visi-misi') }}">Visi Dan Misi Balai Bahasa Provinsi Riau</a>
+                    </li>
+                    <li class="{{ request()->is('profil/tugas-dan-fungsi') ? 'active' : '' }}">
+                        <a href="{{ url('/profil/tugas-dan-fungsi') }}">Tugas Pokok Dan Fungsi</a>
+                    </li>
+                    <li class="{{ request()->is('profil/kontak-kami') ? 'active' : '' }}">
+                        <a href="{{ url('/profil/struktur-organisasi') }}">Struktur Organisasi</a>
+                    </li>
+                    <li class="{{ request()->is('profil/kontak-kami') ? 'active' : '' }}">
+                        <a href="{{ url('/profil/pegawai') }}">Pegawai</a>
+                    </li>
+                    <li class="{{ request()->is('profil/kontak-kami') ? 'active' : '' }}">
+                        <a href="{{ url('/profil/logo-bpp-riau') }}">Logo BPP Riau</a>
                     </li>
                     <li class="{{ request()->is('profil/kontak-kami') ? 'active' : '' }}">
                         <a href="{{ url('/profil/kontak-kami') }}">Kontak Kami</a>
@@ -103,12 +115,28 @@
             </li>
 
             <li class="nav-item dropdown">
-                <a href="#">Akuntabilitas ▾</a>
+                <a href="#" class="dropdown-toggle">Akuntabilitas ▾</a>
+
                 <ul class="dropdown-menu">
-                    <li><a href="#">SAKIP</a></li>
-                    <li><a href="#">Laporan Kinerja</a></li>
+                    <li class="dropdown-submenu">
+                        <a href="#">Perjanjian Kinerja ▸</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Perjanjian Kinerja Tahun 2025</a></li>
+                            <li><a href="#">Perjanjian Kinerja Tahun 2024</a></li>
+                            <li><a href="#">Perjanjian Kinerja Tahun 2023</a></li>
+                            <li><a href="#">Perjanjian Kinerja Tahun 2022</a></li>
+                            <li><a href="#">Perjanjian Kinerja Tahun 2021</a></li>
+                            <li><a href="#">Perjanjian Kinerja Tahun 2020</a></li>
+                        </ul>
+                    </li>
+
+                    <li><a href="#">Renstra</a></li>
+                    <li><a href="#">LAKIP</a></li>
+                    <li><a href="#">LAKIN</a></li>
+                    <li><a href="#">Rencana Aksi</a></li>
                 </ul>
             </li>
+
 
             <li class="nav-item dropdown">
                 <a href="#">Layanan ▾</a>

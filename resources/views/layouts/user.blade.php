@@ -14,6 +14,8 @@
     {{-- CSS USER --}}
     <link rel="stylesheet" href="{{ asset('css/user.css') }}">
 
+    <!-- CSS Halaman Spesifik -->
+    @yield('css')
 </head>
 
 <body>

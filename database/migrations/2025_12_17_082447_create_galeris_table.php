@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Schema\Blueprint; // Ini harus ada
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -9,17 +9,17 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-   public function up()
-{
-    Schema::create('galeris', function (Table $table) {
-        $table->id();
-        $table->string('judul');      // Untuk menyimpan "Judul Media"
-        $table->string('file_media'); // Untuk menyimpan path/nama file
-        $table->string('kategori');   // Untuk menyimpan "Kategori"
-        $table->string('tipe');       // Untuk menyimpan "Tipe Media" (Foto/Video)
-        $table->timestamps();
-    });
-}
+    public function up(): void
+    {
+        // Pastikan di bawah ini tulisannya Blueprint, bukan Table
+        Schema::create('galeris', function (Blueprint $table) {
+            $table->id();
+            $table->string('judul');      
+            $table->string('file_media'); 
+            $table->string('kategori');   
+            $table->timestamps();
+        });
+    }
 
     /**
      * Reverse the migrations.
