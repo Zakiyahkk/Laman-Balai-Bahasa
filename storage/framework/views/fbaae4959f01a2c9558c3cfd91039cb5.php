@@ -14,6 +14,8 @@
     
     <link rel="stylesheet" href="<?php echo e(asset('css/user.css')); ?>">
 
+    <!-- CSS Halaman Spesifik -->
+    <?php echo $__env->yieldContent('css'); ?>
 </head>
 
 <body>
