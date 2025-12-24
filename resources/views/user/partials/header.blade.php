@@ -89,13 +89,13 @@
                     <li class="{{ request()->is('profil/tugas-dan-fungsi') ? 'active' : '' }}">
                         <a href="{{ url('/profil/tugas-dan-fungsi') }}">Tugas Pokok Dan Fungsi</a>
                     </li>
-                    <li class="{{ request()->is('profil/kontak-kami') ? 'active' : '' }}">
+                    <li class="{{ request()->is('profil/struktur-organisasi') ? 'active' : '' }}">
                         <a href="{{ url('/profil/struktur-organisasi') }}">Struktur Organisasi</a>
                     </li>
-                    <li class="{{ request()->is('profil/kontak-kami') ? 'active' : '' }}">
+                    <li class="{{ request()->is('profil/pegawai') ? 'active' : '' }}">
                         <a href="{{ url('/profil/pegawai') }}">Pegawai</a>
                     </li>
-                    <li class="{{ request()->is('profil/kontak-kami') ? 'active' : '' }}">
+                    <li class="{{ request()->is('profil/logo-bpp-riau') ? 'active' : '' }}">
                         <a href="{{ url('/profil/logo-bpp-riau') }}">Logo BPP Riau</a>
                     </li>
                     <li class="{{ request()->is('profil/kontak-kami') ? 'active' : '' }}">

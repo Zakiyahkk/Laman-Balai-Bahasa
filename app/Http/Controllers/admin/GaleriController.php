@@ -46,7 +46,6 @@ class GaleriController extends Controller
 }
 public function index()
 {
-    $galeries = Galeri::all();
-    return view('admin.galeri.index', compact('galeries'));
+    return view('admin.galeri.index');
 }
 }

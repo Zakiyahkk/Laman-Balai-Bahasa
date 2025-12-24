@@ -14,10 +14,14 @@
     <aside class="sidebar d-flex flex-column">
        <div class="admin-profile px-2 py-1">
         <div class="d-flex align-items-center">
-            <img src="/img/AkunLogo.jpg" alt="Foto Profil Admin" class="avatar-circle me-1">
-            <div>
-                <div class="fw-bold fs-6">Username</div>
-                <div class="small">Role</div>
+            <img src="/img/AkunLogo.png" alt="Foto Profil Admin" class="avatar-circle me-1">
+            <div class="admin-info">
+                <div class="fw-bold fs-6">
+                    {{ session('admin_username', 'Admin') }}
+                </div>
+                <div class="small text-muted">
+                    {{ session('admin_role', '-') }}
+                </div>
             </div>
         </div>
 </div>
@@ -88,10 +92,18 @@
         </a>
     </li>
 
-    <a href="/logout" class="nav-link logout-link">
-                <i class="bi bi-box-arrow-right me-2"></i>
-                Logout
-    </a>
+    <li class="nav-item">
+        <a href="#" class="nav-link logout-link"
+        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            <i class="bi bi-box-arrow-right me-2"></i>
+            Logout
+        </a>
+
+        <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="d-none">
+            @csrf
+        </form>
+    </li>
+
 </ul>
 
     </aside>

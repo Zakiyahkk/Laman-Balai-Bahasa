@@ -40,6 +40,21 @@ main {
 }
 
 
+/* LOGIN */
+.login-btn {
+    background-color: #067ac1;;
+    color: white !important;
+}
+
+.login-btn:hover {
+    background: #0369a1; /* Biru lebih gelap */
+}
+
+.form-login {
+            padding: 20px 0px 0px 0px;
+        }
+
+
 /* LOGO DI HEADER HALAMAN (KANAN JUDUL) */
 .header-logo {
     height: 56px;
