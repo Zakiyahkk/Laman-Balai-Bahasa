@@ -411,7 +411,7 @@ header:empty,
     position: absolute;
     top: 10px;
     left: 10px;
-    background: #0b4ea2;
+    background: #0485c7;
     color: #fff;
     font-size: 11px;
     padding: 4px 8px;
@@ -572,7 +572,7 @@ header:empty,
 .maskot-circle {
     width: 260px;
     height: 260px;
-    background: #0b8fd6;
+    background: #0485c7;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -990,7 +990,7 @@ header:empty,
 .dokumen-icon {
     width: 48px;
     height: 48px;
-    background: #2563eb;
+    background: #0485c7;
     color: #fff;
     border-radius: 10px;
     display: flex;
@@ -1369,14 +1369,14 @@ header:empty,
     border: none;
     padding: 8px 14px;
     font-size: 14px;
-    color: #0056b3;
+    color: #0485c7;
     cursor: pointer;
     border-radius: 4px;
     transition: all 0.25s ease;
 }
 
 .filter-btn.active {
-    background-color: #0056b3;
+    background-color: #0485c7;
     color: #fff;
 }
 
@@ -1596,7 +1596,7 @@ header:empty,
     top: 45%;
     width: 42px;
     height: 42px;
-    background: #007bff;
+    background: #0485c7;
     color: #fff;
     border: none;
     font-size: 22px;
