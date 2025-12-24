@@ -1297,8 +1297,9 @@ header:empty,
 }
 
 .section-divider {
-    margin: 40px 0;
-    border-top: 1px solid #e5e5e5;
+    margin: 50px 0;
+    height: 1.5px;
+    background: linear-gradient(to right, transparent, #cbd5e1, transparent);
 }
 
 /* ==================================================

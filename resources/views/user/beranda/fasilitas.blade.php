@@ -72,5 +72,6 @@
             </button>
 
         </div>
+        <div class="section-divider"></div>
     </div>
 </section>
