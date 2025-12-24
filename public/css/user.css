@@ -454,44 +454,24 @@ header:empty,
 }
 
 /* ==================================================
-   PANTUN
+   PANTUN HARIAN – GAMBAR SAJA (DASHBOARD)
 ================================================== */
-.pantun-terbaru {
-    background: #fff;
+.pantun-single {
+    display: flex;
+    justify-content: center;
 }
 
-.pantun-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
-}
-
-.pantun-card {
-    border-radius: 10px;
-    overflow: hidden;
-    background: #fff;
-}
-
-.pantun-card img {
+.pantun-image-card {
+    max-width: 480px; /* ukuran ideal desktop */
     width: 100%;
-    height: 100%;
-    aspect-ratio: 3 / 4;
-    object-fit: cover;
+}
+
+.pantun-image-card img {
+    width: 100%;
+    height: auto;
     display: block;
-}
-
-.btn-right {
-    text-align: right;
-    margin-top: 25px;
-}
-
-.btn-pantun {
-    background: #111;
-    color: #fff;
-    padding: 8px 16px;
-    font-size: 13px;
-    text-decoration: none;
-    border-radius: 3px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
 /* ==================================================
@@ -563,11 +543,16 @@ header:empty,
 }
 
 .alinea-text {
-    max-width: 900px;
-    margin: auto;
-    text-align: center;
-    font-size: 15px;
-    line-height: 1.8;
+    max-width: 800px; /* lebar ideal baca */
+    margin: 0 auto; /* center konten */
+    text-align: justify; /* rata kiri–kanan */
+    line-height: 1.8; /* nyaman dibaca */
+    font-size: 16px;
+    color: #333;
+    text-indent: 2em; /* inden awal paragraf */
+}
+.alinea-text {
+    text-indent: 2em;
 }
 
 /* ==================================================
@@ -667,12 +652,12 @@ header:empty,
     width: 100%;
     height: 315px;
     border-radius: 6px;
-    box-shadow: 0 20px 40px rgba(0,0,0,.35);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
 }
 
 .yelyel-divider {
     margin-top: 80px;
-    border-top: 1px solid rgba(255,255,255,.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 /* RESPONSIVE */
@@ -768,23 +753,47 @@ header:empty,
 }
 
 @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(40px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes fadeLeft {
-    from { opacity: 0; transform: translateX(-40px); }
-    to { opacity: 1; transform: translateX(0); }
+    from {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 @keyframes fadeRight {
-    from { opacity: 0; transform: translateX(40px); }
-    to { opacity: 1; transform: translateX(0); }
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 @keyframes zoomIn {
-    from { opacity: 0; transform: scale(0.92); }
-    to { opacity: 1; transform: scale(1); }
+    from {
+        opacity: 0;
+        transform: scale(0.92);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 /* RESPONSIVE */
@@ -853,12 +862,12 @@ header:empty,
     border-radius: 6px;
     text-decoration: none;
     font-weight: 600;
-    transition: all .25s ease;
+    transition: all 0.25s ease;
 }
 
 .kamus-hero-btn a:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(0,0,0,.25);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
 }
 
 /* GAMBAR KANAN */
@@ -870,7 +879,7 @@ header:empty,
     max-width: 520px;
     width: 100%;
     transform: rotate(-8deg);
-    box-shadow: 0 30px 60px rgba(0,0,0,.35);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
     border-radius: 6px;
 }
 
@@ -962,13 +971,13 @@ header:empty,
     background: #fff;
     border-radius: 10px;
     padding: 24px 22px;
-    box-shadow: 0 12px 30px rgba(0,0,0,.08);
-    transition: all .25s ease;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    transition: all 0.25s ease;
 }
 
 .dokpres-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 18px 45px rgba(0,0,0,.12);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
 }
 
 /* DOKUMEN */
@@ -1044,15 +1053,24 @@ header:empty,
 .fade-up {
     opacity: 0;
     transform: translateY(30px);
-    animation: fadeUp .8s ease forwards;
+    animation: fadeUp 0.8s ease forwards;
 }
 
-.delay-1 { animation-delay: .15s; }
-.delay-2 { animation-delay: .3s; }
-.delay-3 { animation-delay: .45s; }
+.delay-1 {
+    animation-delay: 0.15s;
+}
+.delay-2 {
+    animation-delay: 0.3s;
+}
+.delay-3 {
+    animation-delay: 0.45s;
+}
 
 @keyframes fadeUp {
-    to { opacity: 1; transform: translateY(0); }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* RESPONSIVE */
@@ -1203,28 +1221,44 @@ header:empty,
     }
 
     /* KATA PENGANTAR */
+    .kata-riau-text p:last-of-type {
+        text-align: center;
+        text-indent: 0;
+        margin-top: 24px;
+    }
     .kata-riau-wrap {
         display: flex;
-        flex-direction: column;
+        flex-direction: column; /* mobile = atas bawah */
+        align-items: center;
         gap: 24px;
     }
 
+    /* area teks */
     .kata-riau-text {
-        text-align: left;
+        max-width: 100%;
+        text-align: justify;
+    }
+
+    .kata-riau-text p {
+        line-height: 1.6;
+        text-indent: 1.5em;
+    }
+
+    /* area foto */
+    .kata-riau-foto {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        max-width: 100%;
     }
 
     .kata-riau-foto img {
-        max-width: 100%;
+        max-width: 260px; /* biar tidak terlalu besar */
         height: auto;
     }
 
     /* BERITA */
     .berita-grid {
-        grid-template-columns: 1fr;
-    }
-
-    /* PANTUN */
-    .pantun-grid {
         grid-template-columns: 1fr;
     }
 
@@ -1243,6 +1277,23 @@ header:empty,
     .maskot-circle {
         margin: 0 auto;
     }
+}
+
+.kata-riau-text p {
+    text-indent: 2em;
+}
+
+/* TATA TULIS KATA PENGANTAR */
+.kata-riau-text {
+    text-align: justify; /* rata kiri-kanan */
+}
+
+.kata-riau-text p {
+    text-indent: 2em; /* spasi awal paragraf */
+    line-height: 1.8; /* jarak baris rapi */
+    margin-bottom: 1em; /* jarak antar paragraf */
+    word-spacing: 0.05em; /* spasi kata halus */
+    hyphens: auto; /* pemenggalan kata */
 }
 
 .section-divider {

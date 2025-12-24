@@ -21,8 +21,8 @@
             </p>
 
             <p class="kata-nama">
-                <strong>Dr. Umi Kulsum, S.S., M.Hum.</strong><br>
-                <span>(Kepala Balai Bahasa Provinsi Riau)</span>
+                <strong>Dr. Umi Kulsum, S.S., M.Hum.</strong>
+                (Kepala Balai Bahasa Provinsi Riau)
             </p>
         </div>
 
