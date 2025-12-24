@@ -1,116 +1,153 @@
 @extends('admin.layout')
 
 @section('content')
-<!-- =================  SECTION LAYOUT ATAS ================= -->
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload Media - Balai Bahasa</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
-<body>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    .font-inter { font-family: 'Inter', sans-serif; }
+</style>
+<script src="https://cdn.tailwindcss.com"></script>
 
-    <div class="container">
-        <div class="header" style="display: flex; justify-content: space-between; align-items: flex-start; padding: 20px 40px;">
-    <div>
-        <h1 style="font-size: 24px; color: #334155; font-weight: bold; margin-bottom: 5px;">Upload Media</h1>
-        <p style="font-size: 14px; color: #64748b;">Upload gambar atau video untuk galeri Balai Bahasa Provinsi Riau</p>
-    </div>
-    {{-- HAPUS BARIS DI BAWAH INI JIKA TIDAK INGIN ADA "x" --}}
-    {{-- <a href="/admin/galeri" style="text-decoration: none; font-size: 30px; color: #94a3b8;">&times;</a> --}} </div>
-       <form action="/admin/galeri/store" method="POST" enctype="multipart/form-data">
-    @csrf
-    <form id="uploadForm">
-            <label class="label-title">File Media</label>
-            <div id="dropzone" class="dropzone">
-                <input type="file" id="fileInput" accept="image/*,video/mp4">
-                <div class="dropzone-content">
-                    <i class="fa-solid fa-upload upload-icon"></i>
-                    <p id="fileNameDisplay">Klik untuk upload atau drag & drop</p>
-                    <span>PNG, JPG, GIF atau MP4 (max. 50MB)</span>
+<div class="p-4 md:p-8 bg-[#E5F7FF] min-h-screen font-inter">
+    <div class="w-full min-h-[calc(100vh-80px)] bg-white rounded-xl shadow-sm border border-gray-100 flex flex-col">
+        
+        <div class="p-6 border-b border-gray-50">
+            <h2 class="text-xl font-bold text-gray-800">Upload Media</h2>
+            <p class="text-sm text-gray-500">Tambahkan koleksi foto atau video baru ke galeri sistem</p>
+        </div>
+
+        <form action="{{ route('admin.galeri.store') }}" method="POST" enctype="multipart/form-data" class="flex flex-col flex-1">
+            @csrf
+            
+            <div class="p-20 md:p-5 space-y-4 flex-1">
+                
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Judul Media</label>
+                    <input type="text" name="judul" required placeholder="Masukkan judul media..." 
+                        class="w-full px-3 py-3 border border-gray-200 rounded-xl bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#00897b] focus:bg-white transition text-gray-700">
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="relative">
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Tipe Media</label>
+                        <select name="tipe" id="tipeMedia" class="w-full px-3 py-3 border border-gray-200 rounded-xl bg-gray-50 appearance-none focus:outline-none focus:ring-2 focus:ring-[#00897b] cursor-pointer text-gray-700">
+                            <option value=""disabled selected>Pilih Tipe Media...</option>                           
+                            <option value="foto">Foto (Gambar)</option>
+                            <option value="video">Video (MP4/MKV)</option>
+                        </select>
+                        <div class="absolute right-4 top-[42px] pointer-events-none text-gray-400">
+                            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" /></svg>
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Kategori</label>
+                        <select name="kategori" id="kategoriMedia" required class="w-full px-3 py-3 border border-gray-200 rounded-xl bg-gray-50 appearance-none focus:outline-none focus:ring-2 focus:ring-[#00897b] cursor-pointer text-gray-700">
+                            <option value="" disabled selected>Pilih kategori...</option>
+                            <option value="kegiatan">Kegiatan</option>
+                            <option value="publikasi">Publikasi</option>
+                            <option value="acara">Acara</option>
+                            <option value="dokumentasi">Dokumentasi</option>
+                        </select>
+                        <div class="absolute right-4 top-[42px] pointer-events-none text-gray-400">
+                            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" /></svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">File Media</label>
+                    <input type="file" name="file" id="fileInput" class="hidden" accept="image/*,video/*" required>
+                    
+                    <div id="dropzone" class="border-4 border-dashed border-gray-200 rounded-3xl min-h-[350px] flex flex-col items-center justify-center bg-gray-50 hover:bg-teal-50/50 hover:border-[#00897b]/50 transition-all cursor-pointer overflow-hidden relative group">
+                        
+                        <div id="defaultContent" class="flex flex-col items-center p-12 text-center group-hover:scale-105 transition-transform duration-300">
+                            <div class="bg-blue-100 p-6 rounded-full mb-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-[#00897b]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800">Klik atau seret file ke sini</h3>
+                            <p class="text-gray-500 mt-2 font-medium">Mendukung Foto (PNG, JPG) atau Video (MP4)</p>
+                            <span class="mt-4 px-6 py-2 bg-white border border-gray-300 rounded-lg text-sm font-semibold shadow-sm group-hover:bg-gray-50 transition">Pilih File</span>
+                        </div>
+
+                        <div id="previewContainer" class="hidden absolute inset-0 bg-white z-10 flex flex-col items-center justify-center p-4">
+                            <img id="imagePreview" src="" class="hidden w-full h-full object-contain rounded-xl">
+                            
+                            <div id="videoPreview" class="hidden flex flex-col items-center">
+                                <div class="bg-teal-100 p-8 rounded-full">
+                                    <svg class="w-20 h-20 text-[#00897b]" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M2 6a2 2 0 012-2h12a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"/><path d="M14.5 11a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/></svg>
+                                </div>
+                                <p id="videoName" class="mt-4 font-bold text-gray-700 text-lg italic"></p>
+                            </div>
+
+                            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center z-20">
+                                <button type="button" onclick="resetUpload(event)" class="bg-white text-gray-900 px-8 py-3 rounded-full font-bold uppercase text-xs tracking-widest shadow-2xl active:scale-95 transition">Ganti File</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="form-card">
-                <div class="input-group">
-                    <label>Judul Media</label>
-                    <input type="text" id="judul" placeholder="Masukkan judul media..." required>
-                </div>
-
-                <div class="input-group">
-                    <label>Kategori</label>
-                    <select id="kategori">
-                        <option>Kegiatan</option>
-                        <option>Bahasa</option>
-                        <option>Berita</option>
-                    </select>
-                </div>
-
-<div style="margin-bottom: 25px; display: flex; align-items: center; gap: 20px;">
-    <label style="font-weight: 600; color: #475569; margin: 0; min-width: 100px;">Tipe Media</label>
-    
-    <div style="display: flex; gap: 20px; align-items: center;">
-        <label style="display: inline-flex; align-items: center; cursor: pointer; margin: 0; font-weight: normal;">
-            <input type="radio" name="tipe" value="foto" checked style="width: 18px; height: 18px; margin-right: 8px;"> 
-            Foto
-        </label>
-        <label style="display: inline-flex; align-items: center; cursor: pointer; margin: 0; font-weight: normal;">
-            <input type="radio" name="tipe" value="video" style="width: 18px; height: 18px; margin-right: 8px;"> 
-            Video
-        </label>
+            <div class="flex items-center justify-end gap-4 p-8 border-t border-gray-100 bg-gray-50/50">
+                <button type="button" onclick="history.back()" class="px-8 py-2.5 bg-[#EB1212] border border-red-600 rounded-lg text-sm font-bold text-white hover:bg-red-700 transition shadow-sm active:scale-95">
+                    Batal
+                </button>
+                <button type="submit" id="submitBtn" class="px-10 py-2.5 bg-[#00897b] text-white rounded-lg text-sm font-bold hover:bg-[#00796b] transition shadow-lg shadow-teal-900/10 active:scale-95">
+                    Upload Media
+                </button>
+            </div>
+        </form>
     </div>
 </div>
 
-        <div style="display: flex; justify-content: flex-end; gap: 15px; margin-top: 100px; padding-top: 25px; border-top: 1px solid #f1f5f9;">
-    
-    <a href="/admin/galeri" 
-       style="padding: 10px 35px; border-radius: 8px; border: 1px solid #d1d5db; color: #64748b; text-decoration: none; font-weight: 600; background: #fff; display: inline-flex; align-items: center;">
-       Batal
-    </a>
+<script>
+    const fileInput = document.getElementById('fileInput');
+    const dropzone = document.getElementById('dropzone');
+    const previewContainer = document.getElementById('previewContainer');
+    const imagePreview = document.getElementById('imagePreview');
+    const videoPreview = document.getElementById('videoPreview');
+    const videoName = document.getElementById('videoName');
+    const defaultContent = document.getElementById('defaultContent');
 
-    <button type="submit" 
-            style="padding: 10px 40px; border-radius: 8px; border: none; background: #0ea5e9; color: white; font-weight: 600; cursor: pointer;">
-       Upload Media
-    </button>
-</div>
+    // Buka file explorer saat dropzone diklik
+    dropzone.addEventListener('click', () => fileInput.click());
 
-    <script>
-        const dropzone = document.getElementById('dropzone');
-        const fileInput = document.getElementById('fileInput');
-        const fileNameDisplay = document.getElementById('fileNameDisplay');
+    // Fungsi deteksi file & preview
+    fileInput.addEventListener('change', function() {
+        const file = this.files[0];
+        if (file) {
+            previewContainer.classList.remove('hidden');
+            defaultContent.classList.add('hidden');
 
-        // Drag & Drop Logic
-        dropzone.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            dropzone.classList.add('active');
-        });
-
-        dropzone.addEventListener('dragleave', () => {
-            dropzone.classList.remove('active');
-        });
-
-        dropzone.addEventListener('drop', () => {
-            dropzone.classList.remove('active');
-        });
-
-        // Menampilkan nama file saat dipilih
-        fileInput.addEventListener('change', function() {
-            if (this.files.length > 0) {
-                fileNameDisplay.innerText = "File: " + this.files[0].name;
-                fileNameDisplay.style.color = "#0ea5e9";
+            // Jika file adalah gambar
+            if (file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imagePreview.src = e.target.result;
+                    imagePreview.classList.remove('hidden');
+                    videoPreview.classList.add('hidden');
+                }
+                reader.readAsDataURL(file);
+            } 
+            // Jika file adalah video
+            else if (file.type.startsWith('video/')) {
+                imagePreview.classList.add('hidden');
+                videoPreview.classList.remove('hidden');
+                videoName.innerText = "Video Terpilih: " + file.name;
             }
-        });
+        }
+    });
 
-        // Submit alert
-        document.getElementById('uploadForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('File siap diupload!');
-        });
-    </script>
-</body>
-</html>
-</html>
-</div>
+    // Fungsi Reset/Ganti File
+    function resetUpload(event) {
+        event.stopPropagation(); // Stop trigger klik ke dropzone
+        fileInput.value = "";
+        imagePreview.src = "";
+        videoName.innerText = "";
+        previewContainer.classList.add('hidden');
+        defaultContent.classList.remove('hidden');
+    }
+</script>
 @endsection
