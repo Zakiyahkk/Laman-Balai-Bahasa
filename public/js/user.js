@@ -123,23 +123,75 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 });
-document.addEventListener("DOMContentLoaded", function () {
-    const navLinks = document.querySelectorAll(".nav-menu a");
+/* ==================================================
+       Navbar & Sidebar Fix User
+    ================================================== */
+document.addEventListener("DOMContentLoaded", () => {
 
-    navLinks.forEach((link) => {
-        link.addEventListener("click", function () {
-            // hapus active sementara
-            document
-                .querySelectorAll(".nav-item, .dropdown-menu li")
-                .forEach((el) => el.classList.remove("active"));
+    const navbar = document.querySelector(".bbp-navbar");
+    const toggle = document.getElementById("menuToggle");
+    const overlay = document.getElementById("bbpOverlay");
 
-            // aktifkan parent menu
-            const parentItem = this.closest("li");
-            if (parentItem) parentItem.classList.add("active");
+    toggle.addEventListener("click", () => {
+        navbar.classList.toggle("open");
+    });
 
-            // aktifkan nav utama jika submenu
-            const navItem = this.closest(".nav-item");
-            if (navItem) navItem.classList.add("active");
+    overlay.addEventListener("click", () => {
+        closeSidebar();
+    });
+
+    document.querySelectorAll(".has-dropdown > .dropdown-toggle")
+        .forEach(trigger => {
+            trigger.addEventListener("click", e => {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+
+                    const parent = trigger.closest(".has-dropdown");
+                    document.querySelectorAll(".has-dropdown")
+                        .forEach(item => item !== parent && item.classList.remove("open"));
+
+                    parent.classList.toggle("open");
+                }
+            });
+        });
+
+    document.querySelectorAll(".dropdown a").forEach(link => {
+        link.addEventListener("click", e => {
+            e.stopPropagation();
+            closeSidebar();
         });
     });
+
+    document.querySelectorAll(".nav-menu > li > a:not(.dropdown-toggle)")
+        .forEach(link => {
+            link.addEventListener("click", e => {
+                e.stopPropagation();
+                closeSidebar();
+            });
+        });
+
+    function closeSidebar() {
+        navbar.classList.remove("open");
+        document.querySelectorAll(".has-dropdown")
+            .forEach(item => item.classList.remove("open"));
+    }
 });
+
+/* ==================================================
+    KATA PENGANTAR REVEAL ANIMATION
+    ================================================== */
+document.addEventListener("DOMContentLoaded", () => {
+        const reveals = document.querySelectorAll(".kr-reveal");
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("show");
+                }
+            });
+        }, {
+            threshold: 0.2
+        });
+
+        reveals.forEach(el => observer.observe(el));
+    });
