@@ -1,18 +1,22 @@
-<!-- HERO -->
+<!-- ================= HERO ================= -->
 <section class="dokpres-hero">
     <div class="container">
+
+        {{-- Judul & deskripsi hero (bisa dinamis) --}}
         <h2>Dokumen & Prestasi</h2>
         <p>
             Informasi dokumen resmi serta capaian prestasi Balai Bahasa
             sebagai bentuk transparansi, akuntabilitas, dan kinerja institusi.
         </p>
+
     </div>
 </section>
 
-<!-- DOKUMEN -->
+<!-- ================= DOKUMEN ================= -->
 <section class="dokpres-section">
     <div class="container">
 
+        {{-- Judul section dokumen (bisa dinamis) --}}
         <div class="dokpres-title">
             <h3>Dokumen Resmi</h3>
             <p>Unduh dan akses berbagai dokumen penting Balai Bahasa</p>
@@ -20,6 +24,7 @@
 
         <div class="dokpres-grid">
 
+            {{-- CARD DOKUMEN (nanti bisa loop dari backend) --}}
             <div class="dokpres-card dokumen-card fade-up delay-1">
                 <div class="dokumen-icon">📄</div>
                 <div class="dokumen-content">
@@ -27,6 +32,13 @@
                     <p>Dokumen perencanaan strategis Balai Bahasa.</p>
                     <a href="#">Unduh Dokumen</a>
                 </div>
+
+                {{--
+                DATA DINAMIS DI SINI:
+                - judul dokumen
+                - deskripsi
+                - file_url
+                --}}
             </div>
 
             <div class="dokpres-card dokumen-card fade-up delay-2">
@@ -47,15 +59,19 @@
                 </div>
             </div>
 
+            {{--
+            LOOP DOKUMEN DINAMIS DI SINI
+            --}}
         </div>
 
     </div>
 </section>
 
-<!-- PRESTASI -->
+<!-- ================= PRESTASI ================= -->
 <section class="dokpres-section">
     <div class="container">
 
+        {{-- Judul section prestasi (bisa dinamis) --}}
         <div class="dokpres-title">
             <h3>Prestasi Balai Bahasa</h3>
             <p>Capaian dan penghargaan yang telah diraih</p>
@@ -63,6 +79,7 @@
 
         <div class="dokpres-grid">
 
+            {{-- CARD PRESTASI (nanti bisa loop dari backend) --}}
             <div class="dokpres-card prestasi-card fade-up delay-1">
                 <span class="prestasi-badge">2023</span>
                 <h4>Zona Integritas WBK</h4>
@@ -70,6 +87,13 @@
                     Penghargaan atas komitmen pembangunan zona integritas
                     menuju Wilayah Bebas dari Korupsi.
                 </p>
+
+                {{--
+                DATA DINAMIS DI SINI:
+                - tahun
+                - judul prestasi
+                - deskripsi
+                --}}
             </div>
 
             <div class="dokpres-card prestasi-card fade-up delay-2">
@@ -90,6 +114,9 @@
                 </p>
             </div>
 
+            {{--
+            LOOP PRESTASI DINAMIS DI SINI
+            --}}
         </div>
 
     </div>

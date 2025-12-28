@@ -116,6 +116,14 @@ body {
             align-items: center;
         }
 
+        /* Desktop: logo + menu jadi satu blok kiri */
+        @media (min-width: 769px) {
+            .nav-container {
+                justify-content: flex-start;
+                gap: 32px;
+            }
+        }
+
         .logo img {
             height: 44px;
         }
@@ -130,7 +138,7 @@ body {
         .nav-menu {
             list-style: none;
             display: flex;
-            gap: 28px;
+            gap: 34px;
             margin: 0;
             padding: 0;
             align-items: center;

@@ -42,11 +42,11 @@
                     <!-- Menu Dekstop Aktif -->
                     <ul class="dropdown">
                         <li><a href="{{ url('/profil/visi-misi') }}">Visi & Misi</a></li>
-                        <li><a href="{{ url('/profil/tugas-fungsi') }}">Tugas & Fungsi</a></li>
+                        <li><a href="{{ url('/profil/tugas-dan-fungsi') }}">Tugas & Fungsi</a></li>
                         <li><a href="{{ url('/profil/struktur-organisasi') }}">Struktur Organisasi</a></li>
                         <li><a href="{{ url('/profil/pegawai') }}">Pegawai</a></li>
-                        <li><a href="{{ url('/profil/logo') }}">Logo BPP Riau</a></li>
-                        <li><a href="{{ url('/profil/kontak') }}">Kontak Kami</a></li>
+                        <li><a href="{{ url('/profil/logo-bpp-riau') }}">Logo BPP Riau</a></li>
+                        <li><a href="{{ url('/profil/kontak-kami') }}">Kontak Kami</a></li>
                     </ul>
 
                 </li>
@@ -71,21 +71,31 @@
                         <a href="#">Perjanjian Kinerja</a>
                         <a href="#">Renstra</a>
                         <a href="#">LAKIP</a>
+                        <a href="#">LAKIN</a>
+                        <a href="#">Rencana Aksi</a>
                     </div>
                 </li>
+
+                <li class="has-dropdown">
+                    <a href="#" class="dropdown-toggle">Layanan
+                        <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+                    </a>
+                    <div class="dropdown">
+                        <a href="#">Layanan Ahli Bahasa Balai Bahasa Provinsi Riau</a>
+                        <a href="#">Layanan Penerjemahan Balai Bahasa Provinsi Riau</a>
+                        <a href="#">Layanan Bahasa Indonesia Untuk Penutur Asing (BIPA) Balai Bahasa Provinsi Riau</a>
+                        <a href="#">Layanan Uji Kemahiran Berbahasa Indonesia (UKBI) Adaptif Balai Bahasa Provinsi Riau</a>
+                        <a href="#">Layanan Perpustakaan</a>
+                        <a href="#">Layanan Magang</a>
+                    </div>
+                </li>
+
 
                 <li><a href="#">PPID</a></li>
                 <li><a href="#">Survei</a></li>
                 <li><a href="#">ZI-WBK</a></li>
                 <li><a href="#">Ruang Konsultasi</a></li>
-
             </ul>
-
-            <div class="nav-action">
-                <a href="#" class="btn-outline">Kontak</a>
-                <a href="#" class="btn-primary">Layanan</a>
-            </div>
-
             <button class="menu-toggle" id="menuToggle">
                 <i class="fa-solid fa-bars"></i>
             </button>
