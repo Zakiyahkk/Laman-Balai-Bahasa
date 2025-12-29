@@ -34,6 +34,9 @@
 
         <!-- META INFO -->
         <div class="text-muted small mb-3 d-flex flex-wrap gap-3">
+            <span class="publication-category category-berita">
+                Berita
+            </span>
             <span>
                 <i class="bi bi-calendar-event me-1"></i>
                 12 Januari 2025

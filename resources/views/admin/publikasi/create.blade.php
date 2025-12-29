@@ -20,22 +20,40 @@
         <!-- FRONTEND ONLY -->
         <form onsubmit="handleSubmit(event)" enctype="multipart/form-data">
 
-            <!-- TANGGAL & PENULIS -->
+            <!-- TANGGAL | KATEGORI | PENULIS -->
             <div class="row mb-3">
-                <div class="col-md-6">
+                <!-- TANGGAL -->
+                <div class="col-md-4">
                     <label class="form-label fw-semibold">Tanggal Terbit</label>
                     <input type="date"
-                           class="form-control"
-                           value="{{ date('Y-m-d') }}"
-                           readonly>
+                        class="form-control"
+                        value="{{ date('Y-m-d') }}">
                 </div>
 
-                <div class="col-md-6">
+                <!-- KATEGORI -->
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">
+                        Kategori <span class="text-danger">*</span>
+                    </label>
+
+                    <select class="form-select" required>
+                        <option value="" selected disabled>
+                            -- Pilih Kategori --
+                        </option>
+                        <option value="berita">Berita</option>
+                        <option value="alinea">Alinea</option>
+                        <option value="artikel">Artikel</option>
+                    </select>
+                </div>
+
+                <!-- PENULIS -->
+                <div class="col-md-4">
                     <label class="form-label fw-semibold">Penulis</label>
                     <input type="text"
-                           class="form-control"
-                           placeholder="Nama penulis">
+                        class="form-control"
+                        placeholder="Nama penulis">
                 </div>
+
             </div>
 
             <!-- JUDUL -->
@@ -45,7 +63,7 @@
                 </label>
                 <input type="text"
                        class="form-control"
-                       placeholder="Judul artikel"
+                       placeholder="Judul tulisan"
                        required>
             </div>
 

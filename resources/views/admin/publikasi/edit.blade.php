@@ -22,23 +22,39 @@
         <!-- FRONTEND ONLY -->
         <form onsubmit="handleSubmit(event)" enctype="multipart/form-data">
 
-            <!-- TANGGAL & PENULIS -->
+            <!-- TANGGAL | KATEGORI | PENULIS -->
             <div class="row mb-3">
-                <div class="col-md-6">
+
+                <!-- TANGGAL -->
+                <div class="col-md-4">
                     <label class="form-label fw-semibold">Tanggal Terbit</label>
                     <input type="date"
-                           class="form-control"
-                           value="{{ date('Y-m-d') }}"
-                           readonly>
+                        class="form-control"
+                        value="{{date('Y-m-d') }}"
+                        readonly>
                 </div>
 
-                <div class="col-md-6">
+                <!-- KATEGORI -->
+                <div class="col-md-4">
+                    <label class="form-label fw-semibold">
+                        Kategori <span class="text-danger">*</span>
+                    </label>
+
+                    <select class="form-select" required>
+                        <option value="berita">Berita</option>
+                        <option value="alinea">Alinea</option>
+                        <option value="artikel" selected>Artikel</option>
+                    </select>
+                </div>
+
+                <!-- PENULIS -->
+                <div class="col-md-4">
                     <label class="form-label fw-semibold">Penulis</label>
                     <input type="text"
-                           class="form-control"
-                           placeholder="Nama penulis"
-                           value="Admin Balai Bahasa">
+                        class="form-control"
+                        value="Admin Balai Bahasa">
                 </div>
+
             </div>
 
             <!-- JUDUL -->

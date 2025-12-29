@@ -36,7 +36,7 @@
         </a>
     </li>
 
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link {{ request()->routeIs('admin.artikel*') ? 'active' : '' }}"
            href="{{ route('admin.artikel') }}">
             <i class="bi bi-newspaper me-2"></i>
@@ -50,7 +50,7 @@
             <i class="bi bi-calendar-event me-2"></i>
             Kegiatan
         </a>
-    </li>
+    </li> -->
 
     <li class="nav-item">
         <a class="nav-link {{ request()->routeIs('admin.publikasi*') ? 'active' : '' }}"
@@ -60,13 +60,13 @@
         </a>
     </li>
 
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link {{ request()->routeIs('admin.pendaftaran') ? 'active' : '' }}"
            href="{{ route('admin.pendaftaran') }}">
             <i class="bi bi-clipboard-check me-2"></i>
             Pendaftaran
         </a>
-    </li>
+    </li> -->
 
     <li class="nav-item">
         <a class="nav-link {{ request()->routeIs('admin.galeri*') ? 'active' : '' }}"
@@ -76,13 +76,13 @@
         </a>
     </li>
 
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link {{ request()->routeIs('admin.halamanweb') ? 'active' : '' }}"
            href="{{ route('admin.halamanweb') }}">
             <i class="bi bi-globe me-2"></i>
             Halaman Web
         </a>
-    </li>
+    </li> -->
 
     <li class="nav-item">
         <a class="nav-link {{ request()->routeIs('admin.pengaturan') ? 'active' : '' }}"

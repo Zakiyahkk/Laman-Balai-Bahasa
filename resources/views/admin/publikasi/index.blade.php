@@ -38,10 +38,10 @@
             </button>
 
             <ul class="dropdown-menu dropdown-menu-end">
-                <li><h6 class="dropdown-header">Status</h6></li>
-                <li><a class="dropdown-item" href="#">Draf</a></li>
-                <li><a class="dropdown-item" href="#">Terbit</a></li>
-                <li><a class="dropdown-item active" href="#">Semua</a></li>
+                <li><h6 class="dropdown-header">Kategori</h6></li>
+                <li><a class="dropdown-item" href="#">Alinea</a></li>
+                <li><a class="dropdown-item" href="#">Artikel</a></li>
+                <li><a class="dropdown-item active" href="#">Berita</a></li>
             </ul>
         </div>
     </div>
@@ -77,6 +77,9 @@
         </div>
 
         <div class="d-flex align-items-center flex-wrap gap-3 text-muted small mb-3">
+            <span class="publication-category category-article">
+                Artikel
+            </span>
             <span><i class="bi bi-calendar-event me-1"></i> 15 Desember 2025</span>
             <span><i class="bi bi-person me-1"></i> Refanny Nabilla</span>
             <span><i class="bi bi-eye me-1"></i> 1.245 Pembaca</span>
@@ -116,6 +119,9 @@
         </div>
 
         <div class="d-flex align-items-center flex-wrap gap-3 text-muted small mb-3">
+            <span class="publication-category category-berita">
+                Berita
+            </span>
             <span><i class="bi bi-calendar-event me-1"></i> 8 Desember 2025</span>
             <span><i class="bi bi-person me-1"></i> Zakiyah Binti Adlas</span>
             <span><i class="bi bi-eye me-1"></i> 532 Pembaca</span>
@@ -160,6 +166,9 @@
         </div>
 
         <div class="d-flex align-items-center flex-wrap gap-3 text-muted small mb-3">
+            <span class="publication-category category-alinea">
+                Alinea
+            </span>
             <span><i class="bi bi-calendar-event me-1"></i> 10 Desember 2025</span>
             <span><i class="bi bi-person me-1"></i> Rian Lesmana Putra</span>
             <span><i class="bi bi-eye me-1"></i> 860 Pembaca</span>
@@ -199,6 +208,9 @@
         </div>
 
         <div class="d-flex align-items-center flex-wrap gap-3 text-muted small mb-3">
+            <span class="publication-category category-berita">
+                Berita
+            </span>
             <span><i class="bi bi-calendar-event me-1"></i> 3 Desember 2025</span>
             <span><i class="bi bi-person me-1"></i> Sahala Pane</span>
             <span><i class="bi bi-eye me-1"></i> 352 Pembaca</span>

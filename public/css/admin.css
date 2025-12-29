@@ -294,7 +294,7 @@ main {
 
 
 /* ===============================
-   CSS STATUS
+   CSS STATUS dan KATEGORI
 ================================ */
 
 /* badge status */
@@ -316,6 +316,27 @@ main {
     font-weight: 600;
 }
 
+/* ===== KATEGORI TEKS ===== */
+.publication-category {
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.2px;
+}
+
+/* Artikel — Biru */
+.category-article {
+    color: #0d6efd;
+}
+
+/* Berita — Merah */
+.category-berita {
+    color: #dc3545;
+}
+
+/* Alinea — Ungu */
+.category-alinea {
+    color: #6f42c1;
+}
 
 /* ===============================
    CSS HALAMAN PUBLIKASI
