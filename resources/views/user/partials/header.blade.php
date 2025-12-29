@@ -68,11 +68,11 @@
                         <i class="fa-solid fa-chevron-down dropdown-icon"></i>
                     </a>
                     <div class="dropdown">
-                        <a href="#">Perjanjian Kinerja</a>
-                        <a href="#">Renstra</a>
-                        <a href="#">LAKIP</a>
-                        <a href="#">LAKIN</a>
-                        <a href="#">Rencana Aksi</a>
+                        <a href="{{ url('/akuntabilitas/perjanjian-kinerja') }}">Perjanjian Kinerja</a>
+                        <a href="{{ url('/akuntabilitas/renstra') }}">Renstra</a>
+                        <a href="{{ url('/akuntabilitas/lakip') }}">LAKIP</a>
+                        <a href="{{ url('/akuntabilitas/lakin') }}">LAKIN</a>
+                        <a href="{{ url('/akuntabilitas/rencana-aksi') }}">Rencana Aksi</a>
                     </div>
                 </li>
 
