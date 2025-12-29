@@ -3,7 +3,7 @@
 @section('content')
 <!-- =================  SECTION LAYOUT ATAS ================= -->
 <div class="flex justify-between items-start mb-8 w-full">
-    
+
     <div class="flex flex-col">
         <h3 class="text-3xl font-semi bold text-gray-800 leading-none">Pengaturan</h3>
         <p class="text-gray-500 text-sm mt-2">
@@ -12,7 +12,7 @@
     </div>
 
     <div class="header-logo">
-        <img src="/img/logo.png"
+        <img src="/img/logobbpr.png"
              alt="Logo Balai Bahasa Provinsi Riau"
              class="img-fluid header-logo">
     </div>
@@ -28,10 +28,10 @@
         /* CSS untuk Toggle Switch agar berubah warna saat mati */
         .dot { transition: all 0.3s ease-in-out; }
         input:checked ~ .dot { transform: translateX(100%); }
-        
+
         /* Warna saat AKTIF (Teal) */
         input:checked ~ .switch-bg { background-color: #0d9488; }
-        
+
         /* Warna saat MATI (Abu-abu) - Menjawab permintaan Anda */
         input:not(:checked) ~ .switch-bg { background-color: #d1d5db; }
     </style>

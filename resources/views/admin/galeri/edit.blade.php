@@ -13,7 +13,7 @@
     </div>
 
     <div class="header-logo">
-        <img src="/img/logo.png"
+        <img src="/img/logobbpr.png"
              alt="Logo Balai Bahasa Provinsi Riau"
              class="img-fluid" style="max-height: 50px;">
     </div>
@@ -32,7 +32,7 @@
 
             <div class="card-body px-4">
                 <div class="mb-4">
-                    <img src="https://images.unsplash.com/photo-1459749411177-042180ce673c?q=80&w=1000" 
+                    <img src="https://images.unsplash.com/photo-1459749411177-042180ce673c?q=80&w=1000"
                          alt="Media" class="img-fluid rounded-4 w-100" style="height: 300px; object-fit: cover;">
                 </div>
 

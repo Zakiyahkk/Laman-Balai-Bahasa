@@ -11,7 +11,7 @@
     </div>
 
     <div class="header-logo">
-        <img src="/img/logo.png"
+        <img src="/img/logobbpr.png"
              alt="Logo Balai Bahasa Provinsi Riau"
              class="img-fluid header-logo">
     </div>
