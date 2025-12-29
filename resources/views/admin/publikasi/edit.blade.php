@@ -11,7 +11,7 @@
     </div>
 
     <div class="header-logo">
-        <img src="/img/logo.png" class="img-fluid header-logo">
+        <img src="/img/logobbpr.png" class="img-fluid header-logo">
     </div>
 </div>
 
