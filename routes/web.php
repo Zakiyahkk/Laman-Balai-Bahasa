@@ -80,6 +80,7 @@ Route::prefix('admin')
 
         Route::get('/galeri', [GaleriController::class, 'index'])->name('admin.galeri');
         Route::get('/galeri/create', [GaleriController::class, 'create'])->name('admin.galeri.create');
+        Route::post('/galeri', [GaleriController::class, 'store'])->name('admin.galeri.store');
 
         Route::get('/halamanweb', fn () => view('admin.halamanweb'))->name('admin.halamanweb');
         Route::get('/pengaturan', fn () => view('admin.pengaturan'))->name('admin.pengaturan');
