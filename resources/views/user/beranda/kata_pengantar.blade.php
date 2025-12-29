@@ -1,11 +1,11 @@
-<section class="section kata-riau">
-    <div class="container kata-riau-wrap">
+<section class="kr-section">
+    <div class="kr-wrap">
 
-        <!-- TEKS KIRI -->
-        <div class="kata-riau-text">
+        <!-- TEKS -->
+        <div class="kr-text kr-reveal">
             <h2>Kata Pengantar</h2>
 
-            <p class="kata-lead">
+            <p class="kr-lead">
                 Balai Bahasa Provinsi Riau hadir di tengah-tengah masyarakat
                 Provinsi Riau yang beraneka ragam, mulai dari suku, ras, dan agama.
             </p>
@@ -20,16 +20,16 @@
                 tugas, fungsi, dan kebijakan Balai Bahasa Provinsi Riau.
             </p>
 
-            <p class="kata-nama">
+            <p class="kr-nama">
                 <strong>Dr. Umi Kulsum, S.S., M.Hum.</strong><br>
                 <span>(Kepala Balai Bahasa Provinsi Riau)</span>
             </p>
         </div>
 
-        <!-- FOTO KANAN -->
-        <div class="kata-riau-foto">
+        <!-- FOTO -->
+        <div class="kr-foto kr-reveal">
             <img src="/img/kepala-balai.png" alt="Kepala Balai Bahasa Provinsi Riau">
         </div>
+
     </div>
-    <div class="section-divider"></div>
 </section>

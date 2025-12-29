@@ -1,72 +1,71 @@
-<footer class="footer-riau">
+<footer class="footer-clean">
+    <div class="footer-container">
 
-    <!-- FOOTER ATAS -->
-    <div class="footer-top">
-        <div class="container footer-top-wrap">
+        <!-- GRID UTAMA -->
+        <div class="footer-grid">
 
-            <div class="footer-info">
-                <h4>Ingin mengetahui lebih lanjut?</h4>
-                <p>
-                    Kunjungi media resmi Balai Bahasa Provinsi Riau
-                    untuk memperoleh informasi kebahasaan dan kesastraan.
+            <!-- BRAND -->
+            <div class="footer-brand">
+                <img src="/img/logobbpr.png" alt="BBP Riau" class="footer-logo">
+
+                <p class="footer-desc">
+                    Balai Bahasa Provinsi Riau berperan dalam pengembangan,
+                    pembinaan, dan pelindungan bahasa serta sastra di wilayah Riau.
+                </p>
+
+                <p class="footer-address">
+                    Jalan H.R. Soebrantas Km. 12,5<br>
+                    Kampus Binawidya UNRI<br>
+                    Pekanbaru, Riau<br>
+                    Telp: (0761) 65930
                 </p>
             </div>
 
-        </div>
-    </div>
-
-    <!-- GARIS PEMBATAS -->
-    <div class="footer-divider"></div>
-
-    <!-- FOOTER TENGAH -->
-    <div class="footer-main">
-        <div class="container footer-main-wrap">
-
-            <!-- ALAMAT -->
-            <div class="footer-col">
-                <img src="/img/logo.png" alt="BBP Riau" class="footer-logo">
-
-                <p>
-                    Jalan H.R. Soebrantas<br>
-                    Km. 12,5 Kampus Binawidya UNRI<br>
-                    Simpang Baru, Tampan,<br>
-                    Kota Pekanbaru, Riau.
-                </p>
-
-                <p>
-                    Telepon: (0761) 65930<br>
-                    Faksimile: (0761) 65930
-                </p>
-            </div>
-
-            <!-- PETA -->
-            <div class="footer-col">
-                <h4>Peta</h4>
-                <div class="footer-map">
-                    <iframe src="https://www.google.com/maps?q=Balai+Bahasa+Provinsi+Riau&output=embed" loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade">
-                    </iframe>
-                </div>
-            </div>
-
-            <!-- TENTANG KAMI -->
-            <div class="footer-col">
-                <h4>Tentang Kami</h4>
+            <!-- INFORMASI -->
+            <div>
+                <h4>Informasi</h4>
                 <ul>
-                    <li><a href="#">Profil Organisasi</a></li>
-                    <li><a href="#">Daftar Pejabat</a></li>
-                    <li><a href="#">Sejarah</a></li>
-                    <li><a href="#">Unit Pelaksanaan Teknis</a></li>
-                    <li><a href="#">Risalah Kebijakan</a></li>
+                    <li><a href="#">Berita</a></li>
+                    <li><a href="#">Pengumuman</a></li>
+                    <li><a href="#">Agenda Kegiatan</a></li>
+                    <li><a href="#">Publikasi</a></li>
                 </ul>
             </div>
 
+            <!-- LAYANAN -->
+            <div>
+                <h4>Layanan</h4>
+                <ul>
+                    <li><a href="#">Kamus Bahasa</a></li>
+                    <li><a href="#">Kamus Istilah</a></li>
+                    <li><a href="#">Pengajuan Kosakata</a></li>
+                    <li><a href="#">Konsultasi Kebahasaan</a></li>
+                </ul>
+            </div>
+
+            <!-- LOKASI -->
+            <div class="footer-map">
+                <h4>Lokasi</h4>
+                <iframe
+                    src="https://www.google.com/maps?q=Balai+Bahasa+Provinsi+Riau&output=embed"
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+
         </div>
-    </div>
 
-    <!-- FOOTER BAWAH -->
-    <div class="footer-bottom">
-        <p>© 2025 Balai Bahasa Provinsi Riau</p>
-    </div>
+        <!-- GARIS -->
+        <div class="footer-divider"></div>
 
+        <!-- FOOTER BAWAH -->
+        <div class="footer-bottom">
+            <span>© 2025 Balai Bahasa Provinsi Riau, Kementerian Pendidikan Dasar dan Menengah.</span>
+            <span>
+                <a href="#">Kebijakan Privasi</a> ·
+                <a href="#">Ketentuan Layanan</a>
+            </span>
+        </div>
+
+    </div>
 </footer>

@@ -3,29 +3,14 @@
 
         <!-- JUDUL -->
         <h2 class="judul-center">
-            Pantun <span>Terbaru</span>
+            Pantun <span>Hari Ini</span>
         </h2>
 
-        <!-- GRID PANTUN -->
-        <div class="pantun-grid">
-
-            <!-- ITEM -->
-            <div class="pantun-card">
-                <img src="/img/pantun.jpg" alt="Pantun Antikorupsi">
+        <!-- PANTUN GAMBAR -->
+        <div class="pantun-single">
+            <div class="pantun-card pantun-image-card">
+                <img src="/img/pantu.png" alt="Pantun Hari Ini">
             </div>
-
-            <div class="pantun-card">
-                <img src="/img/pantun.jpg" alt="Pantun Antikorupsi">
-            </div>
-
-            <div class="pantun-card">
-                <img src="/img/pantun.jpg" alt="Pantun Antikorupsi">
-            </div>
-
-            <div class="pantun-card">
-                <img src="/img/pantun.jpg" alt="Pantun Antikorupsi">
-            </div>
-
         </div>
 
         <!-- BUTTON -->

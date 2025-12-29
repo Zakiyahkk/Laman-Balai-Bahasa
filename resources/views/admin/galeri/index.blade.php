@@ -43,10 +43,11 @@
             <option>JPG</option>
             <option>MP4</option>
         </select>
-        <a href="{{ route('admin.galeri.create') }}"
-        class="btn btn-add-article d-flex align-items-center ms-2">
-            Upload Media
-        </a>
+       <a href="{{ route('admin.galeri.create') }}"
+   class="btn btn-add-article d-flex align-items-center ms-2"
+   style="font-size: 12px !important;">
+    + Media
+</a>
 
     </div>
 

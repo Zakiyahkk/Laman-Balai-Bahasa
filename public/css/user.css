@@ -19,356 +19,417 @@ body {
 
 .container {
     max-width: 1200px;
-    margin: auto;
+    margin: auto;   
     padding: 0 16px;
 }
 
 /* ==================================================
-   TOPBAR (FIX RUANG KOSONG)
+   Navbar & Sidebar Fix User
 ================================================== */
-.topbar {
-    background: #ffffff;
-    padding: 0;
-    margin: 0;
-}
+        .bbp-navbar {
+            font-family: Inter, "Segoe UI", Arial, sans-serif;
+            background: #fff;
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            z-index: 5000;
+        }
 
-/* kalau tidak ada isi, benar-benar hilang */
-.topbar:empty {
-    display: none;
-}
+        .bbp-navbar * {
+            box-sizing: border-box;
+        }
 
-.topbar-content {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+        .nav-menu {
+        position: relative;
+        z-index: 5001;
+        }
 
-    /* FIX: jangan terlalu besar */
-    padding: 4px 0;
-}
+        .bbp-overlay {
+            z-index: 4999;
+        }
 
-/* SOCIAL ICON */
-.social-icons {
-    display: flex;
-    gap: 8px;
-}
+        .bbp-navbar a {
+            text-decoration: none;
+            color: #0f172a;
+        }
 
-.social-icons a {
-    width: 28px;
-    height: 28px;
-    background: #0485c7;
-    color: #fff;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    font-size: 14px;
-}
-@media (max-width: 768px) {
-    .topbar-content {
-        justify-content: center;
-        padding: 4px 0;
-    }
-}
+        /* ================= TOP BAR ================= */
+        .bbp-top {
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 13px;
+        }
 
-.kata-riau-wrap {
-    max-width: 1100px;
-    margin: auto;
-    display: grid;
-    grid-template-columns: 1.4fr 0.6fr;
-    gap: 60px;
-    align-items: center;
-}
+        .bbp-top .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 8px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
 
-/* ===============================
-   MOBILE INFO HEADER
-================================ */
-.mobile-info {
-    background: #fff;
-    padding: 12px 16px;
-    border-bottom: 1px solid #e5e5e5;
-    text-align: left;
-}
+        .bbp-top-left {
+            display: flex;
+            gap: 24px;
+        }
 
-.mobile-contact,
-.mobile-ult {
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-    margin-bottom: 6px;
-    color: #333;
-}
+        .bbp-top-left span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
 
-.mobile-contact i,
-.mobile-ult i {
-    color: #0b4ea2;
-    margin-right: 8px;
-    font-size: 16px;
-}
+        .bbp-top-left i {
+            color: #0b4ea2;
+        }
 
-/* sosial media */
-.mobile-social {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-}
+        .bbp-social {
+            display: flex;
+            gap: 8px;
+        }
 
-.mobile-social a {
-    width: 32px;
-    height: 32px;
-    background: #0485c7;
-    color: #fff;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-}
+        .bbp-social a {
+            width: 26px;
+            height: 26px;
+            background: #0485c7;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+        }
 
-/* ===============================
-   TAMPILKAN HANYA DI MOBILE
-================================ */
-@media (min-width: 769px) {
-    .mobile-info {
-        display: none;
-    }
-}
+        /* ================= NAV ================= */
+        .bbp-nav {
+            border-top: 1px solid #e5e7eb;
+        }
 
-/* ==================================================
-   HEADER
-================================================== */
-header:empty,
-.header:empty,
-.topbar:empty {
-    display: none !important;
-}
+        .nav-container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+            height: 72px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-.header-main {
-    background: #fff;
-    border-bottom: 1px solid #eee;
-}
+        /* Desktop: logo + menu jadi satu blok kiri */
+        @media (min-width: 769px) {
+            .nav-container {
+                justify-content: flex-start;
+                gap: 32px;
+            }
+        }
 
-.header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 0;
-}
+        .logo img {
+            height: 44px;
+        }
 
-.header-brand {
-    display: flex;
-    gap: 16px;
-    align-items: center;
-}
+        /* MOBILE SIDEBAR HEADER - default (DESKTOP) */
+        .mobile-sidebar-header {
+            display: none;
+        }
 
-.header-brand img {
-    width: 90px;
-}
 
-.brand-text h1 {
-    font-size: 26px;
-    margin: 0;
-    font-weight: 800;
-}
+        /* ================= DESKTOP MENU ================= */
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            gap: 34px;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+        }
 
-.brand-text h2 {
-    font-size: 16px;
-    margin: 0;
-    font-weight: 600;
-}
+        .nav-menu>li {
+            position: relative;
+        }
 
-.brand-text span,
-.brand-text small {
-    display: block;
-    font-size: 12px;
-    color: #555;
-}
+        .nav-menu>li>a {
+            font-size: 14px;
+            font-weight: 600;
+            padding: 6px 2px;
+            position: relative;
+        }
 
-.header-contact {
-    display: flex;
-    gap: 30px;
-}
+        /* underline desktop */
+        .nav-menu>li>a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 0;
+            height: 2px;
+            background: #0485c7;
+            transition: .25s;
+        }
 
-.contact-item {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
+        .nav-menu>li>a:hover::after {
+            width: 100%;
+        }
 
-.contact-item i {
-    font-size: 26px;
-    color: #0b4ea2;
-}
+        /* ================= DESKTOP DROPDOWN ================= */
+        .dropdown {
+            position: absolute;
+            top: 115%;
+            left: 0;
+            list-style: none;
+            min-width: 240px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 18px 40px rgba(0, 0, 0, .12);
+            padding: 10px 0;
+            opacity: 0;
+            transform: translateY(10px);
+            pointer-events: none;
+            transition: .25s ease;
+        }
 
-/* ==================================================
-   NAVBAR (DESKTOP)
-================================================== */
-.navbar {
-    background: #0485c7;
-    min-height: 48px;
-    position: sticky;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1100;
-}
+        .dropdown a {
+            display: block;
+            padding: 10px 18px;
+            font-size: 14px;
+        }
 
-/* ==================================================
-   NAVBAR SCROLL FIX
-================================================== */
-.navbar.is-fixed {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1100;
-}
+        .dropdown a:hover {
+            background: #f1f5f9;
+        }
 
-.navbar.is-fixed + * {
-    margin-top: 56px; /* sesuaikan tinggi navbar */
-}
+        @media (min-width: 769px) {
+            .has-dropdown:hover>.dropdown {
+                opacity: 1;
+                transform: none;
+                pointer-events: auto;
+            }
+        }
 
-.nav-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+        /* ================= ICON ================= */
+        .dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
 
-.nav-menu {
-    display: flex;
-    list-style: none;
-    gap: 26px;
-    padding: 14px 0;
-    margin: 0;
-    align-items: center;
-}
+        .dropdown-icon {
+            font-size: 11px;
+            transition: transform .25s;
+        }
 
-.nav-menu a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 14px;
-}
+        @media (min-width: 769px) {
+            .has-dropdown:hover .dropdown-icon {
+                transform: rotate(180deg);
+            }
+        }
 
-/* ==================================================
-   ACTIVE MENU
-================================================== */
-.nav-menu > li.active > a,
-.nav-item.active > a {
-    background: rgba(255, 255, 255, 0.25);
-    border-radius: 4px;
-}
+        /* ================= ACTION ================= */
+        .nav-action {
+            display: flex;
+            gap: 12px;
+        }
 
-/* ==================================================
-   DROPDOWN (DESKTOP)
-================================================== */
-.nav-item {
-    position: relative;
-}
+        .btn-outline {
+            border: 1px solid #d1d5db;
+            padding: 8px 16px;
+            border-radius: 999px;
+            font-size: 14px;
+            font-weight: 600;
+        }
 
-.dropdown-menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    min-width: 260px;
-    background: #0485c7;
-    padding: 10px 0;
-    list-style: none;
-    z-index: 1000;
-}
+        .btn-primary {
+            background: linear-gradient(135deg, #0485c7, #0ea5e9);
+            color: #fff;
+            padding: 8px 18px;
+            border-radius: 999px;
+            font-size: 14px;
+            font-weight: 600;
+        }
 
-.dropdown-menu li a {
-    display: block;
-    padding: 10px 18px;
-    color: #fff;
-    text-decoration: none;
-    font-size: 14px;
-}
+        /* ================= MOBILE ================= */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+        }
 
-.dropdown-menu li a:hover {
-    background: rgba(255, 255, 255, 0.15);
-}
+        /* ================= MOBILE SIDEBAR ================= */
+        @media (max-width: 768px) {
 
-@media (min-width: 769px) {
-    .dropdown:hover > .dropdown-menu {
-        display: block;
-    }
-}
+            .dropdown {
+                opacity: 1 !important;
+                pointer-events: auto !important;
+                transform: none !important;
+            }
 
-/* ==================================================
-   MOBILE HEADER
-================================================== */
-.mobile-header {
-    display: none;
-    background: #0485c7;
-    padding: 10px 14px;
-    align-items: center;
-    justify-content: space-between;
-}
+            /* ================= MOBILE SIDEBAR HEADER ================= */
+            .mobile-sidebar-header {
+                display: flex;
+                justify-content: center;
+                padding-bottom: 16px;
+                margin-top: -60px;
+                margin-bottom: 10px;
+                border-bottom: 1px solid #e5e7eb;
+            }
 
-.mobile-logo {
-    height: 38px;
-}
 
-.mobile-menu-btn {
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 22px;
-    cursor: pointer;
-}
+            .mobile-sidebar-header img {
+                height: 48px;
+            }
 
-/* ==================================================
-   RESPONSIVE (MOBILE FIX — SATU KALI SAJA)
-================================================== */
-@media (max-width: 768px) {
-    /* tampilkan header mobile */
-    .mobile-header {
-        display: flex;
-    }
+            /* ================= DROPDOWN ANIMATION ================= */
+            .dropdown {
+                display: block;
+                position: static;
+                max-height: 0;
+                overflow: hidden;
 
-    /* sembunyikan header desktop */
-    .topbar,
-    .header-main {
-        display: none;
-    }
+                background: #f8fafc;
+                border-radius: 12px;
+                margin: 4px 0 6px;
+                padding: 0;
 
-    /* navbar tetap ada */
-    .navbar {
-        display: block;
-    }
+                opacity: 1 !important;
+                pointer-events: auto !important;
+                transform: none !important;
 
-    /* menu mobile */
-    .nav-menu {
-        display: none;
-        flex-direction: column;
-        background: #0485c7;
-        position: fixed;
-        inset: 0;
-        padding: 70px 20px;
-        gap: 18px;
-        z-index: 9999;
-        overflow-y: auto;
-    }
+                transition:
+                    max-height .35s ease,
+                    padding .25s ease,
+                    opacity .25s ease;
+            }
 
-    .nav-menu.show {
-        display: flex;
-    }
+            .has-dropdown.open>.dropdown {
+                max-height: 1000px;
+                padding: 6px 0;
+            }
 
-    /* dropdown mobile */
-    .dropdown-menu {
-        position: static;
-        background: #0485c7;
-        margin-top: 6px;
-        border-radius: 4px;
-        display: none;
-    }
+            /* dropdown item */
+            .dropdown a {
+                padding: 12px 18px;
+                font-size: 14px;
+                font-weight: 500;
+                color: #334155;
+            }
 
-    .dropdown.open > .dropdown-menu {
-        display: block;
-    }
-}
+            .dropdown a:hover {
+                background: #e5f0fb;
+                color: #0369a1;
+            }
+
+            .bbp-top,
+            .nav-action {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            /* OVERLAY */
+            .bbp-overlay {
+                position: fixed;
+                inset: 0;
+                background: rgba(0, 0, 0, .35);
+                opacity: 0;
+                pointer-events: none;
+                transition: .3s ease;
+                z-index: 4999;
+            }
+
+            .bbp-navbar.open .bbp-overlay {
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            /* SIDEBAR */
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 320px;
+                max-width: 85%;
+                height: 100vh;
+                background: #fff;
+                padding: 88px 18px 24px;
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+                overflow-y: auto;
+                transition: right .35s cubic-bezier(.4, 0, .2, 1);
+                z-index: 5000;
+                align-items: stretch;
+                text-align: left;
+            }
+
+            .bbp-navbar.open .nav-menu {
+                right: 0;
+            }
+
+            /* MENU ITEM */
+            .nav-menu>li>a {
+                padding: 14px 14px;
+                font-size: 15px;
+                font-weight: 600;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-radius: 10px;
+            }
+
+            .nav-menu>li>a:hover {
+                background: #f1f5f9;
+            }
+
+            /* ===== MOBILE DROPDOWN (FINAL FIX) ===== */
+            .dropdown {
+                display: block;
+                position: static;
+                max-height: 0;
+                overflow: hidden;
+                background: #f8fafc;
+                border-radius: 12px;
+                margin: 4px 0 6px;
+                padding: 0;
+                box-shadow: none;
+                opacity: 1 !important;
+                pointer-events: auto !important;
+                transform: none !important;   
+
+                transition: max-height .35s ease, padding .25s ease;
+            }
+
+            .has-dropdown.open>.dropdown {
+                max-height: 1000px;
+                padding: 6px 0;
+            }
+
+
+            .dropdown a {
+                padding: 12px 18px;
+                font-size: 14px;
+                font-weight: 500;
+                color: #334155;
+                text-align: left;
+            }
+
+            .dropdown a:hover {
+                background: #e5f0fb;
+                color: #0369a1;
+            }
+
+            .has-dropdown.open .dropdown-icon {
+                transform: rotate(180deg);
+            }
+
+            /* hapus underline desktop */
+            .nav-menu a::after {
+                display: none;
+            }
+
+        }
 
 /* ==================================================
    SECTION GLOBAL
@@ -411,7 +472,7 @@ header:empty,
     position: absolute;
     top: 10px;
     left: 10px;
-    background: #0b4ea2;
+    background: #0485c7;
     color: #fff;
     font-size: 11px;
     padding: 4px 8px;
@@ -454,44 +515,24 @@ header:empty,
 }
 
 /* ==================================================
-   PANTUN
+   PANTUN HARIAN – GAMBAR SAJA (DASHBOARD)
 ================================================== */
-.pantun-terbaru {
-    background: #fff;
+.pantun-single {
+    display: flex;
+    justify-content: center;
 }
 
-.pantun-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
-}
-
-.pantun-card {
-    border-radius: 10px;
-    overflow: hidden;
-    background: #fff;
-}
-
-.pantun-card img {
+.pantun-image-card {
+    max-width: 480px; /* ukuran ideal desktop */
     width: 100%;
-    height: 100%;
-    aspect-ratio: 3 / 4;
-    object-fit: cover;
+}
+
+.pantun-image-card img {
+    width: 100%;
+    height: auto;
     display: block;
-}
-
-.btn-right {
-    text-align: right;
-    margin-top: 25px;
-}
-
-.btn-pantun {
-    background: #111;
-    color: #fff;
-    padding: 8px 16px;
-    font-size: 13px;
-    text-decoration: none;
-    border-radius: 3px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
 /* ==================================================
@@ -563,11 +604,16 @@ header:empty,
 }
 
 .alinea-text {
-    max-width: 900px;
-    margin: auto;
-    text-align: center;
-    font-size: 15px;
-    line-height: 1.8;
+    max-width: 800px; /* lebar ideal baca */
+    margin: 0 auto; /* center konten */
+    text-align: justify; /* rata kiri–kanan */
+    line-height: 1.8; /* nyaman dibaca */
+    font-size: 16px;
+    color: #333;
+    text-indent: 2em; /* inden awal paragraf */
+}
+.alinea-text {
+    text-indent: 2em;
 }
 
 /* ==================================================
@@ -587,7 +633,7 @@ header:empty,
 .maskot-circle {
     width: 260px;
     height: 260px;
-    background: #0b8fd6;
+    background: #0485c7;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -667,12 +713,12 @@ header:empty,
     width: 100%;
     height: 315px;
     border-radius: 6px;
-    box-shadow: 0 20px 40px rgba(0,0,0,.35);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
 }
 
 .yelyel-divider {
     margin-top: 80px;
-    border-top: 1px solid rgba(255,255,255,.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 /* RESPONSIVE */
@@ -688,123 +734,542 @@ header:empty,
 }
 
 /* ==================================================
-   FOOTER
+   SAPA BIPA
 ================================================== */
-.footer-riau {
-    background: #9fd6ff;
-    font-size: 14px;
-    line-height: 1.6; /* lebih nyaman dibaca */
-    color: #1f2d3d;
+.sapa-bipa {
+    background: #f6f6f6;
+    padding: 100px 0;
+    overflow: hidden;
 }
 
-.footer-main {
-    padding: 48px 0 40px; /* lebih seimbang atas-bawah */
+.sapa-bipa-title {
+    text-align: center;
+    margin-bottom: 70px;
 }
 
-.footer-main-wrap {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr 1fr;
-    gap: 48px; /* jarak kolom lebih lega & rapi */
-    align-items: flex-start;
-}
-/* Geser kolom Tentang Kami sedikit ke kanan */
-.footer-main-wrap > .footer-col:last-child {
-    padding-left: 150px;
-}
-
-/* Kolom umum */
-.footer-col p {
+.sapa-bipa-title h2 {
+    font-size: 48px;
+    font-weight: 800;
+    color: #e11d48;
     margin-bottom: 6px;
 }
 
-/* Logo */
-.footer-logo {
-    display: block;
-    margin-bottom: 16px;
-    max-width: 180px;
+.sapa-bipa-title span {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1f2937;
 }
 
-/* Judul kolom */
-.footer-col h4 {
-    font-size: 15px;
+.sapa-bipa-wrap {
+    display: grid;
+    grid-template-columns: 1fr 520px 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.sapa-bipa-item {
+    text-align: center;
+}
+
+.sapa-bipa-item h3 {
+    font-size: 22px;
     font-weight: 600;
+    margin-bottom: 8px;
+    color: #111;
+}
+
+.sapa-bipa-item p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #6b7280;
+}
+
+.sapa-bipa-item .mt {
+    margin-top: 40px;
+}
+
+/* GAMBAR */
+.sapa-bipa-center img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* ==========================
+   ANIMASI HALUS SAPA BIPA
+========================== */
+.fade-up {
+    animation: fadeUp 1s ease forwards;
+}
+
+.fade-left {
+    animation: fadeLeft 1s ease forwards;
+}
+
+.fade-right {
+    animation: fadeRight 1s ease forwards;
+}
+
+.zoom-in {
+    animation: zoomIn 1s ease forwards;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeRight {
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.92);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+    .sapa-bipa-wrap {
+        grid-template-columns: 1fr;
+        gap: 60px;
+    }
+
+    .sapa-bipa-center img {
+        max-width: 420px;
+        margin: 0 auto;
+        display: block;
+    }
+}
+
+/* ==================================================
+   KAMUS – HERO
+================================================== */
+.kamus-hero {
+    background: linear-gradient(135deg, #2f3b43 0%, #3a4851 100%);
+    padding: 90px 0;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+
+.kamus-hero-wrap {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 60px;
+    align-items: center;
+}
+
+/* TEKS KIRI */
+.kamus-hero-text h2 {
+    font-size: 34px;
+    font-weight: 400;
+    margin-bottom: 18px;
+}
+
+.kamus-hero-text h2 span {
+    font-weight: 700;
+}
+
+.kamus-hero-text p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #e5e7eb;
+    max-width: 640px;
+}
+
+.kamus-hero-text em {
+    font-style: italic;
+}
+
+.kamus-hero-btn {
+    margin-top: 26px;
+}
+
+.kamus-hero-btn a {
+    display: inline-block;
+    background: #ffffff;
+    color: #1f2937;
+    padding: 12px 22px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+.kamus-hero-btn a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* GAMBAR KANAN */
+.kamus-hero-visual {
+    text-align: right;
+}
+
+.kamus-hero-visual img {
+    max-width: 520px;
+    width: 100%;
+    transform: rotate(-8deg);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+    border-radius: 6px;
+}
+
+/* GARIS PUTIH BAWAH */
+.kamus-hero-divider {
+    height: 12px;
+    background: #ffffff;
+    margin-top: 80px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+    .kamus-hero-wrap {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 40px;
+    }
+
+    .kamus-hero-visual {
+        text-align: center;
+    }
+
+    .kamus-hero-visual img {
+        transform: none;
+        max-width: 420px;
+        margin: 0 auto;
+    }
+}
+
+/* ==================================================
+   DOKUMEN & PRESTASI
+================================================== */
+
+/* HERO */
+.dokpres-hero {
+    background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+    color: #fff;
+    padding: 90px 0 70px;
+    text-align: center;
+}
+
+.dokpres-hero h2 {
+    font-size: 36px;
+    font-weight: 700;
     margin-bottom: 14px;
 }
 
-/* List link */
-.footer-col ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+.dokpres-hero p {
+    font-size: 16px;
+    color: #e5e7eb;
+    max-width: 720px;
+    margin: 0 auto;
+    line-height: 1.8;
 }
 
-.footer-col ul li {
-    margin-bottom: 8px;
+/* SECTION WRAP */
+.dokpres-section {
+    background: #f3f4f6;
+    padding: 80px 0;
 }
 
-.footer-col ul li a {
-    color: #003f6b;
+/* SECTION TITLE */
+.dokpres-title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.dokpres-title h3 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 10px;
+}
+
+.dokpres-title p {
+    font-size: 15px;
+    color: #6b7280;
+}
+
+/* GRID */
+.dokpres-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+/* CARD UMUM */
+.dokpres-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 24px 22px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    transition: all 0.25s ease;
+}
+
+.dokpres-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
+}
+
+/* DOKUMEN */
+.dokumen-card {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.dokumen-icon {
+    width: 48px;
+    height: 48px;
+    background: #0485c7;
+    color: #fff;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.dokumen-content h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 6px;
+}
+
+.dokumen-content p {
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 10px;
+}
+
+.dokumen-content a {
+    font-size: 14px;
+    font-weight: 600;
+    color: #2563eb;
     text-decoration: none;
 }
 
-.footer-col ul li a:hover {
-    text-decoration: underline;
-}
-
-/* Map */
-.footer-map iframe {
-    width: 100%;
-    height: 200px;
-    border-radius: 6px;
-    border: 0;
-}
-
-/* ==================================================
-   FOOTER BOTTOM
-================================================== */
-.footer-bottom {
-    border-top: 1px solid rgba(0, 0, 0, 0.2);
+/* PRESTASI */
+.prestasi-card {
     text-align: center;
-    padding: 16px 0;
+}
+
+.prestasi-badge {
+    display: inline-block;
+    background: #f59e0b;
+    color: #111;
+    padding: 6px 12px;
+    border-radius: 20px;
     font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 14px;
 }
 
-/* ==================================================
-   FOOTER MOBILE - TEXT LEFT
-================================================== */
-@media (max-width: 768px) {
-    .footer-main {
-        padding: 36px 0 32px;
-    }
+.prestasi-card h4 {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #111827;
+}
 
-    .footer-main-wrap {
+.prestasi-card p {
+    font-size: 14px;
+    color: #6b7280;
+    line-height: 1.6;
+}
+
+/* ANIMASI */
+.fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeUp 0.8s ease forwards;
+}
+
+.delay-1 {
+    animation-delay: 0.15s;
+}
+.delay-2 {
+    animation-delay: 0.3s;
+}
+.delay-3 {
+    animation-delay: 0.45s;
+}
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+    .dokpres-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .dokpres-grid {
         grid-template-columns: 1fr;
-        gap: 28px;
-        text-align: left;
     }
 
-    .footer-col {
-        text-align: left;
-    }
-
-    .footer-logo {
-        margin-bottom: 12px;
-    }
-
-    .footer-map iframe {
-        height: 220px;
-        border-radius: 6px;
-    }
-
-    .footer-main-wrap > .footer-col:last-child {
-        padding-left: 0; /* kunci: hilangkan geser */
-    }
-
-    .footer-main-wrap,
-    .footer-col {
-        text-align: left;
+    .dokpres-hero h2 {
+        font-size: 30px;
     }
 }
+
+/* =========================
+   FOOTER CLEAN
+========================= */
+    .footer-clean {
+        background: #ffffff;
+        border-top: 1px solid #e5e7eb;
+        font-family: Inter, Poppins, sans-serif;
+        color: #334155;
+    }
+
+    /* CONTAINER */
+    .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 56px 24px 32px;
+    }
+
+    /* GRID */
+    .footer-grid {
+        display: grid;
+        grid-template-columns: 1.6fr 1fr 1fr 1.2fr;
+        gap: 40px;
+        align-items: flex-start;
+    }
+
+    /* BRAND */
+    .footer-logo {
+        max-width: 160px;
+        margin-bottom: 14px;
+    }
+
+    .footer-desc {
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 14px;
+        max-width: 420px;
+    }
+
+    .footer-address {
+        font-size: 13px;
+        line-height: 1.6;
+        color: #64748b;
+    }
+
+    /* TITLE */
+    .footer-clean h4 {
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 14px;
+        color: #0f172a;
+    }
+
+    /* LIST */
+    .footer-clean ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .footer-clean ul li {
+        margin-bottom: 8px;
+    }
+
+    .footer-clean ul li a {
+        font-size: 14px;
+        color: #475569;
+        text-decoration: none;
+    }
+
+    .footer-clean ul li a:hover {
+        color: #2563eb;
+    }
+
+    /* MAP */
+    .footer-map iframe {
+        width: 100%;
+        height: 140px;
+        border-radius: 8px;
+        border: 1px solid #e5e7eb;
+    }
+
+    /* DIVIDER */
+    .footer-divider {
+        margin-top: 40px;
+        border-top: 1px solid #e5e7eb;
+    }
+
+    /* BOTTOM */
+    .footer-bottom {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 12px;
+        color: #94a3b8;
+    }
+
+    .footer-bottom a {
+        color: #94a3b8;
+        text-decoration: none;
+    }
+
+    .footer-bottom a:hover {
+        color: #2563eb;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+        .footer-grid {
+            grid-template-columns: 1fr;
+            gap: 32px;
+        }
+
+        .footer-bottom {
+            flex-direction: column;
+            gap: 10px;
+            text-align: center;
+        }
+    }
 
 /* ==================================================
    MOBILE CONTENT FIX (WAJIB)
@@ -817,29 +1282,8 @@ header:empty,
         padding-right: 16px;
     }
 
-    /* KATA PENGANTAR */
-    .kata-riau-wrap {
-        display: flex;
-        flex-direction: column;
-        gap: 24px;
-    }
-
-    .kata-riau-text {
-        text-align: left;
-    }
-
-    .kata-riau-foto img {
-        max-width: 100%;
-        height: auto;
-    }
-
     /* BERITA */
     .berita-grid {
-        grid-template-columns: 1fr;
-    }
-
-    /* PANTUN */
-    .pantun-grid {
         grid-template-columns: 1fr;
     }
 
@@ -861,9 +1305,120 @@ header:empty,
 }
 
 .section-divider {
-    margin: 40px 0;
-    border-top: 1px solid #e5e5e5;
+    margin: 50px 0;
+    height: 1.5px;
+    background: linear-gradient(to right, transparent, #cbd5e1, transparent);
 }
+
+/* ================= KATA PENGANTAR – MODERN ================= */
+    .kr-section {
+        padding: 100px 0;
+        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+        overflow: hidden;
+    }
+
+    .kr-wrap {
+        max-width: 1200px;
+        margin: auto;
+        padding: 0 24px;
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 64px;
+        align-items: center;
+    }
+
+    /* ===== TEXT ===== */
+    .kr-text h2 {
+        font-size: 30px;
+        font-weight: 800;
+        margin-bottom: 20px;
+        color: #0f172a;
+        position: relative;
+    }
+
+    .kr-text h2::after {
+        content: "";
+        width: 64px;
+        height: 4px;
+        background: linear-gradient(90deg, #0485c7, #0ea5e9);
+        display: block;
+        margin-top: 12px;
+        border-radius: 4px;
+    }
+
+    .kr-lead {
+        font-size: 17px;
+        font-weight: 600;
+        color: #334155;
+        margin-bottom: 18px;
+        line-height: 1.7;
+    }
+
+    .kr-text p {
+        font-size: 15px;
+        line-height: 1.9;
+        color: #475569;
+        margin-bottom: 16px;
+    }
+
+    .kr-nama {
+        margin-top: 28px;
+        padding-left: 16px;
+        border-left: 4px solid #0ea5e9;
+    }
+
+    .kr-nama strong {
+        font-size: 16px;
+        color: #0f172a;
+    }
+
+    .kr-nama span {
+        font-size: 14px;
+        color: #64748b;
+    }
+
+    /* ===== FOTO ===== */
+    .kr-foto {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+    }
+
+    .kr-foto img {
+        max-width: 300%;
+        height: auto;
+        border-radius: 24px;
+        filter: drop-shadow(0 30px 40px rgba(0, 0, 0, .15));
+        transform: translateY(20px);
+    }
+
+    /* ===== ANIMATION (INITIAL STATE) ===== */
+    .kr-reveal {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all .9s ease;
+    }
+
+    .kr-reveal.show {
+        opacity: 1;
+        transform: none;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+        .kr-wrap {
+            grid-template-columns: 1fr;
+            gap: 48px;
+        }
+
+        .kr-foto img {
+            max-width: 400px;
+        }
+
+        .kr-text h2 {
+            font-size: 30px;
+        }
+    }
 
 /* ==================================================
    HERO SLIDER
@@ -933,14 +1488,14 @@ header:empty,
     border: none;
     padding: 8px 14px;
     font-size: 14px;
-    color: #0056b3;
+    color: #0485c7;
     cursor: pointer;
     border-radius: 4px;
     transition: all 0.25s ease;
 }
 
 .filter-btn.active {
-    background-color: #0056b3;
+    background-color: #0485c7;
     color: #fff;
 }
 
@@ -1160,7 +1715,7 @@ header:empty,
     top: 45%;
     width: 42px;
     height: 42px;
-    background: #007bff;
+    background: #0485c7;
     color: #fff;
     border: none;
     font-size: 22px;
