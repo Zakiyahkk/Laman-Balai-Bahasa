@@ -57,9 +57,11 @@
                         <i class="fa-solid fa-chevron-down dropdown-icon"></i>
                     </a>
                     <div class="dropdown">
-                        <a href="#">Publikasi</a>
-                        <a href="#">Kamus</a>
-                        <a href="#">Bahasa Daerah</a>
+                        <a href="{{ url('/produk/bahan-bacaan-literasi') }}">Bahan Bacaan Literasi</a>
+                        <a href="{{ url('/produk/jurnal-madah') }}">Jurnal Madah</a>
+                        <a href="{{ url('/produk/majalah') }}">Majalah</a>
+                        <a href="{{ url('/produk/penerjemahan-sembari') }}">Penerjemahan: Sembari</a>
+                        <a href="{{ url('/produk/peta-pembinaan-bahasa') }}">Peta Pembinaan Bahasa</a>
                     </div>
                 </li>
 

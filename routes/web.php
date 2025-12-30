@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\BerandaController;
 use App\Http\Controllers\User\BeritaController;
 use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\User\ProdukController;
 use App\Http\Controllers\User\AkuntabilitasController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\GaleriController;
@@ -37,6 +38,14 @@ Route::prefix('akuntabilitas')->group(function () {
     Route::get('/lakip', [AkuntabilitasController::class, 'lakip']);
     Route::get('/lakin', [AkuntabilitasController::class, 'lakin']);
     Route::get('/rencana-aksi', [AkuntabilitasController::class, 'rencanaAksi']);
+});
+
+Route::prefix('produk')->group(function () {
+    Route::get('/bahan-bacaan-literasi', [ProdukController::class, 'bahanBacaan']);
+    Route::get('/jurnal-madah', [ProdukController::class, 'jurnalMadah']);
+    Route::get('/majalah', [ProdukController::class, 'majalah']);
+    Route::get('/penerjemahan-sembari', [ProdukController::class, 'penerjemahanSembari']);
+    Route::get('/peta-pembinaan-bahasa', [ProdukController::class, 'petaPembinaanBahasa']);
 });
 
 
