@@ -20,33 +20,44 @@
 <div class="galeri-container">
 
     <!-- FILTER BAR (ATAS) -->
-    <div class="filter-bar">
+    <div class="container mt-4">
+  <div class="row g-1 align-items-center bg-white p-3 rounded shadow-sm mb-3">
+    
+    <div class="col-12 col-md-7">
+      <div class="input-group">
+        <span class="input-group-text bg-white border-end-0">
+          <i class="bi bi-search text-muted"></i>
+        </span>
+        <input type="text" class="form-control border-start-0" placeholder="Cari...">
+      </div>
+    </div>
 
-        <div class="search">
-            <div class="input-group">
-                <span class="input-group-text bg-white">
-                    <i class="bi bi-search"></i>
-                </span>
-                <input type="text" class="form-control" placeholder="Cari media...">
-            </div>
-        </div>
+    <div class="col-6 col-md-1.5" style="flex: 0 0 auto; width: 12.5%;">
+      <select class="form-select">
+        <option selected>Kategori</option>
+        <option value="1">Kegiatan</option>
+        <option value="2">Berita</option>
+        <option value="publikasi">Publikasi</option>
+        <option value="acara">Acara</option>
+        <option value="dokumentasi">Dokumentasi</option>
+      </select>
+    </div>
 
-        <select class="form-select">
-            <option>Kategori</option>
-            <option>Foto</option>
-            <option>Video</option>
-        </select>
-
-        <select class="form-select">
-            <option>Tipe File</option>
-            <option>PNG</option>
-            <option>JPG</option>
-            <option>MP4</option>
-        </select>
+    <div class="col-6 col-md-1.5" style="flex: 0 0 auto; width: 12.5%;">
+      <select class="form-select">
+        <option selected>Tipe File</option>
+        <option value="1">Foto</option>
+        <option value="2">Video</option>
+      </select>
+    </div>
        <a href="{{ route('admin.galeri.create') }}"
    class="btn btn-add-article d-flex align-items-center ms-2"
    style="font-size: 12px !important;">
-    + Media
+    <div class="col-12 col-md-auto ms-auto">
+      <button class="btn btn-primary px-4 fw-bold">
+        + Media
+      </button>
+    </div>
 </a>
 
     </div>
