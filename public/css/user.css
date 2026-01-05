@@ -779,6 +779,9 @@ body {
     font-size: 15px;
     line-height: 1.7;
     color: #6b7280;
+    max-width: 320px;
+    margin: 0 auto;
+    word-wrap: break-word;
 }
 
 .sapa-bipa-item .mt {
@@ -865,6 +868,53 @@ body {
         max-width: 420px;
         margin: 0 auto;
         display: block;
+    }
+}
+/* ==========================
+   MOBILE FIX (INTI PERBAIKAN)
+========================== */
+@media (max-width: 768px) {
+    .sapa-bipa {
+        padding: 64px 0;
+    }
+
+    .sapa-bipa-title {
+        margin-bottom: 48px;
+        padding: 0 16px;
+    }
+
+    .sapa-bipa-title h2 {
+        font-size: 40px;
+        margin-bottom: 8px;
+    }
+
+    .sapa-bipa-title span {
+        font-size: 15px;
+        line-height: 1.5;
+        display: block;
+    }
+
+    .sapa-bipa-wrap {
+        gap: 48px;
+    }
+
+    .sapa-bipa-item {
+        padding: 0 16px;
+    }
+
+    .sapa-bipa-item h3 {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    .sapa-bipa-item p {
+        font-size: 14px;
+        max-width: 100%;
+        line-height: 1.7;
+    }
+
+    .sapa-bipa-center img {
+        max-width: 320px;
     }
 }
 
@@ -1349,13 +1399,22 @@ body {
     color: #334155;
     margin-bottom: 18px;
     line-height: 1.7;
+    text-align: left;
 }
 
 .kr-text p {
     font-size: 15px;
     line-height: 1.9;
     color: #475569;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
+
+    /* FIX RATA KIRI–KANAN */
+    text-align: justify;
+    text-justify: inter-word;
+
+    /* BIAR JUSTIFY RAPI */
+    hyphens: auto;
+    word-spacing: 0.02em;
 }
 
 .kr-nama {
@@ -1414,6 +1473,59 @@ body {
 
     .kr-text h2 {
         font-size: 30px;
+    }
+}
+/* =====================
+   FIX KATA PENGANTAR – MOBILE ONLY
+===================== */
+@media (max-width: 768px) {
+    .kr-section {
+        padding: 64px 0;
+    }
+
+    .kr-wrap {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 0 16px;
+    }
+
+    .kr-text {
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .kr-text h2 {
+        font-size: 26px;
+        margin-bottom: 16px;
+    }
+
+    .kr-lead {
+        font-size: 15px;
+    }
+
+    .kr-text p {
+        font-size: 14px;
+        line-height: 1.8;
+
+        /* 🔑 CEGAH TEKS KELUAR LAYAR */
+        overflow-wrap: break-word;
+        word-break: break-word;
+
+        /* justify aman di mobile */
+        text-align: justify;
+        hyphens: auto;
+        word-spacing: 0;
+    }
+
+    .kr-nama {
+        padding-left: 12px;
+        margin-top: 24px;
+    }
+
+    /* 🔑 FOTO JANGAN DORONG LAYOUT */
+    .kr-foto img {
+        max-width: 100%;
+        transform: none;
     }
 }
 
