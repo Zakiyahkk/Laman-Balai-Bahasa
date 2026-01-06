@@ -1,13 +1,27 @@
 @extends('admin.layout')
 
 @section('content')
+<!-- =================  SECTION LAYOUT ATAS ================= -->
+<div class="page-header d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="text-xl font-bold text-gray-900">Upload Media</h2>
+        <p class="text-muted mb-0">
+            Halaman ini untuk mengupload media yang akan dipublikasikan di Balai Bahasa Provinsi Riau
+        </p>
+    </div>
+    <div class="header-logo">
+        <img src="/img/logobbpr.png"
+             alt="Logo Balai Bahasa Provinsi Riau"
+             class="img-fluid header-logo">
+    </div>
+</div>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
     .font-inter { font-family: 'Inter', sans-serif; }
 </style>
 <script src="https://cdn.tailwindcss.com"></script>
 
-<div class="p-4 md:p-8 bg-[#E5F7FF] min-h-screen font-inter">
+<div class="p-1 md:p-3 bg-[#E5F7FF] min-h-screen font-inter">
     <div class="w-full min-h-[calc(100vh-80px)] bg-white rounded-xl shadow-sm border border-gray-100 flex flex-col">
         
         <div class="p-6 border-b border-gray-50 flex justify-between items-center">
@@ -110,16 +124,14 @@
     fileInput.addEventListener('change', function() {
         const files = Array.from(this.files);
         
-        // Validasi Maksimal 10 File
         if (files.length > 10) {
             alert("Anda hanya dapat mengunggah maksimal 10 file.");
-            this.value = ""; // Reset input
+            this.value = ""; 
             return;
         }
 
         if (files.length > 0) {
-            // Tampilan UI
-            previewGrid.innerHTML = ''; // Bersihkan preview lama
+            previewGrid.innerHTML = ''; 
             previewGrid.classList.remove('hidden');
             previewGrid.classList.add('grid');
             defaultContent.classList.add('hidden');
@@ -128,23 +140,32 @@
             fileCounter.innerText = `${files.length} / 10 File Terpilih`;
 
             files.forEach(file => {
-                const reader = new FileReader();
-                
-                // Buat wrapper preview
                 const wrapper = document.createElement('div');
-                wrapper.className = "relative aspect-square bg-gray-100 rounded-xl overflow-hidden border border-gray-200";
+                wrapper.className = "relative aspect-square bg-gray-100 rounded-xl overflow-hidden border border-gray-200 group/item";
 
+                // Preview untuk GAMBAR
                 if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
                     reader.onload = function(e) {
                         wrapper.innerHTML = `<img src="${e.target.result}" class="w-full h-full object-cover">`;
                     }
                     reader.readAsDataURL(file);
-                } else if (file.type.startsWith('video/')) {
+                } 
+                
+                // Preview untuk VIDEO (Perubahan di sini)
+                else if (file.type.startsWith('video/')) {
+                    const videoUrl = URL.createObjectURL(file);
                     wrapper.innerHTML = `
-                        <div class="flex flex-col items-center justify-center h-full p-2 text-center">
-                            <svg class="w-8 h-8 text-[#00897b]" fill="currentColor" viewBox="0 0 20 20"><path d="M2 6a2 2 0 012-2h12a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"/></svg>
-                            <p class="text-[10px] mt-1 font-bold truncate w-full">${file.name}</p>
-                        </div>`;
+                        <video src="${videoUrl}#t=0.5" class="w-full h-full object-cover" muted></video>
+                        <div class="absolute inset-0 flex items-center justify-center bg-black/20 pointer-events-none">
+                            <svg class="w-8 h-8 text-white drop-shadow-md" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="absolute bottom-0 inset-x-0 bg-black/50 p-1">
+                            <p class="text-[8px] text-white truncate text-center">${file.name}</p>
+                        </div>
+                    `;
                 }
                 
                 previewGrid.appendChild(wrapper);

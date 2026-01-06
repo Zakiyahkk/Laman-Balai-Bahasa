@@ -118,6 +118,9 @@ Route::prefix('admin')
         Route::get('/galeri', [GaleriController::class, 'index'])->name('admin.galeri');
         Route::get('/galeri/create', [GaleriController::class, 'create'])->name('admin.galeri.create');
         Route::post('/galeri', [GaleriController::class, 'store'])->name('admin.galeri.store');
+        Route::get('/galeri/show', function () { return view('admin.galeri.show');  })->name('admin.galeri.show');
+        Route::resource('admin/galeri', GaleriController::class)->names('admin.galeri');   
+        Route::get('/galeri/show', [GaleriController::class, 'show'])->name('admin.galeri.');     
 
         Route::get('/halamanweb', fn () => view('admin.halamanweb'))->name('admin.halamanweb');
         Route::get('/pengaturan', fn () => view('admin.pengaturan'))->name('admin.pengaturan');
