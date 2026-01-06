@@ -28,7 +28,7 @@ body {
 ================================================== */
 .bbp-navbar {
     font-family: Inter, "Segoe UI", Arial, sans-serif;
-    background: #fff;
+    background: #0485c7;
     border-bottom: 1px solid #e5e7eb;
     position: sticky;
     top: 0;
@@ -55,8 +55,10 @@ body {
 
 /* ================= TOP BAR ================= */
 .bbp-top {
-    border-bottom: 1px solid #e5e7eb;
+    border-bottom: 1px solid #fff;
     font-size: 13px;
+    background-color: #ffffff;
+    color: #000000;
 }
 
 .bbp-top .container {
@@ -103,7 +105,7 @@ body {
 
 /* ================= NAV ================= */
 .bbp-nav {
-    border-top: 1px solid #e5e7eb;
+    border-top: 1px solid #0485c7;
 }
 
 .nav-container {
@@ -148,6 +150,7 @@ body {
 }
 
 .nav-menu > li > a {
+    color: #ffffff !important;
     font-size: 14px;
     font-weight: 600;
     padding: 6px 2px;
@@ -269,7 +272,7 @@ body {
         padding-bottom: 16px;
         margin-top: -60px;
         margin-bottom: 10px;
-        border-bottom: 1px solid #e5e7eb;
+        border-bottom: 1px solid #0485c7;
     }
 
     .mobile-sidebar-header img {
@@ -321,6 +324,7 @@ body {
 
     .menu-toggle {
         display: block;
+        color: #fff;
     }
 
     /* OVERLAY */
@@ -347,7 +351,7 @@ body {
         width: 320px;
         max-width: 85%;
         height: 100vh;
-        background: #fff;
+        background: #0485c7;
         padding: 88px 18px 24px;
         display: flex;
         flex-direction: column;
@@ -365,6 +369,7 @@ body {
 
     /* MENU ITEM */
     .nav-menu > li > a {
+        color: #ffffff !important;
         padding: 14px 14px;
         font-size: 15px;
         font-weight: 600;
@@ -374,10 +379,31 @@ body {
         border-radius: 10px;
     }
 
+    /* 1) Hover menu utama: kalau background jadi terang, teks harus jadi gelap */
     .nav-menu > li > a:hover {
         background: #f1f5f9;
+        color: #111827 !important;
+    }
+    .nav-menu > li > a:hover i {
+        color: #111827 !important;
     }
 
+    /* 2) Hindari tabrakan style dropdown:
+      Pastikan dropdown yang dipakai adalah versi "FINAL FIX" (yang animasi max-height)
+      Jadi reset rule dropdown-menu putih sebelumnya agar tidak bikin loncat */
+    .nav-menu .dropdown-menu {
+        background: transparent !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+    }
+
+    /* Kalau submenu Anda pakai .dropdown (bukan .dropdown-menu), ini menjaga konsistensi */
+    .nav-menu .dropdown {
+        margin: 4px 0 6px; /* ikut yang FINAL FIX */
+        box-shadow: none; /* ikut yang FINAL FIX */
+    }
     /* ===== MOBILE DROPDOWN (FINAL FIX) ===== */
     .dropdown {
         display: block;

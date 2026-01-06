@@ -22,7 +22,7 @@
         <div class="nav-container">
 
             <div class="logo">
-                <img src="{{ asset('img/logobbpr4.png') }}" alt="BBP Riau">
+                <img src="{{ asset('img/logobbpr.png') }}" alt="BBP Riau">
             </div>
 
             <ul class="nav-menu">
@@ -85,8 +85,10 @@
                     <div class="dropdown">
                         <a href="#">Layanan Ahli Bahasa Balai Bahasa Provinsi Riau</a>
                         <a href="#">Layanan Penerjemahan Balai Bahasa Provinsi Riau</a>
-                        <a href="#">Layanan Bahasa Indonesia Untuk Penutur Asing (BIPA) Balai Bahasa Provinsi Riau</a>
-                        <a href="#">Layanan Uji Kemahiran Berbahasa Indonesia (UKBI) Adaptif Balai Bahasa Provinsi Riau</a>
+                        <a href="#">Layanan Bahasa Indonesia Untuk Penutur Asing (BIPA) Balai Bahasa Provinsi
+                            Riau</a>
+                        <a href="#">Layanan Uji Kemahiran Berbahasa Indonesia (UKBI) Adaptif Balai Bahasa Provinsi
+                            Riau</a>
                         <a href="#">Layanan Perpustakaan</a>
                         <a href="#">Layanan Magang</a>
                     </div>
