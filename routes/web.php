@@ -5,7 +5,11 @@ use App\Http\Controllers\User\BerandaController;
 use App\Http\Controllers\User\BeritaController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\ProdukController;
+use App\Http\Controllers\User\PpidController;
+use App\Http\Controllers\User\SurveiController;
 use App\Http\Controllers\User\AkuntabilitasController;
+use App\Http\Controllers\User\ZiwbkController;
+use App\Http\Controllers\User\RuangKonsultasiController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\GaleriController;
 
@@ -48,6 +52,21 @@ Route::prefix('produk')->group(function () {
     Route::get('/peta-pembinaan-bahasa', [ProdukController::class, 'petaPembinaanBahasa']);
 });
 
+Route::prefix('ppid')->group(function () {
+    Route::get('/ppid', [PpidController::class, 'ppid']);
+});
+
+Route::prefix('survei')->group(function () {
+    Route::get('/survei', [SurveiController::class, 'survei']);
+});
+
+Route::prefix('ziwbk')->group(function () {
+    Route::get('/ziwbk', [ZiwbkController::class, 'ziwbk']);
+});
+
+Route::prefix('ruangkonsultasi')->group(function () {
+    Route::get('/ruangkonsultasi', [RuangKonsultasiController::class, 'ruangKonsultasi']);
+});
 
 /*
 |--------------------------------------------------------------------------

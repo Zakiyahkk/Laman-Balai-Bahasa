@@ -93,10 +93,10 @@
                 </li>
 
 
-                <li><a href="#">PPID</a></li>
-                <li><a href="#">Survei</a></li>
-                <li><a href="#">ZI-WBK</a></li>
-                <li><a href="#">Ruang Konsultasi</a></li>
+                <li><a href="{{ url('/ppid/ppid') }}">PPID</a></li>
+                <li><a href="{{ url('/survei/survei') }}">Survei</a></li>
+                <li><a href="{{ url('/ziwbk/ziwbk') }}">ZI-WBK</a></li>
+                <li><a href="{{ url('/ruangkonsultasi/ruangkonsultasi') }}">Ruang Konsultasi</a></li>
             </ul>
             <button class="menu-toggle" id="menuToggle">
                 <i class="fa-solid fa-bars"></i>
