@@ -266,9 +266,16 @@ body {
 /* ===== ACTIVE MENU MOBILE ===== */
 @media (max-width: 768px) {
     .nav-menu > li > a.active {
-        background: #f1f5f9;
-        color: #111827 !important;
+        background: rgba(255, 255, 255, 0.12);
+        color: #ffffff !important;
+        font-weight: 600;
+        border-radius: 10px;
+
+        /* MATIKAN GLOW */
+        text-shadow: none;
+        box-shadow: none;
     }
+
 
     .dropdown a.active {
         background: #e0f2fe;
@@ -487,10 +494,6 @@ body {
     .nav-menu > li > a.active {
         color: #ffffff !important;
         font-weight: 700;
-    }
-
-    .nav-menu > li > a.active {
-    text-shadow: 0 0 6px rgba(255,255,255,.6);
     }
 }
 
