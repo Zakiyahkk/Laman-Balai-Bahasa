@@ -165,7 +165,7 @@ body {
     bottom: -6px;
     width: 0;
     height: 2px;
-    background: #0485c7;
+    background: #ffffff;
     transition: 0.25s;
 }
 
@@ -256,6 +256,27 @@ body {
     border: none;
     font-size: 24px;
 }
+
+.dropdown a.active {
+    background: #e5f0fb;
+    color: #0369a1;
+    font-weight: 600;
+}
+
+/* ===== ACTIVE MENU MOBILE ===== */
+@media (max-width: 768px) {
+    .nav-menu > li > a.active {
+        background: #f1f5f9;
+        color: #111827 !important;
+    }
+
+    .dropdown a.active {
+        background: #e0f2fe;
+        color: #0369a1;
+        font-weight: 600;
+    }
+}
+
 
 /* ================= MOBILE SIDEBAR ================= */
 @media (max-width: 768px) {
@@ -448,7 +469,42 @@ body {
     .nav-menu a::after {
         display: none;
     }
+
+    /* ===== ACTIVE MENU DESKTOP ===== */
+    .nav-menu > li > a.active {
+        color: #ffffff !important;
+        font-weight: 700;
+    }
+
+    /* ===== FIX ACTIVE UNDERLINE ===== */
+
+    .nav-menu > li > a.active {
+    font-weight: 700;
+    color: #ffffff !important;
+    }
+
+    /* ===== ACTIVE MENU DESKTOP ===== */
+    .nav-menu > li > a.active {
+        color: #ffffff !important;
+        font-weight: 700;
+    }
+
+    .nav-menu > li > a.active {
+    text-shadow: 0 0 6px rgba(255,255,255,.6);
+    }
 }
+
+/* ===== ACTIVE MENU DESKTOP ===== */
+.nav-menu > li > a.active {
+    color: #ffffff !important;
+    font-weight: 700;
+}
+
+.nav-menu > li > a.active::after {
+    width: 100%;
+    background: #ffffff;
+}
+
 
 /* ==================================================
    SECTION GLOBAL
