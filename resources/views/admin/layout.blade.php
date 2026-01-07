@@ -17,7 +17,7 @@
             <img src="/img/AkunLogo.png" alt="Foto Profil Admin" class="avatar-circle me-1">
             <div class="admin-info">
                 <div class="fw-bold fs-6">
-                    {{ session('admin_username', 'Admin') }}
+                    {{ session('admin_username', '-') }}
                 </div>
                 <div class="small text-muted">
                     {{ session('admin_role', '-') }}

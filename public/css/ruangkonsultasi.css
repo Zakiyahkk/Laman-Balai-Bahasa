@@ -1,0 +1,32 @@
+/* ==================================================
+   Ruang Konsultasi Styles
+================================================== */
+.ruangkonsultasi-container {
+    max-width: 1400px;
+    margin: auto;
+    padding: 60px 20px;
+}
+
+.ruangkonsultasi-header {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.ruangkonsultasi-header h1 {
+    font-size: 40px;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.ruangkonsultasi-header p {
+    font-size: 16px;
+    color: #64748b;
+    margin-top: 10px;
+}
+
+/* GRID */
+.ruangkonsultasi-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 28px;
+}

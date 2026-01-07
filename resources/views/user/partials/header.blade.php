@@ -22,7 +22,7 @@
         <div class="nav-container">
 
             <div class="logo">
-                <img src="{{ asset('img/logobbpr4.png') }}" alt="BBP Riau">
+                <img src="{{ asset('img/logobbpr.png') }}" alt="BBP Riau">
             </div>
 
             <ul class="nav-menu">
@@ -57,9 +57,11 @@
                         <i class="fa-solid fa-chevron-down dropdown-icon"></i>
                     </a>
                     <div class="dropdown">
-                        <a href="#">Publikasi</a>
-                        <a href="#">Kamus</a>
-                        <a href="#">Bahasa Daerah</a>
+                        <a href="{{ url('/produk/bahan-bacaan-literasi') }}">Bahan Bacaan Literasi</a>
+                        <a href="{{ url('/produk/jurnal-madah') }}">Jurnal Madah</a>
+                        <a href="{{ url('/produk/majalah') }}">Majalah</a>
+                        <a href="{{ url('/produk/penerjemahan-sembari') }}">Penerjemahan: Sembari</a>
+                        <a href="{{ url('/produk/peta-pembinaan-bahasa') }}">Peta Pembinaan Bahasa</a>
                     </div>
                 </li>
 
@@ -68,11 +70,11 @@
                         <i class="fa-solid fa-chevron-down dropdown-icon"></i>
                     </a>
                     <div class="dropdown">
-                        <a href="#">Perjanjian Kinerja</a>
-                        <a href="#">Renstra</a>
-                        <a href="#">LAKIP</a>
-                        <a href="#">LAKIN</a>
-                        <a href="#">Rencana Aksi</a>
+                        <a href="{{ url('/akuntabilitas/perjanjian-kinerja') }}">Perjanjian Kinerja</a>
+                        <a href="{{ url('/akuntabilitas/renstra') }}">Renstra</a>
+                        <a href="{{ url('/akuntabilitas/lakip') }}">LAKIP</a>
+                        <a href="{{ url('/akuntabilitas/lakin') }}">LAKIN</a>
+                        <a href="{{ url('/akuntabilitas/rencana-aksi') }}">Rencana Aksi</a>
                     </div>
                 </li>
 
@@ -83,18 +85,20 @@
                     <div class="dropdown">
                         <a href="#">Layanan Ahli Bahasa Balai Bahasa Provinsi Riau</a>
                         <a href="#">Layanan Penerjemahan Balai Bahasa Provinsi Riau</a>
-                        <a href="#">Layanan Bahasa Indonesia Untuk Penutur Asing (BIPA) Balai Bahasa Provinsi Riau</a>
-                        <a href="#">Layanan Uji Kemahiran Berbahasa Indonesia (UKBI) Adaptif Balai Bahasa Provinsi Riau</a>
+                        <a href="#">Layanan Bahasa Indonesia Untuk Penutur Asing (BIPA) Balai Bahasa Provinsi
+                            Riau</a>
+                        <a href="#">Layanan Uji Kemahiran Berbahasa Indonesia (UKBI) Adaptif Balai Bahasa Provinsi
+                            Riau</a>
                         <a href="#">Layanan Perpustakaan</a>
                         <a href="#">Layanan Magang</a>
                     </div>
                 </li>
 
 
-                <li><a href="#">PPID</a></li>
-                <li><a href="#">Survei</a></li>
-                <li><a href="#">ZI-WBK</a></li>
-                <li><a href="#">Ruang Konsultasi</a></li>
+                <li><a href="{{ url('/ppid/ppid') }}">PPID</a></li>
+                <li><a href="{{ url('/survei/survei') }}">Survei</a></li>
+                <li><a href="{{ url('/ziwbk/ziwbk') }}">ZI-WBK</a></li>
+                <li><a href="{{ url('/ruangkonsultasi/ruangkonsultasi') }}">Ruang Konsultasi</a></li>
             </ul>
             <button class="menu-toggle" id="menuToggle">
                 <i class="fa-solid fa-bars"></i>

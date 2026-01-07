@@ -9,6 +9,7 @@ class Galeri extends Model
     use HasFactory;
 
     // Daftarkan kolom agar bisa diisi (Mass Assignment)
+    protected $table = 'galeri';
     protected $fillable = [
         'judul',
         'file_media',

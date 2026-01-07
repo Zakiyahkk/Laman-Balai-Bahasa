@@ -23,7 +23,7 @@
 
             <!-- INFORMASI -->
             <div>
-                <h4>Informasi</h4>
+                <h4>Beranda</h4>
                 <ul>
                     <li><a href="#">Berita</a></li>
                     <li><a href="#">Pengumuman</a></li>
