@@ -22,7 +22,7 @@
         <div class="nav-container">
 
             <div class="logo">
-                <img src="{{ asset('img/logobbpr.png') }}" alt="BBP Riau">
+                <img src="{{ asset('img/logobalai.png') }}" alt="BBP Riau">
             </div>
 
             <ul class="nav-menu">
