@@ -38,6 +38,7 @@ class AdminAuthController extends Controller
             ->orWhere('username', $email)
             ->first();
 
+
         // Kalau email TIDAK ADA atau password SALAH
         if (!$admin || !Hash::check($password, $admin->password)) {
             return back()->withErrors([
@@ -72,4 +73,5 @@ class AdminAuthController extends Controller
 
         return redirect()->route('admin.login');
     }
+
 }

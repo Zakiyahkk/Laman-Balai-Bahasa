@@ -36,22 +36,6 @@
         </a>
     </li>
 
-    <!-- <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('admin.artikel*') ? 'active' : '' }}"
-           href="{{ route('admin.artikel') }}">
-            <i class="bi bi-newspaper me-2"></i>
-            Artikel & Berita
-        </a>
-    </li>
-
-    <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('admin.kegiatan*') ? 'active' : '' }}"
-           href="{{ route('admin.kegiatan') }}">
-            <i class="bi bi-calendar-event me-2"></i>
-            Kegiatan
-        </a>
-    </li> -->
-
     <li class="nav-item">
         <a class="nav-link {{ request()->routeIs('admin.publikasi*') ? 'active' : '' }}"
            href="{{ route('admin.publikasi') }}">
@@ -60,14 +44,6 @@
         </a>
     </li>
 
-    <!-- <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('admin.pendaftaran') ? 'active' : '' }}"
-           href="{{ route('admin.pendaftaran') }}">
-            <i class="bi bi-clipboard-check me-2"></i>
-            Pendaftaran
-        </a>
-    </li> -->
-
     <li class="nav-item">
         <a class="nav-link {{ request()->routeIs('admin.galeri*') ? 'active' : '' }}"
            href="{{ route('admin.galeri') }}">
@@ -75,6 +51,30 @@
             Galeri
         </a>
     </li>
+
+    <li class="nav-item">
+        <a class="nav-link {{ request()->routeIs('admin.profi*') ? 'active' : '' }}"
+           href="{{ route('admin.profil') }}">
+            <i class="bi bi-building-gear me-2"></i>
+            Profil Laman
+        </a>
+    </li>
+
+    <!-- <li class="nav-item">
+        <a class="nav-link {{ request()->routeIs('admin.kegiatan*') ? 'active' : '' }}"
+           href="{{ route('admin.kegiatan') }}">
+            <i class="bi bi-calendar-event me-2"></i>
+            Kegiatan
+        </a>
+    </li> -->
+
+    <!-- <li class="nav-item">
+        <a class="nav-link {{ request()->routeIs('admin.pendaftaran') ? 'active' : '' }}"
+           href="{{ route('admin.pendaftaran') }}">
+            <i class="bi bi-clipboard-check me-2"></i>
+            Pendaftaran
+        </a>
+    </li> -->
 
     <!-- <li class="nav-item">
         <a class="nav-link {{ request()->routeIs('admin.halamanweb') ? 'active' : '' }}"
