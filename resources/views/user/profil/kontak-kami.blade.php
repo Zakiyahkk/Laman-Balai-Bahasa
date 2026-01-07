@@ -5,10 +5,10 @@
     <link rel="stylesheet" href="{{ asset('css/profil.css') }}">
 @endsection
 @section('content')
-    <section class="profil-ntb">
+    <section class="profil-bbpr">
         <div class="container">
 
-            <div class="profil-header">
+            <div class="profil-headerbbpr">
                 <h1>Kontak Kami</h1>
             </div>
 

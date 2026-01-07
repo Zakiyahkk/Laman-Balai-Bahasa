@@ -11,15 +11,14 @@
         <div class="container profil-container">
 
             <div class="profil-header">
-                <h1>Logo BPP Riau</h1>
+                <h1>Logo BBP Riau</h1>
                 <p class="profil-subtitle">
                     Identitas Resmi Balai Bahasa Provinsi Riau
                 </p>
             </div>
 
             <div class="profil-card text-center">
-                <img src="{{ asset('images/logo-bpp-riau.png') }}" alt="Logo BPP Riau"
-                    style="max-width: 220px; margin-bottom: 20px;">
+                <img src="{{ asset('img/logobbpr4.png') }}" alt="Logo BPP Riau" style="max-width: 220px; margin-bottom: 20px;">
 
                 <h3>Makna Logo</h3>
                 <p>
