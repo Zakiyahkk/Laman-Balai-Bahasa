@@ -127,7 +127,6 @@ document.addEventListener("DOMContentLoaded", function () {
        Navbar & Sidebar Fix User
     ================================================== */
 document.addEventListener("DOMContentLoaded", () => {
-
     const navbar = document.querySelector(".bbp-navbar");
     const toggle = document.getElementById("menuToggle");
     const overlay = document.getElementById("bbpOverlay");
@@ -140,31 +139,37 @@ document.addEventListener("DOMContentLoaded", () => {
         closeSidebar();
     });
 
-    document.querySelectorAll(".has-dropdown > .dropdown-toggle")
-        .forEach(trigger => {
-            trigger.addEventListener("click", e => {
+    document
+        .querySelectorAll(".has-dropdown > .dropdown-toggle")
+        .forEach((trigger) => {
+            trigger.addEventListener("click", (e) => {
                 if (window.innerWidth <= 768) {
                     e.preventDefault();
 
                     const parent = trigger.closest(".has-dropdown");
-                    document.querySelectorAll(".has-dropdown")
-                        .forEach(item => item !== parent && item.classList.remove("open"));
+                    document
+                        .querySelectorAll(".has-dropdown")
+                        .forEach(
+                            (item) =>
+                                item !== parent && item.classList.remove("open")
+                        );
 
                     parent.classList.toggle("open");
                 }
             });
         });
 
-    document.querySelectorAll(".dropdown a").forEach(link => {
-        link.addEventListener("click", e => {
+    document.querySelectorAll(".dropdown a").forEach((link) => {
+        link.addEventListener("click", (e) => {
             e.stopPropagation();
             closeSidebar();
         });
     });
 
-    document.querySelectorAll(".nav-menu > li > a:not(.dropdown-toggle)")
-        .forEach(link => {
-            link.addEventListener("click", e => {
+    document
+        .querySelectorAll(".nav-menu > li > a:not(.dropdown-toggle)")
+        .forEach((link) => {
+            link.addEventListener("click", (e) => {
                 e.stopPropagation();
                 closeSidebar();
             });
@@ -172,8 +177,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function closeSidebar() {
         navbar.classList.remove("open");
-        document.querySelectorAll(".has-dropdown")
-            .forEach(item => item.classList.remove("open"));
+        document
+            .querySelectorAll(".has-dropdown")
+            .forEach((item) => item.classList.remove("open"));
     }
 });
 
@@ -181,17 +187,115 @@ document.addEventListener("DOMContentLoaded", () => {
     KATA PENGANTAR REVEAL ANIMATION
     ================================================== */
 document.addEventListener("DOMContentLoaded", () => {
-        const reveals = document.querySelectorAll(".kr-reveal");
+    const reveals = document.querySelectorAll(".kr-reveal");
 
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add("show");
                 }
             });
-        }, {
-            threshold: 0.2
+        },
+        {
+            threshold: 0.2,
+        }
+    );
+
+    reveals.forEach((el) => observer.observe(el));
+});
+
+// ================================
+// Slider Artikel Terbaru (bb33)
+// ================================
+(function () {
+    function initArtikelSlider() {
+        const track = document.getElementById("bb33ArtikelTrack");
+        const prev = document.getElementById("bb33ArtikelPrev");
+        const next = document.getElementById("bb33ArtikelNext");
+        const dots = document.getElementById("bb33ArtikelDots");
+
+        // kalau section tidak ada di halaman ini, stop
+        if (!track || !prev || !next || !dots) return;
+
+        const slides = Array.from(track.querySelectorAll(".bb33-slide"));
+        if (slides.length === 0) return;
+
+        let index = 0;
+
+        function perView() {
+            const w = window.innerWidth;
+            if (w < 640) return 1;
+            if (w < 992) return 2;
+            return 3;
+        }
+
+        function maxIndex() {
+            return Math.max(0, slides.length - perView());
+        }
+
+        function getGap() {
+            const style = getComputedStyle(track);
+            const gap = parseFloat(style.gap || style.columnGap || 0);
+            return Number.isFinite(gap) ? gap : 0;
+        }
+
+        function step() {
+            const w = slides[0].getBoundingClientRect().width;
+            return w + getGap();
+        }
+
+        function renderDots() {
+            const pages = maxIndex() + 1;
+            dots.innerHTML = "";
+
+            for (let i = 0; i < pages; i++) {
+                const b = document.createElement("button");
+                b.type = "button";
+                b.className = "bb33-dot" + (i === index ? " active" : "");
+                b.setAttribute("aria-label", "Slide " + (i + 1));
+                b.addEventListener("click", () => go(i));
+                dots.appendChild(b);
+            }
+        }
+
+        function go(i) {
+            index = Math.max(0, Math.min(i, maxIndex()));
+            track.scrollTo({ left: index * step(), behavior: "smooth" });
+            renderDots();
+        }
+
+        prev.addEventListener("click", () => go(index - 1));
+        next.addEventListener("click", () => go(index + 1));
+
+        // update index saat user swipe/drag
+        track.addEventListener(
+            "scroll",
+            () => {
+                const i = Math.round(track.scrollLeft / step());
+                const clamped = Math.max(0, Math.min(i, maxIndex()));
+                if (clamped !== index) {
+                    index = clamped;
+                    renderDots();
+                }
+            },
+            { passive: true }
+        );
+
+        window.addEventListener("resize", () => {
+            // snap ulang biar pas setelah breakpoint berubah
+            go(index);
         });
 
-        reveals.forEach(el => observer.observe(el));
-    });
+        // init
+        renderDots();
+        go(0);
+    }
+
+    // Pastikan jalan setelah DOM siap
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initArtikelSlider);
+    } else {
+        initArtikelSlider();
+    }
+})();

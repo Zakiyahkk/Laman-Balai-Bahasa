@@ -13,7 +13,7 @@ use App\Http\Controllers\User\RuangKonsultasiController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\GaleriController;
 use App\Http\Controllers\Admin\PublikasiController;
-
+use App\Http\Controllers\User\ArtikelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +37,12 @@ Route::prefix('profil')->group(function () {
     Route::get('/pegawai', [ProfileController::class, 'pegawai']);
     Route::get('/logo-bpp-riau', [ProfileController::class, 'logobppriau']);
 });
+
+Route::prefix('artikel')->name('artikel.')->group(function () {
+    Route::get('/', [ArtikelController::class, 'index'])->name('index');
+    Route::get('/{slug}', [ArtikelController::class, 'show'])->name('show');
+});
+
 
 Route::prefix('akuntabilitas')->group(function () {
     Route::get('/perjanjian-kinerja', [AkuntabilitasController::class, 'perjanjianKinerja']);

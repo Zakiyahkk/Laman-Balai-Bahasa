@@ -22,7 +22,7 @@
         <div class="nav-container">
 
             <div class="logo">
-                <img src="{{ asset('img/logobbpr.png') }}" alt="BBP Riau">
+                <img src="{{ asset('img/logobalai.png') }}" alt="BBP Riau">
             </div>
 
             <ul class="nav-menu">
@@ -31,9 +31,12 @@
                     <img src="{{ asset('img/logobbpr4.png') }}" alt="BBP Riau">
                 </li>
 
-                <li><a href="/">Beranda</a></li>
+                <li><a href="/" class="{{ request()->is('/') ? 'active' : '' }}">
+                        Beranda
+                    </a>
+                </li>
 
-                <li class="has-dropdown">
+                <li class="has-dropdown {{ request()->is('profil*') ? 'active open' : '' }}">
                     <a href="#" class="dropdown-toggle">
                         Profil
                         <i class="fa-solid fa-chevron-down dropdown-icon"></i>
@@ -41,13 +44,49 @@
 
                     <!-- Menu Dekstop Aktif -->
                     <ul class="dropdown">
-                        <li><a href="{{ url('/profil/visi-misi') }}">Visi & Misi</a></li>
-                        <li><a href="{{ url('/profil/tugas-dan-fungsi') }}">Tugas & Fungsi</a></li>
-                        <li><a href="{{ url('/profil/struktur-organisasi') }}">Struktur Organisasi</a></li>
-                        <li><a href="{{ url('/profil/pegawai') }}">Pegawai</a></li>
-                        <li><a href="{{ url('/profil/logo-bpp-riau') }}">Logo BPP Riau</a></li>
-                        <li><a href="{{ url('/profil/kontak-kami') }}">Kontak Kami</a></li>
+                        <li>
+                            <a href="{{ url('/profil/visi-misi') }}"
+                                class="{{ request()->is('profil/visi-misi') ? 'active' : '' }}">
+                                Visi & Misi
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ url('/profil/tugas-dan-fungsi') }}"
+                                class="{{ request()->is('profil/tugas-dan-fungsi') ? 'active' : '' }}">
+                                Tugas & Fungsi
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ url('/profil/struktur-organisasi') }}"
+                                class="{{ request()->is('profil/struktur-organisasi') ? 'active' : '' }}">
+                                Struktur Organisasi
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ url('/profil/pegawai') }}"
+                                class="{{ request()->is('profil/pegawai') ? 'active' : '' }}">
+                                Pegawai
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ url('/profil/logo-bpp-riau') }}"
+                                class="{{ request()->is('profil/logo-bpp-riau') ? 'active' : '' }}">
+                                Logo BPP Riau
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ url('/profil/kontak-kami') }}"
+                                class="{{ request()->is('profil/kontak-kami') ? 'active' : '' }}">
+                                Kontak Kami
+                            </a>
+                        </li>
                     </ul>
+
 
                 </li>
 
@@ -57,11 +96,11 @@
                         <i class="fa-solid fa-chevron-down dropdown-icon"></i>
                     </a>
                     <div class="dropdown">
-                        <a href="{{ url('/produk/bahan-bacaan-literasi') }}">Bahan Bacaan Literasi</a>
-                        <a href="{{ url('/produk/jurnal-madah') }}">Jurnal Madah</a>
-                        <a href="{{ url('/produk/majalah') }}">Majalah</a>
-                        <a href="{{ url('/produk/penerjemahan-sembari') }}">Penerjemahan: Sembari</a>
-                        <a href="{{ url('/produk/peta-pembinaan-bahasa') }}">Peta Pembinaan Bahasa</a>
+                        <a href="{{ url('/produk/bahan-bacaan-literasi') }}" class="{{ request()->is('produk/bahan-bacaan-literasi') ? 'active' : '' }}">Bahan Bacaan Literasi</a>
+                        <a href="{{ url('/produk/jurnal-madah') }}" class="{{ request()->is('produk/jurnal-madah') ? 'active' : '' }}">Jurnal Madah</a>
+                        <a href="{{ url('/produk/majalah') }}" class="{{ request()->is('produk/majalah') ? 'active' : '' }}">Majalah</a>
+                        <a href="{{ url('/produk/penerjemahan-sembari') }}" class="{{ request()->is('produk/penerjemahan-sembari') ? 'active' : '' }}">Penerjemahan: Sembari</a>
+                        <a href="{{ url('/produk/peta-pembinaan-bahasa') }}" class="{{ request()->is('produk/peta-pembinaan-bahasa') ? 'active' : '' }}">Peta Pembinaan Bahasa</a>
                     </div>
                 </li>
 
@@ -70,11 +109,11 @@
                         <i class="fa-solid fa-chevron-down dropdown-icon"></i>
                     </a>
                     <div class="dropdown">
-                        <a href="{{ url('/akuntabilitas/perjanjian-kinerja') }}">Perjanjian Kinerja</a>
-                        <a href="{{ url('/akuntabilitas/renstra') }}">Renstra</a>
-                        <a href="{{ url('/akuntabilitas/lakip') }}">LAKIP</a>
-                        <a href="{{ url('/akuntabilitas/lakin') }}">LAKIN</a>
-                        <a href="{{ url('/akuntabilitas/rencana-aksi') }}">Rencana Aksi</a>
+                        <a href="{{ url('/akuntabilitas/perjanjian-kinerja') }}" class="{{ request()->is('akuntabilitas/perjanjian-kinerja') ? 'active' : '' }}">Perjanjian Kinerja</a>
+                        <a href="{{ url('/akuntabilitas/renstra') }}" class="{{ request()->is('akuntabilitas/renstra') ? 'active' : '' }}">Renstra</a>
+                        <a href="{{ url('/akuntabilitas/lakip') }}" class="{{ request()->is('akuntabilitas/lakip') ? 'active' : '' }}">LAKIP</a>
+                        <a href="{{ url('/akuntabilitas/lakin') }}" class="{{ request()->is('akuntabilitas/lakin') ? 'active' : '' }}">LAKIN</a>
+                        <a href="{{ url('/akuntabilitas/rencana-aksi') }}" class="{{ request()->is('akuntabilitas/rencana-aksi') ? 'active' : '' }}">Rencana Aksi</a>
                     </div>
                 </li>
 
@@ -95,10 +134,34 @@
                 </li>
 
 
-                <li><a href="{{ url('/ppid/ppid') }}">PPID</a></li>
-                <li><a href="{{ url('/survei/survei') }}">Survei</a></li>
-                <li><a href="{{ url('/ziwbk/ziwbk') }}">ZI-WBK</a></li>
-                <li><a href="{{ url('/ruangkonsultasi/ruangkonsultasi') }}">Ruang Konsultasi</a></li>
+                <li>
+                    <a href="{{ url('/ppid/ppid') }}"
+                        class="{{ request()->is('ppid*') ? 'active' : '' }}">
+                        PPID
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ url('/survei/survei') }}"
+                        class="{{ request()->is('survei*') ? 'active' : '' }}">
+                        Survei
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ url('/ziwbk/ziwbk') }}"
+                        class="{{ request()->is('ziwbk*') ? 'active' : '' }}">
+                        ZI-WBK
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ url('/ruangkonsultasi/ruangkonsultasi') }}"
+                        class="{{ request()->is('ruangkonsultasi*') ? 'active' : '' }}">
+                        Ruang Konsultasi
+                    </a>
+                </li>
+
             </ul>
             <button class="menu-toggle" id="menuToggle">
                 <i class="fa-solid fa-bars"></i>

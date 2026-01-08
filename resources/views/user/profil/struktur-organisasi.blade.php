@@ -10,7 +10,7 @@
     <section class="profil-riau">
         <div class="container">
 
-            <div class="profil-header">
+            <div class="profil-header-struktur">
                 <h1>Struktur Organisasi</h1>
             </div>
 
