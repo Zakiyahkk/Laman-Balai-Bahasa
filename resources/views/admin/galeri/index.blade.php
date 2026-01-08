@@ -50,15 +50,15 @@
     @foreach($galeri as $item)
     <div class="col-12 col-md-6 col-lg-4">
         <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden h-100 d-flex flex-column transition-all hover:shadow-md">
-            
-            <div class="position-relative w-full" 
+
+            <div class="position-relative w-full"
                  style="height: 200px; background-color: #f8f9fa; cursor: pointer;"
-                 data-bs-toggle="modal" 
+                 data-bs-toggle="modal"
                  data-bs-target="#galleryModal"
                  data-type="{{ $item->tipe }}"
                  data-src="{{ $item->file_media }}"
                  data-judul="{{ $item->judul }}">
-                
+
                 @if($item->tipe == 'foto')
                     <img src="{{ $item->file_media }}" class="w-100 h-100 object-fit-cover">
                 @else
@@ -71,7 +71,7 @@
                 @endif
 
                 <div class="position-absolute top-0 end-0 m-3" style="z-index: 20;">
-                    <span class="px-3 py-1 text-xs font-bold text-white rounded-pill shadow-sm" 
+                    <span class="px-3 py-1 text-xs font-bold text-white rounded-pill shadow-sm"
                           style="background-color: {{ $item->tipe == 'foto' ? '#FFB800' : '#00D26A' }};">
                         {{ ucfirst($item->tipe) }}
                     </span>
@@ -96,16 +96,16 @@
             </div>
 
             <div class="p-4 pt-0">
-        
+
                 <div class="p-4 pt-0">
     <div class="d-flex gap-2">
-        <a href="{{ route('admin.galeri.show', $item->id) }}" 
-        class="btn btn-outline-primary flex-grow-1 d-flex align-items-center 
+        <a href="{{ route('admin.galeri.show', $item->id) }}"
+        class="btn btn-outline-primary flex-grow-1 d-flex align-items-center
         justify-content-center gap-2" style="border-radius: 8px; font-weight: 500;">
             <i class="bi bi-pencil-square"></i> Edit
         </a>
-        <button class="btn btn-outline-danger flex-grow-1 d-flex align-items-center 
-        justify-content-center gap-2" 
+        <button class="btn btn-outline-danger flex-grow-1 d-flex align-items-center
+        justify-content-center gap-2"
         style="border-radius: 8px; font-weight: 500;"
         onclick="confirm('Simulasi: Item {{ $item->id }} akan dihapus?')">
             <i class="bi bi-trash3"></i> Hapus
@@ -128,7 +128,7 @@
             </div>
             <div class="modal-body p-0 d-flex justify-content-center align-items-center" style="min-height: 300px; background: #000;">
                 <img id="modalImage" src="" class="img-fluid d-none" style="max-height: 80vh;">
-                
+
                 <div id="modalVideoContainer" class="w-100 d-none">
                     <div class="ratio ratio-16x9">
                         <video id="modalVideo" controls>
