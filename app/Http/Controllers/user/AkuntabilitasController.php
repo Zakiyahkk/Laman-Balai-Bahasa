@@ -15,10 +15,11 @@ class AkuntabilitasController extends Controller
     public function renstra(Request $request)
     {
         $docs = collect([
-            ['judul' => 'Renstra 2025–2029', 'tahun' => 2025, 'tipe' => 'pdf', 'file' => 'renstra/dokumentesting1.pdf'],
-            ['judul' => 'Renstra 2020–2024', 'tahun' => 2024, 'tipe' => 'pdf', 'file' => 'renstra/dokumentesting2.pdf'],
+            ['judul' => 'Rencana Strategis Unit Kerja Tahun 2025–2029', 'tahun' => 2025, 'tipe' => 'pdf', 'file' => 'renstra/dokumentesting1.pdf'],
+            ['judul' => 'Renstra Badan Bahasa: Arah Kebijakan dan Program 2025–2029', 'tahun' => 2025, 'tipe' => 'pdf', 'file' => 'renstra/dokumentesting2.pdf'],
+            ['judul' => 'Dokumen Renstra dan Indikator Kinerja 2020–2024', 'tahun' => 2024, 'tipe' => 'pdf', 'file' => 'renstra/dokumentesting3.pdf'],
+            ['judul' => 'Renstra: Sasaran Strategis dan Target Tahunan 2023', 'tahun' => 2023, 'tipe' => 'pdf', 'file' => 'renstra/dokumentesting4.pdf'],
         ]);
-    
         $q = trim((string) $request->query('q', ''));
         $year = $request->query('year');
     

@@ -8,9 +8,9 @@
 
 @section('content')
 
-    <div class="ak-container ak-renstra-clone">
+    <div class="ak-container ak-renstra-ui">
 
-        {{-- Header ala Badan Bahasa (simpel) --}}
+        {{-- Header halaman (Dokumen) --}}
         <div class="ak-pagehead">
             <h1>Dokumen</h1>
             <div class="ak-breadcrumb">
@@ -20,56 +20,58 @@
             </div>
         </div>
 
-        <div class="ak-card ak-card-doc">
-            <div class="ak-card-top">
-                <div class="ak-card-title">Rencana Strategis (Renstra)</div>
-                <div class="ak-card-subtitle">Rencana Strategis (Renstra)</div>
-            </div>
+        {{-- CARD 1: hanya judul kategori --}}
+        <div class="ak-card ak-card-section">
+            <div class="ak-section-title">Rencana Strategis (Renstra)</div>
+            <div class="ak-section-subtitle">Rencana Strategis (Renstra)</div>
+        </div>
 
-            {{-- Filter super simpel (kayak web badan bahasa) --}}
-            <form class="ak-filter" method="GET" action="{{ url('/akuntabilitas/renstra') }}">
-                <div class="ak-filter-left">
+        {{-- CARD 2: tools (search/filter) + tabel --}}
+        <div class="ak-card ak-doc-card">
+
+            <form class="ak-tools" method="GET" action="{{ url('/akuntabilitas/renstra') }}">
+                <div class="ak-tools-row">
                     <div class="ak-search">
-                        <span class="ak-search-ico">🔎</span>
+                        <span class="ak-search-icon">🔎</span>
                         <input type="text" name="q" value="{{ $q ?? '' }}" placeholder="Masukkan kata kunci">
                     </div>
 
-                    <select name="year" class="ak-year">
+                    <select class="ak-year" name="year">
                         <option value="">Pilih Tahun</option>
                         @foreach ($years ?? [] as $y)
                             <option value="{{ $y }}" @selected((string) ($selectedYear ?? '') === (string) $y)>{{ $y }}</option>
                         @endforeach
                     </select>
 
-                    <button type="submit" class="ak-btn">Cari</button>
+                    <button class="ak-btn ak-btn-primary" type="submit">Cari</button>
 
                     @if (!empty($q) || !empty($selectedYear))
-                        <a href="{{ url('/akuntabilitas/renstra') }}" class="ak-btn ak-btn-ghost">Reset</a>
+                        <a class="ak-btn ak-btn-ghost" href="{{ url('/akuntabilitas/renstra') }}">Reset</a>
                     @endif
                 </div>
             </form>
 
-            {{-- List / tabel ala Badan Bahasa (tetap simpel) --}}
-            <div class="ak-doc-table">
-                <div class="ak-doc-head">
+            <div class="ak-table">
+                <div class="ak-thead">
                     <div>Judul Dokumen</div>
                     <div class="c">Tahun</div>
                     <div class="c">Bentuk Berkas</div>
                     <div class="c">Unduh</div>
                 </div>
 
-                <div class="ak-doc-body">
+                <div class="ak-tbody">
                     @forelse(($docs ?? []) as $doc)
-                        <div class="ak-doc-row">
-                            <div class="ak-doc-name">{{ $doc['judul'] ?? '-' }}</div>
+                        <div class="ak-row">
+                            <div class="ak-docname">{{ $doc['judul'] ?? '-' }}</div>
 
                             <div class="c">
                                 <span class="ak-badge">{{ $doc['tahun'] ?? '-' }}</span>
                             </div>
 
                             <div class="c">
-                                <span class="ak-file">
-                                    📄 {{ strtoupper($doc['tipe'] ?? 'PDF') }}
+                                <span class="ak-filepill">
+                                    <span class="ak-file-ico">📄</span>
+                                    {{ strtoupper($doc['tipe'] ?? 'PDF') }}
                                 </span>
                             </div>
 
@@ -77,7 +79,7 @@
                                 <a class="ak-download"
                                     href="{{ isset($doc['file']) ? asset('storage/' . $doc['file']) : '#' }}" target="_blank"
                                     title="Unduh">
-                                    ⬇️
+                                    <span class="ak-download-ico">⬇️</span>
                                 </a>
                             </div>
                         </div>
@@ -86,6 +88,7 @@
                     @endforelse
                 </div>
             </div>
+
         </div>
 
     </div>
