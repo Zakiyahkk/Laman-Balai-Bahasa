@@ -1,6 +1,6 @@
 @extends('layouts.user')
 
-@section('title', 'Bahan Bacaan sembari')
+@section('title', 'sembari')
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/produk.css') }}">

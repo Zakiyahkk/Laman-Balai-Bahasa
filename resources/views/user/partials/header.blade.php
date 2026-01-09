@@ -45,6 +45,12 @@
                     <!-- Menu Dekstop Aktif -->
                     <ul class="dropdown">
                         <li>
+                            <a href="{{ url('/profil/sejarah-singkat') }}"
+                                class="{{ request()->is('profil/sejarah-singkat') ? 'active' : '' }}">
+                                Sejarah Singkat
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{ url('/profil/visi-misi') }}"
                                 class="{{ request()->is('profil/visi-misi') ? 'active' : '' }}">
                                 Visi & Misi
@@ -75,14 +81,7 @@
                         <li>
                             <a href="{{ url('/profil/logo-bpp-riau') }}"
                                 class="{{ request()->is('profil/logo-bpp-riau') ? 'active' : '' }}">
-                                Logo BBP Riau
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="{{ url('/profil/kontak-kami') }}"
-                                class="{{ request()->is('profil/kontak-kami') ? 'active' : '' }}">
-                                Kontak Kami
+                                Logo
                             </a>
                         </li>
                     </ul>
@@ -126,17 +125,19 @@
                         <i class="fa-solid fa-chevron-down dropdown-icon"></i>
                     </a>
                     <div class="dropdown">
+                        <a href="{{ url('/akuntabilitas/renstra') }}"
+                            class="{{ request()->is('akuntabilitas/renstra') ? 'active' : '' }}">Renstra</a>
+                        <a href="{{ url('/akuntabilitas/dipa') }}"
+                            class="{{ request()->is('akuntabilitas/dipa') ? 'active' : '' }}">DIPA</a>
                         <a href="{{ url('/akuntabilitas/perjanjian-kinerja') }}"
                             class="{{ request()->is('akuntabilitas/perjanjian-kinerja') ? 'active' : '' }}">Perjanjian
                             Kinerja</a>
-                        <a href="{{ url('/akuntabilitas/renstra') }}"
-                            class="{{ request()->is('akuntabilitas/renstra') ? 'active' : '' }}">Renstra</a>
-                        <a href="{{ url('/akuntabilitas/lakip') }}"
-                            class="{{ request()->is('akuntabilitas/lakip') ? 'active' : '' }}">LAKIP</a>
-                        <a href="{{ url('/akuntabilitas/lakin') }}"
-                            class="{{ request()->is('akuntabilitas/lakin') ? 'active' : '' }}">LAKIN</a>
                         <a href="{{ url('/akuntabilitas/rencana-aksi') }}"
                             class="{{ request()->is('akuntabilitas/rencana-aksi') ? 'active' : '' }}">Rencana Aksi</a>
+                        <a href="{{ url('/akuntabilitas/lakin') }}"
+                            class="{{ request()->is('akuntabilitas/lakin') ? 'active' : '' }}">LAKIN</a>
+                        <a href="{{ url('/akuntabilitas/sakai') }}"
+                            class="{{ request()->is('akuntabilitas/saki') ? 'active' : '' }}">SAKAI</a>
                     </div>
                 </li>
 

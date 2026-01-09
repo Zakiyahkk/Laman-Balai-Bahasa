@@ -105,7 +105,7 @@ body {
 
 /* ================= NAV ================= */
 .bbp-nav {
-    background: linear-gradient(90deg, #1e2638, #2a3550, #385094);
+    background: linear-gradient(to right, #0f172a, #1e3a8a);
 }
 
 .nav-container {

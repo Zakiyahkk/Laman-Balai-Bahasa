@@ -7,11 +7,11 @@
 @endsection
 
 @section('content')
-    <section class="profil-page profil-pegawai">
+    <section class="profil-page profil-pegawai profil-hero" data-bg="{{ asset('img/latar.jpg') }}">
         <div class="container profil-container">
 
             <!-- Header -->
-            <div class="profil-header">
+            <div class="profil-header hero-header">
                 <h1>Pegawai</h1>
                 <p class="profil-subtitle">
                     Balai Bahasa Provinsi Riau

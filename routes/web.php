@@ -31,7 +31,7 @@ Route::get('/berita/{slug}', [BeritaController::class, 'show'])
 
 Route::prefix('profil')->group(function () {
     Route::get('/visi-misi', [ProfileController::class, 'visiMisi']);
-    Route::get('/kontak-kami', [ProfileController::class, 'kontakKami']);
+    Route::get('/sejarah-singkat', [ProfileController::class, 'sejarahSingkat']);
     Route::get('/tugas-dan-fungsi', [ProfileController::class, 'tugasDanFungsi']);
     Route::get('/struktur-organisasi', [ProfileController::class, 'strukturOrganisasi']);
     Route::get('/pegawai', [ProfileController::class, 'pegawai']);
@@ -47,9 +47,10 @@ Route::prefix('artikel')->name('artikel.')->group(function () {
 Route::prefix('akuntabilitas')->group(function () {
     Route::get('/perjanjian-kinerja', [AkuntabilitasController::class, 'perjanjianKinerja']);
     Route::get('/renstra', [AkuntabilitasController::class, 'renstra']);
-    Route::get('/lakip', [AkuntabilitasController::class, 'lakip']);
+    Route::get('/dipa', [AkuntabilitasController::class, 'dipa']);
     Route::get('/lakin', [AkuntabilitasController::class, 'lakin']);
     Route::get('/rencana-aksi', [AkuntabilitasController::class, 'rencanaAksi']);
+    Route::get('/sakai', [AkuntabilitasController::class, 'sakai']);
 });
 
 Route::prefix('produk')->group(function () {

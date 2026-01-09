@@ -1,19 +1,19 @@
 @extends('layouts.user')
 
-@section('title', 'Peta-Bahasa')
+@section('title', 'SAKAI')
 
 @section('css')
-    <link rel="stylesheet" href="{{ asset('css/produk.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/akuntabilitas.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/dearflip/css/dflip.min.css') }}">
 @endsection
 
 @section('content')
 
-    <section class="peta-bahasa-container">
+    <section class="sakai-container">
 
-        <div class="peta-bahasa-header">
-            <h1>Peta Pembinaan Bahasa</h1>
-            <p>Disini Halaman Peta Pembinaan Bahasa</p>
+        <div class="sakai-header">
+            <h1>Sakai</h1>
+            <p>Disini Halaman Sakai</p>
         </div>
     </section>
 
