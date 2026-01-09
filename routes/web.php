@@ -53,11 +53,14 @@ Route::prefix('akuntabilitas')->group(function () {
 });
 
 Route::prefix('produk')->group(function () {
-    Route::get('/bahan-bacaan-literasi', [ProdukController::class, 'bahanBacaan']);
-    Route::get('/jurnal-madah', [ProdukController::class, 'jurnalMadah']);
+    Route::get('/terbitan-bbpr', [ProdukController::class, 'terbitanbbpr']);
+    Route::get('/jurnal', [ProdukController::class, 'jurnal']);
     Route::get('/majalah', [ProdukController::class, 'majalah']);
-    Route::get('/penerjemahan-sembari', [ProdukController::class, 'penerjemahanSembari']);
+    Route::get('/sembari', [ProdukController::class, 'Sembari']);
     Route::get('/peta-pembinaan-bahasa', [ProdukController::class, 'petaPembinaanBahasa']);
+    Route::get('/peta-pembinaan-sastra', [ProdukController::class, 'petaPembinaanSastra']);
+    Route::get('/bipa', [ProdukController::class, 'bipa']);
+    Route::get('/kemala', [ProdukController::class, 'kemala']);
 });
 
 Route::prefix('ppid')->group(function () {

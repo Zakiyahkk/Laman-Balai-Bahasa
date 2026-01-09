@@ -5,11 +5,12 @@
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/profil.css') }}">
 @endsection
+
 @section('content')
-    <section class="profil-page">
+    <section class="profil-page profil-visi-misi profil-hero" data-bg="{{ asset('img/latar.jpg') }}">
         <div class="container profil-container">
 
-            <div class="profil-header">
+            <div class="profil-header hero-header">
                 <h1>Visi dan Misi</h1>
                 <p class="profil-subtitle">Balai Bahasa Provinsi Riau</p>
             </div>

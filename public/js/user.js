@@ -299,3 +299,13 @@ document.addEventListener("DOMContentLoaded", () => {
         initArtikelSlider();
     }
 })();
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".profil-hero[data-bg]").forEach((el) => {
+        const bg = el.getAttribute("data-bg");
+        if (!bg) return;
+
+        // set CSS variable yang dipakai di profil.css
+        el.style.setProperty("--hero-bg", `url("${bg}")`);
+    });
+});

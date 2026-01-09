@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-    <section class="profil-page">
+    <section class="profil-page profil-pegawai">
         <div class="container profil-container">
 
             <!-- Header -->

@@ -1,6 +1,6 @@
 @extends('layouts.user')
 
-@section('title', 'Bahan Bacaan peta-bahasa')
+@section('title', 'Bahan Bacaan jurnal')
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/produk.css') }}">
@@ -9,11 +9,11 @@
 
 @section('content')
 
-    <section class="peta-bahasa-container">
+    <section class="jurnal-container">
 
-        <div class="peta-bahasa-header">
-            <h1>Peta Pembinaan Bahasa</h1>
-            <p>Disini Halaman Peta Pembinaan Bahasa</p>
+        <div class="jurnal-header">
+            <h1>Jurnal Madah</h1>
+            <p>Disini Halaman Jurnal</p>
         </div>
     </section>
 
