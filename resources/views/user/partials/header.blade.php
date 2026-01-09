@@ -170,15 +170,14 @@
                 </li>
 
                 <li>
-                    <a href="{{ url('/ziwbk/ziwbk') }}" class="{{ request()->is('ziwbk*') ? 'active' : '' }}">
-                        ZI-WBK
+                    <a href="{{ url('/wbs/wbs') }}" class="{{ request()->is('wbs') ? 'active' : '' }}">
+                        WBS
                     </a>
                 </li>
 
                 <li>
-                    <a href="{{ url('/ruangkonsultasi/ruangkonsultasi') }}"
-                        class="{{ request()->is('ruangkonsultasi*') ? 'active' : '' }}">
-                        Ruang Konsultasi
+                    <a href="{{ url('/ziwbk/ziwbk') }}" class="{{ request()->is('ziwbk*') ? 'active' : '' }}">
+                        ZI-WBK
                     </a>
                 </li>
 

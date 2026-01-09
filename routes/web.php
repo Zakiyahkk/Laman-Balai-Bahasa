@@ -9,7 +9,7 @@ use App\Http\Controllers\User\PpidController;
 use App\Http\Controllers\User\SurveiController;
 use App\Http\Controllers\User\AkuntabilitasController;
 use App\Http\Controllers\User\ZiwbkController;
-use App\Http\Controllers\User\RuangKonsultasiController;
+use App\Http\Controllers\User\WbsController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\GaleriController;
 use App\Http\Controllers\Admin\PublikasiController;
@@ -71,12 +71,12 @@ Route::prefix('survei')->group(function () {
     Route::get('/survei', [SurveiController::class, 'survei']);
 });
 
-Route::prefix('ziwbk')->group(function () {
-    Route::get('/ziwbk', [ZiwbkController::class, 'ziwbk']);
+Route::prefix('wbs')->group(function () {
+    Route::get('/wbs', [WbsController::class, 'wbs']);
 });
 
-Route::prefix('ruangkonsultasi')->group(function () {
-    Route::get('/ruangkonsultasi', [RuangKonsultasiController::class, 'ruangKonsultasi']);
+Route::prefix('ziwbk')->group(function () {
+    Route::get('/ziwbk', [ZiwbkController::class, 'ziwbk']);
 });
 
 /*
