@@ -7,8 +7,11 @@
         <div class="fasilitas-wrapper">
 
             <!-- PANAH KIRI -->
-            <button class="fasilitas-nav prev" id="fasilitasPrev">
-                &#10094;
+            <button class="fasilitas-arrow fasilitas-arrow-left" type="button" id="fasilitasPrev" aria-label="Sebelumnya">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M15 18l-6-6 6-6" fill="none" stroke="currentColor" stroke-width="2.6"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
             </button>
 
             <!-- SLIDER -->
@@ -17,7 +20,7 @@
 
                 <!-- CARD -->
                 <div class="fasilitas-card">
-                    <img src="{{ asset('img/fasilitas-1.jpg') }}" alt="">
+                    <img src="{{ asset('img/fasilitas.png') }}" alt="">
                     <div class="fasilitas-card-content">
                         <h4>Fasilitas Disabilitas</h4>
                         <p>
@@ -29,7 +32,7 @@
                 </div>
 
                 <div class="fasilitas-card">
-                    <img src="{{ asset('img/fasilitas-2.jpg') }}" alt="">
+                    <img src="{{ asset('img/fasilitas.png') }}" alt="">
                     <div class="fasilitas-card-content">
                         <h4>Unit Layanan Terpadu</h4>
                         <p>
@@ -41,9 +44,9 @@
                 </div>
 
                 <div class="fasilitas-card">
-                    <img src="{{ asset('img/fasilitas-3.jpg') }}" alt="">
+                    <img src="{{ asset('img/fasilitas.png') }}" alt="">
                     <div class="fasilitas-card-content">
-                        <h4>Tempat Bermain Mandalika</h4>
+                        <h4>Tempat Bermain Balai</h4>
                         <p>
                             Area ramah anak untuk mendukung kegiatan literasi
                             dan pembelajaran yang menyenangkan.
@@ -53,9 +56,9 @@
                 </div>
 
                 <div class="fasilitas-card">
-                    <img src="{{ asset('img/fasilitas-3.jpg') }}" alt="">
+                    <img src="{{ asset('img/fasilitas.png') }}" alt="">
                     <div class="fasilitas-card-content">
-                        <h4>Tempat Bermain Mandalika</h4>
+                        <h4>Tempat Olahraga</h4>
                         <p>
                             Area ramah anak untuk mendukung kegiatan literasi
                             dan pembelajaran yang menyenangkan.
@@ -67,8 +70,12 @@
             </div>
 
             <!-- PANAH KANAN -->
-            <button class="fasilitas-nav next" id="fasilitasNext">
-                &#10095;
+            <button class="fasilitas-arrow fasilitas-arrow-right" type="button" id="fasilitasNext"
+                aria-label="Berikutnya">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
             </button>
 
         </div>

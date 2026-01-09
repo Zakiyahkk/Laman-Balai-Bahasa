@@ -12,6 +12,8 @@ use App\Http\Controllers\User\ZiwbkController;
 use App\Http\Controllers\User\RuangKonsultasiController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\GaleriController;
+use App\Http\Controllers\Admin\PublikasiController;
+use App\Http\Controllers\User\ArtikelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +37,12 @@ Route::prefix('profil')->group(function () {
     Route::get('/pegawai', [ProfileController::class, 'pegawai']);
     Route::get('/logo-bpp-riau', [ProfileController::class, 'logobppriau']);
 });
+
+Route::prefix('artikel')->name('artikel.')->group(function () {
+    Route::get('/', [ArtikelController::class, 'index'])->name('index');
+    Route::get('/{slug}', [ArtikelController::class, 'show'])->name('show');
+});
+
 
 Route::prefix('akuntabilitas')->group(function () {
     Route::get('/perjanjian-kinerja', [AkuntabilitasController::class, 'perjanjianKinerja']);
@@ -97,21 +105,25 @@ Route::prefix('admin')
             return view('admin.dashboard');
         })->name('admin.dashboard');
 
-        Route::get('/artikel', fn () => view('admin.artikel.index'))->name('admin.artikel');
-        Route::get('/artikel/create', fn () => view('admin.artikel.create'))->name('admin.artikel.create');
-        Route::get('/artikel/edit', fn () => view('admin.artikel.edit'))->name('admin.artikel.edit');
-        Route::get('/artikel/show', fn () => view('admin.artikel.show'))->name('admin.artikel.show');
+        Route::get('/profil', fn () => view('admin.profil.index'))->name('admin.profil');
+        Route::get('/profil/create', fn () => view('admin.profil.create'))->name('admin.profil.create');
+        Route::get('/profil/edit', fn () => view('admin.profil.edit'))->name('admin.profil.edit');
+        Route::get('/profil/show', fn () => view('admin.profil.show'))->name('admin.profil.show');
 
         Route::get('/kegiatan', fn () => view('admin.kegiatan.index'))->name('admin.kegiatan');
         Route::get('/kegiatan/create', fn () => view('admin.kegiatan.create'))->name('admin.kegiatan.create');
         Route::get('/kegiatan/edit', fn () => view('admin.kegiatan.edit'))->name('admin.kegiatan.edit');
         Route::get('/kegiatan/show', fn () => view('admin.kegiatan.show'))->name('admin.kegiatan.show');
 
-        Route::get('/publikasi', fn () => view('admin.publikasi.index'))->name('admin.publikasi');
-        Route::get('/publikasi/create', fn () => view('admin.publikasi.create'))->name('admin.publikasi.create');
-        Route::get('/publikasi/show', fn () => view('admin.publikasi.show'))->name('admin.publikasi.show');
-        Route::get('/publikasi/{id}/edit', fn () => view('admin.publikasi.edit')) ->name('admin.publikasi.edit');
-
+        Route::get('/publikasi', [PublikasiController::class, 'index'])->name('admin.publikasi');
+        Route::get('/publikasi/create', [PublikasiController::class, 'create'])->name('admin.publikasi.create');
+        Route::get('/publikasi/{id}', [PublikasiController::class, 'show'])->name('admin.publikasi.show');
+        Route::get('/publikasi/{id}/edit', [PublikasiController::class, 'edit'])->name('admin.publikasi.edit');
+        Route::put('/publikasi/{id}', [PublikasiController::class, 'update'])->name('admin.publikasi.update');
+        Route::post('/publikasi', [PublikasiController::class, 'store'])->name('admin.publikasi.store');
+        Route::delete('/publikasi/{id}', [PublikasiController::class, 'destroy'])->name('admin.publikasi.delete');
+        Route::put('/publikasi/{id}/status', [PublikasiController::class, 'updateStatus']) ->name('admin.publikasi.status');
+        Route::get('/admin/publikasi/download/{id}', [PublikasiController::class, 'download']) ->name('admin.publikasi.download');
 
         Route::get('/pendaftaran', fn () => view('admin.pendaftaran'))->name('admin.pendaftaran');
 

@@ -1,6 +1,60 @@
 /* ==================================================
    PROFIL PAGE – ELEGAN & RESMI
 ================================================== */
+.profil-headerbbpr,
+.profil-header-struktur {
+    max-width: 760px; /* fokus ke isi */
+    margin-left: auto;
+    margin-right: auto;
+}
+.profil-content {
+    max-width: 760px; /* fokus ke isi */
+    margin-left: auto;
+    margin-right: auto;
+}
+.profil-section {
+    background: #ffffff;
+    border: 1px solid #eef2f7;
+    border-radius: 14px;
+    box-shadow: 0 14px 30px rgba(2, 6, 23, 0.06);
+    padding: 20px 22px;
+}
+/* Teks */
+.profil-section p {
+    margin: 0 0 12px;
+    font-size: 15px;
+    line-height: 1.9;
+    color: #334155;
+}
+/* Nama instansi */
+.profil-section p:first-child {
+    font-size: 16px;
+    color: #0f172a;
+}
+
+/* Strong tapi tidak bold */
+.profil-section strong {
+    font-weight: 500;
+    color: #0f172a;
+}
+
+/* Label rapi (Telepon / Email) */
+.profil-section p strong {
+    display: inline-block;
+    min-width: 80px;
+}
+
+/* Divider */
+.section-divider {
+    height: 1px;
+    background: #e7eef6;
+    margin-top: 16px;
+}
+
+.profil-bbpr {
+    background: #f6f8fb;
+    padding: 36px 0 1px;
+}
 .profil-page {
     padding: 70px 0;
     background: #f9fafb;
@@ -12,14 +66,15 @@
 
 /* Header */
 .profil-header {
-    margin-bottom: 40px;
+    margin-bottom: 18px;
 }
 
 .profil-header h1 {
-    font-size: 34px;
-    font-weight: 700;
-    color: #1f2d3d;
-    margin-bottom: 8px;
+    margin: 0;
+    font-size: clamp(26px, 3vw, 38px);
+    line-height: 1.2;
+    font-weight: 500; /* tidak bold */
+    color: #0f172a;
 }
 
 .profil-subtitle {

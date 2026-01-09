@@ -52,24 +52,33 @@
     </div>
 </form>
 <div class="row g-4">
-        @forelse($galeri as $item)
-        @php
-            // Logic ambil media & thumbnail
-            $rawMedia = data_get($item, 'file_media');
-            $files = is_array($rawMedia) ? $rawMedia : [$rawMedia];
+    @foreach($galeri as $item)
+    <div class="col-12 col-md-6 col-lg-4">
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden h-100 d-flex flex-column transition-all hover:shadow-md">
             
-            // Ambil gambar cover
-            $firstFile = $files[0] ?? 'https://placehold.co/600x400?text=No+Image';
-            $urlThumbnail = data_get($item, 'thumbnail') ?? $firstFile;
-        @endphp
-
-        <div class="col-12 col-md-6 col-lg-4">
-            <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden position-relative">
+            <div class="position-relative w-full" 
+                 style="height: 200px; background-color: #f8f9fa; cursor: pointer;"
+                 data-bs-toggle="modal" 
+                 data-bs-target="#galleryModal"
+                 data-type="{{ $item->tipe }}"
+                 data-src="{{ $item->file_media }}"
+                 data-judul="{{ $item->judul }}">
                 
-                {{-- Badge Tipe --}}
-                <div class="position-absolute top-0 end-0 m-3" style="z-index: 5;">
-                    <span class="badge {{ $item->tipe == 'foto' ? 'bg-warning' : 'bg-success' }} text-uppercase px-3 py-2 shadow-sm">
-                        {{ $item->tipe }}
+                @if($item->tipe == 'foto')
+                    <img src="{{ $item->file_media }}" class="w-100 h-100 object-fit-cover">
+                @else
+                    <div class="w-100 h-100 position-relative">
+                        <img src="{{ $item->thumbnail ?? 'https://placehold.co/600x400/C7F9EE/00A884?text=Video' }}" class="w-100 h-100 object-fit-cover" style="filter: brightness(0.8);">
+                        <div class="position-absolute top-50 start-50 translate-middle">
+                            <i class="bi bi-play-circle-fill text-white" style="font-size: 3.5rem;"></i>
+                        </div>
+                    </div>
+                @endif
+
+                <div class="position-absolute top-0 end-0 m-3" style="z-index: 20;">
+                    <span class="px-3 py-1 text-xs font-bold text-white rounded-pill shadow-sm" 
+                          style="background-color: {{ $item->tipe == 'foto' ? '#FFB800' : '#00D26A' }};">
+                        {{ ucfirst($item->tipe) }}
                     </span>
                 </div>
 
@@ -92,27 +101,25 @@
                     </div>
                     @endif
                 </div>
+            </div>
 
-                {{-- Detail Card --}}
-                <div class="card-body p-4">
-                    <h5 class="fw-bold text-dark mb-1">{{ $item->judul }}</h5>
-                    <div class="d-flex align-items-center text-muted small mb-3">
-                        <span class="me-3"><i class="bi bi-tag me-1"></i> {{ ucfirst($item->kategori) }}</span>
-                        <span><i class="bi bi-calendar3 me-1"></i> {{ $item->created_at }}</span>
-                    </div>
-                    
-                    <div class="d-flex gap-2 mt-auto">
-                        <a href="{{ route('admin.galeri.edit', $item->id) }}" class="btn btn-light border flex-grow-1 rounded-3 fw-medium">
-                            <i class="bi bi-pencil-square me-1"></i> Edit
-                        </a>
-                        <form action="{{ route('admin.galeri.destroy', $item->id) }}" method="POST" class="flex-grow-1">
-                            @csrf @method('DELETE')
-                            <button type="submit" class="btn btn-outline-danger w-100 rounded-3" onclick="return confirm('Hapus media ini?')">
-                                <i class="bi bi-trash"></i> Hapus
-                            </button>
-                        </form>
-                    </div>
-                </div>
+            <div class="p-4 pt-0">
+        
+                <div class="p-4 pt-0">
+    <div class="d-flex gap-2">
+        <a href="{{ route('admin.galeri.show', $item->id) }}" 
+        class="btn btn-outline-primary flex-grow-1 d-flex align-items-center 
+        justify-content-center gap-2" style="border-radius: 8px; font-weight: 500;">
+            <i class="bi bi-pencil-square"></i> Edit
+        </a>
+        <button class="btn btn-outline-danger flex-grow-1 d-flex align-items-center 
+        justify-content-center gap-2" 
+        style="border-radius: 8px; font-weight: 500;"
+        onclick="confirm('Simulasi: Item {{ $item->id }} akan dihapus?')">
+            <i class="bi bi-trash3"></i> Hapus
+        </button>
+    </div>
+</div>
             </div>
         </div>
         @empty
@@ -132,7 +139,18 @@
                 <h6 class="modal-title text-white fw-bold" id="modalTitle">Preview</h6>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
-            <div class="modal-body p-0" id="modalContent"></div>
+            <div class="modal-body p-0 d-flex justify-content-center align-items-center" style="min-height: 300px; background: #000;">
+                <img id="modalImage" src="" class="img-fluid d-none" style="max-height: 80vh;">
+                
+                <div id="modalVideoContainer" class="w-100 d-none">
+                    <div class="ratio ratio-16x9">
+                        <video id="modalVideo" controls>
+                            <source src="" type="video/mp4">
+                            Browser anda tidak mendukung video.
+                        </video>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

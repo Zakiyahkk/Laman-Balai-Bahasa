@@ -1,8 +1,54 @@
 @extends('admin.layout')
-
+@php use Carbon\Carbon; @endphp
 @section('content')
 
-<!-- =================  ISI MAIN CONTENT ================= -->
+@if(session('success'))
+<div id="notif-top" class="notif-top">
+    {{ session('success') }}
+</div>
+@endif
+<style>
+.notif-top {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #0485c7;;
+    color: white;
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 16px;
+    min-width: 300px;
+    text-align: center;
+    z-index: 9999;
+    animation: slideDown 0.5s ease-out forwards;
+    opacity: 0;
+}
+
+@keyframes slideDown {
+    0% { transform: translate(-50%, -30px); opacity: 0; }
+    100% { transform: translate(-50%, 0); opacity: 1; }
+}
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const notif = document.getElementById("notif-top");
+    if (notif) {
+        setTimeout(() => {
+            notif.style.opacity = "0";
+            notif.style.transition = "0.5s ease";
+        }, 2500); // mulai fade out di 2,5 detik
+
+        setTimeout(() => {
+            notif.remove();
+        }, 3000); // hilang total di 3 detik
+    }
+});
+</script>
+
+
+
 <div class="card border-0 shadow-sm position-relative">
     <div class="card-body p-4">
 
@@ -15,87 +61,101 @@
 
         <!-- HEADER JUDUL + STATUS -->
         <div class="d-flex align-items-center gap-3 mb-2">
-            <h4 class="fw-bold mb-0">
-                Literasi Digital di Kalangan Pelajar
-            </h4>
+            <h4 class="fw-bold mb-0">{{ $data->judul }}</h4>
 
-            <!-- STATUS (GANTI SESUAI KONDISI) -->
-            <!-- DRAF -->
-            <span class="badge badge-draft">
-                Draf
-            </span>
-
-            <!-- TERBIT (contoh jika sudah publish)
-            <span class="badge badge-published">
-                Terbit
-            </span>
-            -->
+            @if($data->status === 'draf')
+                <span class="badge badge-draft">Draf</span>
+            @else
+                <span class="badge badge-published">Terbit</span>
+            @endif
         </div>
 
         <!-- META INFO -->
         <div class="text-muted small mb-3 d-flex flex-wrap gap-3">
-            <span class="publication-category category-berita">
-                Berita
+            <span class="publication-category category-{{ $data->kategori }}">
+                {{ ucfirst($data->kategori) }}
             </span>
-            <span>
-                <i class="bi bi-calendar-event me-1"></i>
-                12 Januari 2025
-            </span>
-
-            <span>
-                <i class="bi bi-person me-1"></i>
-                Admin Balai Bahasa
-            </span>
-
-            <span>
-                <i class="bi bi-eye me-1"></i>
-                0 Pembaca
-            </span>
+            <span><i class="bi bi-calendar-event me-1"></i> {{ $data->tanggal ? \Carbon\Carbon::parse($data->tanggal)->translatedFormat('d F Y') : '-' }}</span>
+            <span><i class="bi bi-person me-1"></i> {{ $data->penulis ?? $data->email }}</span>
+            <span><i class="bi bi-eye me-1"></i> 0 Pembaca</span>
         </div>
 
-        <!-- GAMBAR PUBLIKASI -->
+        <!-- PREVIEW AREA -->
         <div class="mb-4">
-            <img src="https://picsum.photos/900/400"
-                 alt="Gambar Publikasi"
-                 class="img-fluid rounded w-100">
+            @if($data->file)
+                @php $ext = strtolower(pathinfo($data->file, PATHINFO_EXTENSION)); @endphp
+
+                @if($ext === 'pdf')
+                    <!-- Jika PDF → preview PDF -->
+                    <iframe src="{{ $data->file }}" class="w-100 rounded border mb-3" style="height:450px;"></iframe>
+                @else
+                    @if($data->gambar)
+                        <!-- Jika bukan PDF dan ada gambar → preview gambar -->
+                        <img src="{{ $data->gambar }}" class="img-fluid rounded w-100 mb-3">
+                    @else
+                        <!-- Jika bukan PDF dan tidak ada gambar → tampil gambar default -->
+                        <img src="{{ asset('img/logobbpr.png') }}" class="img-fluid rounded w-100 mb-3">
+                    @endif
+                @endif
+
+                <!-- ALERT KUNING (link klik buka file) hanya jika file bukan PDF -->
+                @if($ext !== 'pdf')
+                <div class="mt-3">
+                    <a href="{{ $data->file }}" target="_blank"
+                       class="alert alert-warning small rounded border d-block text-decoration-none text-dark">
+                        <strong>File terlampir:</strong> {{ basename($data->file) }}
+                        <br><small>(Klik untuk membuka file)</small>
+                    </a>
+                </div>
+                @endif
+
+
+                <!-- Tombol Download jika diizinkan -->
+                @if($data->allow_download == 1)
+                <div class="mt-2">
+                    <a href="{{ route('admin.publikasi.download', $data->publikasi_id) }}"
+                       class="btn btn-sm fw-semibold"
+                       style="color:#067ac1;">
+                       <i class="bi bi-download me-1"></i> Unduh Lampiran
+                    </a>
+                </div>
+                @endif
+
+            @elseif($data->gambar && !$data->file)
+                <!-- Jika hanya ada gambar → preview gambar -->
+                <img src="{{ $data->gambar }}" class="img-fluid rounded w-100 mb-3">
+            @else
+                <!-- Jika tidak ada file & tidak ada gambar → gambar default -->
+                <img src="{{ asset('img/logobbpr.png') }}" class="img-fluid rounded w-100 mb-3">
+            @endif
         </div>
 
         <!-- ISI PUBLIKASI -->
         <div class="content-publication">
-            <p>
-                Literasi digital menjadi kompetensi penting bagi pelajar di era teknologi
-                informasi. Kemampuan untuk memahami, mengevaluasi, dan menggunakan informasi
-                secara bijak sangat dibutuhkan dalam menghadapi arus digital yang semakin
-                masif.
-            </p>
-
-            <p>
-                Melalui berbagai program edukasi dan publikasi, Balai Bahasa Provinsi Riau
-                berupaya meningkatkan kesadaran serta keterampilan literasi digital di
-                kalangan pelajar. Kegiatan ini diharapkan mampu membentuk generasi yang
-                cakap digital, kritis, dan bertanggung jawab.
-            </p>
-
-            <p>
-                Publikasi ini merupakan bagian dari komitmen Balai Bahasa Provinsi Riau
-                dalam mendukung pengembangan bahasa dan sastra Indonesia di tengah
-                perkembangan teknologi informasi.
-            </p>
+            {!! nl2br(e($data->isi)) !!}
         </div>
 
         <!-- ACTION BUTTON -->
-       <div class="d-flex justify-content-end gap-2 mt-4">
-            <a href="{{ route('admin.publikasi') }}"
-            class="btn btn-action btn-draft">
-                Draf
-            </a>
+        <div class="d-flex justify-content-end gap-2 mt-4">
+            <form action="{{ route('admin.publikasi.status', $data->publikasi_id) }}" method="POST" class="d-inline">
+                @csrf
+                @method('PUT')
+                <input type="hidden" name="status" value="draf">
+                <button type="submit" class="btn btn-action btn-draft">Draf</button>
+            </form>
 
-            <a href="{{ route('admin.publikasi') }}"
-            class="btn btn-action btn-save">
-                Terbit
-            </a>
+            <form action="{{ route('admin.publikasi.status', $data->publikasi_id) }}" method="POST" class="d-inline">
+                @csrf
+                @method('PUT')
+                <input type="hidden" name="status" value="terbit">
+                <button type="submit" class="btn btn-action btn-save">Terbit</button>
+            </form>
         </div>
+
     </div>
 </div>
 
 @endsection
+
+
+
