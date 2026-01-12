@@ -105,7 +105,7 @@ body {
 
 /* ================= NAV ================= */
 .bbp-nav {
-    border-top: 1px solid #0485c7;
+    background: linear-gradient(to right, #0f172a, #1e3a8a);
 }
 
 .nav-container {
@@ -685,31 +685,6 @@ body {
     }
 }
 /* ==================================================
-   PANTUN HARIAN – GAMBAR SAJA (DASHBOARD)
-================================================== */
-.pantun-single {
-    display: flex;
-    justify-content: center;
-    max-width: 720px;
-    margin: 0 auto;
-}
-
-.pantun-image-card {
-    max-width: 560px;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    overflow: hidden;
-}
-
-.pantun-image-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    border-radius: 12px;
-}
-
-/* ==================================================
    PENGUMUMAN
 ================================================== */
 .pengumuman-section {
@@ -767,27 +742,6 @@ body {
     font-size: 13px;
     text-decoration: none;
     border-radius: 3px;
-}
-
-/* ==================================================
-   ALINEA
-================================================== */
-.alinea-section {
-    background: #fff;
-    padding: 30px 0;
-}
-
-.alinea-text {
-    max-width: 800px; /* lebar ideal baca */
-    margin: 0 auto; /* center konten */
-    text-align: justify; /* rata kiri–kanan */
-    line-height: 1.8; /* nyaman dibaca */
-    font-size: 16px;
-    color: #333;
-    text-indent: 2em; /* inden awal paragraf */
-}
-.alinea-text {
-    text-indent: 2em;
 }
 
 /* ==================================================

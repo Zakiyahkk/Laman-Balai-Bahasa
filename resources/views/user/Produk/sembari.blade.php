@@ -1,6 +1,6 @@
 @extends('layouts.user')
 
-@section('title', 'Peta-Bahasa')
+@section('title', 'sembari')
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/produk.css') }}">
@@ -9,11 +9,11 @@
 
 @section('content')
 
-    <section class="peta-bahasa-container">
+    <section class="sembari-container">
 
-        <div class="peta-bahasa-header">
-            <h1>Peta Pembinaan Bahasa</h1>
-            <p>Disini Halaman Peta Pembinaan Bahasa</p>
+        <div class="sembari-header">
+            <h1>Sembari</h1>
+            <p>Disini Halaman Penerjemahan Sembari</p>
         </div>
     </section>
 

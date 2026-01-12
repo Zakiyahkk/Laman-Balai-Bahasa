@@ -45,6 +45,12 @@
                     <!-- Menu Dekstop Aktif -->
                     <ul class="dropdown">
                         <li>
+                            <a href="{{ url('/profil/sejarah-singkat') }}"
+                                class="{{ request()->is('profil/sejarah-singkat') ? 'active' : '' }}">
+                                Sejarah Singkat
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{ url('/profil/visi-misi') }}"
                                 class="{{ request()->is('profil/visi-misi') ? 'active' : '' }}">
                                 Visi & Misi
@@ -75,14 +81,7 @@
                         <li>
                             <a href="{{ url('/profil/logo-bpp-riau') }}"
                                 class="{{ request()->is('profil/logo-bpp-riau') ? 'active' : '' }}">
-                                Logo BPP Riau
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="{{ url('/profil/kontak-kami') }}"
-                                class="{{ request()->is('profil/kontak-kami') ? 'active' : '' }}">
-                                Kontak Kami
+                                Logo
                             </a>
                         </li>
                     </ul>
@@ -96,11 +95,28 @@
                         <i class="fa-solid fa-chevron-down dropdown-icon"></i>
                     </a>
                     <div class="dropdown">
-                        <a href="{{ url('/produk/bahan-bacaan-literasi') }}" class="{{ request()->is('produk/bahan-bacaan-literasi') ? 'active' : '' }}">Bahan Bacaan Literasi</a>
-                        <a href="{{ url('/produk/jurnal-madah') }}" class="{{ request()->is('produk/jurnal-madah') ? 'active' : '' }}">Jurnal Madah</a>
-                        <a href="{{ url('/produk/majalah') }}" class="{{ request()->is('produk/majalah') ? 'active' : '' }}">Majalah</a>
-                        <a href="{{ url('/produk/penerjemahan-sembari') }}" class="{{ request()->is('produk/penerjemahan-sembari') ? 'active' : '' }}">Penerjemahan: Sembari</a>
-                        <a href="{{ url('/produk/peta-pembinaan-bahasa') }}" class="{{ request()->is('produk/peta-pembinaan-bahasa') ? 'active' : '' }}">Peta Pembinaan Bahasa</a>
+                        <a href="{{ url('/produk/terbitan-bbpr') }}"
+                            class="{{ request()->is('produk/terbitan-bbpr') ? 'active' : '' }}">Terbitan BBPR
+                        </a>
+                        <a href="{{ url('/produk/jurnal') }}"
+                            class="{{ request()->is('produk/jurnal') ? 'active' : '' }}">Jurnal</a>
+                        <a href="{{ url('/produk/majalah') }}"
+                            class="{{ request()->is('produk/majalah') ? 'active' : '' }}">Majalah Serindit</a>
+                        <a href="{{ url('/produk/sembari') }}"
+                            class="{{ request()->is('produk/sembari') ? 'active' : '' }}">Sembari (Serial
+                            Terjemahan BBPR)</a>
+                        <a href="{{ url('/produk/peta-pembinaan-bahasa') }}"
+                            class="{{ request()->is('produk/peta-pembinaan-bahasa') ? 'active' : '' }}">Peta
+                            Pembinaan
+                            Bahasa</a>
+                        <a href="{{ url('/produk/peta-pembinaan-sastra') }}"
+                            class="{{ request()->is('produk/peta-pembinaan-sastra') ? 'active' : '' }}">Peta
+                            Pembinaan
+                            Sastra</a>
+                        <a href="{{ url('/produk/bipa') }}"
+                            class="{{ request()->is('produk/bipa') ? 'active' : '' }}">Bipa</a>
+                        <a href="{{ url('/produk/kemala') }}"
+                            class="{{ request()->is('produk/kemala') ? 'active' : '' }}">kemala</a>
                     </div>
                 </li>
 
@@ -109,11 +125,19 @@
                         <i class="fa-solid fa-chevron-down dropdown-icon"></i>
                     </a>
                     <div class="dropdown">
-                        <a href="{{ url('/akuntabilitas/perjanjian-kinerja') }}" class="{{ request()->is('akuntabilitas/perjanjian-kinerja') ? 'active' : '' }}">Perjanjian Kinerja</a>
-                        <a href="{{ url('/akuntabilitas/renstra') }}" class="{{ request()->is('akuntabilitas/renstra') ? 'active' : '' }}">Renstra</a>
-                        <a href="{{ url('/akuntabilitas/lakip') }}" class="{{ request()->is('akuntabilitas/lakip') ? 'active' : '' }}">LAKIP</a>
-                        <a href="{{ url('/akuntabilitas/lakin') }}" class="{{ request()->is('akuntabilitas/lakin') ? 'active' : '' }}">LAKIN</a>
-                        <a href="{{ url('/akuntabilitas/rencana-aksi') }}" class="{{ request()->is('akuntabilitas/rencana-aksi') ? 'active' : '' }}">Rencana Aksi</a>
+                        <a href="{{ url('/akuntabilitas/renstra') }}"
+                            class="{{ request()->is('akuntabilitas/renstra') ? 'active' : '' }}">Renstra</a>
+                        <a href="{{ url('/akuntabilitas/dipa') }}"
+                            class="{{ request()->is('akuntabilitas/dipa') ? 'active' : '' }}">DIPA</a>
+                        <a href="{{ url('/akuntabilitas/perjanjian-kinerja') }}"
+                            class="{{ request()->is('akuntabilitas/perjanjian-kinerja') ? 'active' : '' }}">Perjanjian
+                            Kinerja</a>
+                        <a href="{{ url('/akuntabilitas/rencana-aksi') }}"
+                            class="{{ request()->is('akuntabilitas/rencana-aksi') ? 'active' : '' }}">Rencana Aksi</a>
+                        <a href="{{ url('/akuntabilitas/lakin') }}"
+                            class="{{ request()->is('akuntabilitas/lakin') ? 'active' : '' }}">LAKIN</a>
+                        <a href="{{ url('/akuntabilitas/sakai') }}"
+                            class="{{ request()->is('akuntabilitas/saki') ? 'active' : '' }}">SAKAI</a>
                     </div>
                 </li>
 
@@ -135,30 +159,26 @@
 
 
                 <li>
-                    <a href="{{ url('/ppid/ppid') }}"
-                        class="{{ request()->is('ppid*') ? 'active' : '' }}">
+                    <a href="{{ url('/ppid/ppid') }}" class="{{ request()->is('ppid*') ? 'active' : '' }}">
                         PPID
                     </a>
                 </li>
 
                 <li>
-                    <a href="{{ url('/survei/survei') }}"
-                        class="{{ request()->is('survei*') ? 'active' : '' }}">
+                    <a href="{{ url('/survei/survei') }}" class="{{ request()->is('survei*') ? 'active' : '' }}">
                         Survei
                     </a>
                 </li>
 
                 <li>
-                    <a href="{{ url('/ziwbk/ziwbk') }}"
-                        class="{{ request()->is('ziwbk*') ? 'active' : '' }}">
-                        ZI-WBK
+                    <a href="{{ url('/wbs/wbs') }}" class="{{ request()->is('wbs') ? 'active' : '' }}">
+                        WBS
                     </a>
                 </li>
 
                 <li>
-                    <a href="{{ url('/ruangkonsultasi/ruangkonsultasi') }}"
-                        class="{{ request()->is('ruangkonsultasi*') ? 'active' : '' }}">
-                        Ruang Konsultasi
+                    <a href="{{ url('/ziwbk/ziwbk') }}" class="{{ request()->is('ziwbk*') ? 'active' : '' }}">
+                        ZI-WBK
                     </a>
                 </li>
 

@@ -9,7 +9,7 @@ use App\Http\Controllers\User\PpidController;
 use App\Http\Controllers\User\SurveiController;
 use App\Http\Controllers\User\AkuntabilitasController;
 use App\Http\Controllers\User\ZiwbkController;
-use App\Http\Controllers\User\RuangKonsultasiController;
+use App\Http\Controllers\User\WbsController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\GaleriController;
 use App\Http\Controllers\Admin\PublikasiController;
@@ -31,7 +31,7 @@ Route::get('/berita/{slug}', [BeritaController::class, 'show'])
 
 Route::prefix('profil')->group(function () {
     Route::get('/visi-misi', [ProfileController::class, 'visiMisi']);
-    Route::get('/kontak-kami', [ProfileController::class, 'kontakKami']);
+    Route::get('/sejarah-singkat', [ProfileController::class, 'sejarahSingkat']);
     Route::get('/tugas-dan-fungsi', [ProfileController::class, 'tugasDanFungsi']);
     Route::get('/struktur-organisasi', [ProfileController::class, 'strukturOrganisasi']);
     Route::get('/pegawai', [ProfileController::class, 'pegawai']);
@@ -47,17 +47,21 @@ Route::prefix('artikel')->name('artikel.')->group(function () {
 Route::prefix('akuntabilitas')->group(function () {
     Route::get('/perjanjian-kinerja', [AkuntabilitasController::class, 'perjanjianKinerja']);
     Route::get('/renstra', [AkuntabilitasController::class, 'renstra']);
-    Route::get('/lakip', [AkuntabilitasController::class, 'lakip']);
+    Route::get('/dipa', [AkuntabilitasController::class, 'dipa']);
     Route::get('/lakin', [AkuntabilitasController::class, 'lakin']);
     Route::get('/rencana-aksi', [AkuntabilitasController::class, 'rencanaAksi']);
+    Route::get('/sakai', [AkuntabilitasController::class, 'sakai']);
 });
 
 Route::prefix('produk')->group(function () {
-    Route::get('/bahan-bacaan-literasi', [ProdukController::class, 'bahanBacaan']);
-    Route::get('/jurnal-madah', [ProdukController::class, 'jurnalMadah']);
+    Route::get('/terbitan-bbpr', [ProdukController::class, 'terbitanbbpr']);
+    Route::get('/jurnal', [ProdukController::class, 'jurnal']);
     Route::get('/majalah', [ProdukController::class, 'majalah']);
-    Route::get('/penerjemahan-sembari', [ProdukController::class, 'penerjemahanSembari']);
+    Route::get('/sembari', [ProdukController::class, 'Sembari']);
     Route::get('/peta-pembinaan-bahasa', [ProdukController::class, 'petaPembinaanBahasa']);
+    Route::get('/peta-pembinaan-sastra', [ProdukController::class, 'petaPembinaanSastra']);
+    Route::get('/bipa', [ProdukController::class, 'bipa']);
+    Route::get('/kemala', [ProdukController::class, 'kemala']);
 });
 
 Route::prefix('ppid')->group(function () {
@@ -68,12 +72,12 @@ Route::prefix('survei')->group(function () {
     Route::get('/survei', [SurveiController::class, 'survei']);
 });
 
-Route::prefix('ziwbk')->group(function () {
-    Route::get('/ziwbk', [ZiwbkController::class, 'ziwbk']);
+Route::prefix('wbs')->group(function () {
+    Route::get('/wbs', [WbsController::class, 'wbs']);
 });
 
-Route::prefix('ruangkonsultasi')->group(function () {
-    Route::get('/ruangkonsultasi', [RuangKonsultasiController::class, 'ruangKonsultasi']);
+Route::prefix('ziwbk')->group(function () {
+    Route::get('/ziwbk', [ZiwbkController::class, 'ziwbk']);
 });
 
 /*
@@ -105,11 +109,6 @@ Route::prefix('admin')
             return view('admin.dashboard');
         })->name('admin.dashboard');
 
-        Route::get('/profil', fn () => view('admin.profil.index'))->name('admin.profil');
-        Route::get('/profil/create', fn () => view('admin.profil.create'))->name('admin.profil.create');
-        Route::get('/profil/edit', fn () => view('admin.profil.edit'))->name('admin.profil.edit');
-        Route::get('/profil/show', fn () => view('admin.profil.show'))->name('admin.profil.show');
-
         Route::get('/kegiatan', fn () => view('admin.kegiatan.index'))->name('admin.kegiatan');
         Route::get('/kegiatan/create', fn () => view('admin.kegiatan.create'))->name('admin.kegiatan.create');
         Route::get('/kegiatan/edit', fn () => view('admin.kegiatan.edit'))->name('admin.kegiatan.edit');
@@ -131,8 +130,21 @@ Route::prefix('admin')
         Route::get('/galeri/create', [GaleriController::class, 'create'])->name('admin.galeri.create');
         Route::post('/galeri', [GaleriController::class, 'store'])->name('admin.galeri.store');
         Route::get('/galeri/show', function () { return view('admin.galeri.show');  })->name('admin.galeri.show');
-        Route::resource('admin/galeri', GaleriController::class)->names('admin.galeri');   
-        Route::get('/galeri/show', [GaleriController::class, 'show'])->name('admin.galeri.');     
+        Route::resource('admin/galeri', GaleriController::class)->names('admin.galeri');
+        Route::get('/galeri/show', [GaleriController::class, 'show'])->name('admin.galeri.');
+
+        Route::prefix('profil')->group(function () {
+            Route::get('/visimisi', function () {
+                return view('admin.profil.visimisi');
+            })->name('admin.profil.visimisi');
+        });
+
+        Route::prefix('profil')->group(function () {
+            Route::get('/tugasfungsi', function () {
+                return view('admin.profil.tugasfungsi');
+            })->name('admin.profil.tugasfungsi');
+        });
+
 
         Route::get('/halamanweb', fn () => view('admin.halamanweb'))->name('admin.halamanweb');
         Route::get('/pengaturan', fn () => view('admin.pengaturan'))->name('admin.pengaturan');
