@@ -23,18 +23,7 @@
 
 <div class="p-1 md:p-3 bg-[#E5F7FF] min-h-screen font-inter">
     <div class="w-full min-h-[calc(100vh-80px)] bg-white rounded-xl shadow-sm border border-gray-100 flex flex-col">
-        
-        <div class="p-6 border-b border-gray-50 flex justify-between items-center">
-            <div>
-                <h2 class="text-xl font-bold text-gray-800">Upload Media (Multiple)</h2>
-                <p class="text-sm text-gray-500">Tambahkan hingga 10 foto atau video ke galeri</p>
-            </div>
-            <div id="fileCounter" class="text-sm font-bold text-[#00897b] bg-teal-50 px-4 py-2 rounded-full hidden">
-                0 / 10 File Terpilih
-            </div>
-        </div>
-
-        <form action="{{ route('admin.galeri.store') }}" method="POST" enctype="multipart/form-data" class="flex flex-col flex-1">
+           <form action="{{ route('admin.galeri.store') }}" method="POST" enctype="multipart/form-data" class="flex flex-col flex-1">
             @csrf
             
             <div class="p-6 md:p-10 space-y-6 flex-1">
@@ -48,9 +37,12 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="relative">
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Tipe Media</label>
-                        <select name="tipe" id="tipeMedia" class="w-full px-3 py-3 border border-gray-200 rounded-xl bg-gray-50 appearance-none focus:outline-none focus:ring-2 focus:ring-[#00897b] cursor-pointer text-gray-700">
-                            <option value="foto" selected>Foto (Gambar)</option>
-                            <option value="video">Video (MP4/MKV)</option>
+                        <select name="tipe" id="tipeMedia" class="w-full px-3 py-3 border border-gray-200 
+                        rounded-xl bg-gray-50 appearance-none focus:outline-none focus:ring-2 
+                        focus:ring-[#00897b] cursor-pointer text-gray-700">
+                            <option value="" disabled selected>Pilih Tipe Media...</option>
+                            <option value="foto" > Foto (Gambar) </option>
+                            <option value="video"> Video (MP4/MKV)</option>
                         </select>
                         <div class="absolute right-4 top-[42px] pointer-events-none text-gray-400">
                             <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" /></svg>
@@ -103,7 +95,7 @@
                 <button type="button" onclick="history.back()" class="px-8 py-2.5 bg-[#EB1212] border border-red-600 rounded-lg text-sm font-bold text-white hover:bg-red-700 transition shadow-sm active:scale-95">
                     Batal
                 </button>
-                <button type="submit" id="submitBtn" class="px-10 py-2.5 bg-[#00897b] text-white rounded-lg text-sm font-bold hover:bg-[#00796b] transition shadow-lg shadow-teal-900/10 active:scale-95">
+                <button type="submit" id="submitBtn" class="px-10 py-2.5 bg-[#067ac1] text-white rounded-lg text-sm font-bold hover:bg-[#00796b] transition shadow-lg shadow-teal-900/10 active:scale-95">
                     Upload Media
                 </button>
             </div>

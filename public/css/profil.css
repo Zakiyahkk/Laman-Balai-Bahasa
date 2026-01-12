@@ -1,60 +1,8 @@
 /* ==================================================
-   PROFIL PAGE – ELEGAN & RESMI
+   PROFIL - BASE (UMUM UNTUK SEMUA SUBMENU PROFIL)
+   Tujuan: layout dasar saja, tidak spesifik halaman
 ================================================== */
-.profil-headerbbpr,
-.profil-header-struktur {
-    max-width: 760px; /* fokus ke isi */
-    margin-left: auto;
-    margin-right: auto;
-}
-.profil-content {
-    max-width: 760px; /* fokus ke isi */
-    margin-left: auto;
-    margin-right: auto;
-}
-.profil-section {
-    background: #ffffff;
-    border: 1px solid #eef2f7;
-    border-radius: 14px;
-    box-shadow: 0 14px 30px rgba(2, 6, 23, 0.06);
-    padding: 20px 22px;
-}
-/* Teks */
-.profil-section p {
-    margin: 0 0 12px;
-    font-size: 15px;
-    line-height: 1.9;
-    color: #334155;
-}
-/* Nama instansi */
-.profil-section p:first-child {
-    font-size: 16px;
-    color: #0f172a;
-}
 
-/* Strong tapi tidak bold */
-.profil-section strong {
-    font-weight: 500;
-    color: #0f172a;
-}
-
-/* Label rapi (Telepon / Email) */
-.profil-section p strong {
-    display: inline-block;
-    min-width: 80px;
-}
-
-/* Divider */
-.section-divider {
-    height: 1px;
-    background: #e7eef6;
-    margin-top: 16px;
-}
-
-.profil-bbpr {
-    background: #f6f8fb;
-    padding: 36px 0 1px;
-}
 .profil-page {
     padding: 70px 0;
     background: #f9fafb;
@@ -64,7 +12,6 @@
     max-width: 900px;
 }
 
-/* Header */
 .profil-header {
     margin-bottom: 18px;
 }
@@ -73,8 +20,8 @@
     margin: 0;
     font-size: clamp(26px, 3vw, 38px);
     line-height: 1.2;
-    font-weight: 500; /* tidak bold */
-    color: #0f172a;
+    font-weight: 500;
+    color: #ffffff;
 }
 
 .profil-subtitle {
@@ -82,25 +29,18 @@
     color: #6b7280;
 }
 
-/* Card Section */
+/* Card base (netral) — aman untuk semua */
 .profil-card {
     background: #ffffff;
     border-radius: 10px;
     padding: 28px 32px;
     margin-bottom: 30px;
+    border: 1px solid #eef2f7;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
 }
 
-.profil-card h3 {
-    font-size: 18px;
-    font-weight: 600;
-    color: #0b5ed7;
-    margin-bottom: 14px;
-    border-left: 4px solid #0b5ed7;
-    padding-left: 12px;
-}
-
-.profil-card p {
+.profil-card p,
+.profil-card li {
     font-size: 15px;
     line-height: 1.9;
     color: #374151;
@@ -111,60 +51,254 @@
 }
 
 .profil-card ol li {
-    font-size: 15px;
     line-height: 1.8;
     margin-bottom: 8px;
-    color: #374151;
 }
 
-/* Responsive */
+/* Responsive base */
 @media (max-width: 768px) {
     .profil-page {
         padding: 40px 0;
     }
-
-    .profil-header h1 {
-        font-size: 26px;
-    }
-
     .profil-card {
         padding: 22px;
     }
 }
 
-/* ==========================
-   PEGAWAI
-========================== */
-.pegawai-grid {
+/* ==================================================
+   PROFIL - HERO (PPID STYLE)
+   Aktif untuk semua halaman profil yang memakai .profil-hero
+================================================== */
+
+/* ==================================================
+   ENHANCE CARD DI HERO (lebih nyaman dibaca)
+================================================== */
+
+/* Gelapkan overlay background sedikit supaya card lebih fokus */
+.profil-page.profil-hero {
+    background-image: linear-gradient(
+            90deg,
+            rgba(18, 28, 48, 0.96) 0%,
+            rgba(18, 28, 48, 0.75) 55%,
+            rgba(18, 28, 48, 0.65) 100%
+        ),
+        var(--hero-bg);
+}
+
+/* Card: lebih lembut, radius lebih besar, shadow lebih halus */
+.profil-page.profil-hero .profil-card {
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 16px;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.22);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+/* Spasi antar card biar lega */
+.profil-page.profil-hero .profil-card + .profil-card {
+    margin-top: 18px;
+}
+
+/* Teks lebih nyaman dibaca */
+.profil-page.profil-hero .profil-card p,
+.profil-page.profil-hero .profil-card li {
+    color: #334155;
+    line-height: 1.85;
+}
+
+/* Pastikan konten di atas overlay */
+.profil-page.profil-hero .profil-container {
+    position: relative;
+    z-index: 2;
+    max-width: 980px;
+}
+
+/* Header hero */
+.profil-page.profil-hero .hero-header {
+    margin-bottom: 28px;
+}
+
+.profil-page.profil-hero .hero-header h1 {
+    color: #ffffff;
+    font-weight: 800;
+    font-size: clamp(30px, 4vw, 46px);
+}
+
+.profil-page.profil-hero .hero-header .profil-subtitle {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* Card di dalam hero biar kontras */
+.profil-page.profil-hero .profil-card {
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 16px 34px rgba(0, 0, 0, 0.18);
+}
+
+.profil-page.profil-hero .profil-card p,
+.profil-page.profil-hero .profil-card li {
+    color: #374151;
+}
+
+/* Responsive hero */
+@media (max-width: 768px) {
+    .profil-page.profil-hero {
+        padding: 60px 0;
+        background-position: center;
+    }
+}
+
+/* ==================================================
+   PROFIL - VISI & MISI (GARIS BIRU DI H3)
+================================================== */
+
+.profil-visi-misi .profil-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1d4ed8;
+    margin: 0 0 12px;
+    position: relative;
+    padding-left: 14px;
+    border-left: 0;
+}
+
+.profil-visi-misi .profil-card h3::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 4px;
+    height: 22px;
+    background: #1d4ed8;
+    border-radius: 2px;
+}
+
+/* ==================================================
+   PROFIL - TUGAS POKOK & FUNGSI
+   Garis biru SAMA PERSIS dengan Visi & Misi
+================================================== */
+
+.profil-page.profil-tupoksi .profil-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1d4ed8; /* samakan warna */
+    margin-bottom: 12px;
+    position: relative;
+    padding-left: 14px; /* samakan jarak */
+    border-left: 0 !important; /* pastikan tidak dobel */
+}
+
+/* GARIS BIRU */
+.profil-page.profil-tupoksi .profil-card h3::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 2px; /* posisi SAMA */
+    width: 4px;
+    height: 22px; /* tinggi SAMA */
+    background: #1d4ed8;
+    border-radius: 2px;
+}
+
+/* Teks isi */
+.profil-page.profil-tupoksi .profil-card p,
+.profil-page.profil-tupoksi .profil-card li {
+    color: #374151;
+    line-height: 1.7;
+}
+
+/* List rapi */
+.profil-page.profil-tupoksi .profil-card ol {
+    padding-left: 18px;
+    margin: 0;
+}
+
+.profil-page.profil-tupoksi .profil-card ol li {
+    margin-bottom: 8px;
+}
+
+/* ==================================================
+   PROFIL - PEGAWAI (SCOPED)
+================================================== */
+
+.profil-pegawai .pegawai-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 24px;
+    margin-top: 10px;
 }
 
-.pegawai-card {
+.profil-pegawai .pegawai-card {
     background: #ffffff;
-    border-radius: 10px;
-    padding: 20px;
+    border-radius: 12px;
+    padding: 22px 20px;
     text-align: center;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.pegawai-card img {
+.profil-pegawai .pegawai-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.1);
+}
+
+.profil-pegawai .pegawai-card img {
     width: 120px;
     height: 120px;
     object-fit: cover;
     border-radius: 50%;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
 }
 
-.pegawai-card h4 {
+.profil-pegawai .pegawai-card h4 {
     font-size: 16px;
     font-weight: 600;
     margin-bottom: 4px;
     color: #1f2d3d;
 }
 
-.pegawai-card p {
+.profil-pegawai .pegawai-card p {
     font-size: 14px;
     color: #6b7280;
+}
+
+@media (max-width: 640px) {
+    .profil-pegawai .pegawai-card img {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+/* ==================================================
+    sejarah singkat
+================================================== */
+.sejarah-container {
+    max-width: 1400px;
+    margin: auto;
+    padding: 60px 20px;
+}
+
+.sejarah-header {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.sejarah-header h1 {
+    font-size: 40px;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.sejarah-header p {
+    font-size: 16px;
+    color: #64748b;
+    margin-top: 10px;
+}
+
+/* GRID */
+.sejarah-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 28px;
 }

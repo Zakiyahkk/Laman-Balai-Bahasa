@@ -9,7 +9,7 @@ use App\Http\Controllers\User\PpidController;
 use App\Http\Controllers\User\SurveiController;
 use App\Http\Controllers\User\AkuntabilitasController;
 use App\Http\Controllers\User\ZiwbkController;
-use App\Http\Controllers\User\RuangKonsultasiController;
+use App\Http\Controllers\User\WbsController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\GaleriController;
 use App\Http\Controllers\Admin\PublikasiController;
@@ -31,7 +31,7 @@ Route::get('/berita/{slug}', [BeritaController::class, 'show'])
 
 Route::prefix('profil')->group(function () {
     Route::get('/visi-misi', [ProfileController::class, 'visiMisi']);
-    Route::get('/kontak-kami', [ProfileController::class, 'kontakKami']);
+    Route::get('/sejarah-singkat', [ProfileController::class, 'sejarahSingkat']);
     Route::get('/tugas-dan-fungsi', [ProfileController::class, 'tugasDanFungsi']);
     Route::get('/struktur-organisasi', [ProfileController::class, 'strukturOrganisasi']);
     Route::get('/pegawai', [ProfileController::class, 'pegawai']);
@@ -47,17 +47,21 @@ Route::prefix('artikel')->name('artikel.')->group(function () {
 Route::prefix('akuntabilitas')->group(function () {
     Route::get('/perjanjian-kinerja', [AkuntabilitasController::class, 'perjanjianKinerja']);
     Route::get('/renstra', [AkuntabilitasController::class, 'renstra']);
-    Route::get('/lakip', [AkuntabilitasController::class, 'lakip']);
+    Route::get('/dipa', [AkuntabilitasController::class, 'dipa']);
     Route::get('/lakin', [AkuntabilitasController::class, 'lakin']);
     Route::get('/rencana-aksi', [AkuntabilitasController::class, 'rencanaAksi']);
+    Route::get('/sakai', [AkuntabilitasController::class, 'sakai']);
 });
 
 Route::prefix('produk')->group(function () {
-    Route::get('/bahan-bacaan-literasi', [ProdukController::class, 'bahanBacaan']);
-    Route::get('/jurnal-madah', [ProdukController::class, 'jurnalMadah']);
+    Route::get('/terbitan-bbpr', [ProdukController::class, 'terbitanbbpr']);
+    Route::get('/jurnal', [ProdukController::class, 'jurnal']);
     Route::get('/majalah', [ProdukController::class, 'majalah']);
-    Route::get('/penerjemahan-sembari', [ProdukController::class, 'penerjemahanSembari']);
+    Route::get('/sembari', [ProdukController::class, 'Sembari']);
     Route::get('/peta-pembinaan-bahasa', [ProdukController::class, 'petaPembinaanBahasa']);
+    Route::get('/peta-pembinaan-sastra', [ProdukController::class, 'petaPembinaanSastra']);
+    Route::get('/bipa', [ProdukController::class, 'bipa']);
+    Route::get('/kemala', [ProdukController::class, 'kemala']);
 });
 
 Route::prefix('ppid')->group(function () {
@@ -68,12 +72,12 @@ Route::prefix('survei')->group(function () {
     Route::get('/survei', [SurveiController::class, 'survei']);
 });
 
-Route::prefix('ziwbk')->group(function () {
-    Route::get('/ziwbk', [ZiwbkController::class, 'ziwbk']);
+Route::prefix('wbs')->group(function () {
+    Route::get('/wbs', [WbsController::class, 'wbs']);
 });
 
-Route::prefix('ruangkonsultasi')->group(function () {
-    Route::get('/ruangkonsultasi', [RuangKonsultasiController::class, 'ruangKonsultasi']);
+Route::prefix('ziwbk')->group(function () {
+    Route::get('/ziwbk', [ZiwbkController::class, 'ziwbk']);
 });
 
 /*

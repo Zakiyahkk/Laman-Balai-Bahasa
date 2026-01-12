@@ -7,14 +7,14 @@ use Illuminate\Http\Request;
 
 class ProdukController extends Controller
 {
-    public function bahanBacaan()
+    public function terbitanbbpr()
     {
-        return view('user.produk.bahan-bacaan-literasi');
+        return view('user.produk.terbitan-bbpr');
     }
 
-    public function jurnalMadah()
+    public function jurnal()
     {
-        return view('user.produk.jurnal-madah');
+        return view('user.produk.jurnal');
     }
 
     public function majalah()
@@ -22,13 +22,26 @@ class ProdukController extends Controller
         return view('user.produk.majalah');
     }
 
-    public function penerjemahanSembari()
+    public function Sembari()
     {
-        return view('user.produk.penerjemahan-sembari');
+        return view('user.produk.sembari');
     }
 
     public function petaPembinaanBahasa()
     {
         return view('user.produk.peta-pembinaan-bahasa');
     }
+    public function petaPembinaanSastra()
+    {
+        return view('user.produk.peta-pembinaan-sastra');
+    }
+    public function bipa()
+    {
+        return view('user.produk.bipa');
+    }
+    public function kemala()
+    {
+        return view('user.produk.kemala');
+    }
+    
 }

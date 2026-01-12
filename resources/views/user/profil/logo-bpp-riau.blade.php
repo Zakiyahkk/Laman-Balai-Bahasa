@@ -1,31 +1,25 @@
 @extends('layouts.user')
 
-@section('title', 'Logo BPP Riau')
+@section('title', 'Logo')
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/profil.css') }}">
 @endsection
 
 @section('content')
-    <section class="profil-page">
+    <section class="profil-page profil-logo profil-hero" data-bg="{{ asset('img/latar.jpg') }}">
         <div class="container profil-container">
 
-            <div class="profil-header">
-                <h1>Logo BBP Riau</h1>
+            <div class="profil-header hero-header">
+                <h1>Logo</h1>
                 <p class="profil-subtitle">
                     Identitas Resmi Balai Bahasa Provinsi Riau
                 </p>
             </div>
 
             <div class="profil-card text-center">
-                <img src="{{ asset('img/logobbpr4.png') }}" alt="Logo BPP Riau" style="max-width: 220px; margin-bottom: 20px;">
-
-                <h3>Makna Logo</h3>
-                <p>
-                    Logo Balai Bahasa Provinsi Riau melambangkan komitmen dalam
-                    pembinaan, pengembangan, dan pelindungan bahasa dan sastra
-                    Indonesia serta bahasa daerah di Provinsi Riau.
-                </p>
+                <img src="{{ asset('img/logobbpr4.png') }}" alt="Logo BPP Riau"
+                    style="max-width: 220px; margin-bottom: 20px;">
             </div>
 
         </div>
