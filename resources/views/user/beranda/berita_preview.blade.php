@@ -1,4 +1,4 @@
-<section class="section berita-terbaru">
+<section class="section berita-terbaru artikel-preview">
     <div class="container">
 
         <h2 class="judul-center">
@@ -7,131 +7,50 @@
 
         <div class="berita-grid">
 
-            {{-- CARD 1 --}}
-            <div class="berita-card">
-                <div class="berita-img">
-                    <span class="badge">BERITA</span>
-                    <a href="{{ route('berita.show', 'kolaborasi-komunitas-relawan-cerdas-riau') }}">
-                        <img src="/img/img1.png" alt="Kolaborasi Relawan Cerdas Riau">
-                    </a>
-                </div>
+            @forelse ($berita ?? [] as $item)
+                <div class="berita-card">
+                    <div class="berita-img">
+                        <span class="badge">BERITA</span>
 
-                <div class="berita-body">
-                    <a href="{{ route('berita.show', 'kolaborasi-komunitas-relawan-cerdas-riau') }}">
-                        <h4>Kolaborasi dengan Komunitas Relawan Cerdas Riau</h4>
-                    </a>
+                        <a href="{{ route('berita.show', $item['publikasi_id']) }}">
+                            <img src="{{ $item['gambar_url'] ?? asset('img/img1.png') }}"
+                                alt="{{ $item['judul'] ?? 'Berita' }}">
+                        </a>
+                    </div>
 
-                    <p>
-                        Balai Bahasa Provinsi Riau melaksanakan kegiatan
-                        pemantapan kebahasaan...
-                    </p>
+                    <div class="berita-body">
+                        <a href="{{ route('berita.show', $item['publikasi_id']) }}">
+                            <h4>{{ $item['judul'] ?? '-' }}</h4>
+                        </a>
 
-                    <div class="berita-meta">
-                        <span>14 Desember 2025</span>
-                        <div class="meta-right">
-                            <span>Admin</span>
-                            <span class="views">
-                                <i class="fa-regular fa-eye"></i>
-                            </span> 486
+                        <p>
+                            {{ \Illuminate\Support\Str::limit(strip_tags($item['isi'] ?? ''), 120) }}
+                        </p>
+
+                        <div class="berita-meta">
+                            <span>
+                                @if (!empty($item['tanggal']))
+                                    {{ \Carbon\Carbon::parse($item['tanggal'])->translatedFormat('d F Y') }}
+                                @else
+                                    -
+                                @endif
+                            </span>
+
+                            <div class="meta-right">
+                                <span>{{ $item['penulis'] ?? 'Admin' }}</span>
+                                <span class="views">
+                                    <i class="fa-regular fa-eye"></i>
+                                </span>
+                                {{ $item['pembaca'] ?? 0 }}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @empty
+                <p style="text-align:center; width:100%;">Belum ada berita.</p>
+            @endforelse
 
-            {{-- CARD 2 --}}
-            <div class="berita-card">
-                <div class="berita-img">
-                    <span class="badge">BERITA</span>
-                    <a href="{{ route('berita.show', 'pembinaan-bahasa-provinsi-riau') }}">
-                        <img src="/img/img1.png" alt="Pembinaan Bahasa Riau">
-                    </a>
-                </div>
-
-                <div class="berita-body">
-                    <a href="{{ route('berita.show', 'pembinaan-bahasa-provinsi-riau') }}">
-                        <h4>Pembinaan Bahasa di Provinsi Riau</h4>
-                    </a>
-
-                    <p>
-                        Kegiatan pembinaan dilakukan untuk meningkatkan
-                        kualitas penggunaan bahasa...
-                    </p>
-
-                    <div class="berita-meta">
-                        <span>13 Desember 2025</span>
-                        <div class="meta-right">
-                            <span>Admin</span>
-                            <span class="views">
-                                <i class="fa-regular fa-eye"></i>
-                            </span> 486
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {{-- CARD 3 --}}
-            <div class="berita-card">
-                <div class="berita-img">
-                    <span class="badge">BERITA</span>
-                    <a href="{{ route('berita.show', 'literasi-sekolah-riau') }}">
-                        <img src="/img/img1.png" alt="Literasi Sekolah Riau">
-                    </a>
-                </div>
-
-                <div class="berita-body">
-                    <a href="{{ route('berita.show', 'literasi-sekolah-riau') }}">
-                        <h4>Penguatan Literasi Sekolah di Provinsi Riau</h4>
-                    </a>
-
-                    <p>
-                        Program literasi dilaksanakan untuk meningkatkan
-                        minat baca peserta didik...
-                    </p>
-
-                    <div class="berita-meta">
-                        <span>12 Desember 2025</span>
-                        <div class="meta-right">
-                            <span>Admin</span>
-                            <span class="views">
-                                <i class="fa-regular fa-eye"></i>
-                            </span> 486
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {{-- CARD 4 --}}
-            <div class="berita-card">
-                <div class="berita-img">
-                    <span class="badge">BERITA</span>
-                    <a href="{{ route('berita.show', 'dialog-kebijakan-bahasa-riau') }}">
-                        <img src="/img/img1.png" alt="Dialog Kebijakan Bahasa">
-                    </a>
-                </div>
-
-                <div class="berita-body">
-                    <a href="{{ route('berita.show', 'dialog-kebijakan-bahasa-riau') }}">
-                        <h4>Dialog Kebijakan Bahasa Bersama Pemangku Kepentingan</h4>
-                    </a>
-
-                    <p>
-                        Diskusi kebijakan bahasa dilakukan untuk menyamakan
-                        persepsi lintas sektor...
-                    </p>
-
-                    <div class="berita-meta">
-                        <span>11 Desember 2025</span>
-                        <div class="meta-right">
-                            <span>Admin</span>
-                            <span class="views">
-                                <i class="fa-regular fa-eye"></i>
-                            </span> 486
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div> {{-- end .berita-grid --}}
+        </div>
 
         <div class="btn-center">
             <a href="{{ route('berita.index') }}" class="btn-berita">

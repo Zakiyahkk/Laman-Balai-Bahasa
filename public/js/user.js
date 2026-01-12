@@ -309,3 +309,54 @@ document.addEventListener("DOMContentLoaded", () => {
         el.style.setProperty("--hero-bg", `url("${bg}")`);
     });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const track = document.getElementById("bb33ArtikelTrack");
+    const prev = document.getElementById("bb33ArtikelPrev");
+    const next = document.getElementById("bb33ArtikelNext");
+    const dotsWrap = document.getElementById("bb33ArtikelDots");
+
+    if (!track || !prev || !next || !dotsWrap) return;
+
+    const slides = Array.from(track.querySelectorAll(".bb33-slide"));
+    if (slides.length === 0) return;
+
+    const perView = 3; // sesuai tampilan contoh (3 card)
+    const pages = Math.max(1, Math.ceil(slides.length / perView));
+
+    let page = 0;
+
+    // buat dots
+    dotsWrap.innerHTML = "";
+    const dots = [];
+    for (let i = 0; i < pages; i++) {
+        const dot = document.createElement("button");
+        dot.type = "button";
+        dot.className = "bb33-dot" + (i === 0 ? " is-active" : "");
+        dot.addEventListener("click", () => go(i));
+        dotsWrap.appendChild(dot);
+        dots.push(dot);
+    }
+
+    function updateDots() {
+        dots.forEach((d, i) => d.classList.toggle("is-active", i === page));
+    }
+
+    function viewportWidth() {
+        // track parent = wrap viewport
+        return track.parentElement.clientWidth;
+    }
+
+    function go(p) {
+        page = Math.max(0, Math.min(pages - 1, p));
+        const w = viewportWidth();
+        track.style.transform = `translateX(${-page * w}px)`;
+        updateDots();
+    }
+
+    prev.addEventListener("click", () => go(page - 1));
+    next.addEventListener("click", () => go(page + 1));
+    window.addEventListener("resize", () => go(page));
+
+    go(0);
+});

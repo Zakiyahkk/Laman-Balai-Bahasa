@@ -4,69 +4,103 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Artikel;
+use Illuminate\Support\Facades\Http;
 
 class ArtikelController extends Controller
 {
+    private function supabase()
+    {
+        $key = env('SUPABASE_ANON_KEY');
+
+        if (!$key) {
+            abort(500, 'SUPABASE_ANON_KEY tidak ditemukan di .env');
+        }
+
+        return Http::withHeaders([
+            'apikey' => $key,
+            'Authorization' => 'Bearer ' . $key,
+            'Accept' => 'application/json',
+        ]);
+    }
+
+    private function publicImageUrl(?string $gambar): ?string
+    {
+        if (!$gambar) return null;
+
+        // kalau sudah URL lengkap
+        if (preg_match('/^https?:\/\//i', $gambar)) return $gambar;
+
+        // kalau masih path/nama file -> bucket gambar
+        return rtrim(env('SUPABASE_URL'), '/')
+            . '/storage/v1/object/public/gambar/'
+            . ltrim($gambar, '/');
+    }
+
     /**
-     * Halaman daftar semua artikel
+     * Halaman daftar semua Artikel + Alinea (Supabase)
+     * /artikel?q=keyword
      */
     public function index(Request $request)
     {
-        $q = $request->get('q');
+        $q = trim((string) $request->get('q', ''));
 
-        $articles = Artikel::query()
-            ->when($q, function ($query) use ($q) {
-                $query->where('title', 'like', "%{$q}%");
-            })
-            ->orderByDesc('created_at')
-            ->paginate(12)
-            ->withQueryString();
+        $params = [
+            'select' => 'publikasi_id,judul,tanggal,penulis,gambar,isi,pembaca,status,kategori,created_at',
+            // gabungkan artikel + alinea
+            'kategori' => 'in.(artikel,alinea)',
+            'status' => 'eq.terbit',
+            'order' => 'tanggal.desc,created_at.desc,publikasi_id.desc',
+        ];
 
-        return view('user.artikel.index', compact('articles', 'q'));
+        if ($q !== '') {
+            // cari di judul (case-insensitive)
+            $params['judul'] = 'ilike.*' . $q . '*';
+        }
+
+        $response = $this->supabase()->get(
+            rtrim(env('SUPABASE_URL'), '/') . '/rest/v1/publikasi',
+            $params
+        )->throw();
+
+        $items = $response->json();
+
+        $items = array_map(function ($row) {
+            $row['gambar_url'] = $this->publicImageUrl($row['gambar'] ?? null);
+            return $row;
+        }, $items);
+
+        // ✅ sesuai blade baru: index pakai $items
+        return view('user.artikel.index', [
+            'items' => $items,
+            'q' => $q,
+        ]);
     }
 
     /**
-     * Halaman detail artikel (berdasarkan slug)
+     * Detail Artikel / Alinea
+     * /artikel/{slug} -> sementara {slug} = publikasi_id
      */
     public function show($slug)
     {
-        $article = Artikel::where('slug', $slug)->firstOrFail();
+        $response = $this->supabase()->get(
+            rtrim(env('SUPABASE_URL'), '/') . '/rest/v1/publikasi',
+            [
+                'select' => '*',
+                'publikasi_id' => 'eq.' . $slug,
+                // izinkan artikel + alinea
+                'kategori' => 'in.(artikel,alinea)',
+                'status' => 'eq.terbit',
+                'limit' => 1,
+            ]
+        )->throw();
 
-        // Naikkan view counter (opsional)
-        // Pastikan ada kolom `views` di tabel
-        if (schema_has_column('artikels', 'views')) {
-            $article->increment('views');
-        } else {
-            // kalau tabel kamu bukan "artikels" / tidak ada kolom views, aman diabaikan
-            // atau hapus bagian ini
-        }
+        $data = $response->json();
+        abort_if(empty($data), 404);
 
-        return view('user.artikel.show', compact('article'));
-    }
+        $item = $data[0];
+        $item['gambar_url'] = $this->publicImageUrl($item['gambar'] ?? null);
 
-    /**
-     * Untuk section "Artikel Terbaru" di Beranda
-     * (kalau kamu butuh route khusus untuk AJAX/partial, opsional)
-     */
-    public function terbaru()
-    {
-        $articles = Artikel::orderByDesc('created_at')->take(6)->get();
-
-        return view('user.beranda.artikel', compact('articles'));
-    }
-}
-
-/**
- * Helper kecil untuk cek kolom (biar gak error kalau kolom/tabel beda)
- */
-if (!function_exists('schema_has_column')) {
-    function schema_has_column($table, $column): bool
-    {
-        try {
-            return \Illuminate\Support\Facades\Schema::hasColumn($table, $column);
-        } catch (\Throwable $e) {
-            return false;
-        }
+        // ✅ sesuai blade baru: show pakai $item
+        return view('user.artikel.show', compact('item'));
     }
 }
