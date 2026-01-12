@@ -28,7 +28,12 @@
 
                     <div class="berita-meta">
                         <span>14 Desember 2025</span>
-                        <span>Admin</span>
+                        <div class="meta-right">
+                            <span>Admin</span>
+                            <span class="views">
+                                <i class="fa-regular fa-eye"></i>
+                            </span> 486
+                        </div>
                     </div>
                 </div>
             </div>
@@ -54,7 +59,12 @@
 
                     <div class="berita-meta">
                         <span>13 Desember 2025</span>
-                        <span>Admin</span>
+                        <div class="meta-right">
+                            <span>Admin</span>
+                            <span class="views">
+                                <i class="fa-regular fa-eye"></i>
+                            </span> 486
+                        </div>
                     </div>
                 </div>
             </div>
@@ -80,7 +90,12 @@
 
                     <div class="berita-meta">
                         <span>12 Desember 2025</span>
-                        <span>Admin</span>
+                        <div class="meta-right">
+                            <span>Admin</span>
+                            <span class="views">
+                                <i class="fa-regular fa-eye"></i>
+                            </span> 486
+                        </div>
                     </div>
                 </div>
             </div>
@@ -106,12 +121,17 @@
 
                     <div class="berita-meta">
                         <span>11 Desember 2025</span>
-                        <span>Admin</span>
+                        <div class="meta-right">
+                            <span>Admin</span>
+                            <span class="views">
+                                <i class="fa-regular fa-eye"></i>
+                            </span> 486
+                        </div>
                     </div>
                 </div>
             </div>
 
-        </div>
+        </div> {{-- end .berita-grid --}}
 
         <div class="btn-center">
             <a href="{{ route('berita.index') }}" class="btn-berita">

@@ -16,7 +16,7 @@
     <link rel="apple-touch-icon" href="{{ asset('img/gambar1.png') }}">
 
     {{-- CSS USER --}}
-    <link rel="stylesheet" href="{{ asset('css/user.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/user.css') }}?v={{ time() }}">
 
     <!-- CSS Halaman Spesifik -->
     @yield('css')

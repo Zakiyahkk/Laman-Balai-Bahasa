@@ -34,7 +34,76 @@
 
                         <div class="berita-meta">
                             <span>14 Desember 2025</span>
-                            <span>Admin</span>
+
+                            <div class="meta-right">
+                                <span>Admin</span>
+                                <span class="views">
+                                    <i class="fa-regular fa-eye"></i>
+                                </span>486
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- CARD --}}
+                <div class="berita-card">
+                    <div class="berita-img">
+                        <span class="badge">BERITA</span>
+                        <a href="{{ route('berita.show', 'kolaborasi-komunitas-relawan-cerdas-riau') }}">
+                            <img src="/img/img1.png" alt="">
+                        </a>
+                    </div>
+
+                    <div class="berita-body">
+                        <a href="{{ route('berita.show', 'kolaborasi-komunitas-relawan-cerdas-riau') }}">
+                            <h4>Kolaborasi dengan Komunitas Relawan Cerdas Riau</h4>
+                        </a>
+
+                        <p>
+                            Balai Bahasa Provinsi Riau melaksanakan kegiatan
+                            pemantapan kebahasaan...
+                        </p>
+
+                        <div class="berita-meta">
+                            <span>14 Desember 2025</span>
+                            <div class="meta-right">
+                                <span>Admin</span>
+                                <span class="views">
+                                    <i class="fa-regular fa-eye"></i>
+                                </span>486
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- CARD --}}
+                <div class="berita-card">
+                    <div class="berita-img">
+                        <span class="badge">BERITA</span>
+                        <a href="{{ route('berita.show', 'kolaborasi-komunitas-relawan-cerdas-riau') }}">
+                            <img src="/img/img1.png" alt="">
+                        </a>
+                    </div>
+
+                    <div class="berita-body">
+                        <a href="{{ route('berita.show', 'kolaborasi-komunitas-relawan-cerdas-riau') }}">
+                            <h4>Kolaborasi dengan Komunitas Relawan Cerdas Riau</h4>
+                        </a>
+
+                        <p>
+                            Balai Bahasa Provinsi Riau melaksanakan kegiatan
+                            pemantapan kebahasaan...
+                        </p>
+
+                        <div class="berita-meta">
+                            <span>14 Desember 2025</span>
+
+                            <div class="meta-right">
+                                <span>Admin</span>
+                                <span class="views">
+                                    <i class="fa-regular fa-eye"></i>
+                                </span>486
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -59,8 +128,14 @@
                         </p>
 
                         <div class="berita-meta">
-                            <span>13 Desember 2025</span>
-                            <span>Admin</span>
+                            <span>14 Desember 2025</span>
+
+                            <div class="meta-right">
+                                <span>Admin</span>
+                                <span class="views">
+                                    <i class="fa-regular fa-eye"></i>
+                                </span>486
+                            </div>
                         </div>
                     </div>
                 </div>
