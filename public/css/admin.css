@@ -37,6 +37,27 @@ main {
     height: 100vh;
     overflow-y: auto;
     z-index: 1000;
+    scrollbar-gutter: stable;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Sub-menu Profil Laman saja */
+#SubMenu .nav-link {
+    font-size: 12px;
+    padding-top: 6px;
+    padding-bottom: 6px;
 }
 
 
@@ -338,6 +359,11 @@ main {
     color: #6f42c1;
 }
 
+/* Pengumuman — Hijau */
+.category-pengumuman {
+    color: #df5a0d;
+}
+
 /* ===============================
    CSS HALAMAN PUBLIKASI
 ================================ */
@@ -459,7 +485,7 @@ main {
   position: absolute;
   right: 0;
   top: 110%;
-  width: 100px;
+  width: 130px;
   background: white;
   border: 1px solid #e2e8f0;
   border-radius: 12px;

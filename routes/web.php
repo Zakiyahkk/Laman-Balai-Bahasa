@@ -105,11 +105,6 @@ Route::prefix('admin')
             return view('admin.dashboard');
         })->name('admin.dashboard');
 
-        Route::get('/profil', fn () => view('admin.profil.index'))->name('admin.profil');
-        Route::get('/profil/create', fn () => view('admin.profil.create'))->name('admin.profil.create');
-        Route::get('/profil/edit', fn () => view('admin.profil.edit'))->name('admin.profil.edit');
-        Route::get('/profil/show', fn () => view('admin.profil.show'))->name('admin.profil.show');
-
         Route::get('/kegiatan', fn () => view('admin.kegiatan.index'))->name('admin.kegiatan');
         Route::get('/kegiatan/create', fn () => view('admin.kegiatan.create'))->name('admin.kegiatan.create');
         Route::get('/kegiatan/edit', fn () => view('admin.kegiatan.edit'))->name('admin.kegiatan.edit');
@@ -131,8 +126,15 @@ Route::prefix('admin')
         Route::get('/galeri/create', [GaleriController::class, 'create'])->name('admin.galeri.create');
         Route::post('/galeri', [GaleriController::class, 'store'])->name('admin.galeri.store');
         Route::get('/galeri/show', function () { return view('admin.galeri.show');  })->name('admin.galeri.show');
-        Route::resource('admin/galeri', GaleriController::class)->names('admin.galeri');   
-        Route::get('/galeri/show', [GaleriController::class, 'show'])->name('admin.galeri.');     
+        Route::resource('admin/galeri', GaleriController::class)->names('admin.galeri');
+        Route::get('/galeri/show', [GaleriController::class, 'show'])->name('admin.galeri.');
+
+        Route::prefix('profil')->group(function () {
+            Route::get('/visimisi', function () {
+                return view('admin.profil.visimisi.index');
+            })->name('admin.profil.visimisi.index');
+        });
+
 
         Route::get('/halamanweb', fn () => view('admin.halamanweb'))->name('admin.halamanweb');
         Route::get('/pengaturan', fn () => view('admin.pengaturan'))->name('admin.pengaturan');
