@@ -64,9 +64,73 @@
 
                     <li><a href="/" class="{{ request()->is('/') ? 'active' : '' }}"><i class="fa-regular fa-compass menu-icon"></i> Beranda</a></li>
 
+<<<<<<< HEAD
                     <li class="has-dropdown">
                         <a href="javascript:void(0)" onclick="toggleSub(this)" class="{{ request()->is('profil*') ? 'active' : '' }}">
                             Profil <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+=======
+                <li class="has-dropdown {{ request()->is('profil*') ? 'active open' : '' }}">
+                    <a href="#" class="dropdown-toggle">
+                        Profil
+                        <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+                    </a>
+
+                    <!-- Menu Dekstop Aktif -->
+                    <ul class="dropdown">
+                        <li>
+                            <a href="{{ url('/profil/sejarah-singkat') }}"
+                                class="{{ request()->is('profil/sejarah-singkat') ? 'active' : '' }}">
+                                Sejarah Singkat
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url('/profil/visi-misi') }}"
+                                class="{{ request()->is('profil/visi-misi') ? 'active' : '' }}">
+                                Visi & Misi
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ url('/profil/tugas-dan-fungsi') }}"
+                                class="{{ request()->is('profil/tugas-dan-fungsi') ? 'active' : '' }}">
+                                Tugas & Fungsi
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ url('/profil/struktur-organisasi') }}"
+                                class="{{ request()->is('profil/struktur-organisasi') ? 'active' : '' }}">
+                                Struktur Organisasi
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ url('/profil/pegawai') }}"
+                                class="{{ request()->is('profil/pegawai') ? 'active' : '' }}">
+                                Pegawai
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ url('/profil/logo-bpp-riau') }}"
+                                class="{{ request()->is('profil/logo-bpp-riau') ? 'active' : '' }}">
+                                Logo
+                            </a>
+                        </li>
+                    </ul>
+
+
+                </li>
+
+                <li class="has-dropdown">
+                    <a href="#" class="dropdown-toggle">
+                        Produk
+                        <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+                    </a>
+                    <div class="dropdown">
+                        <a href="{{ url('/produk/terbitan-bbpr') }}"
+                            class="{{ request()->is('produk/terbitan-bbpr') ? 'active' : '' }}">Terbitan BBPR
+>>>>>>> 6883b8e58caaadc7258d1a9d662322497200fcfd
                         </a>
                         <ul class="dropdown">
                             <li><a href="{{ url('/profil/visi-misi') }}"><i class="fa-regular fa-lightbulb"></i> Visi & Misi</a></li>
@@ -78,6 +142,7 @@
                         </ul>
                     </li>
 
+<<<<<<< HEAD
                     <li class="has-dropdown">
                         <a href="javascript:void(0)" onclick="toggleSub(this)" class="{{ request()->is('produk*') ? 'active' : '' }}">
                             Produk <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
@@ -90,6 +155,28 @@
                             <li><a href="{{ url('/produk/kemala') }}"><i class="fa-regular fa-gem"></i> Kemala</a></li>
                         </ul>
                     </li>
+=======
+                <li class="has-dropdown">
+                    <a href="#" class="dropdown-toggle">Akuntabilitas
+                        <i class="fa-solid fa-chevron-down dropdown-icon"></i>
+                    </a>
+                    <div class="dropdown">
+                        <a href="{{ url('/akuntabilitas/renstra') }}"
+                            class="{{ request()->is('akuntabilitas/renstra') ? 'active' : '' }}">Renstra</a>
+                        <a href="{{ url('/akuntabilitas/dipa') }}"
+                            class="{{ request()->is('akuntabilitas/dipa') ? 'active' : '' }}">DIPA</a>
+                        <a href="{{ url('/akuntabilitas/perjanjian-kinerja') }}"
+                            class="{{ request()->is('akuntabilitas/perjanjian-kinerja') ? 'active' : '' }}">Perjanjian
+                            Kinerja</a>
+                        <a href="{{ url('/akuntabilitas/rencana-aksi') }}"
+                            class="{{ request()->is('akuntabilitas/rencana-aksi') ? 'active' : '' }}">Rencana Aksi</a>
+                        <a href="{{ url('/akuntabilitas/lakin') }}"
+                            class="{{ request()->is('akuntabilitas/lakin') ? 'active' : '' }}">LAKIN</a>
+                        <a href="{{ url('/akuntabilitas/sakai') }}"
+                            class="{{ request()->is('akuntabilitas/saki') ? 'active' : '' }}">SAKAI</a>
+                    </div>
+                </li>
+>>>>>>> 6883b8e58caaadc7258d1a9d662322497200fcfd
 
                     <li class="has-dropdown">
                         <a href="javascript:void(0)" onclick="toggleSub(this)" class="{{ request()->is('akuntabilitas*') ? 'active' : '' }}">

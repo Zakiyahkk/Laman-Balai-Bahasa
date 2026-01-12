@@ -82,9 +82,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     </label>
                     <select class="form-select" name="kategori" required>
                         <option value="" selected disabled>-- Pilih Kategori --</option>
-                        <option value="berita">Berita</option>
                         <option value="alinea">Alinea</option>
                         <option value="artikel">Artikel</option>
+                        <option value="berita">Berita</option>
+                        <option value="pengumuman">Pengumuman</option>
                     </select>
                 </div>
 

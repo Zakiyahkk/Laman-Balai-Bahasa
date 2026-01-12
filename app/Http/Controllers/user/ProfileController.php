@@ -12,9 +12,9 @@ class ProfileController extends Controller
         return view('user.profil.visi-misi');
     }
 
-    public function kontakKami()
+    public function sejarahSingkat()
     {
-        return view('user.profil.kontak-kami');
+        return view('user.profil.sejarah-singkat');
     }
 
     public function tugasdanfungsi()

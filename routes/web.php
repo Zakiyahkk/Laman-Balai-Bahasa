@@ -31,7 +31,7 @@ Route::get('/berita/{slug}', [BeritaController::class, 'show'])
 
 Route::prefix('profil')->group(function () {
     Route::get('/visi-misi', [ProfileController::class, 'visiMisi']);
-    Route::get('/kontak-kami', [ProfileController::class, 'kontakKami']);
+    Route::get('/sejarah-singkat', [ProfileController::class, 'sejarahSingkat']);
     Route::get('/tugas-dan-fungsi', [ProfileController::class, 'tugasDanFungsi']);
     Route::get('/struktur-organisasi', [ProfileController::class, 'strukturOrganisasi']);
     Route::get('/pegawai', [ProfileController::class, 'pegawai']);
@@ -43,13 +43,13 @@ Route::prefix('artikel')->name('artikel.')->group(function () {
     Route::get('/{slug}', [ArtikelController::class, 'show'])->name('show');
 });
 
-
 Route::prefix('akuntabilitas')->group(function () {
     Route::get('/perjanjian-kinerja', [AkuntabilitasController::class, 'perjanjianKinerja']);
     Route::get('/renstra', [AkuntabilitasController::class, 'renstra']);
-    Route::get('/lakip', [AkuntabilitasController::class, 'lakip']);
+    Route::get('/dipa', [AkuntabilitasController::class, 'dipa']);
     Route::get('/lakin', [AkuntabilitasController::class, 'lakin']);
     Route::get('/rencana-aksi', [AkuntabilitasController::class, 'rencanaAksi']);
+    Route::get('/sakai', [AkuntabilitasController::class, 'sakai']);
 });
 
 Route::prefix('produk')->group(function () {
@@ -108,11 +108,6 @@ Route::prefix('admin')
             return view('admin.dashboard');
         })->name('admin.dashboard');
 
-        Route::get('/profil', fn () => view('admin.profil.index'))->name('admin.profil');
-        Route::get('/profil/create', fn () => view('admin.profil.create'))->name('admin.profil.create');
-        Route::get('/profil/edit', fn () => view('admin.profil.edit'))->name('admin.profil.edit');
-        Route::get('/profil/show', fn () => view('admin.profil.show'))->name('admin.profil.show');
-
         Route::get('/kegiatan', fn () => view('admin.kegiatan.index'))->name('admin.kegiatan');
         Route::get('/kegiatan/create', fn () => view('admin.kegiatan.create'))->name('admin.kegiatan.create');
         Route::get('/kegiatan/edit', fn () => view('admin.kegiatan.edit'))->name('admin.kegiatan.edit');
@@ -134,8 +129,21 @@ Route::prefix('admin')
         Route::get('/galeri/create', [GaleriController::class, 'create'])->name('admin.galeri.create');
         Route::post('/galeri', [GaleriController::class, 'store'])->name('admin.galeri.store');
         Route::get('/galeri/show', function () { return view('admin.galeri.show');  })->name('admin.galeri.show');
-        Route::resource('admin/galeri', GaleriController::class)->names('admin.galeri');   
-        Route::get('/galeri/show', [GaleriController::class, 'show'])->name('admin.galeri.');     
+        Route::resource('admin/galeri', GaleriController::class)->names('admin.galeri');
+        Route::get('/galeri/show', [GaleriController::class, 'show'])->name('admin.galeri.');
+
+        Route::prefix('profil')->group(function () {
+            Route::get('/visimisi', function () {
+                return view('admin.profil.visimisi');
+            })->name('admin.profil.visimisi');
+        });
+
+        Route::prefix('profil')->group(function () {
+            Route::get('/tugasfungsi', function () {
+                return view('admin.profil.tugasfungsi');
+            })->name('admin.profil.tugasfungsi');
+        });
+
 
         Route::get('/halamanweb', fn () => view('admin.halamanweb'))->name('admin.halamanweb');
         Route::get('/pengaturan', fn () => view('admin.pengaturan'))->name('admin.pengaturan');
