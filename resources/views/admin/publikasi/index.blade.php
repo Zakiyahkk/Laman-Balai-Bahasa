@@ -47,6 +47,7 @@
         <a href="{{ request('search') ? '?search='.request('search').'&kategori=alinea' : '?kategori=alinea' }}" class="filter-item">Alinea</a>
         <a href="{{ request('search') ? '?search='.request('search').'&kategori=artikel' : '?kategori=artikel' }}" class="filter-item">Artikel</a>
         <a href="{{ request('search') ? '?search='.request('search').'&kategori=berita' : '?kategori=berita' }}" class="filter-item">Berita</a>
+        <a href="{{ request('search') ? '?search='.request('search').'&kategori=pengumuman' : '?kategori=pengumuman' }}" class="filter-item">Pengumuman</a>
       </div>
     </div>
   </div>

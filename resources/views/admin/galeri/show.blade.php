@@ -91,9 +91,10 @@
                     </button>
                     
                     <div class="flex items-center gap-3">
-                        <button type="button" class="px-6 py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-lg transition active:scale-95 shadow-sm shadow-rose-200">
-                            Batal
-                        </button>
+                        <a href="{{ route('admin.galeri.index') }}" 
+   class="px-6 py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-lg transition active:scale-95 shadow-sm shadow-rose-200 inline-flex items-center justify-center">
+    Batal
+</a>
                         <button type="button" class="px-6 py-2.5 bg-[#067ac1] hover:bg-[#056ba9] text-white font-bold rounded-lg transition flex items-center gap-2 active:scale-95">
                             Simpan
                         </button>

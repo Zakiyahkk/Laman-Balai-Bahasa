@@ -93,10 +93,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="col-md-4">
                     <label class="form-label fw-semibold">Kategori <span class="text-danger">*</span></label>
                     <select class="form-select" name="kategori" required>
-                        <option value="berita" {{ $data->kategori == 'berita' ? 'selected' : '' }}>Berita</option>
                         <option value="alinea" {{ $data->kategori == 'alinea' ? 'selected' : '' }}>Alinea</option>
                         <option value="artikel" {{ $data->kategori == 'artikel' ? 'selected' : '' }}>Artikel</option>
-                        <option value="draf" {{ $data->kategori == 'draf' ? 'selected' : '' }}>Draf</option>
+                        <option value="berita" {{ $data->kategori == 'berita' ? 'selected' : '' }}>Berita</option>
+                        <option value="pengumuman" {{ $data->kategori == 'pengumuman' ? 'selected' : '' }}>Pengumuman</option>
                     </select>
                 </div>
 
