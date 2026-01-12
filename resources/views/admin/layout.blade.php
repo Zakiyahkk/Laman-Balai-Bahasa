@@ -52,26 +52,6 @@
         </a>
     </li>
 
-   <li class="nav-item">
-    <a class="nav-link d-flex justify-content-between align-items-center"
-       href="#"
-       onclick="toggleSubMenu('akuntabilitasSubMenu','akuntabilitasArrow')"
-       style="cursor:pointer;">
-        <div>
-            <i class="bi bi-building-gear me-2"></i> Akuntabilitas
-        </div>
-        <i id="akuntabilitasArrow" class="bi bi-caret-right-fill"></i>
-    </a>
-
-    <ul id="akuntabilitasSubMenu" class="nav flex-column ms-3" style="display:none;">
-        <li><a class="nav-link" href="#">Sub Menu 1</a></li>
-        <li><a class="nav-link" href="#">Sub Menu 2</a></li>
-        <li><a class="nav-link" href="#">Sub Menu 3</a></li>
-        <li><a class="nav-link" href="#">Sub Menu 4</a></li>
-        <li><a class="nav-link" href="#">Sub Menu 5</a></li>
-    </ul>
-</li>
-
     <li class="nav-item">
     <a class="nav-link d-flex justify-content-between align-items-center"
        href="#" onclick="toggleSubMenu('SubMenu','profilArrow')" style="cursor:pointer;">
@@ -95,7 +75,25 @@
         </ul>
     </li>
 
+   <li class="nav-item">
+        <a class="nav-link d-flex justify-content-between align-items-center"
+        href="#"
+        onclick="toggleSubMenu('akuntabilitasSubMenu','akuntabilitasArrow')"
+        style="cursor:pointer;">
+            <div>
+                <i class="bi bi-clipboard-check me-2"></i> Akuntabilitas
+            </div>
+            <i id="akuntabilitasArrow" class="bi bi-caret-right-fill"></i>
+        </a>
 
+        <ul id="akuntabilitasSubMenu" class="nav flex-column ms-3" style="display:none;">
+            <li><a class="nav-link" href="#">Sub Menu 1</a></li>
+            <li><a class="nav-link" href="#">Sub Menu 2</a></li>
+            <li><a class="nav-link" href="#">Sub Menu 3</a></li>
+            <li><a class="nav-link" href="#">Sub Menu 4</a></li>
+            <li><a class="nav-link" href="#">Sub Menu 5</a></li>
+        </ul>
+    </li>
 
 
     <!-- <li class="nav-item">
