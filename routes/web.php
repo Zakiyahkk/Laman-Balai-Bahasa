@@ -135,8 +135,14 @@ Route::prefix('admin')
 
         Route::prefix('profil')->group(function () {
             Route::get('/visimisi', function () {
-                return view('admin.profil.visimisi.index');
-            })->name('admin.profil.visimisi.index');
+                return view('admin.profil.visimisi');
+            })->name('admin.profil.visimisi');
+        });
+
+        Route::prefix('profil')->group(function () {
+            Route::get('/tugasfungsi', function () {
+                return view('admin.profil.tugasfungsi');
+            })->name('admin.profil.tugasfungsi');
         });
 
 
