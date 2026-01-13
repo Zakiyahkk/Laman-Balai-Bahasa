@@ -1,6 +1,163 @@
+:root {
+    --font-main: "Montserrat", sans-serif;
+}
+
+html,
+body {
+    font-family: var(--font-main);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+a,
+li,
+button,
+input,
+textarea,
+select {
+    font-family: var(--font-main);
+}
+
+/* =========================
+   PROFIL THEME (GLOBAL LOOK)
+   Dipakai di semua halaman profil yang punya class: .profil-theme
+   Struktur Organisasi tidak pakai class ini.
+========================= */
+
+.profil-theme {
+    position: relative;
+    overflow: hidden;
+    padding: 80px 0;
+    background: #0b1220;
+}
+
+/* Jika ada .hero-bg di dalam halaman */
+.profil-theme .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.profil-theme .hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transform: scale(1.05);
+    filter: saturate(1.05) contrast(1.05);
+}
+
+/* overlay elegan biar menyatu dengan background */
+.profil-theme::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: radial-gradient(
+            900px 420px at 20% 15%,
+            rgba(255, 255, 255, 0.16),
+            transparent 60%
+        ),
+        radial-gradient(
+            900px 420px at 80% 20%,
+            rgba(255, 255, 255, 0.12),
+            transparent 60%
+        ),
+        linear-gradient(
+            180deg,
+            rgba(3, 7, 18, 0.68) 0%,
+            rgba(3, 7, 18, 0.55) 40%,
+            rgba(3, 7, 18, 0.74) 100%
+        );
+}
+
+/* konten di atas overlay */
+.profil-theme .container,
+.profil-theme .profil-container {
+    position: relative;
+    z-index: 2;
+}
+
+/* header teks */
+.profil-theme h1 {
+    color: #fff;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.profil-theme p,
+.profil-theme .profil-subtitle {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* Card menyatu (tanpa putih solid) */
+.profil-theme .profil-card,
+.profil-theme .timeline-content,
+.profil-theme .brand-card {
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* teks di dalam card */
+.profil-theme .profil-card h3,
+.profil-theme .timeline-content h3,
+.profil-theme .brand-card h3 {
+    color: #fff;
+    font-weight: 700;
+}
+
+.profil-theme .profil-card p,
+.profil-theme .profil-card li,
+.profil-theme .timeline-content p {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Galeri foto biar premium */
+.profil-theme .sejarah-photo {
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.2);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.profil-theme .sejarah-photo:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.28);
+}
+
+.profil-theme .sejarah-photo img {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    display: block;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .profil-theme {
+        padding: 56px 0;
+    }
+    .profil-theme .profil-card,
+    .profil-theme .timeline-content,
+    .profil-theme .brand-card {
+        border-radius: 18px;
+    }
+}
+
 /* ==================================================
    PROFIL - BASE (UMUM UNTUK SEMUA SUBMENU PROFIL)
-   Tujuan: layout dasar saja, tidak spesifik halaman
 ================================================== */
 
 .profil-page {
@@ -10,8 +167,8 @@
 
 .profil-container {
     max-width: 900px;
-    margin: 0 auto; /* Tambahan: Biar tengah */
-    padding: 0 20px; /* Tambahan: Biar gak mepet di HP */
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 .profil-header {
@@ -22,21 +179,17 @@
     margin: 0;
     font-size: clamp(26px, 3vw, 38px);
     line-height: 1.2;
-    font-weight: 500;
-    color: #111827; /* Ubah ke gelap agar terbaca jika background putih */
+    font-weight: 800;
+    color: #111827;
 }
 
-/* KOREKSI: Jika header berada di Hero (Background gelap), warnanya putih */
-.profil-hero .profil-header h1 {
-    color: #ffffff;
-}
-
+/* Subtitle default */
 .profil-subtitle {
     font-size: 14px;
     color: #6b7280;
 }
 
-/* Card base (netral) — aman untuk semua */
+/* Card base */
 .profil-card {
     background: #ffffff;
     border-radius: 10px;
@@ -62,11 +215,70 @@
     margin-bottom: 8px;
 }
 
-/* Responsive base */
+/* ==================================================
+   PROFIL - HERO (UNTUK HEADER DENGAN BACKGROUND IMAGE)
+   Dipakai saat section punya class: .profil-hero
+================================================== */
+
+.profil-hero {
+    position: relative;
+    overflow: hidden;
+    background: #111827; /* fallback kalau gambar gagal load */
+}
+
+/* Tempat gambar background */
+.profil-hero .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.profil-hero .hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Overlay gelap supaya teks kebaca */
+.profil-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 1;
+}
+
+/* Naikkan konten ke atas overlay */
+.profil-hero .profil-container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Header warna putih kalau di hero */
+.profil-hero .profil-header h1 {
+    color: #ffffff;
+}
+
+/* Subtitle juga dibuat terang kalau di hero */
+.profil-hero .profil-subtitle {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* Opsional: bikin card sedikit transparan biar nyatu dengan hero */
+.profil-hero .profil-card {
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(2px);
+}
+
+/* ==================================================
+   Responsive base
+================================================== */
 @media (max-width: 768px) {
     .profil-page {
         padding: 40px 0;
     }
+
     .profil-card {
         padding: 22px;
     }
@@ -78,11 +290,11 @@
 
 .profil-page.profil-hero {
     /* Pastikan variable --hero-bg didefinisikan atau fallback ke warna solid jika gambar gagal */
-    background-color: #1e293b; 
+    background-color: #1e293b;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    
+
     background-image: linear-gradient(
             90deg,
             rgba(18, 28, 48, 0.96) 0%,
@@ -138,69 +350,192 @@
     }
 }
 
-/* ==================================================
-   PROFIL - VISI & MISI
-================================================== */
+/* =========================
+   VISI & MISI – GLASS THEME
+   (judul putih bold, card transparan)
+========================= */
 
+.profil-visi-misi.profil-hero {
+    position: relative;
+    overflow: hidden;
+    padding: 86px 0;
+    background: #0b1220; /* fallback */
+}
+
+/* Background image */
+.profil-visi-misi .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.profil-visi-misi .hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transform: scale(1.05);
+    filter: saturate(1.05) contrast(1.05);
+}
+
+/* Overlay agar teks kebaca */
+.profil-visi-misi.profil-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: radial-gradient(
+            900px 420px at 20% 15%,
+            rgba(255, 255, 255, 0.16),
+            transparent 60%
+        ),
+        radial-gradient(
+            900px 420px at 80% 20%,
+            rgba(255, 255, 255, 0.12),
+            transparent 60%
+        ),
+        linear-gradient(
+            180deg,
+            rgba(3, 7, 18, 0.68) 0%,
+            rgba(3, 7, 18, 0.56) 40%,
+            rgba(3, 7, 18, 0.76) 100%
+        );
+}
+
+/* Konten di atas background */
+.profil-visi-misi .profil-container {
+    position: relative;
+    z-index: 2;
+    max-width: 980px;
+}
+
+/* Header: pertahankan putih bold */
+.profil-visi-misi .profil-header {
+    margin-bottom: 22px;
+}
+
+.profil-visi-misi .profil-header h1 {
+    color: #fff;
+    font-weight: 800; /* lebih bold */
+    letter-spacing: -0.02em;
+    font-size: clamp(30px, 3.3vw, 44px);
+    line-height: 1.1;
+    margin: 0 0 10px 0;
+}
+
+.profil-visi-misi .profil-subtitle {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 14.5px;
+}
+
+/* CARD: transparan (glass) */
+.profil-visi-misi .profil-card {
+    border-radius: 20px;
+    padding: 22px 24px;
+    margin-bottom: 16px;
+
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Judul dalam card */
 .profil-visi-misi .profil-card h3 {
+    margin: 0 0 10px 0;
     font-size: 18px;
     font-weight: 700;
-    color: #1d4ed8;
-    margin: 0 0 12px;
-    position: relative;
-    padding-left: 14px;
-    border-left: 0;
+    color: #fff;
+    letter-spacing: -0.01em;
 }
 
-.profil-visi-misi .profil-card h3::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 2px;
-    width: 4px;
-    height: 22px;
-    background: #1d4ed8;
-    border-radius: 2px;
+/* Isi teks */
+.profil-visi-misi .profil-card p,
+.profil-visi-misi .profil-card li {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 15px;
+    line-height: 1.85;
 }
 
-/* ==================================================
-   PROFIL - TUGAS POKOK & FUNGSI
-================================================== */
-
-.profil-page.profil-tupoksi .profil-card h3 {
-    font-size: 18px;
-    font-weight: 700;
-    color: #1d4ed8;
-    margin-bottom: 12px;
-    position: relative;
-    padding-left: 14px;
-    border-left: 0 !important;
-}
-
-.profil-page.profil-tupoksi .profil-card h3::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 2px;
-    width: 4px;
-    height: 22px;
-    background: #1d4ed8;
-    border-radius: 2px;
-}
-
-.profil-page.profil-tupoksi .profil-card p,
-.profil-page.profil-tupoksi .profil-card li {
-    color: #374151;
-    line-height: 1.7;
-}
-
-.profil-page.profil-tupoksi .profil-card ol {
+/* List */
+.profil-visi-misi .profil-card ol {
     padding-left: 18px;
     margin: 0;
 }
 
-.profil-page.profil-tupoksi .profil-card ol li {
-    margin-bottom: 8px;
+.profil-visi-misi .profil-card ol li {
+    margin-bottom: 10px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .profil-visi-misi.profil-hero {
+        padding: 56px 0;
+    }
+    .profil-visi-misi .profil-card {
+        padding: 18px;
+        border-radius: 18px;
+    }
+}
+
+/* ==================================================
+   PROFIL - TUPoksi (SAMAKAN DENGAN PROFIL THEME)
+   Tempel di paling bawah profil.css
+================================================== */
+
+.profil-page.profil-tupoksi.profil-theme .profil-card {
+    border-radius: 20px;
+    padding: 22px 24px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Judul card: hilangkan aksen biru, samakan putih */
+.profil-page.profil-tupoksi.profil-theme .profil-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 10px;
+    padding-left: 0; /* hapus padding kiri */
+    border-left: 0 !important; /* pastikan tidak ada border kiri */
+    position: relative;
+}
+
+/* Matikan bar biru */
+.profil-page.profil-tupoksi.profil-theme .profil-card h3::before {
+    content: none;
+}
+
+/* Isi teks & list jadi putih lembut */
+.profil-page.profil-tupoksi.profil-theme .profil-card p,
+.profil-page.profil-tupoksi.profil-theme .profil-card li {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.85;
+}
+
+/* List spacing rapi */
+.profil-page.profil-tupoksi.profil-theme .profil-card ol {
+    padding-left: 18px;
+    margin: 0;
+}
+
+.profil-page.profil-tupoksi.profil-theme .profil-card ol li {
+    margin-bottom: 10px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .profil-page.profil-tupoksi.profil-theme .profil-card {
+        padding: 18px;
+        border-radius: 18px;
+    }
 }
 
 /* ==================================================
@@ -212,8 +547,8 @@
     --line-color: #94a3b8;
     --card-border: #cbd5e1;
     --bg-body: #f8fafc;
-    
-    font-family: 'Plus Jakarta Sans', sans-serif;
+
+    font-family: "Plus Jakarta Sans", sans-serif;
     background: var(--bg-body);
     padding: 60px 0 100px;
     overflow-x: hidden;
@@ -244,8 +579,13 @@
     scrollbar-color: #cbd5e1 transparent;
 }
 
-.org-tree-wrapper::-webkit-scrollbar { height: 8px; }
-.org-tree-wrapper::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+.org-tree-wrapper::-webkit-scrollbar {
+    height: 8px;
+}
+.org-tree-wrapper::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
 
 .tree {
     display: inline-table;
@@ -254,43 +594,62 @@
 }
 
 .tree ul {
-    padding-top: 20px; 
+    padding-top: 20px;
     position: relative;
     display: flex;
     justify-content: center;
 }
 
 .tree li {
-    float: left; text-align: center;
+    float: left;
+    text-align: center;
     list-style-type: none;
     position: relative;
     padding: 20px 10px 0 10px;
 }
 
 /* Garis Konektor */
-.tree li::before, .tree li::after {
-    content: '';
-    position: absolute; top: 0; right: 50%;
+.tree li::before,
+.tree li::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 50%;
     border-top: var(--line-width) solid var(--line-color);
-    width: 50%; height: 20px;
+    width: 50%;
+    height: 20px;
 }
 .tree li::after {
-    right: auto; left: 50%;
+    right: auto;
+    left: 50%;
     border-left: var(--line-width) solid var(--line-color);
 }
-.tree li:only-child::after, .tree li:only-child::before { display: none; }
-.tree li:only-child { padding-top: 0; }
-.tree li:first-child::before, .tree li:last-child::after { border: 0 none; }
+.tree li:only-child::after,
+.tree li:only-child::before {
+    display: none;
+}
+.tree li:only-child {
+    padding-top: 0;
+}
+.tree li:first-child::before,
+.tree li:last-child::after {
+    border: 0 none;
+}
 .tree li:last-child::before {
     border-right: var(--line-width) solid var(--line-color);
-    border-radius: 0 10px 0 0; 
+    border-radius: 0 10px 0 0;
 }
-.tree li:first-child::after { border-radius: 10px 0 0 0; }
+.tree li:first-child::after {
+    border-radius: 10px 0 0 0;
+}
 .tree ul ul::before {
-    content: '';
-    position: absolute; top: 0; left: 50%;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
     border-left: var(--line-width) solid var(--line-color);
-    width: 0; height: 20px;
+    width: 0;
+    height: 20px;
     transform: translateX(-50%);
 }
 
@@ -301,40 +660,59 @@
     padding: 15px 20px;
     text-decoration: none;
     color: #333;
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-family: "Plus Jakarta Sans", sans-serif;
     display: inline-block;
     border-radius: 12px;
     transition: all 0.3s;
     position: relative;
     z-index: 10;
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
     min-width: 170px;
 }
 
 .img-box {
-    width: 60px; height: 60px;
+    width: 60px;
+    height: 60px;
     margin: 0 auto 10px;
     border-radius: 50%;
     overflow: hidden;
     border: 3px solid #f1f5f9;
     background: #e2e8f0;
 }
-.img-box img { width: 100%; height: 100%; object-fit: cover; }
+.img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
 .role-title {
-    font-size: 0.85rem; font-weight: 800;
-    text-transform: uppercase; letter-spacing: 0.5px;
-    margin-bottom: 5px; color: #0f172a;
+    font-size: 0.85rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 5px;
+    color: #0f172a;
 }
-.role-name { font-size: 0.8rem; color: #64748b; font-weight: 500; }
+.role-name {
+    font-size: 0.8rem;
+    color: #64748b;
+    font-weight: 500;
+}
 
-.tree li .card-head { border-top: 5px solid #f59e0b; background: linear-gradient(to bottom, #fff, #fffbeb); }
-.tree li .card-sub { border-top: 5px solid #3b82f6; }
-.tree li .card-team { border-top: 5px solid #10b981; }
+.tree li .card-head {
+    border-top: 5px solid #f59e0b;
+    background: linear-gradient(to bottom, #fff, #fffbeb);
+}
+.tree li .card-sub {
+    border-top: 5px solid #3b82f6;
+}
+.tree li .card-team {
+    border-top: 5px solid #10b981;
+}
 
 .tree .card-org:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
     z-index: 20;
     border-color: #94a3b8;
 }
@@ -364,19 +742,29 @@
 }
 
 .profil-pegawai .pegawai-card img {
-    width: 120px; height: 120px;
-    object-fit: cover; border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
     margin-bottom: 14px;
 }
 
 .profil-pegawai .pegawai-card h4 {
-    font-size: 16px; font-weight: 600;
-    margin-bottom: 4px; color: #1f2d3d;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: #1f2d3d;
 }
-.profil-pegawai .pegawai-card p { font-size: 14px; color: #6b7280; }
+.profil-pegawai .pegawai-card p {
+    font-size: 14px;
+    color: #6b7280;
+}
 
 @media (max-width: 640px) {
-    .profil-pegawai .pegawai-card img { width: 100px; height: 100px; }
+    .profil-pegawai .pegawai-card img {
+        width: 100px;
+        height: 100px;
+    }
 }
 
 /* ==================================================
@@ -390,7 +778,7 @@
     --text-color: #334155;
     --bg-page: #f8fafc;
 
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-family: "Plus Jakarta Sans", sans-serif;
     background-color: var(--bg-page);
     padding: 100px 0 140px;
     position: relative;
@@ -400,39 +788,73 @@
 
 .ambient-glow {
     position: absolute;
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
-    top: -100px; left: 50%; transform: translateX(-50%);
-    z-index: 0; pointer-events: none;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(
+        circle,
+        rgba(59, 130, 246, 0.15) 0%,
+        rgba(255, 255, 255, 0) 70%
+    );
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 0;
+    pointer-events: none;
     animation: pulseGlow 8s infinite alternate;
 }
 @keyframes pulseGlow {
-    0% { transform: translateX(-50%) scale(1); opacity: 0.5; }
-    100% { transform: translateX(-50%) scale(1.2); opacity: 0.8; }
+    0% {
+        transform: translateX(-50%) scale(1);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateX(-50%) scale(1.2);
+        opacity: 0.8;
+    }
 }
 
 .brand-section .container {
-    max-width: 1200px; margin: 0 auto; padding: 0 25px;
-    position: relative; z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 25px;
+    position: relative;
+    z-index: 2;
 }
 
-.brand-header { text-align: center; margin-bottom: 70px; }
+.brand-header {
+    text-align: center;
+    margin-bottom: 70px;
+}
 
 .badge-header {
-    display: inline-block; background: #eff6ff; color: #3b82f6;
-    font-size: 0.85rem; font-weight: 700; padding: 6px 16px;
-    border-radius: 50px; text-transform: uppercase; letter-spacing: 1px;
-    margin-bottom: 15px; border: 1px solid #dbeafe;
+    display: inline-block;
+    background: #eff6ff;
+    color: #3b82f6;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 6px 16px;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    border: 1px solid #dbeafe;
 }
 
 .brand-header h1 {
-    font-size: 3.5rem; font-weight: 800; color: #0f172a;
-    margin-bottom: 15px; letter-spacing: -1px; line-height: 1.1;
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 15px;
+    letter-spacing: -1px;
+    line-height: 1.1;
 }
 
 .brand-header p {
-    font-size: 1.2rem; color: #64748b; max-width: 600px;
-    margin: 0 auto; line-height: 1.6;
+    font-size: 1.2rem;
+    color: #ffffff;
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.6;
 }
 
 .brand-grid {
@@ -442,66 +864,460 @@
 }
 
 .brand-card {
-    background: #fff; border-radius: 24px; overflow: hidden;
+    background: #fff;
+    border-radius: 24px;
+    overflow: hidden;
     border: 1px solid rgba(226, 232, 240, 0.8);
-    box-shadow: 0 10px 40px -10px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.05);
     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    display: flex; flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 .brand-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.12);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.12);
     border-color: #cbd5e1;
 }
 
 .card-visual {
     height: 240px;
-    display: flex; align-items: center; justify-content: center;
-    padding: 40px; position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    position: relative;
     background-color: #ffffff;
     background-image: radial-gradient(#e2e8f0 1.5px, transparent 1.5px);
     background-size: 20px 20px;
 }
 .card-visual img {
-    max-width: 100%; max-height: 100%; object-fit: contain;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
     transition: transform 0.5s ease;
-    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.08));
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.08));
 }
-.brand-card:hover .card-visual img { transform: scale(1.1); }
+.brand-card:hover .card-visual img {
+    transform: scale(1.1);
+}
 
 .card-details {
-    padding: 24px; background: #fff;
+    padding: 24px;
+    background: #fff;
     border-top: 1px solid #f1f5f9;
-    display: flex; flex-direction: column;
-    gap: 20px; text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
 }
 
-.info h3 { font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 4px; }
-.info p { font-size: 0.85rem; color: #94a3b8; font-weight: 500; }
+.info h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 4px;
+}
+.info p {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    font-weight: 500;
+}
 
-.actions { display: flex; gap: 10px; width: 100%; }
+.actions {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
 .btn-dl {
-    flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-    padding: 12px 16px; border-radius: 12px;
-    font-size: 0.9rem; font-weight: 700; text-decoration: none;
-    transition: 0.3s; border: 1px solid transparent;
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: 0.3s;
+    border: 1px solid transparent;
 }
 
-.btn-png { background: #eff6ff; color: #3b82f6; border-color: #dbeafe; }
+.btn-png {
+    background: #eff6ff;
+    color: #3b82f6;
+    border-color: #dbeafe;
+}
 .btn-png:hover {
-    background: #3b82f6; color: #fff; border-color: transparent;
+    background: #3b82f6;
+    color: #fff;
+    border-color: transparent;
     box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
 }
 
-.btn-pdf { background: #fef2f2; color: #ef4444; border-color: #fee2e2; }
+.btn-pdf {
+    background: #fef2f2;
+    color: #ef4444;
+    border-color: #fee2e2;
+}
 .btn-pdf:hover {
-    background: #ef4444; color: #fff; border-color: transparent;
+    background: #ef4444;
+    color: #fff;
+    border-color: transparent;
     box-shadow: 0 5px 15px rgba(239, 68, 68, 0.3);
 }
 
 @media (max-width: 768px) {
-    .brand-header h1 { font-size: 2.5rem; }
-    .card-visual { height: 200px; padding: 30px; }
-    .card-details { padding: 20px; }
-    .btn-dl { font-size: 0.8rem; padding: 10px; }
+    .brand-header h1 {
+        font-size: 2.5rem;
+    }
+    .card-visual {
+        height: 200px;
+        padding: 30px;
+    }
+    .card-details {
+        padding: 20px;
+    }
+    .btn-dl {
+        font-size: 0.8rem;
+        padding: 10px;
+    }
+}
+
+/* =========================
+   SEJARAH - ELEGANT UPGRADE
+========================= */
+
+/* Hero lebih modern */
+.sejarah-page {
+    position: relative;
+    padding: 80px 0;
+    overflow: hidden;
+    background: #0b1220;
+}
+
+.sejarah-page .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.sejarah-page .hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.03);
+    filter: saturate(1.05) contrast(1.05);
+    display: block;
+}
+
+/* overlay gradient biar premium */
+.sejarah-page::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: radial-gradient(
+            900px 420px at 20% 10%,
+            rgba(255, 255, 255, 0.14),
+            transparent 60%
+        ),
+        radial-gradient(
+            900px 420px at 80% 20%,
+            rgba(255, 255, 255, 0.1),
+            transparent 60%
+        ),
+        linear-gradient(
+            180deg,
+            rgba(3, 7, 18, 0.65) 0%,
+            rgba(3, 7, 18, 0.58) 35%,
+            rgba(3, 7, 18, 0.72) 100%
+        );
+}
+
+/* konten di atas background */
+.sejarah-container {
+    position: relative;
+    z-index: 2;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header elegan */
+.sejarah-header {
+    margin-bottom: 22px;
+}
+
+.sejarah-header h1 {
+    margin: 0;
+    font-size: clamp(28px, 3vw, 42px);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    font-weight: 800;
+    color: #fff;
+}
+
+.sejarah-header p {
+    margin-top: 10px;
+    max-width: 680px;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.7;
+}
+
+/* Timeline line lebih halus */
+.sejarah-timeline {
+    margin-top: 22px;
+    position: relative;
+    padding-left: 30px;
+}
+
+.sejarah-timeline::before {
+    content: "";
+    position: absolute;
+    left: 13px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.55),
+        rgba(255, 255, 255, 0.22)
+    );
+}
+
+/* Item */
+.timeline-item {
+    position: relative;
+    margin-bottom: 22px;
+}
+
+/* Dot modern */
+.timeline-dot {
+    position: absolute;
+    left: 2px;
+    top: 16px;
+    width: 22px;
+    height: 22px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+}
+.timeline-dot::after {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border-radius: 999px;
+    background: rgba(17, 24, 39, 0.85);
+}
+
+/* Card periode lebih premium */
+.timeline-content {
+    background: rgba(255, 255, 255, 0.94);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 18px;
+    padding: 18px 18px 16px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+    backdrop-filter: blur(6px);
+}
+
+.timeline-content h3 {
+    margin: 0 0 6px 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #0f172a;
+    letter-spacing: -0.01em;
+}
+
+.timeline-content p {
+    margin: 0 0 14px 0;
+    color: #334155;
+    line-height: 1.75;
+}
+
+/* Gallery grid rapi */
+.sejarah-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+}
+
+/* Foto jadi “premium tile” */
+.sejarah-photo {
+    display: block;
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+    transform: translateZ(0);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+/* Rasio konsisten (gak akan kotak kosong) */
+.sejarah-photo img {
+    width: 100%;
+    height: 190px; /* konsisten */
+    object-fit: cover;
+    display: block;
+    transition: transform 0.25s ease;
+}
+
+/* hover elegan */
+.sejarah-photo:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+}
+.sejarah-photo:hover img {
+    transform: scale(1.04);
+}
+
+/* overlay tipis saat hover */
+.sejarah-photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, 0.22));
+    opacity: 0;
+    transition: opacity 0.18s ease;
+}
+.sejarah-photo:hover::after {
+    opacity: 1;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .sejarah-gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .sejarah-page {
+        padding: 50px 0;
+    }
+    .sejarah-timeline {
+        padding-left: 26px;
+    }
+    .sejarah-gallery {
+        grid-template-columns: 1fr;
+    }
+    .sejarah-photo img {
+        height: 210px;
+    }
+}
+
+/* =========================
+   LIGHTBOX
+========================= */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    background: rgba(0, 0, 0, 0.78);
+    backdrop-filter: blur(6px);
+    z-index: 9999;
+}
+
+.lightbox.is-open {
+    display: flex;
+}
+
+.lightbox-content {
+    max-width: min(980px, 92vw);
+    max-height: 82vh;
+    display: grid;
+    gap: 10px;
+    justify-items: center;
+}
+
+.lightbox-content img {
+    max-width: 100%;
+    max-height: 72vh;
+    border-radius: 16px;
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+}
+
+.lightbox-caption {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 14px;
+    text-align: center;
+    max-width: 90ch;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    width: 44px;
+    height: 44px;
+    border: none;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.14);
+    color: #fff;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 52px;
+    height: 52px;
+    border: none;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.14);
+    color: #fff;
+    font-size: 26px;
+    cursor: pointer;
+}
+
+.lightbox-nav.prev {
+    left: 14px;
+}
+.lightbox-nav.next {
+    right: 14px;
+}
+
+.lightbox-close:hover,
+.lightbox-nav:hover {
+    background: rgba(255, 255, 255, 0.22);
+}
+
+@media (max-width: 576px) {
+    .lightbox-nav {
+        width: 46px;
+        height: 46px;
+    }
+    .lightbox-nav.prev {
+        left: 10px;
+    }
+    .lightbox-nav.next {
+        right: 10px;
+    }
+}
+
+/* FORCE: semua halaman profil-theme card jadi glass */
+.profil-theme .profil-card {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.24) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+}
+
+/* teks di card */
+.profil-theme .profil-card h3 {
+    color: #fff !important;
+}
+
+.profil-theme .profil-card p,
+.profil-theme .profil-card li {
+    color: rgba(255, 255, 255, 0.9) !important;
 }

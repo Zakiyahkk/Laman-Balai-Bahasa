@@ -7,11 +7,16 @@
 @endsection
 
 @section('content')
-    <section class="profil-page profil-tupoksi profil-hero" data-bg="{{ asset('img/latar.jpg') }}">
+    <section class="profil-page profil-tupoksi profil-hero profil-theme">
+
+
+        <div class="hero-bg">
+            <img src="https://ppidbbpriau.kemendikdasmen.go.id/images/gedung-balai.jpeg" alt="Gedung Balai">
+        </div>
         <div class="container profil-container">
 
             <!-- Header -->
-            <div class="profil-header hero-header">
+            <div class="profil-header ">
                 <h1>Tugas Pokok dan Fungsi</h1>
                 <p class="profil-subtitle">
                     Balai Bahasa Provinsi Riau

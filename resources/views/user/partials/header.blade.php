@@ -48,49 +48,67 @@
                     <img src="{{ asset('img/logobalai.png') }}" alt="Logo Mobile">
                 </li>
 
-                <li><a href="/" class="{{ request()->is('/') ? 'active' : '' }}"><i class="fa-regular fa-compass menu-icon"></i> Beranda</a></li>
+                <li><a href="/" class="{{ request()->is('/') ? 'active' : '' }}"><i
+                            class="fa-regular fa-compass menu-icon"></i> Beranda</a></li>
 
                 <li class="has-dropdown">
-                    <a href="javascript:void(0)" onclick="toggleSub(this)" class="{{ request()->is('profil*') ? 'active' : '' }}">
+                    <a href="javascript:void(0)" onclick="toggleSub(this)"
+                        class="{{ request()->is('profil*') ? 'active' : '' }}">
                         Profil <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
                     </a>
                     <ul class="dropdown">
-                        <li><a href="{{ url('/profil/visi-misi') }}"><i class="fa-regular fa-lightbulb"></i> Visi & Misi</a></li>
-                        <li><a href="{{ url('/profil/tugas-dan-fungsi') }}"><i class="fa-regular fa-id-badge"></i> Tugas & Fungsi</a></li>
-                        <li><a href="{{ url('/profil/struktur-organisasi') }}"><i class="fa-solid fa-sitemap"></i> Struktur Organisasi</a></li>
+                        <li><a href="{{ url('/profil/sejarah-singkat') }}"><i class="fa-regular fa-address-book"></i>
+                                Sejarah Singkat</a></li>
+                        <li><a href="{{ url('/profil/visi-misi') }}"><i class="fa-regular fa-lightbulb"></i> Visi &
+                                Misi</a></li>
+                        <li><a href="{{ url('/profil/tugas-dan-fungsi') }}"><i class="fa-regular fa-id-badge"></i> Tugas
+                                & Fungsi</a></li>
+                        <li><a href="{{ url('/profil/struktur-organisasi') }}"><i class="fa-solid fa-sitemap"></i>
+                                Struktur Organisasi</a></li>
                         <li><a href="{{ url('/profil/pegawai') }}"><i class="fa-regular fa-user"></i> Pegawai</a></li>
-                        <li><a href="{{ url('/profil/logo-bpp-riau') }}"><i class="fa-regular fa-image"></i> Logo</a></li>
-                        <li><a href="{{ url('/profil/kontak-kami') }}"><i class="fa-regular fa-address-book"></i> Kontak Kami</a></li>
+                        <li><a href="{{ url('/profil/logo-bpp-riau') }}"><i class="fa-regular fa-image"></i> Logo</a>
+                        </li>
                     </ul>
                 </li>
 
                 <li class="has-dropdown">
-                    <a href="javascript:void(0)" onclick="toggleSub(this)" class="{{ request()->is('produk*') ? 'active' : '' }}">
+                    <a href="javascript:void(0)" onclick="toggleSub(this)"
+                        class="{{ request()->is('produk*') ? 'active' : '' }}">
                         Produk <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
                     </a>
                     <ul class="dropdown">
-                        <li><a href="{{ url('/produk/terbitan-bbpr') }}"><i class="fa-regular fa-copy"></i> Terbitan BBPR</a></li>
-                        <li><a href="{{ url('/produk/jurnal') }}"><i class="fa-regular fa-newspaper"></i> Jurnal</a></li>
-                        <li><a href="{{ url('/produk/majalah') }}"><i class="fa-solid fa-book-open"></i> Majalah Serindit</a></li>
-                        <li><a href="{{ url('/produk/sembari') }}"><i class="fa-solid fa-language"></i> Sembari</a></li>
+                        <li><a href="{{ url('/produk/terbitan-bbpr') }}"><i class="fa-regular fa-copy"></i> Terbitan
+                                BBPR</a></li>
+                        <li><a href="{{ url('/produk/jurnal') }}"><i class="fa-regular fa-newspaper"></i> Jurnal</a>
+                        </li>
+                        <li><a href="{{ url('/produk/majalah') }}"><i class="fa-solid fa-book-open"></i> Majalah
+                                Serindit</a></li>
+                        <li><a href="{{ url('/produk/sembari') }}"><i class="fa-solid fa-language"></i> Sembari</a>
+                        </li>
                         <li><a href="{{ url('/produk/kemala') }}"><i class="fa-regular fa-gem"></i> Kemala</a></li>
                     </ul>
                 </li>
 
                 <li class="has-dropdown">
-                    <a href="javascript:void(0)" onclick="toggleSub(this)" class="{{ request()->is('akuntabilitas*') ? 'active' : '' }}">
+                    <a href="javascript:void(0)" onclick="toggleSub(this)"
+                        class="{{ request()->is('akuntabilitas*') ? 'active' : '' }}">
                         Akuntabilitas <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
                     </a>
                     <ul class="dropdown">
-                        <li><a href="{{ url('/akuntabilitas/perjanjian-kinerja') }}"><i class="fa-regular fa-file-lines"></i> Perjanjian Kinerja</a></li>
-                        <li><a href="{{ url('/akuntabilitas/renstra') }}"><i class="fa-regular fa-map"></i> Renstra</a></li>
-                        <li><a href="{{ url('/akuntabilitas/lakip') }}"><i class="fa-solid fa-chart-line"></i> LAKIP</a></li>
-                        <li><a href="{{ url('/akuntabilitas/rencana-aksi') }}"><i class="fa-regular fa-rectangle-list"></i> Rencana Aksi</a></li>
+                        <li><a href="{{ url('/akuntabilitas/perjanjian-kinerja') }}"><i
+                                    class="fa-regular fa-file-lines"></i> Perjanjian Kinerja</a></li>
+                        <li><a href="{{ url('/akuntabilitas/renstra') }}"><i class="fa-regular fa-map"></i> Renstra</a>
+                        </li>
+                        <li><a href="{{ url('/akuntabilitas/lakip') }}"><i class="fa-solid fa-chart-line"></i>
+                                LAKIP</a></li>
+                        <li><a href="{{ url('/akuntabilitas/rencana-aksi') }}"><i
+                                    class="fa-regular fa-rectangle-list"></i> Rencana Aksi</a></li>
                     </ul>
                 </li>
 
                 <li class="has-dropdown">
-                    <a href="javascript:void(0)" onclick="toggleSub(this)" class="{{ request()->is('layanan*') ? 'active' : '' }}">
+                    <a href="javascript:void(0)" onclick="toggleSub(this)"
+                        class="{{ request()->is('layanan*') ? 'active' : '' }}">
                         Layanan <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
                     </a>
                     <ul class="dropdown">
@@ -101,10 +119,14 @@
                     </ul>
                 </li>
 
-                <li><a href="{{ url('/ppid/ppid') }}" class="{{ request()->is('ppid*') ? 'active' : '' }}"><i class="fa-regular fa-file-lines menu-icon"></i> PPID</a></li>
-                <li><a href="{{ url('/survei/survei') }}" class="{{ request()->is('survei*') ? 'active' : '' }}"><i class="fa-solid fa-chart-simple menu-icon"></i> Survei</a></li>
-                <li><a href="{{ url('/wbs/wbs') }}" class="{{ request()->is('wbs*') ? 'active' : '' }}"><i class="fa-solid fa-bullhorn menu-icon"></i> WBS</a></li>
-                <li><a href="{{ url('/ziwbk/ziwbk') }}" class="{{ request()->is('ziwbk*') ? 'active' : '' }}"><i class="fa-regular fa-star menu-icon"></i>ZI-WBK</a></li>
+                <li><a href="{{ url('/ppid/ppid') }}" class="{{ request()->is('ppid*') ? 'active' : '' }}"><i
+                            class="fa-regular fa-file-lines menu-icon"></i> PPID</a></li>
+                <li><a href="{{ url('/survei/survei') }}" class="{{ request()->is('survei*') ? 'active' : '' }}"><i
+                            class="fa-solid fa-chart-simple menu-icon"></i> Survei</a></li>
+                <li><a href="{{ url('/wbs/wbs') }}" class="{{ request()->is('wbs*') ? 'active' : '' }}"><i
+                            class="fa-solid fa-bullhorn menu-icon"></i> WBS</a></li>
+                <li><a href="{{ url('/ziwbk/ziwbk') }}" class="{{ request()->is('ziwbk*') ? 'active' : '' }}"><i
+                            class="fa-regular fa-star menu-icon"></i>ZI-WBK</a></li>
 
                 <li class="mobile-extra-content">
                     <div class="mob-item">
