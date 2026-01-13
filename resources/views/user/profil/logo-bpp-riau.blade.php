@@ -1,10 +1,6 @@
 @extends('layouts.user')
 
-<<<<<<< HEAD
-@section('title', 'Brand Assets')
-=======
 @section('title', 'Logo')
->>>>>>> 6883b8e58caaadc7258d1a9d662322497200fcfd
 
 @section('css')
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
