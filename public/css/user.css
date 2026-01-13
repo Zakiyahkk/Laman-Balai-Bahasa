@@ -2303,6 +2303,26 @@ iframe,
     display: inline-block;
 }
 
+/* --- MAP RESPONSIVE --- */
+.map-responsive {
+    overflow: hidden;
+    /* Membuat rasio aspek 16:9 (seperti video YouTube) agar proporsional */
+    padding-bottom: 56.25%; 
+    position: relative;
+    height: 0;
+    border-radius: 12px; /* Membuat sudut map melengkung */
+    border: 1px solid #cbd5e1;
+    background: #e2e8f0; /* Placeholder warna abu saat loading */
+}
+
+.map-responsive iframe {
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%; /* KUNCI: Lebar map mengikuti lebar layar HP */
+    position: absolute;
+}
+
 /* LIST STYLE */
 .footer-clean ul li {
     margin-bottom: 12px;
