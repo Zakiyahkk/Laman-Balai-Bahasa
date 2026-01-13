@@ -26,14 +26,17 @@ body {
 /* ==================================================
    Navbar Menu Dekstop dan Mobile
 ================================================== */
+
+/* HAPUS font-family dari sini agar Icon tidak rusak */
 .bbp-navbar * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: "Montserrat", sans-serif;
 }
 
+/* Terapkan Font Montserrat di Induknya */
 .bbp-navbar {
+    font-family: "Montserrat", sans-serif;
     position: sticky;
     top: 0;
     z-index: 5000;
@@ -42,7 +45,18 @@ body {
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
 }
 
-/* TOP BAR */
+/* PAKSA ICON MENGGUNAKAN FONT AWESOME (Supaya tidak kotak-kotak) */
+.bbp-navbar i,
+.bbp-navbar .fa-solid,
+.bbp-navbar .fa-regular,
+.bbp-navbar .fa-brands {
+    font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands" !important;
+    font-weight: 900; /* Pastikan ketebalan icon benar */
+}
+
+/* =========================================
+   2. TOP BAR
+   ========================================= */
 .bbp-top {
     background-color: #ffffff;
     padding: 15px 0;
@@ -91,25 +105,12 @@ body {
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
-.bbp-social-top a:nth-child(1):hover {
-    background: #1877f2;
-}
-.bbp-social-top a:nth-child(2):hover {
-    background: #000000;
-}
+.bbp-social-top a:nth-child(1):hover { background: #1877f2; }
+.bbp-social-top a:nth-child(2):hover { background: #000000; }
 .bbp-social-top a:nth-child(3):hover {
-    background: linear-gradient(
-        45deg,
-        #f09433 0%,
-        #e6683c 25%,
-        #dc2743 50%,
-        #cc2366 75%,
-        #bc1888 100%
-    );
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
 }
-.bbp-social-top a:nth-child(4):hover {
-    background: #ff0000;
-}
+.bbp-social-top a:nth-child(4):hover { background: #ff0000; }
 
 .top-item-box {
     display: flex;
@@ -165,7 +166,9 @@ body {
     box-shadow: 0 10px 15px -3px rgba(239, 68, 68, 0.3);
 }
 
-/* MAIN NAV */
+/* =========================================
+   3. MAIN NAV
+   ========================================= */
 .bbp-nav {
     height: 70px;
     display: flex;
@@ -175,12 +178,12 @@ body {
 .nav-container {
     max-width: 1400px;
     margin: auto;
-    padding: 0 24px;
+    padding: 0 15px; /* Padding sedikit dikurangi */
     width: 100%;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    gap: 30px;
+    gap: 15px; /* Jarak logo ke menu dirapatkan (sebelumnya 30px) */
 }
 
 .logo img {
@@ -188,13 +191,16 @@ body {
     display: block;
 }
 
-/* MENU SYSTEM */
+/* =========================================
+   4. MENU SYSTEM (FIX ZI-WBK)
+   ========================================= */
 .nav-menu {
     list-style: none;
     display: flex;
-    gap: 12px;
+    gap: 5px; /* Jarak antar menu dirapatkan (sebelumnya 12px) */
     align-items: center;
     height: 100%;
+    flex-wrap: nowrap; /* Mencegah menu turun baris */
 }
 
 .nav-menu > li {
@@ -213,14 +219,18 @@ body {
 
 .nav-menu > li > a {
     color: rgba(255, 255, 255, 0.9) !important;
-    font-size: 12px;
+    font-size: 11.5px; /* Font dikecilkan 0.5px agar muat */
     font-weight: 700;
     height: 40px;
-    padding: 0 18px;
+    
+    /* FIX ZI-WBK: Paksa satu baris & kurangi padding */
+    padding: 0 10px; 
+    white-space: nowrap; 
+    
     border-radius: 8px;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     text-decoration: none;
     transition: all 0.2s ease;
 }
@@ -239,8 +249,8 @@ body {
 }
 
 .menu-icon {
-    font-size: 14px;
-    opacity: 0.8;
+    font-size: 13px;
+    opacity: 0.9;
     display: inline-block;
 }
 
@@ -286,6 +296,8 @@ body {
     font-weight: 600;
     border-radius: 8px;
     text-decoration: none;
+    white-space: normal; /* Dropdown boleh turun baris */
+    height: auto;
 }
 
 .dropdown li a i {
@@ -309,7 +321,7 @@ body {
     height: 20px;
 }
 
-/* TOMBOL BURGER (Akan disembunyikan jika menu terbuka via JS/CSS) */
+/* TOMBOL BURGER */
 .menu-toggle {
     display: none;
     background: transparent;
@@ -330,17 +342,13 @@ body {
 }
 
 /* ===========================
-    FIX RESPONSIVE & MOBILE
-    =========================== */
+   5. FIX RESPONSIVE & MOBILE
+   =========================== */
 @media (max-width: 1200px) {
     /* 1. Sembunyikan Top Bar Asli */
-    .bbp-top {
-        display: none;
-    }
+    .bbp-top { display: none; }
 
-    .menu-toggle {
-        display: block;
-    }
+    .menu-toggle { display: block; }
 
     /* -- LOGIC PENTING: Sembunyikan burger luar jika menu terbuka -- */
     .bbp-navbar.mobile-open .menu-toggle {
@@ -363,6 +371,7 @@ body {
         z-index: 6000;
         justify-content: flex-start;
         height: auto;
+        align-items: flex-start; /* Fix align mobile */
     }
 
     .bbp-navbar.mobile-open .nav-menu {

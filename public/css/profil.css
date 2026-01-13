@@ -10,6 +10,8 @@
 
 .profil-container {
     max-width: 900px;
+    margin: 0 auto; /* Tambahan: Biar tengah */
+    padding: 0 20px; /* Tambahan: Biar gak mepet di HP */
 }
 
 .profil-header {
@@ -21,6 +23,11 @@
     font-size: clamp(26px, 3vw, 38px);
     line-height: 1.2;
     font-weight: 500;
+    color: #111827; /* Ubah ke gelap agar terbaca jika background putih */
+}
+
+/* KOREKSI: Jika header berada di Hero (Background gelap), warnanya putih */
+.profil-hero .profil-header h1 {
     color: #ffffff;
 }
 
@@ -67,25 +74,24 @@
 
 /* ==================================================
    PROFIL - HERO (PPID STYLE)
-   Aktif untuk semua halaman profil yang memakai .profil-hero
 ================================================== */
 
-/* ==================================================
-   ENHANCE CARD DI HERO (lebih nyaman dibaca)
-================================================== */
-
-/* Gelapkan overlay background sedikit supaya card lebih fokus */
 .profil-page.profil-hero {
+    /* Pastikan variable --hero-bg didefinisikan atau fallback ke warna solid jika gambar gagal */
+    background-color: #1e293b; 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
     background-image: linear-gradient(
             90deg,
             rgba(18, 28, 48, 0.96) 0%,
             rgba(18, 28, 48, 0.75) 55%,
             rgba(18, 28, 48, 0.65) 100%
         ),
-        var(--hero-bg);
+        var(--hero-bg); /* Gambar dari inline style HTML */
 }
 
-/* Card: lebih lembut, radius lebih besar, shadow lebih halus */
 .profil-page.profil-hero .profil-card {
     background: rgba(255, 255, 255, 0.92);
     border: 1px solid rgba(255, 255, 255, 0.35);
@@ -95,26 +101,22 @@
     -webkit-backdrop-filter: blur(6px);
 }
 
-/* Spasi antar card biar lega */
 .profil-page.profil-hero .profil-card + .profil-card {
     margin-top: 18px;
 }
 
-/* Teks lebih nyaman dibaca */
 .profil-page.profil-hero .profil-card p,
 .profil-page.profil-hero .profil-card li {
     color: #334155;
     line-height: 1.85;
 }
 
-/* Pastikan konten di atas overlay */
 .profil-page.profil-hero .profil-container {
     position: relative;
     z-index: 2;
     max-width: 980px;
 }
 
-/* Header hero */
 .profil-page.profil-hero .hero-header {
     margin-bottom: 28px;
 }
@@ -129,28 +131,15 @@
     color: rgba(255, 255, 255, 0.85);
 }
 
-/* Card di dalam hero biar kontras */
-.profil-page.profil-hero .profil-card {
-    background: rgba(255, 255, 255, 0.95);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 16px 34px rgba(0, 0, 0, 0.18);
-}
-
-.profil-page.profil-hero .profil-card p,
-.profil-page.profil-hero .profil-card li {
-    color: #374151;
-}
-
 /* Responsive hero */
 @media (max-width: 768px) {
     .profil-page.profil-hero {
         padding: 60px 0;
-        background-position: center;
     }
 }
 
 /* ==================================================
-   PROFIL - VISI & MISI (GARIS BIRU DI H3)
+   PROFIL - VISI & MISI
 ================================================== */
 
 .profil-visi-misi .profil-card h3 {
@@ -176,39 +165,35 @@
 
 /* ==================================================
    PROFIL - TUGAS POKOK & FUNGSI
-   Garis biru SAMA PERSIS dengan Visi & Misi
 ================================================== */
 
 .profil-page.profil-tupoksi .profil-card h3 {
     font-size: 18px;
     font-weight: 700;
-    color: #1d4ed8; /* samakan warna */
+    color: #1d4ed8;
     margin-bottom: 12px;
     position: relative;
-    padding-left: 14px; /* samakan jarak */
-    border-left: 0 !important; /* pastikan tidak dobel */
+    padding-left: 14px;
+    border-left: 0 !important;
 }
 
-/* GARIS BIRU */
 .profil-page.profil-tupoksi .profil-card h3::before {
     content: "";
     position: absolute;
     left: 0;
-    top: 2px; /* posisi SAMA */
+    top: 2px;
     width: 4px;
-    height: 22px; /* tinggi SAMA */
+    height: 22px;
     background: #1d4ed8;
     border-radius: 2px;
 }
 
-/* Teks isi */
 .profil-page.profil-tupoksi .profil-card p,
 .profil-page.profil-tupoksi .profil-card li {
     color: #374151;
     line-height: 1.7;
 }
 
-/* List rapi */
 .profil-page.profil-tupoksi .profil-card ol {
     padding-left: 18px;
     margin: 0;
@@ -219,19 +204,15 @@
 }
 
 /* ==================================================
-   PROFIL - BBPR / STRUKTUR (KHUSUS KONTEN TEKS)
+   PROFIL - STRUKTUR ORGANISASI
 ================================================== */
-:root {
-    --line-width: 4px;       /* KETEBALAN GARIS */
-    --line-color: #94a3b8;   /* WARNA GARIS (Abu Tegas) */
+/* Gunakan scope .profil-riau agar variabel tidak bocor */
+.profil-riau {
+    --line-width: 4px;
+    --line-color: #94a3b8;
     --card-border: #cbd5e1;
     --bg-body: #f8fafc;
-}
-
-/* ============================
-   BASE STYLES
-   ============================ */
-.profil-riau {
+    
     font-family: 'Plus Jakarta Sans', sans-serif;
     background: var(--bg-body);
     padding: 60px 0 100px;
@@ -254,15 +235,11 @@
     line-height: 1.6;
 }
 
-/* ============================
-   ORGANIZATION TREE CSS
-   ============================ */
 .org-tree-wrapper {
     width: 100%;
-    overflow-x: auto; /* Agar bisa discroll samping di HP */
+    overflow-x: auto;
     padding: 20px;
     text-align: center;
-    /* Scrollbar styling */
     scrollbar-width: thin;
     scrollbar-color: #cbd5e1 transparent;
 }
@@ -271,9 +248,9 @@
 .org-tree-wrapper::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
 
 .tree {
-    display: inline-table; /* Center align trick */
+    display: inline-table;
     margin: 0 auto;
-    min-width: 800px; /* Lebar minimal agar pohon tidak gepeng */
+    min-width: 800px;
 }
 
 .tree ul {
@@ -290,46 +267,25 @@
     padding: 20px 10px 0 10px;
 }
 
-/* --- LOGIKA GARIS PENGHUBUNG (CONNECTING LINES) --- */
-
-/* 1. Garis Horizontal (Kiri-Kanan) */
+/* Garis Konektor */
 .tree li::before, .tree li::after {
     content: '';
     position: absolute; top: 0; right: 50%;
     border-top: var(--line-width) solid var(--line-color);
     width: 50%; height: 20px;
 }
-
-/* 2. Garis Vertikal (Turun ke Kartu) */
 .tree li::after {
     right: auto; left: 50%;
     border-left: var(--line-width) solid var(--line-color);
 }
-
-/* --- MEMBERSIHKAN GARIS (AGAR RAPI & TIDAK DOUBLE) --- */
-
-/* Menghapus garis di elemen pertama (Kiri) dan terakhir (Kanan) */
-.tree li:only-child::after, .tree li:only-child::before {
-    display: none;
-}
+.tree li:only-child::after, .tree li:only-child::before { display: none; }
 .tree li:only-child { padding-top: 0; }
-
-.tree li:first-child::before, .tree li:last-child::after {
-    border: 0 none;
-}
-
-/* Membentuk Siku (Corner) */
-/* Siku Kanan Atas */
+.tree li:first-child::before, .tree li:last-child::after { border: 0 none; }
 .tree li:last-child::before {
     border-right: var(--line-width) solid var(--line-color);
     border-radius: 0 10px 0 0; 
 }
-/* Siku Kiri Atas */
-.tree li:first-child::after {
-    border-radius: 10px 0 0 0;
-}
-
-/* 3. Garis vertikal turun dari parent (Garis Tengah Utama) */
+.tree li:first-child::after { border-radius: 10px 0 0 0; }
 .tree ul ul::before {
     content: '';
     position: absolute; top: 0; left: 50%;
@@ -338,7 +294,7 @@
     transform: translateX(-50%);
 }
 
-/* --- KARTU JABATAN (THE CARD) --- */
+/* Card Org */
 .tree .card-org {
     background: #fff;
     border: 1px solid #e2e8f0;
@@ -355,7 +311,6 @@
     min-width: 170px;
 }
 
-/* Foto Profil Bulat */
 .img-box {
     width: 60px; height: 60px;
     margin: 0 auto 10px;
@@ -371,27 +326,12 @@
     text-transform: uppercase; letter-spacing: 0.5px;
     margin-bottom: 5px; color: #0f172a;
 }
+.role-name { font-size: 0.8rem; color: #64748b; font-weight: 500; }
 
-.role-name {
-    font-size: 0.8rem; color: #64748b; font-weight: 500;
-}
+.tree li .card-head { border-top: 5px solid #f59e0b; background: linear-gradient(to bottom, #fff, #fffbeb); }
+.tree li .card-sub { border-top: 5px solid #3b82f6; }
+.tree li .card-team { border-top: 5px solid #10b981; }
 
-/* --- WARNA KHUSUS PER LEVEL --- */
-/* Kepala Balai (Emas) */
-.tree li .card-head {
-    border-top: 5px solid #f59e0b;
-    background: linear-gradient(to bottom, #fff, #fffbeb);
-}
-/* Kasubbag (Biru) */
-.tree li .card-sub {
-    border-top: 5px solid #3b82f6;
-}
-/* KKLP / Tim (Hijau/Abu) */
-.tree li .card-team {
-    border-top: 5px solid #10b981;
-}
-
-/* --- HOVER EFFECTS (INTERAKTIF) --- */
 .tree .card-org:hover {
     transform: translateY(-5px);
     box-shadow: 0 15px 30px rgba(0,0,0,0.1);
@@ -400,9 +340,8 @@
 }
 
 /* ==================================================
-   PROFIL - PEGAWAI (SCOPED)
+   PROFIL - PEGAWAI
 ================================================== */
-
 .profil-pegawai .pegawai-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -425,45 +364,32 @@
 }
 
 .profil-pegawai .pegawai-card img {
-    width: 120px;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 50%;
+    width: 120px; height: 120px;
+    object-fit: cover; border-radius: 50%;
     margin-bottom: 14px;
 }
 
 .profil-pegawai .pegawai-card h4 {
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 4px;
-    color: #1f2d3d;
+    font-size: 16px; font-weight: 600;
+    margin-bottom: 4px; color: #1f2d3d;
 }
-
-.profil-pegawai .pegawai-card p {
-    font-size: 14px;
-    color: #6b7280;
-}
+.profil-pegawai .pegawai-card p { font-size: 14px; color: #6b7280; }
 
 @media (max-width: 640px) {
-    .profil-pegawai .pegawai-card img {
-        width: 100px;
-        height: 100px;
-    }
+    .profil-pegawai .pegawai-card img { width: 100px; height: 100px; }
 }
-/* ============================
-   ULTRA MODERN BRAND PAGE
-   ============================ */
 
-:root {
+/* ==================================================
+   ULTRA MODERN BRAND PAGE
+================================================== */
+/* Gunakan variable lokal atau pastikan tidak global reset */
+.brand-section {
     --primary-color: #3b82f6;
-    --danger-color: #ef4444; /* Warna Merah untuk PDF */
+    --danger-color: #ef4444;
     --dark-color: #0f172a;
     --text-color: #334155;
     --bg-page: #f8fafc;
-}
 
-/* SECTION BASE */
-.brand-section {
     font-family: 'Plus Jakarta Sans', sans-serif;
     background-color: var(--bg-page);
     padding: 100px 0 140px;
@@ -472,7 +398,6 @@
     min-height: 100vh;
 }
 
-/* AMBIENT GLOW */
 .ambient-glow {
     position: absolute;
     width: 600px; height: 600px;
@@ -481,29 +406,27 @@
     z-index: 0; pointer-events: none;
     animation: pulseGlow 8s infinite alternate;
 }
-
 @keyframes pulseGlow {
     0% { transform: translateX(-50%) scale(1); opacity: 0.5; }
     100% { transform: translateX(-50%) scale(1.2); opacity: 0.8; }
 }
 
-.container {
+.brand-section .container {
     max-width: 1200px; margin: 0 auto; padding: 0 25px;
     position: relative; z-index: 2;
 }
 
-/* HEADER */
 .brand-header { text-align: center; margin-bottom: 70px; }
 
 .badge-header {
-    display: inline-block; background: #eff6ff; color: var(--primary-color);
+    display: inline-block; background: #eff6ff; color: #3b82f6;
     font-size: 0.85rem; font-weight: 700; padding: 6px 16px;
     border-radius: 50px; text-transform: uppercase; letter-spacing: 1px;
     margin-bottom: 15px; border: 1px solid #dbeafe;
 }
 
 .brand-header h1 {
-    font-size: 3.5rem; font-weight: 800; color: var(--dark-color);
+    font-size: 3.5rem; font-weight: 800; color: #0f172a;
     margin-bottom: 15px; letter-spacing: -1px; line-height: 1.1;
 }
 
@@ -512,100 +435,70 @@
     margin: 0 auto; line-height: 1.6;
 }
 
-/* GRID LAYOUT */
 .brand-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Sedikit diperlebar minmax-nya */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
 }
 
-/* CARD DESIGN */
 .brand-card {
-    background: #fff;
-    border-radius: 24px;
-    overflow: hidden;
+    background: #fff; border-radius: 24px; overflow: hidden;
     border: 1px solid rgba(226, 232, 240, 0.8);
     box-shadow: 0 10px 40px -10px rgba(0,0,0,0.05);
     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     display: flex; flex-direction: column;
 }
-
 .brand-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 25px 50px -12px rgba(0,0,0,0.12);
     border-color: #cbd5e1;
 }
 
-/* VISUAL AREA */
 .card-visual {
     height: 240px;
     display: flex; align-items: center; justify-content: center;
     padding: 40px; position: relative;
-    
     background-color: #ffffff;
     background-image: radial-gradient(#e2e8f0 1.5px, transparent 1.5px);
     background-size: 20px 20px;
 }
-
 .card-visual img {
     max-width: 100%; max-height: 100%; object-fit: contain;
     transition: transform 0.5s ease;
     filter: drop-shadow(0 10px 20px rgba(0,0,0,0.08));
 }
-
 .brand-card:hover .card-visual img { transform: scale(1.1); }
 
-/* DETAILS AREA */
 .card-details {
     padding: 24px; background: #fff;
     border-top: 1px solid #f1f5f9;
-    display: flex; flex-direction: column; /* Ubah jadi kolom agar layout rapi */
-    gap: 20px;
-    text-align: center;
+    display: flex; flex-direction: column;
+    gap: 20px; text-align: center;
 }
 
-.info h3 {
-    font-size: 1.1rem; font-weight: 700; color: var(--dark-color); margin-bottom: 4px;
-}
+.info h3 { font-size: 1.1rem; font-weight: 700; color: #0f172a; margin-bottom: 4px; }
 .info p { font-size: 0.85rem; color: #94a3b8; font-weight: 500; }
 
-/* BUTTONS GROUP */
-.actions {
-    display: flex; gap: 10px; width: 100%;
-}
-
+.actions { display: flex; gap: 10px; width: 100%; }
 .btn-dl {
-    flex: 1; /* Lebar tombol sama rata */
-    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
     padding: 12px 16px; border-radius: 12px;
     font-size: 0.9rem; font-weight: 700; text-decoration: none;
-    transition: 0.3s;
-    border: 1px solid transparent;
+    transition: 0.3s; border: 1px solid transparent;
 }
 
-/* Tombol PNG (Biru) */
-.btn-png {
-    background: #eff6ff; color: var(--primary-color);
-    border-color: #dbeafe;
-}
+.btn-png { background: #eff6ff; color: #3b82f6; border-color: #dbeafe; }
 .btn-png:hover {
-    background: var(--primary-color); color: #fff;
-    border-color: transparent;
+    background: #3b82f6; color: #fff; border-color: transparent;
     box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
 }
 
-/* Tombol PDF (Merah) */
-.btn-pdf {
-    background: #fef2f2; color: var(--danger-color);
-    border-color: #fee2e2;
-}
+.btn-pdf { background: #fef2f2; color: #ef4444; border-color: #fee2e2; }
 .btn-pdf:hover {
-    background: var(--danger-color); color: #fff;
-    border-color: transparent;
+    background: #ef4444; color: #fff; border-color: transparent;
     box-shadow: 0 5px 15px rgba(239, 68, 68, 0.3);
 }
 
-/* RESPONSIVE */
 @media (max-width: 768px) {
     .brand-header h1 { font-size: 2.5rem; }
     .card-visual { height: 200px; padding: 30px; }
