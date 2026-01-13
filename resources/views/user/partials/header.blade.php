@@ -29,6 +29,7 @@
     <div class="bbp-nav">
         <div class="nav-container">
             <div class="logo">
+                {{-- Gunakan asset() untuk gambar juga --}}
                 <img src="{{ asset('img/logobalai.png') }}" alt="Logo">
             </div>
 
@@ -63,7 +64,6 @@
                     </ul>
                 </li>
 
-                {{-- MENU PRODUK (Tadi Bentrok disini, saya rapikan) --}}
                 <li class="has-dropdown">
                     <a href="javascript:void(0)" onclick="toggleSub(this)" class="{{ request()->is('produk*') ? 'active' : '' }}">
                         Produk <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
@@ -105,7 +105,6 @@
                 <li><a href="{{ url('/survei/survei') }}" class="{{ request()->is('survei*') ? 'active' : '' }}"><i class="fa-solid fa-chart-simple menu-icon"></i> Survei</a></li>
                 <li><a href="{{ url('/wbs/wbs') }}" class="{{ request()->is('wbs*') ? 'active' : '' }}"><i class="fa-solid fa-bullhorn menu-icon"></i> WBS</a></li>
                 <li><a href="{{ url('/ziwbk/ziwbk') }}" class="{{ request()->is('ziwbk*') ? 'active' : '' }}"><i class="fa-regular fa-star menu-icon"></i>ZI-WBK</a></li>
-
 
                 <li class="mobile-extra-content">
                     <div class="mob-item">
