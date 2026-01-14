@@ -83,7 +83,15 @@
                         </li>
                         <li><a href="{{ url('/produk/majalah') }}"><i class="fa-solid fa-book-open"></i> Majalah
                                 Serindit</a></li>
-                        <li><a href="{{ url('/produk/sembari') }}"><i class="fa-solid fa-language"></i> Sembari</a>
+                        <li><a href="{{ url('/produk/sembari') }}"><i class="fa-solid fa-language"></i>
+                                Sembari BBPR</a>
+                        <li><a href="{{ url('/produk/peta-pembinaan-bahasa') }}"><i class="fa-solid fa-globe-asia"></i>
+                                Peta Pembinaan Bahasa</a>
+                        </li>
+                        <li><a href="{{ url('/produk/peta-pembinaan-sastra') }}"><i class="fa-solid fa-globe-asia"></i>
+                                Peta Pembinaan Sastra</a>
+                        </li>
+                        <li><a href="{{ url('/produk/bipa') }}"><i class="fa-solid fa-language"></i> BIPA</a>
                         </li>
                         <li><a href="{{ url('/produk/kemala') }}"><i class="fa-regular fa-gem"></i> Kemala</a></li>
                     </ul>
@@ -95,14 +103,19 @@
                         Akuntabilitas <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
                     </a>
                     <ul class="dropdown">
-                        <li><a href="{{ url('/akuntabilitas/perjanjian-kinerja') }}"><i
-                                    class="fa-regular fa-file-lines"></i> Perjanjian Kinerja</a></li>
                         <li><a href="{{ url('/akuntabilitas/renstra') }}"><i class="fa-regular fa-map"></i> Renstra</a>
                         </li>
                         <li><a href="{{ url('/akuntabilitas/lakip') }}"><i class="fa-solid fa-chart-line"></i>
+                                DIPA</a></li>
+                        <li><a href="{{ url('/akuntabilitas/lakip') }}"><i class="fa-solid fa-chart-line"></i>
                                 LAKIP</a></li>
+                        <li><a href="{{ url('/akuntabilitas/perjanjian-kinerja') }}"><i
+                                    class="fa-regular fa-file-lines"></i> Perjanjian Kinerja</a></li>
                         <li><a href="{{ url('/akuntabilitas/rencana-aksi') }}"><i
                                     class="fa-regular fa-rectangle-list"></i> Rencana Aksi</a></li>
+                        <li><a href="{{ url('/akuntabilitas/sakai') }}"><i class="fa-regular fa-file-lines"></i>
+                                Sakai
+                            </a></li>
                     </ul>
                 </li>
 

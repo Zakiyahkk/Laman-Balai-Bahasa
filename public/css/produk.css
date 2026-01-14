@@ -397,3 +397,191 @@
     grid-template-columns: repeat(5, 1fr);
     gap: 28px;
 }
+
+/* ==================================================
+   SAPA BIPA
+================================================== */
+.sapa-bipa {
+    background: #f6f6f6;
+    padding: 100px 0;
+    overflow: hidden;
+}
+
+.sapa-bipa-title {
+    text-align: center;
+    margin-bottom: 70px;
+}
+
+.sapa-bipa-title h2 {
+    font-size: 48px;
+    font-weight: 800;
+    color: #e11d48;
+    margin-bottom: 6px;
+}
+
+.sapa-bipa-title span {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.sapa-bipa-wrap {
+    display: grid;
+    grid-template-columns: 1fr 520px 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.sapa-bipa-item {
+    text-align: center;
+}
+
+.sapa-bipa-item h3 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #111;
+}
+
+.sapa-bipa-item p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #6b7280;
+    max-width: 320px;
+    margin: 0 auto;
+    word-wrap: break-word;
+}
+
+.sapa-bipa-item .mt {
+    margin-top: 40px;
+}
+
+/* GAMBAR */
+.sapa-bipa-center img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* ==========================
+   ANIMASI HALUS SAPA BIPA
+========================== */
+.fade-up {
+    animation: fadeUp 1s ease forwards;
+}
+
+.fade-left {
+    animation: fadeLeft 1s ease forwards;
+}
+
+.fade-right {
+    animation: fadeRight 1s ease forwards;
+}
+
+.zoom-in {
+    animation: zoomIn 1s ease forwards;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeRight {
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.92);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+    .sapa-bipa-wrap {
+        grid-template-columns: 1fr;
+        gap: 60px;
+    }
+
+    .sapa-bipa-center img {
+        max-width: 420px;
+        margin: 0 auto;
+        display: block;
+    }
+}
+/* ==========================
+   MOBILE FIX (INTI PERBAIKAN)
+========================== */
+@media (max-width: 768px) {
+    .sapa-bipa {
+        padding: 64px 0;
+    }
+
+    .sapa-bipa-title {
+        margin-bottom: 48px;
+        padding: 0 16px;
+    }
+
+    .sapa-bipa-title h2 {
+        font-size: 40px;
+        margin-bottom: 8px;
+    }
+
+    .sapa-bipa-title span {
+        font-size: 15px;
+        line-height: 1.5;
+        display: block;
+    }
+
+    .sapa-bipa-wrap {
+        gap: 48px;
+    }
+
+    .sapa-bipa-item {
+        padding: 0 16px;
+    }
+
+    .sapa-bipa-item h3 {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    .sapa-bipa-item p {
+        font-size: 14px;
+        max-width: 100%;
+        line-height: 1.7;
+    }
+
+    .sapa-bipa-center img {
+        max-width: 320px;
+    }
+}

@@ -105,12 +105,25 @@ body {
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
-.bbp-social-top a:nth-child(1):hover { background: #1877f2; }
-.bbp-social-top a:nth-child(2):hover { background: #000000; }
-.bbp-social-top a:nth-child(3):hover {
-    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+.bbp-social-top a:nth-child(1):hover {
+    background: #1877f2;
 }
-.bbp-social-top a:nth-child(4):hover { background: #ff0000; }
+.bbp-social-top a:nth-child(2):hover {
+    background: #000000;
+}
+.bbp-social-top a:nth-child(3):hover {
+    background: linear-gradient(
+        45deg,
+        #f09433 0%,
+        #e6683c 25%,
+        #dc2743 50%,
+        #cc2366 75%,
+        #bc1888 100%
+    );
+}
+.bbp-social-top a:nth-child(4):hover {
+    background: #ff0000;
+}
 
 .top-item-box {
     display: flex;
@@ -222,11 +235,11 @@ body {
     font-size: 11.5px; /* Font dikecilkan 0.5px agar muat */
     font-weight: 700;
     height: 40px;
-    
+
     /* FIX ZI-WBK: Paksa satu baris & kurangi padding */
-    padding: 0 10px; 
-    white-space: nowrap; 
-    
+    padding: 0 10px;
+    white-space: nowrap;
+
     border-radius: 8px;
     display: flex;
     align-items: center;
@@ -346,9 +359,13 @@ body {
    =========================== */
 @media (max-width: 1200px) {
     /* 1. Sembunyikan Top Bar Asli */
-    .bbp-top { display: none; }
+    .bbp-top {
+        display: none;
+    }
 
-    .menu-toggle { display: block; }
+    .menu-toggle {
+        display: block;
+    }
 
     /* -- LOGIC PENTING: Sembunyikan burger luar jika menu terbuka -- */
     .bbp-navbar.mobile-open .menu-toggle {
@@ -1589,194 +1606,6 @@ iframe,
 }
 
 /* ==================================================
-   SAPA BIPA
-================================================== */
-.sapa-bipa {
-    background: #f6f6f6;
-    padding: 100px 0;
-    overflow: hidden;
-}
-
-.sapa-bipa-title {
-    text-align: center;
-    margin-bottom: 70px;
-}
-
-.sapa-bipa-title h2 {
-    font-size: 48px;
-    font-weight: 800;
-    color: #e11d48;
-    margin-bottom: 6px;
-}
-
-.sapa-bipa-title span {
-    font-size: 16px;
-    font-weight: 600;
-    color: #1f2937;
-}
-
-.sapa-bipa-wrap {
-    display: grid;
-    grid-template-columns: 1fr 520px 1fr;
-    gap: 40px;
-    align-items: center;
-}
-
-.sapa-bipa-item {
-    text-align: center;
-}
-
-.sapa-bipa-item h3 {
-    font-size: 22px;
-    font-weight: 600;
-    margin-bottom: 8px;
-    color: #111;
-}
-
-.sapa-bipa-item p {
-    font-size: 15px;
-    line-height: 1.7;
-    color: #6b7280;
-    max-width: 320px;
-    margin: 0 auto;
-    word-wrap: break-word;
-}
-
-.sapa-bipa-item .mt {
-    margin-top: 40px;
-}
-
-/* GAMBAR */
-.sapa-bipa-center img {
-    max-width: 100%;
-    height: auto;
-}
-
-/* ==========================
-   ANIMASI HALUS SAPA BIPA
-========================== */
-.fade-up {
-    animation: fadeUp 1s ease forwards;
-}
-
-.fade-left {
-    animation: fadeLeft 1s ease forwards;
-}
-
-.fade-right {
-    animation: fadeRight 1s ease forwards;
-}
-
-.zoom-in {
-    animation: zoomIn 1s ease forwards;
-}
-
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(40px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fadeLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-40px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes fadeRight {
-    from {
-        opacity: 0;
-        transform: translateX(40px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes zoomIn {
-    from {
-        opacity: 0;
-        transform: scale(0.92);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-/* RESPONSIVE */
-@media (max-width: 1024px) {
-    .sapa-bipa-wrap {
-        grid-template-columns: 1fr;
-        gap: 60px;
-    }
-
-    .sapa-bipa-center img {
-        max-width: 420px;
-        margin: 0 auto;
-        display: block;
-    }
-}
-/* ==========================
-   MOBILE FIX (INTI PERBAIKAN)
-========================== */
-@media (max-width: 768px) {
-    .sapa-bipa {
-        padding: 64px 0;
-    }
-
-    .sapa-bipa-title {
-        margin-bottom: 48px;
-        padding: 0 16px;
-    }
-
-    .sapa-bipa-title h2 {
-        font-size: 40px;
-        margin-bottom: 8px;
-    }
-
-    .sapa-bipa-title span {
-        font-size: 15px;
-        line-height: 1.5;
-        display: block;
-    }
-
-    .sapa-bipa-wrap {
-        gap: 48px;
-    }
-
-    .sapa-bipa-item {
-        padding: 0 16px;
-    }
-
-    .sapa-bipa-item h3 {
-        font-size: 20px;
-        margin-bottom: 10px;
-    }
-
-    .sapa-bipa-item p {
-        font-size: 14px;
-        max-width: 100%;
-        line-height: 1.7;
-    }
-
-    .sapa-bipa-center img {
-        max-width: 320px;
-    }
-}
-
-/* ==================================================
    KAMUS – HERO
 ================================================== */
 .kamus-hero {
@@ -1881,343 +1710,347 @@ iframe,
 /* ============================
            RESET & BASE
            ============================ */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #f8fafc;
-            color: #334155;
-        }
+body {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    background-color: #f8fafc;
+    color: #334155;
+}
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
 
-        /* ============================
+/* ============================
            HERO SECTION
            ============================ */
-        .dokpres-hero {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            padding: 100px 0 80px;
-            text-align: center;
-            color: #fff;
-            position: relative;
-            overflow: hidden;
-        }
+.dokpres-hero {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    padding: 100px 0 80px;
+    text-align: center;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+}
 
-        .dokpres-hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, transparent 60%);
-            pointer-events: none;
-        }
+.dokpres-hero::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.03) 0%,
+        transparent 60%
+    );
+    pointer-events: none;
+}
 
-        .dokpres-hero h2 {
-            font-size: 42px;
-            font-weight: 800;
-            margin-bottom: 16px;
-            background: linear-gradient(to right, #fbbf24, #f59e0b);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+.dokpres-hero h2 {
+    font-size: 42px;
+    font-weight: 800;
+    margin-bottom: 16px;
+    background: linear-gradient(to right, #fbbf24, #f59e0b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 
-        .dokpres-hero p {
-            font-size: 18px;
-            color: #cbd5e1;
-            max-width: 700px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
+.dokpres-hero p {
+    font-size: 18px;
+    color: #cbd5e1;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
 
-        /* ============================
+/* ============================
            SECTION PRESTASI
            ============================ */
-        .dokpres-section {
-            padding: 80px 0;
-        }
+.dokpres-section {
+    padding: 80px 0;
+}
 
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
 
-        .section-header h3 {
-            font-size: 32px;
-            font-weight: 700;
-            color: #0f172a;
-            margin-bottom: 10px;
-        }
+.section-header h3 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 10px;
+}
 
-        .section-header p {
-            font-size: 16px;
-            color: #64748b;
-        }
+.section-header p {
+    font-size: 16px;
+    color: #64748b;
+}
 
-        .dokpres-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-        }
+.dokpres-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
 
-        /* ============================
+/* ============================
            STYLE KARTU PIAGAM
            ============================ */
-        .piagam-card {
-            background: #fff;
-            border-radius: 16px;
-            overflow: hidden;
-            border: 1px solid #e2e8f0;
-            position: relative;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            cursor: pointer;
-        }
+.piagam-card {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+}
 
-        .piagam-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 50px -12px rgba(245, 158, 11, 0.2);
-            border-color: #fcd34d;
-        }
+.piagam-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px -12px rgba(245, 158, 11, 0.2);
+    border-color: #fcd34d;
+}
 
-        /* Thumb Image */
-        .piagam-thumb {
-            width: 100%;
-            height: 220px;
-            overflow: hidden;
-            position: relative;
-            border-bottom: 4px solid #f59e0b;
-        }
+/* Thumb Image */
+.piagam-thumb {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    position: relative;
+    border-bottom: 4px solid #f59e0b;
+}
 
-        .piagam-thumb img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
+.piagam-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
 
-        .piagam-card:hover .piagam-thumb img {
-            transform: scale(1.1);
-        }
+.piagam-card:hover .piagam-thumb img {
+    transform: scale(1.1);
+}
 
-        .thumb-overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: 0.3s;
-        }
+.thumb-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: 0.3s;
+}
 
-        .thumb-overlay i {
-            color: #fff;
-            font-size: 32px;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 15px;
-            border-radius: 50%;
-            backdrop-filter: blur(5px);
-        }
+.thumb-overlay i {
+    color: #fff;
+    font-size: 32px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 15px;
+    border-radius: 50%;
+    backdrop-filter: blur(5px);
+}
 
-        .piagam-card:hover .thumb-overlay {
-            opacity: 1;
-        }
+.piagam-card:hover .thumb-overlay {
+    opacity: 1;
+}
 
-        /* Content */
-        .piagam-content {
-            padding: 25px;
-            text-align: center;
-            position: relative;
-            flex: 1;
-        }
+/* Content */
+.piagam-content {
+    padding: 25px;
+    text-align: center;
+    position: relative;
+    flex: 1;
+}
 
-        .piagam-year-badge {
-            display: inline-block;
-            background: #fffbeb;
-            color: #b45309;
-            font-size: 12px;
-            font-weight: 800;
-            padding: 5px 12px;
-            border-radius: 50px;
-            margin-bottom: 15px;
-            border: 1px solid #fcd34d;
-        }
+.piagam-year-badge {
+    display: inline-block;
+    background: #fffbeb;
+    color: #b45309;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 5px 12px;
+    border-radius: 50px;
+    margin-bottom: 15px;
+    border: 1px solid #fcd34d;
+}
 
-        .piagam-card h4 {
-            font-size: 18px;
-            font-weight: 700;
-            color: #1e293b;
-            margin-bottom: 10px;
-            line-height: 1.4;
-        }
+.piagam-card h4 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
 
-        .piagam-card p {
-            font-size: 14px;
-            color: #64748b;
-            line-height: 1.6;
-            margin-bottom: 0;
-        }
+.piagam-card p {
+    font-size: 14px;
+    color: #64748b;
+    line-height: 1.6;
+    margin-bottom: 0;
+}
 
-        .watermark {
-            position: absolute;
-            bottom: -10px;
-            right: -10px;
-            font-size: 80px;
-            color: #f59e0b;
-            opacity: 0.05;
-            pointer-events: none;
-            transform: rotate(-15deg);
-            transition: 0.4s;
-        }
+.watermark {
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    font-size: 80px;
+    color: #f59e0b;
+    opacity: 0.05;
+    pointer-events: none;
+    transform: rotate(-15deg);
+    transition: 0.4s;
+}
 
-        .piagam-card:hover .watermark {
-            transform: rotate(0deg) scale(1.2);
-            opacity: 0.08;
-        }
+.piagam-card:hover .watermark {
+    transform: rotate(0deg) scale(1.2);
+    opacity: 0.08;
+}
 
-        /* ============================
+/* ============================
            MODAL / POPUP LIGHTBOX (KHUSUS GAMBAR)
            ============================ */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            /* Latar belakang lebih gelap */
-            backdrop-filter: blur(5px);
-            z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: 0.3s ease;
-            padding: 20px;
-        }
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    /* Latar belakang lebih gelap */
+    backdrop-filter: blur(5px);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s ease;
+    padding: 20px;
+}
 
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
 
-        .modal-content-simple {
-            position: relative;
-            max-width: 90%;
-            max-height: 90vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transform: scale(0.8);
-            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
+.modal-content-simple {
+    position: relative;
+    max-width: 90%;
+    max-height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: scale(0.8);
+    transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
 
-        .modal-overlay.active .modal-content-simple {
-            transform: scale(1);
-        }
+.modal-overlay.active .modal-content-simple {
+    transform: scale(1);
+}
 
-        /* Gambar Full di Modal */
-        .modal-content-simple img {
-            max-width: 100%;
-            max-height: 85vh;
-            /* Agar tidak melebihi tinggi layar */
-            display: block;
-            border-radius: 8px;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
-            border: 5px solid #fff;
-            /* Bingkai putih */
-        }
+/* Gambar Full di Modal */
+.modal-content-simple img {
+    max-width: 100%;
+    max-height: 85vh;
+    /* Agar tidak melebihi tinggi layar */
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    border: 5px solid #fff;
+    /* Bingkai putih */
+}
 
-        /* Tombol Close (X) */
-        .modal-close-simple {
-            position: absolute;
-            top: -20px;
-            right: -20px;
-            width: 45px;
-            height: 45px;
-            background: #ef4444;
-            color: white;
-            border: 3px solid #fff;
-            border-radius: 50%;
-            font-size: 20px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: 0.3s;
-            z-index: 10;
-        }
+/* Tombol Close (X) */
+.modal-close-simple {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    width: 45px;
+    height: 45px;
+    background: #ef4444;
+    color: white;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: 0.3s;
+    z-index: 10;
+}
 
-        .modal-close-simple:hover {
-            background: #dc2626;
-            transform: rotate(90deg);
-        }
+.modal-close-simple:hover {
+    background: #dc2626;
+    transform: rotate(90deg);
+}
 
-        /* RESPONSIVE */
-        @media (max-width: 992px) {
-            .dokpres-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
+/* RESPONSIVE */
+@media (max-width: 992px) {
+    .dokpres-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
 
-        @media (max-width: 640px) {
-            .dokpres-grid {
-                grid-template-columns: 1fr;
-            }
+@media (max-width: 640px) {
+    .dokpres-grid {
+        grid-template-columns: 1fr;
+    }
 
-            .modal-content-simple img {
-                width: 100%;
-                height: auto;
-            }
+    .modal-content-simple img {
+        width: 100%;
+        height: auto;
+    }
 
-            .modal-close-simple {
-                top: -15px;
-                right: -10px;
-                width: 35px;
-                height: 35px;
-                font-size: 16px;
-            }
-        }
+    .modal-close-simple {
+        top: -15px;
+        right: -10px;
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+    }
+}
 
-        /* Animasi Fade Up */
-        .fade-up {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeUp 0.8s ease forwards;
-        }
+/* Animasi Fade Up */
+.fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeUp 0.8s ease forwards;
+}
 
-        .delay-1 {
-            animation-delay: 0.1s;
-        }
+.delay-1 {
+    animation-delay: 0.1s;
+}
 
-        .delay-2 {
-            animation-delay: 0.2s;
-        }
+.delay-2 {
+    animation-delay: 0.2s;
+}
 
-        .delay-3 {
-            animation-delay: 0.3s;
-        }
+.delay-3 {
+    animation-delay: 0.3s;
+}
 
-        @keyframes fadeUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
 /* =========================================
    FOOTER MODERN INDIGO - BALAI BAHASA
@@ -2316,7 +2149,7 @@ iframe,
 .map-responsive {
     overflow: hidden;
     /* Membuat rasio aspek 16:9 (seperti video YouTube) agar proporsional */
-    padding-bottom: 56.25%; 
+    padding-bottom: 56.25%;
     position: relative;
     height: 0;
     border-radius: 12px; /* Membuat sudut map melengkung */
