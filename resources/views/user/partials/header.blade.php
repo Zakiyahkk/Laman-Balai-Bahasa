@@ -49,7 +49,7 @@
                 </li>
 
                 <li><a href="/" class="{{ request()->is('/') ? 'active' : '' }}"><i
-                            class="fa-regular fa-compass menu-icon"></i> Beranda</a></li>
+                            class="fa-regular fa-home menu-icon"></i> Beranda</a></li>
 
                 <li class="has-dropdown">
                     <a href="javascript:void(0)" onclick="toggleSub(this)"
@@ -132,7 +132,8 @@
                     </ul>
                 </li>
 
-                <li><a href="{{ url('/ppid/ppid') }}" class="{{ request()->is('ppid*') ? 'active' : '' }}"><i
+                <li><a href="{{ url('https://ppidbbpriau.kemendikdasmen.go.id/') }}"
+                        class="{{ request()->is('ppid*') ? 'active' : '' }}"><i
                             class="fa-regular fa-file-lines menu-icon"></i> PPID</a></li>
                 <li><a href="{{ url('/survei/survei') }}" class="{{ request()->is('survei*') ? 'active' : '' }}"><i
                             class="fa-solid fa-chart-simple menu-icon"></i> Survei</a></li>
