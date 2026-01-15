@@ -135,8 +135,22 @@
                 <li><a href="{{ url('https://ppidbbpriau.kemendikdasmen.go.id/') }}"
                         class="{{ request()->is('ppid*') ? 'active' : '' }}"><i
                             class="fa-regular fa-file-lines menu-icon"></i> PPID</a></li>
-                <li><a href="{{ url('/survei/survei') }}" class="{{ request()->is('survei*') ? 'active' : '' }}"><i
-                            class="fa-solid fa-chart-simple menu-icon"></i> Survei</a></li>
+                <li class="has-dropdown">
+                    <a href="javascript:void(0)" onclick="toggleSub(this)"
+                        class="{{ request()->is('survei*') ? 'active' : '' }}">
+                        <i class="fa-solid fa-chart-simple menu-icon"></i> Survei
+                        <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+                    </a>
+                    <ul class="dropdown">
+                        <li><a href="{{ url('#') }}" class="{{ request()->is('skm*') ? 'active' : '' }}"><i
+                                    class="fa-regular fa-file-lines menu-icon"></i> SKM</a></li>
+                        <li><a href="{{ url('#') }}" class="{{ request()->is('spkp*') ? 'active' : '' }}"><i
+                                    class="fa-regular fa-file-lines menu-icon"></i> SPKP</a></li>
+                        <li><a href="{{ url('#') }}" class="{{ request()->is('spak*') ? 'active' : '' }}"><i
+                                    class="fa-regular fa-file-lines menu-icon"></i> Survei Persepsi Anti Korupsi</a>
+                        </li>
+                    </ul>
+                </li>
                 <li><a href="{{ url('/wbs/wbs') }}" class="{{ request()->is('wbs*') ? 'active' : '' }}"><i
                             class="fa-solid fa-bullhorn menu-icon"></i> WBS</a></li>
                 <li><a href="{{ url('/ziwbk/ziwbk') }}" class="{{ request()->is('ziwbk*') ? 'active' : '' }}"><i
