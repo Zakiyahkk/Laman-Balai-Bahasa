@@ -137,9 +137,8 @@
                             class="fa-regular fa-file-lines menu-icon"></i> PPID</a></li>
                 <li class="has-dropdown">
                     <a href="javascript:void(0)" onclick="toggleSub(this)"
-                        class="{{ request()->is('survei*') ? 'active' : '' }}">
-                        <i class="fa-solid fa-chart-simple menu-icon"></i> Survei
-                        <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+                        class="{{ request()->is('layanan*') ? 'active' : '' }}">
+                        Survei <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
                     </a>
                     <ul class="dropdown">
                         <li><a href="{{ url('#') }}" class="{{ request()->is('skm*') ? 'active' : '' }}"><i
