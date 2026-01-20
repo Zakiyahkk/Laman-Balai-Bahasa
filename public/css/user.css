@@ -41,8 +41,12 @@ body {
     top: 0;
     z-index: 5000;
     width: 100%;
-    background: linear-gradient(to right, #0f172a, #1e3a8a, #2563eb);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(to right, #0f172a, #1e3a8a);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3),
+        0 4px 6px -2px rgba(0, 0, 0, 0.2);
+
+    /* Border bottom */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* PAKSA ICON MENGGUNAKAN FONT AWESOME (Supaya tidak kotak-kotak) */
@@ -189,14 +193,14 @@ body {
 }
 
 .nav-container {
-    max-width: 1400px;
+    max-width: 1200px;
     margin: auto;
     padding: 0 15px; /* Padding sedikit dikurangi */
     width: 100%;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
-    gap: 15px; /* Jarak logo ke menu dirapatkan (sebelumnya 30px) */
+    gap: 50px; /* Jarak logo ke menu dirapatkan (sebelumnya 30px) */
 }
 
 .logo img {
@@ -2907,7 +2911,6 @@ body {
 }
 
 /* ===== TOKOH BAHASA & SASTRA ===== */
-/* ===== TOKOH ===== */
 .tokoh-section {
     padding: 60px 0;
 }
@@ -2936,14 +2939,14 @@ body {
     border: none;
     padding: 8px 14px;
     font-size: 14px;
-    color: #0485c7;
+    color: #1e3a8a;
     cursor: pointer;
     border-radius: 4px;
     transition: all 0.25s ease;
 }
 
 .filter-btn.active {
-    background-color: #0485c7;
+    background-color: #1e3a8a;
     color: #fff;
 }
 
@@ -3859,4 +3862,75 @@ body {
         right: -15px;
         border-width: 3px;
     }
+}
+
+.mahkota-kalam {
+    padding: 80px 0;
+    background: #f8fafc;
+}
+
+.mahkota-kalam .section-header {
+    margin-bottom: 28px;
+}
+
+.mahkota-kalam h2 {
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.mahkota-kalam p {
+    color: #64748b;
+}
+
+/* Tabs */
+.mahkota-tabs {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+}
+
+.mk-tab {
+    padding: 10px 18px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    background: white;
+    cursor: pointer;
+}
+
+.mk-tab.active {
+    background: #1e3a8a;
+    color: white;
+    border-color: #1e3a8a;
+}
+
+/* Content */
+.mahkota-content {
+    display: none;
+}
+
+.mahkota-content.active {
+    display: block;
+}
+
+/* Card */
+.mk-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 24px;
+}
+
+.mk-card {
+    background: white;
+    border-radius: 14px;
+    padding: 16px;
+    text-align: center;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+}
+
+.mk-card img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    border-radius: 10px;
 }
