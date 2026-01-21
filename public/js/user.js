@@ -879,3 +879,19 @@ document.addEventListener("DOMContentLoaded", function () {
         if (e.key === "ArrowRight") next();
     });
 });
+
+document.querySelectorAll(".mk-tab").forEach((tab) => {
+    tab.addEventListener("click", () => {
+        const parent = tab.closest(".mahkota-kalam");
+
+        parent
+            .querySelectorAll(".mk-tab")
+            .forEach((t) => t.classList.remove("active"));
+        parent
+            .querySelectorAll(".mahkota-content")
+            .forEach((c) => c.classList.remove("active"));
+
+        tab.classList.add("active");
+        parent.querySelector("#" + tab.dataset.tab).classList.add("active");
+    });
+});
