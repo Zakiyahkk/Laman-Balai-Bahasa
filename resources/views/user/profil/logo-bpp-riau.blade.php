@@ -19,8 +19,7 @@
         <div class="container">
 
             <div class="brand-header">
-                <span class="badge-header">Official Assets</span>
-                <h1>Logo & Identitas Visual</h1>
+                <h1>Logo </h1>
                 <p>
                     Unduh logo resmi Balai Bahasa Provinsi Riau dalam format PNG (Transparan) dan PDF (Vektor).
                 </p>

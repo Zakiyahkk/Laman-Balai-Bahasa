@@ -2094,8 +2094,7 @@ body {
 }
 
 .footer-brand .footer-logo {
-    display: inline-block;
-    background: #ffffff; /* Putih bersih agar logo terlihat jelas */
+    display: inline-block; /* Putih bersih agar logo terlihat jelas */
     padding: 15px 20px; /* Ruang di dalam kotak putih */
     border-radius: 12px; /* Sudut melengkung yang rapi */
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* Bayangan agar kotak terlihat muncul */

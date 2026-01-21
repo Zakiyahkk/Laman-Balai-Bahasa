@@ -11,15 +11,21 @@
                 </div>
                 <p class="footer-desc">
                     Balai Bahasa Provinsi Riau berperan dalam pengembangan,
-                    pembinaan, dan pelindungan bahasa serta sastra di wilayah Riau.
+                    pembinaan, dan pelindungan bahasa serta sastra di Provinsi Riau.
                 </p>
                 <div class="footer-socials">
-                    <a href="#" class="social-icon facebook" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#" class="social-icon instagram" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" class="social-icon tiktok" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-                    <a href="#" class="social-icon youtube" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-                    <a href="#" class="social-icon whatsapp" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-                    <a href="mailto:balaibahasaprovriau@gmail.com" class="social-icon email" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+                    <a href="#" class="social-icon facebook" aria-label="Facebook"><i
+                            class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon instagram" aria-label="Instagram"><i
+                            class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="social-icon tiktok" aria-label="TikTok"><i
+                            class="fa-brands fa-tiktok"></i></a>
+                    <a href="#" class="social-icon youtube" aria-label="YouTube"><i
+                            class="fa-brands fa-youtube"></i></a>
+                    <a href="#" class="social-icon whatsapp" aria-label="WhatsApp"><i
+                            class="fa-brands fa-whatsapp"></i></a>
+                    <a href="mailto:balaibahasaprovriau@gmail.com" class="social-icon email" aria-label="Email"><i
+                            class="fa-solid fa-envelope"></i></a>
                 </div>
             </div>
 
@@ -70,11 +76,7 @@
                 <div class="map-responsive">
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.669896086782!2d101.37326837496464!3d0.494799999501062!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31d5a9d805f6396f%3A0xe52636a0d4816c4f!2sBalai%20Bahasa%20Provinsi%20Riau!5e0!3m2!1sid!2sid!4v1709440000000!5m2!1sid!2sid"
-                        width="100%"
-                        height="300"
-                        style="border:0;"
-                        allowfullscreen=""
-                        loading="lazy"
+                        width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"
                         referrerpolicy="no-referrer-when-downgrade">
                     </iframe>
                 </div>

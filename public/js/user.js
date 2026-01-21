@@ -710,13 +710,13 @@ const contentData = [
         desc: `<p>Penampilan penuh semangat dari seluruh pegawai Balai Bahasa Provinsi Riau. Membawa pesan perubahan menuju Zona Integritas Wilayah Bebas dari Korupsi (ZI-WBK).</p>`,
     },
     {
-        type: "Podcast",
-        title: "RESAMBASRA: Diskusi Sastra & Bahasa",
+        type: "Siniar",
+        title: "RESAM BASTRA",
         videoId: "PhnYJL-LSx8",
-        desc: `<p>Saksikan episode terbaru dari <span class="yelyel-highlight">RESAMBASRA</span>. Membahas isu-isu terkini mengenai perkembangan bahasa Indonesia dan sastra daerah di Riau.</p>`,
+        desc: `<p>Saksikan episode terbaru dari <span class="yelyel-highlight">RESAM BASTRA</span>. Membahas isu-isu terkini mengenai perkembangan bahasa Indonesia dan sastra daerah di Riau.</p>`,
     },
     {
-        type: "Dokumentasi",
+        type: "Konten",
         title: "Kegiatan Balai Bahasa Riau",
         videoId: "5TAGi3OeScY",
         desc: `<p>Cuplikan kegiatan penting yang diselenggarakan oleh Balai Bahasa Provinsi Riau. Upaya nyata dalam pelindungan dan pemasyarakatan bahasa di tengah masyarakat.</p>`,

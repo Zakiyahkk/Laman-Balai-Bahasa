@@ -50,7 +50,8 @@
 
                 <li><a href="/" class="{{ request()->is('/') ? 'active' : '' }}"><i
                             class="fa-regular fa-home menu-icon"></i> Beranda</a></li>
-
+                <li><a href="{{ url('/ziwbk/ziwbk') }}" class="{{ request()->is('ziwbk*') ? 'active' : '' }}"><i
+                            class="fa-regular fa-book-bookmark menu-icon"></i>SAPA</a></li>
                 <li class="has-dropdown">
                     <a href="javascript:void(0)" onclick="toggleSub(this)"
                         class="{{ request()->is('profil*') ? 'active' : '' }}">
@@ -79,21 +80,23 @@
                     <ul class="dropdown">
                         <li><a href="{{ url('/produk/terbitan-bbpr') }}"><i class="fa-regular fa-copy"></i> Terbitan
                                 BBPR</a></li>
-                        <li><a href="{{ url('/produk/jurnal') }}"><i class="fa-regular fa-newspaper"></i> Jurnal</a>
+                        <li><a href="{{ url('/produk/jurnal') }}"><i class="fa-regular fa-newspaper"></i> Jurnal
+                                Madah</a>
                         </li>
                         <li><a href="{{ url('/produk/majalah') }}"><i class="fa-solid fa-book-open"></i> Majalah
                                 Serindit</a></li>
-                        <li><a href="{{ url('/produk/sembari') }}"><i class="fa-solid fa-language"></i>
-                                Sembari BBPR</a>
-                        <li><a href="{{ url('/produk/peta-pembinaan-bahasa') }}"><i class="fa-solid fa-globe-asia"></i>
+                        <li><a href="{{ url('/produk/sembari') }}"><i class="fa-solid fa-gem"></i>
+                                Sembari ( Serial Terjemahan BBPR)</a>
+                        <li><a href="{{ url('/produk/peta-pembinaan-bahasa') }}"><i class="fa-solid fa-map"></i>
                                 Peta Pembinaan Bahasa</a>
                         </li>
-                        <li><a href="{{ url('/produk/peta-pembinaan-sastra') }}"><i class="fa-solid fa-globe-asia"></i>
+                        <li><a href="{{ url('/produk/peta-pembinaan-sastra') }}"><i class="fa-solid fa-map"></i>
                                 Peta Pembinaan Sastra</a>
                         </li>
-                        <li><a href="{{ url('/produk/bipa') }}"><i class="fa-solid fa-language"></i> BIPA</a>
+                        <li><a href="{{ url('/produk/bipa') }}"><i class="fa-solid fa-globe-asia"></i> SAPA BIPA</a>
                         </li>
-                        <li><a href="{{ url('/produk/kemala') }}"><i class="fa-regular fa-gem"></i> Kemala</a></li>
+                        <li><a href="{{ url('/produk/kemala') }}"><i class="fa-regular fa-language"></i> Kemala (Kamus
+                                Elektronik Bahasa Melayu Riau)</a></li>
                     </ul>
                 </li>
 
@@ -103,18 +106,19 @@
                         Akuntabilitas <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
                     </a>
                     <ul class="dropdown">
-                        <li><a href="{{ url('/akuntabilitas/renstra') }}"><i class="fa-regular fa-map"></i> Renstra</a>
+                        <li><a href="{{ url('/akuntabilitas/renstra') }}"><i class="fa-regular fa-folder"></i>
+                                Renstra</a>
                         </li>
-                        <li><a href="{{ url('/akuntabilitas/lakip') }}"><i class="fa-solid fa-chart-line"></i>
+                        <li><a href="{{ url('/akuntabilitas/dipa') }}"><i class="fa-solid fa-calculator"></i>
                                 DIPA</a></li>
-                        <li><a href="{{ url('/akuntabilitas/lakip') }}"><i class="fa-solid fa-chart-line"></i>
-                                LAKIP</a></li>
+                        <li><a href="{{ url('/akuntabilitas/lakin') }}"><i class="fa-solid fa-folder-minus"></i>
+                                Lakin</a></li>
                         <li><a href="{{ url('/akuntabilitas/perjanjian-kinerja') }}"><i
                                     class="fa-regular fa-file-lines"></i> Perjanjian Kinerja</a></li>
                         <li><a href="{{ url('/akuntabilitas/rencana-aksi') }}"><i
                                     class="fa-regular fa-rectangle-list"></i> Rencana Aksi</a></li>
                         <li><a href="{{ url('/akuntabilitas/sakai') }}"><i class="fa-regular fa-file-lines"></i>
-                                Sakai
+                                SAKAI
                             </a></li>
                     </ul>
                 </li>
@@ -128,7 +132,9 @@
                         <li><a href="#"><i class="fa-solid fa-user-tie"></i> Ahli Bahasa</a></li>
                         <li><a href="#"><i class="fa-solid fa-pen-nib"></i> Penerjemahan</a></li>
                         <li><a href="#"><i class="fa-solid fa-graduation-cap"></i> UKBI Adaptif</a></li>
-                        <li><a href="#"><i class="fa-solid fa-book-reader"></i> Perpustakaan</a></li>
+                        <li><a href="#"><i class="fa-solid fa-globe-asia"></i> BIPA </a></li>
+                        <li><a href="#"><i class="fa-solid fa-book"></i> Perpustakaan</a></li>
+                        <li><a href="#"><i class="fa-solid fa-users"></i> Magang </a></li>
                     </ul>
                 </li>
 
@@ -142,11 +148,12 @@
                     </a>
                     <ul class="dropdown">
                         <li><a href="{{ url('#') }}" class="{{ request()->is('skm*') ? 'active' : '' }}"><i
-                                    class="fa-regular fa-file-lines menu-icon"></i> SKM</a></li>
+                                    class="fa-regular fa-file-lines menu-icon"></i> Survei Kepuasan Masyarakat</a></li>
                         <li><a href="{{ url('#') }}" class="{{ request()->is('spkp*') ? 'active' : '' }}"><i
-                                    class="fa-regular fa-file-lines menu-icon"></i> SPKP</a></li>
+                                    class="fa-regular fa-file-lines menu-icon"></i> Survei Persepsi Kualitas
+                                Pelayanan</a></li>
                         <li><a href="{{ url('#') }}" class="{{ request()->is('spak*') ? 'active' : '' }}"><i
-                                    class="fa-regular fa-file-lines menu-icon"></i> Survei Persepsi Anti Korupsi</a>
+                                    class="fa-regular fa-file-lines menu-icon"></i> Survei Persepsi Antikorupsi</a>
                         </li>
                     </ul>
                 </li>

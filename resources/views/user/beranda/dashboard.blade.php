@@ -14,6 +14,4 @@
     @include('user.beranda.dokumenprestasi')
     @include('user.beranda.tokoh_bahasa_sastra')
     @include('user.beranda.mahkota_kalam')
-    @include('user.beranda.kamus')
-
 @endsection
