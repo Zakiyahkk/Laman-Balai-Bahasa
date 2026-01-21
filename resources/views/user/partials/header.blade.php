@@ -132,9 +132,6 @@
                     </ul>
                 </li>
 
-                <li><a href="{{ url('https://ppidbbpriau.kemendikdasmen.go.id/') }}"
-                        class="{{ request()->is('ppid*') ? 'active' : '' }}"><i
-                            class="fa-regular fa-file-lines menu-icon"></i> PPID</a></li>
                 <li class="has-dropdown">
                     <a href="javascript:void(0)" onclick="toggleSub(this)"
                         class="{{ request()->is('layanan*') ? 'active' : '' }}">
@@ -150,6 +147,13 @@
                         </li>
                     </ul>
                 </li>
+
+
+                <li><a href="{{ url('https://ppidbbpriau.kemendikdasmen.go.id/') }}"
+                        class="{{ request()->is('ppid*') ? 'active' : '' }}"><i
+                            class="fa-regular fa-file-lines menu-icon"></i> PPID</a>
+                </li>
+
                 <li><a href="{{ url('/wbs/wbs') }}" class="{{ request()->is('wbs*') ? 'active' : '' }}"><i
                             class="fa-solid fa-bullhorn menu-icon"></i> WBS</a></li>
                 <li><a href="{{ url('/ziwbk/ziwbk') }}" class="{{ request()->is('ziwbk*') ? 'active' : '' }}"><i

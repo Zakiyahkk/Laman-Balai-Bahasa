@@ -7,7 +7,7 @@
 
             <div class="footer-brand" data-aos="fade-up">
                 <div class="footer-logo">
-                    <img src="{{ asset('img/logobalai.png') }}" alt="Logo Balai Bahasa Riau">
+                    <img src="{{ asset('img/logobbpr4.png') }}" alt="Logo Balai Bahasa Riau">
                 </div>
                 <p class="footer-desc">
                     Balai Bahasa Provinsi Riau berperan dalam pengembangan,
@@ -62,14 +62,14 @@
                 <h4>Lokasi Kami</h4>
                 <p class="footer-address">
                     <i class="fa-solid fa-location-dot" style="color: #facc15; margin-right: 8px;"></i>
-                    Jalan Binawidya No.2, Simpang Baru,<br>
+                    Jl. HR. Soebrantas Panam Panam No.Km. 12,5, Simpang Baru,<br>
                     Kec. Tampan, Kota Pekanbaru,<br>
                     Riau 28292
                 </p>
 
                 <div class="map-responsive">
                     <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.669896086782!2d101.37326837496464!3d0.494799999501062!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31d5a9d805f6396f%3A0xe52636a0d4816c4f!2sBalai%20Bahasa%20Provinsi%20Riau!5e0!3m2!1sid!2sid!4v1709440000000!5m2!1sid!2sid"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.682349616947!2d101.3793813749647!3d0.47302599952234275!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31d5a853e3083e97%3A0x5c40a215adfd57fd!2sBalai%20Bahasa%20Riau!5e0!3m2!1sid!2sid!4v1768914854595!5m2!1sid!2sid"
                         width="100%"
                         height="300"
                         style="border:0;"
