@@ -1,45 +1,92 @@
-<section class="mahkota-kalam">
-    <div class="container">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-        <div class="section-header">
-            <h2>Mahkota Kalam Melayu Riau</h2>
-            <p>Tokoh dan Komunitas Penggerak Bahasa dan Sastra Melayu</p>
+<section class="mahkota-section">
+    <div class="mahkota-container">
+
+        <div class="mahkota-header">
+            <div class="mahkota-title-group">
+                <h2 class="mahkota-main-title">Mahkota Kalam Melayu Riau</h2>
+                <p class="mahkota-sub-text">Tokoh dan Komunitas Penggerak Bahasa dan Sastra Melayu</p>
+            </div>
         </div>
 
-        <!-- TAB -->
         <div class="mahkota-tabs">
-            <button class="mk-tab active" data-tab="mk-tokoh">Tokoh Sastra Lisan</button>
-            <button class="mk-tab" data-tab="mk-literasi">Komunitas Literasi</button>
-            <button class="mk-tab" data-tab="mk-komunitas">Komunitas Sastra</button>
+            <button class="mk-tab-btn active" data-tab="mk-tokoh">Tokoh Sastra Lisan</button>
+            <button class="mk-tab-btn" data-tab="mk-literasi">Komunitas Literasi</button>
+            <button class="mk-tab-btn" data-tab="mk-komunitas">Komunitas Sastra</button>
         </div>
 
-        <!-- CONTENT -->
-        <div class="mahkota-content active" id="mk-tokoh">
-            <div class="mk-grid">
-                <div class="mk-card">
-                    <img src="{{ asset('img/maskot-serindit.png') }}">
-                    <h4>Nama Tokoh</h4>
-                    <span>Sastrawan</span>
-                </div>
-                <div class="mk-card">
-                    <img src="{{ asset('img/tokoh/tokoh2.png') }}">
-                    <h4>Nama Tokoh</h4>
-                    <span>Penyair</span>
+        <div class="mahkota-pane active" id="mk-tokoh">
+            <div class="mk-slider-wrapper">
+                <div class="mk-arrow mk-prev"><i class="fa-solid fa-chevron-left"></i></div>
+                <div class="mk-arrow mk-next"><i class="fa-solid fa-chevron-right"></i></div>
+
+                <div class="swiper mahkotaSwiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="mk-card-box">
+                                <div class="mk-img-frame">
+                                    <span class="mk-label label-bahasa">TOKOH BAHASA</span>
+                                    <img src="{{ asset('img/maskot-serindit.png') }}" alt="Tokoh">
+                                </div>
+                                <h4 class="mk-name">Raja Ali Haji</h4>
+                                <p class="mk-info">Bapak Bahasa Indonesia</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="mk-card-box">
+                                <div class="mk-img-frame">
+                                    <span class="mk-label label-bahasa">TOKOH BAHASA</span>
+                                    <img src="{{ asset('img/maskot-serindit.png') }}" alt="Tokoh">
+                                </div>
+                                <h4 class="mk-name">Raja Ali Haji</h4>
+                                <p class="mk-info">Bapak Bahasa Indonesia</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="mk-card-box">
+                                <div class="mk-img-frame">
+                                    <span class="mk-label label-bahasa">TOKOH BAHASA</span>
+                                    <img src="{{ asset('img/maskot-serindit.png') }}" alt="Tokoh">
+                                </div>
+                                <h4 class="mk-name">Raja Ali Haji</h4>
+                                <p class="mk-info">Bapak Bahasa Indonesia</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="mk-card-box">
+                                <div class="mk-img-frame">
+                                    <span class="mk-label label-bahasa">TOKOH BAHASA</span>
+                                    <img src="{{ asset('img/maskot-serindit.png') }}" alt="Tokoh">
+                                </div>
+                                <h4 class="mk-name">Raja Ali Haji</h4>
+                                <p class="mk-info">Bapak Bahasa Indonesia</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="mk-card-box">
+                                <div class="mk-img-frame">
+                                    <span class="mk-label label-bahasa">TOKOH BAHASA</span>
+                                    <img src="{{ asset('img/maskot-serindit.png') }}" alt="Tokoh">
+                                </div>
+                                <h4 class="mk-name">Raja Ali Haji</h4>
+                                <p class="mk-info">Bapak Bahasa Indonesia</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="mahkota-content" id="mk-lisan">
-            <p class="empty">Data sastra lisan belum tersedia</p>
+        <div class="mahkota-pane" id="mk-literasi">
+            <p class="mk-empty-msg">Data belum tersedia</p>
         </div>
-
-        <div class="mahkota-content" id="mk-literasi">
-            <p class="empty">Data komunitas literasi belum tersedia</p>
-        </div>
-
-        <div class="mahkota-content" id="mk-komunitas">
-            <p class="empty">Data komunitas sastra belum tersedia</p>
+        <div class="mahkota-pane" id="mk-komunitas">
+            <p class="mk-empty-msg">Data belum tersedia</p>
         </div>
 
     </div>
 </section>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>

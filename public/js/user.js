@@ -35,52 +35,6 @@ document.addEventListener("DOMContentLoaded", function () {
             slides[slideIndex].classList.add("active");
         }, 4000);
     }
-
-    /* ==================================================
-       TOKOH FILTER + MODAL
-    ================================================== */
-    const filterButtons = document.querySelectorAll(".filter-btn");
-    const cards = document.querySelectorAll(".tokoh-card");
-
-    filterButtons.forEach((btn) => {
-        btn.addEventListener("click", function () {
-            filterButtons.forEach((b) => b.classList.remove("active"));
-            this.classList.add("active");
-
-            const filter = this.dataset.filter;
-
-            cards.forEach((card) => {
-                card.style.display =
-                    filter === "all" || card.classList.contains(filter)
-                        ? "block"
-                        : "none";
-            });
-        });
-    });
-
-    const modal = document.getElementById("tokohModal");
-    const modalFoto = document.getElementById("modalFoto");
-    const modalNama = document.getElementById("modalNama");
-    const modalDeskripsi = document.getElementById("modalDeskripsi");
-    const modalClose = document.querySelector(".tokoh-modal-close");
-
-    if (modal) {
-        document.querySelectorAll(".tokoh-card").forEach((card) => {
-            card.addEventListener("click", function () {
-                modalFoto.src = this.dataset.foto;
-                modalNama.textContent = this.dataset.nama;
-                modalDeskripsi.textContent = this.dataset.deskripsi;
-                modal.classList.add("show");
-            });
-        });
-
-        modalClose.onclick = () => modal.classList.remove("show");
-
-        modal.onclick = (e) => {
-            if (e.target === modal) modal.classList.remove("show");
-        };
-    }
-
     /* ==================================================
        FASILITAS SLIDER + INDICATOR
     ================================================== */
@@ -504,72 +458,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // ================================
 // Popup Pantun & Slider Text
 // ================================
-document.addEventListener("DOMContentLoaded", function () {
-    // --- 1. LOGIKA POPUP PANTUN ---
-    const popup = document.getElementById("welcomePopup");
 
-    // Munculkan popup setelah loading selesai (delay 0.5 detik biar smooth)
-    setTimeout(() => {
-        popup.classList.add("show");
-    }, 500);
-
-    // Fungsi Tutup Popup
-    window.closeWelcomePopup = function () {
-        popup.classList.remove("show");
-    };
-
-    // Tutup kalau klik area gelap (background)
-    popup.addEventListener("click", function (e) {
-        if (e.target === this) {
-            closeWelcomePopup();
-        }
-    });
-
-    // --- 2. LOGIKA SLIDER TEXT (Tetap jalan di belakang) ---
-    const seqBrand = document.getElementById("seq-brand");
-    const seqService = document.getElementById("seq-service");
-
-    // Typed.js
-    const typed = new Typed("#typing-element", {
-        strings: ["Ligat.", "Giat.", "Loyal.", "Inovatif.", "Akuntabel."],
-        typeSpeed: 60,
-        backSpeed: 40,
-        backDelay: 1500,
-        loop: true,
-        showCursor: true,
-        cursorChar: "|",
-    });
-
-    // Looping Slider
-    const showTime = 5000;
-    const serviceTime = 6000;
-
-    function switchState(state) {
-        if (state === "brand") {
-            seqService.classList.remove("active");
-            setTimeout(() => {
-                seqBrand.classList.add("active");
-            }, 500);
-        } else if (state === "service") {
-            seqBrand.classList.remove("active");
-            setTimeout(() => {
-                seqService.classList.add("active");
-            }, 500);
-        }
-    }
-
-    // Jalankan Loop Slider
-    setTimeout(() => {
-        switchState("service");
-    }, showTime);
-
-    setInterval(() => {
-        switchState("brand");
-        setTimeout(() => {
-            switchState("service");
-        }, showTime);
-    }, showTime + serviceTime);
-});
 
 // ================================
 // Pengumuman
@@ -638,6 +527,17 @@ document.addEventListener("DOMContentLoaded", function () {
             closeDocModal();
         }
     });
+});
+
+// Menambahkan kelas warna berdasarkan data-type saat halaman dimuat
+const items = document.querySelectorAll(".pengumuman-item");
+items.forEach((item) => {
+    const type = item.getAttribute("data-type");
+    if (type === "pdf") {
+        item.classList.add("type-pdf");
+    } else if (type === "image") {
+        item.classList.add("type-image");
+    }
 });
 
 // ================================
@@ -880,18 +780,188 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-document.querySelectorAll(".mk-tab").forEach((tab) => {
-    tab.addEventListener("click", () => {
-        const parent = tab.closest(".mahkota-kalam");
+/* =========================================
+   Slider Swiper di halaman Beranda
+========================================= */
+document.addEventListener("DOMContentLoaded", function() {
+    // Inisialisasi Swiper
+    var swiper = new Swiper(".mySwiper", {
+        spaceBetween: 0,
+        effect: "fade", // Efek pudar
+        centeredSlides: true,
+        autoplay: {
+            delay: 4000, // Ganti slide 4 detik
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        // Navigation (Arrow) dihapus sesuai permintaan
+    });
 
-        parent
-            .querySelectorAll(".mk-tab")
-            .forEach((t) => t.classList.remove("active"));
-        parent
-            .querySelectorAll(".mahkota-content")
-            .forEach((c) => c.classList.remove("active"));
+    // Script Popup
+    const popup = document.getElementById('welcomePopup');
+    const closeBtn = document.querySelector('.close-btn');
 
-        tab.classList.add("active");
-        parent.querySelector("#" + tab.dataset.tab).classList.add("active");
+    // Fungsi tutup popup
+    window.closeWelcomePopup = function() {
+        if(popup) popup.style.display = 'none';
+    }
+
+    // Jika ingin popup muncul otomatis saat load, uncomment baris di bawah:
+    // if(popup) popup.style.display = 'flex';
+});
+
+/* =========================================
+   SCRIPT TOKOH BAHASA (INIT CHECK)
+   ========================================= */
+document.addEventListener("DOMContentLoaded", function() {
+    
+    // --- 1. CONFIG SWIPER ---
+    // Cek apakah slider ada di halaman sebelum inisialisasi
+    if (document.querySelector('.tokohSlider')) {
+        
+        // Cek library Swiper
+        if (typeof Swiper !== 'undefined') {
+            var swiper = new Swiper(".tokohSlider", {
+                slidesPerView: 1, 
+                spaceBetween: 25,
+                loop: true,
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: false,
+                    pauseOnMouseEnter: true, 
+                },
+                navigation: {
+                    nextEl: ".tokoh-next",
+                    prevEl: ".tokoh-prev",
+                },
+                breakpoints: {
+                    640: { slidesPerView: 2, spaceBetween: 20 },
+                    768: { slidesPerView: 3, spaceBetween: 25 },
+                    1024: { slidesPerView: 4, spaceBetween: 30 },
+                }
+            });
+        }
+    }
+
+    // --- 2. LOGIC MODAL POPUP ---
+    const modal = document.getElementById('modalTokoh');
+    const mFoto = document.getElementById('mFoto');
+    const mNama = document.getElementById('mNama');
+    const mDesc = document.getElementById('mDesc');
+    const mKat = document.getElementById('mKategori');
+
+    // Fungsi Global Buka Modal
+    window.openTokohModal = function(nama, foto, deskripsi, kategori) {
+        // Set Data
+        if(mNama) mNama.innerText = nama;
+        if(mFoto) mFoto.src = foto;
+        if(mDesc) mDesc.innerText = deskripsi;
+
+        // Set Warna Badge
+        if(mKat) {
+            mKat.className = 'modal-tag'; // Reset class
+            if(kategori === 'bahasa') {
+                mKat.innerText = "Tokoh Bahasa";
+                mKat.className += ' bg-blue';
+            } else if (kategori === 'sastra') {
+                mKat.innerText = "Tokoh Sastra";
+                mKat.className += ' bg-orange';
+            } else {
+                mKat.innerText = "Tokoh Budaya";
+                mKat.className += ' bg-green';
+            }
+        }
+        
+        // Tampilkan Modal
+        if(modal) {
+            modal.style.display = 'flex';
+            setTimeout(() => {
+                modal.classList.add('active');
+            }, 10);
+        }
+    }
+
+    // Fungsi Global Tutup Modal
+    window.closeTokohModal = function() {
+        if(modal) {
+            modal.classList.remove('active');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300); 
+        }
+    }
+
+    // Close jika klik backdrop
+    if(modal) {
+        modal.addEventListener('click', function(e) {
+            if(e.target === modal || e.target.classList.contains('modal-backdrop')) {
+                closeTokohModal();
+            }
+        });
+    }
+});
+
+
+/* =========================================
+   SCRIPT MAHKOTA KALAM (TAB & SLIDER)
+   ========================================= */
+document.addEventListener("DOMContentLoaded", function() {
+    
+    // Inisialisasi Swiper
+    const initMahkotaSwiper = () => {
+        if (document.querySelector('.mahkotaSwiper')) {
+            return new Swiper(".mahkotaSwiper", {
+                slidesPerView: 1,
+                spaceBetween: 15,
+                loop: true,
+                navigation: {
+                    nextEl: ".mk-next",
+                    prevEl: ".mk-prev",
+                },
+                breakpoints: {
+                    480: { slidesPerView: 2 },
+                    768: { slidesPerView: 3 },
+                    1024: { slidesPerView: 4 }
+                }
+            });
+        }
+        return null;
+    };
+
+    let mahkotaSlider = initMahkotaSwiper();
+
+    // Fungsi Klik Tab
+    const mkTabs = document.querySelectorAll(".mk-tab-btn");
+    const mkPanes = document.querySelectorAll(".mahkota-pane");
+
+    mkTabs.forEach(tab => {
+        tab.addEventListener("click", () => {
+            const target = tab.getAttribute("data-tab");
+
+            // Update Active Tab Button
+            mkTabs.forEach(t => t.classList.remove("active"));
+            tab.classList.add("active");
+
+            // Update Active Pane
+            mkPanes.forEach(pane => {
+                pane.classList.remove("active");
+                if (pane.id === target) {
+                    pane.classList.add("active");
+                }
+            });
+
+            // Re-inisialisasi Swiper agar tidak rusak di tab baru
+            if (mahkotaSlider) {
+                if (Array.isArray(mahkotaSlider)) {
+                    mahkotaSlider.forEach(s => s.destroy());
+                } else {
+                    mahkotaSlider.destroy();
+                }
+            }
+            mahkotaSlider = initMahkotaSwiper();
+        });
     });
 });

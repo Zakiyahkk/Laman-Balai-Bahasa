@@ -585,3 +585,153 @@
         max-width: 320px;
     }
 }
+
+
+/* =========================================
+   STYLE QUICK ACCESS MENU (KATALOG PRODUK)
+   ========================================= */
+
+/* Container Utama */
+.quick-access-section {
+    position: relative;
+    /* Margin negatif agar naik ke atas menutupi bagian bawah Slider */
+    margin-top: -80px; 
+    z-index: 50; /* Pastikan layer-nya di atas Slider */
+    padding-bottom: 40px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.quick-access-section .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Card Putih Besar */
+.quick-access-card {
+    background: #ffffff;
+    border-radius: 16px;
+    /* Shadow lembut di sekeliling card */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1); 
+    padding: 30px;
+    border: 1px solid #e2e8f0;
+}
+
+/* Grid Layout (4 Kolom x 3 Baris) */
+.access-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 Kolom */
+    gap: 20px;
+    row-gap: 25px;
+}
+
+/* Item Aplikasi Individual */
+.access-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+    padding: 12px;
+    border-radius: 12px;
+    transition: all 0.2s ease-in-out;
+    background: transparent;
+    border: 1px solid transparent; /* Border transparan awal */
+}
+
+/* Efek Hover */
+.access-item:hover {
+    background: #f8fafc;
+    border-color: #f1f5f9;
+    transform: translateY(-3px); /* Efek naik sedikit */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+/* Kotak Ikon (Kiri) */
+.icon-wrap {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+    
+    /* Style Outline mirip logo aplikasi */
+    background: #fff;
+    border: 2px solid; 
+}
+
+/* Teks (Kanan) */
+.text-wrap {
+    display: flex;
+    flex-direction: column;
+}
+
+.app-title {
+    font-weight: 700;
+    font-size: 14px;
+    color: #0f172a;
+    line-height: 1.2;
+    margin-bottom: 2px;
+}
+
+.app-sub {
+    font-size: 11px;
+    color: #64748b;
+    font-weight: 500;
+}
+
+/* ============================
+   WARNA-WARNI IKON (Palette)
+   ============================ */
+.color-blue      { color: #2563eb; border-color: #dbeafe; background: #eff6ff; }
+.color-cyan      { color: #0891b2; border-color: #cffafe; background: #ecfeff; }
+.color-indigo    { color: #4f46e5; border-color: #e0e7ff; background: #eef2ff; }
+.color-red       { color: #dc2626; border-color: #fee2e2; background: #fef2f2; }
+.color-rose      { color: #e11d48; border-color: #ffe4e6; background: #fff1f2; }
+.color-orange    { color: #ea580c; border-color: #ffedd5; background: #fff7ed; }
+.color-purple    { color: #9333ea; border-color: #f3e8ff; background: #faf5ff; }
+.color-green     { color: #16a34a; border-color: #dcfce7; background: #f0fdf4; }
+.color-teal      { color: #0d9488; border-color: #ccfbf1; background: #f0fdfa; }
+.color-blue-dark { color: #1e3a8a; border-color: #dbeafe; background: #eff6ff; }
+.color-slate     { color: #475569; border-color: #e2e8f0; background: #f8fafc; }
+.color-pink      { color: #db2777; border-color: #fce7f3; background: #fdf2f8; }
+
+/* ============================
+   RESPONSIVE (HP & Tablet)
+   ============================ */
+@media (max-width: 1024px) {
+    .access-grid {
+        grid-template-columns: repeat(3, 1fr); /* 3 Kolom di Tablet */
+    }
+}
+
+@media (max-width: 768px) {
+    .quick-access-section {
+        margin-top: -40px; /* Kurangi efek naik di HP */
+    }
+    .access-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 Kolom di HP */
+        gap: 15px;
+    }
+    .quick-access-card {
+        padding: 20px;
+    }
+    .icon-wrap {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
+    .app-title { font-size: 13px; }
+}
+
+@media (max-width: 480px) {
+    .access-grid {
+        grid-template-columns: 1fr; /* 1 Kolom di HP Kecil */
+    }
+    .access-item {
+        border-bottom: 1px solid #f1f5f9;
+        padding: 10px 5px;
+    }
+}
