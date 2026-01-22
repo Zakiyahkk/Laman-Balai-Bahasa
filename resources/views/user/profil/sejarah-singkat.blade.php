@@ -6,100 +6,112 @@
     <link rel="stylesheet" href="{{ asset('css/profil.css') }}">
 @endsection
 
+
 @section('content')
     <section class="sejarah-page profile-hero profil-theme">
-
         <div class="hero-bg">
             <img src="https://ppidbbpriau.kemendikdasmen.go.id/images/gedung-balai.jpeg" alt="Gedung Balai">
         </div>
 
         <div class="container sejarah-container">
 
+            {{-- HEADER --}}
             <div class="sejarah-header">
                 <h1>Sejarah Singkat</h1>
                 <p>Dokumentasi perjalanan Balai Bahasa Provinsi Riau dari awal berdiri hingga sekarang.</p>
             </div>
 
-            {{-- TIMELINE --}}
-            <div class="sejarah-timeline">
+            {{-- KONTEN UTAMA --}}
+            <div class="sejarah-content">
 
-                {{-- PERIODE 1 --}}
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>Awal Berdiri (Contoh: 2005–2010)</h3>
-                        <p>Dokumentasi awal kegiatan, perintisan program, dan perkembangan fasilitas.</p>
+                {{-- DESKRIPSI SEJARAH --}}
+                <div class="sejarah-deskripsi">
+                    <h4>Sejarah Singkat Balai Bahasa Provinsi Riau</h4>
+                    <div class="text-box">
+                        Balai Bahasa Provinsi Riau awalnya bernama Balai Bahasa Pekanbaru yang berdiri
+                        berdasarkan Keputusan Menteri Pendidikan dan Kebudayaan Nomor 226/0/1999 Tanggal 23
+                        September 1999 dan sesuai dengan DIK 1997/1998 Pusat Pembinaan dan Pengembangan
+                        Bahasa Jakarta. Balai bahasa dibangun di atas sebidang tanah yang luasnya 2000 meter
+                        persegi terletak di Kampus UNRI, Jalan H.R. Subrantas Km. 12,5 Simpang Baru,
+                        Pekanbaru. Tanah ini dihibahkan oleh Pemerintah Provinsi Riau pada bulan April 1997. Luas
+                        bangunan Balai Bahasa Pekanbaru adalah 2000 meter. Meskipun perkembangannya masih
+                        70%, Balai Bahasa Pekanbaru sudah mulai dioperasikan secara resmi pada tanggal 28 Oktober 2000.
+                        <br><br>
 
-                        <div class="sejarah-gallery">
-                            <a class="sejarah-photo" href="{{ asset('img/pantun.jpg') }}" target="_blank">
-                                <img src="{{ asset('img/pantun.jpg') }}" alt="Awal 1">
-                            </a>
-                            <a class="sejarah-photo" href="{{ asset('img/buku.jpg') }}" target="_blank">
-                                <img src="{{ asset('img/buku.jpg') }}" alt="Awal 2">
-                            </a>
-                            <a class="sejarah-photo" href="{{ asset('img/pantun2.png') }}" target="_blank">
-                                <img src="{{ asset('img/pantun2.png') }}" alt="Awal 3">
-                            </a>
-                        </div>
+                        Melalui Permendikbud Nomor 21 Tahun 2012 (dan perubahan berikutnya dengan
+                        Permendikbud/Permendikbudristek), nomenklatur Balai Bahasa Pekanbaru diubah menjadi Balai Bahasa
+                        Provinsi Riau,
+                        selaras dengan nomenklatur UPT Balai Bahasa di provinsi lain. Perubahan ini diperbarui kembali dalam
+                        Permendikbudristek
+                        Nomor 12 Tahun 2022, serta diperkuat dalam Permendikbudristek Nomor 47 Tahun 2024, yang menjelaskan
+                        nomenklatur resmi Balai
+                        Bahasa Provinsi Riau dengan lokasi di Kota Pekanbaru dan wilayah kerja Provinsi Riau. Balai Bahasa
+                        Provinsi Riau adalah Unit
+                        Pelaksana Teknis (UPT) di bawah Badan Pengembangan dan Pembinaan Bahasa, Kementerian Pendidikan
+                        Pendidikan Dasar dan Menengah,
+                        yang berkedudukan di Kota Pekanbaru, dengan wilayah kerja meliputi seluruh Provinsi Riau.
+
+                        <br><br>
+
+                        Balai ini memiliki mandat untuk menjalankan tugas pengembangan, pembinaan,
+                        pelindungan,dan fasilitasi kebahasaan dan kesastraan, baik dalam bahasa Indonesia
+                        maupun bahasa daerah yang hidup dan berkembang di Riau.
                     </div>
                 </div>
 
-                {{-- PERIODE 2 --}}
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>Masa Pengembangan (Contoh: 2011–2016)</h3>
-                        <p>Kegiatan kebahasaan, pendampingan, serta penguatan layanan publik.</p>
-
-                        <div class="sejarah-gallery">
-                            <a class="sejarah-photo" href="{{ asset('img/sejarah/pengembangan-1.jpg') }}" target="_blank">
-                                <img src="{{ asset('img/sejarah/pengembangan-1.jpg') }}" alt="Pengembangan 1">
-                            </a>
-                            <a class="sejarah-photo" href="{{ asset('img/sejarah/pengembangan-2.jpg') }}" target="_blank">
-                                <img src="{{ asset('img/sejarah/pengembangan-2.jpg') }}" alt="Pengembangan 2">
-                            </a>
-                            <a class="sejarah-photo" href="{{ asset('img/sejarah/pengembangan-3.jpg') }}" target="_blank">
-                                <img src="{{ asset('img/sejarah/pengembangan-3.jpg') }}" alt="Pengembangan 3">
-                            </a>
+                {{-- GAMBAR ILUSTRASI (LANDSCAPE) --}}
+                <div class="sejarah-illustration">
+                    <div class="upload-box">
+                        <div class="upload-placeholder">
+                            Tidak ada gambar
                         </div>
                     </div>
-                </div>
 
-                {{-- PERIODE 3 --}}
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>Sekarang (Contoh: 2017–Sekarang)</h3>
-                        <p>Inovasi layanan, kegiatan terbaru, dan dokumentasi terkini.</p>
+                    <div class="upload-box">
+                        <div class="upload-placeholder">
+                            Tidak ada gambar
+                        </div>
+                    </div>
 
-                        <div class="sejarah-gallery">
-                            <a class="sejarah-photo" href="{{ asset('img/sejarah/sekarang-1.jpg') }}" target="_blank">
-                                <img src="{{ asset('img/sejarah/sekarang-1.jpg') }}" alt="Sekarang 1">
-                            </a>
-                            <a class="sejarah-photo" href="{{ asset('img/sejarah/sekarang-2.jpg') }}" target="_blank">
-                                <img src="{{ asset('img/sejarah/sekarang-2.jpg') }}" alt="Sekarang 2">
-                            </a>
-                            <a class="sejarah-photo" href="{{ asset('img/sejarah/sekarang-3.jpg') }}" target="_blank">
-                                <img src="{{ asset('img/sejarah/sekarang-3.jpg') }}" alt="Sekarang 3">
-                            </a>
+                    <div class="upload-box">
+                        <div class="upload-placeholder">
+                            Tidak ada gambar
+                        </div>
+                    </div>
+
+                    <div class="upload-box">
+                        <div class="upload-placeholder">
+                            Tidak ada gambar
                         </div>
                     </div>
                 </div>
 
             </div>
 
-        </div>
-        {{-- LIGHTBOX --}}
-        <div id="lightbox" class="lightbox" aria-hidden="true">
-            <button class="lightbox-close" type="button" aria-label="Tutup">&times;</button>
-            <button class="lightbox-nav prev" type="button" aria-label="Sebelumnya">&#10094;</button>
+            {{-- GALERI FOTO --}}
+            <div class="sejarah-galeri">
+                <h4>Tokoh Pimpinan Terdahulu</h4>
+                <p class="galeri-desc">
+                    Dokumentasi para tokoh yang pernah memimpin Balai Bahasa Provinsi Riau dari masa ke masa.
+                </p>
 
-            <div class="lightbox-content">
-                <img id="lightbox-img" src="" alt="Preview">
-                <div id="lightbox-caption" class="lightbox-caption"></div>
+                <div class="sejarah-galeri-grid">
+                    <div class="galeri-box">
+                        <span>Kosong</span>
+                    </div>
+                    <div class="galeri-box">
+                        <span>Kosong</span>
+                    </div>
+                    <div class="galeri-box">
+                        <span>Kosong</span>
+                    </div>
+                    <div class="galeri-box">
+                        <span>Kosong</span>
+                    </div>
+                </div>
             </div>
 
-            <button class="lightbox-nav next" type="button" aria-label="Berikutnya">&#10095;</button>
+
         </div>
     </section>
 @endsection
