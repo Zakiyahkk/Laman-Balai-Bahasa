@@ -358,6 +358,8 @@ body {
     background: rgba(255, 255, 255, 0.1);
 }
 
+
+
 /* ===========================
    5. FIX RESPONSIVE & MOBILE
    =========================== */
@@ -567,6 +569,108 @@ body {
     }
 }
 
+/* =======================================================
+   FIX MULTI-LEVEL DROPDOWN ZI-WBK (OPEN LEFT - 1 ARROW)
+   ======================================================= */
+
+@media (min-width: 992px) {
+    /* Pastikan induk relatif */
+    .nav-menu li.has-dropdown {
+        position: relative;
+    }
+
+    /* 1. Atur Dropdown Level 2 & 3 agar muncul di KIRI */
+    .dropdown .has-dropdown .dropdown {
+        position: absolute;
+        top: 0;
+        left: auto;
+        right: 100%; 
+        margin-top: -8px;
+        margin-right: 2px; /* Jarak halus antar box */
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(10px);
+        transition: all 0.3s ease;
+        border-radius: 12px;
+        min-width: 280px;
+        z-index: 7000;
+    }
+
+    /* Munculkan saat di-hover */
+    .dropdown .has-dropdown:hover > .dropdown {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(0);
+    }
+
+    /* 2. SEMBUNYIKAN PANAH BAWAAN HTML DI DALAM DROPDOWN */
+    /* Ini agar tidak muncul dua panah */
+    .dropdown .has-dropdown > a i.fa-solid.fa-chevron-right,
+    .dropdown .has-dropdown > a i.dropdown-arrow {
+        display: none !important;
+    }
+
+    /* 3. TAMBAHKAN PANAH BARU DI SISI KIRI (::before) */
+    .dropdown .has-dropdown > a::before {
+        content: "\f053"; /* FontAwesome Chevron-Left */
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        font-size: 9px;
+        position: absolute;
+        left: 12px; /* Posisi di paling kiri */
+        color: #94a3b8;
+        transition: color 0.3s;
+    }
+
+    /* Beri ruang di kiri teks agar tidak menabrak panah baru */
+    .dropdown .has-dropdown > a {
+        padding-left: 30px !important;
+        position: relative;
+    }
+
+    /* Warna panah saat hover */
+    .dropdown .has-dropdown:hover > a::before {
+        color: #1e3a8a;
+    }
+}
+
+/* FIX UNTUK MOBILE */
+@media (max-width: 1200px) {
+    .dropdown .has-dropdown .dropdown {
+        position: static;
+        width: 100%;
+        display: none;
+        background: rgba(0, 0, 0, 0.05);
+        margin: 5px 0;
+        box-shadow: none;
+        padding-left: 15px;
+    }
+
+    /* Di mobile, biarkan panah bawaan tetap muncul atau sesuaikan */
+    .dropdown .has-dropdown > a i.fa-solid.fa-chevron-right {
+        display: inline-block !important;
+        transform: rotate(90deg); /* Arahkan ke bawah untuk accordion */
+    }
+}
+
+/* FIX UNTUK MOBILE (Mencegah menu kepotong) */
+@media (max-width: 1200px) {
+    .dropdown .has-dropdown .dropdown {
+        position: static; /* Buat dia meluas ke bawah di mobile */
+        width: 100%;
+        opacity: 1;
+        visibility: visible;
+        display: none; /* Dikontrol oleh JS toggleSub Anda */
+        background: rgba(0, 0, 0, 0.05);
+        margin: 5px 0;
+        box-shadow: none;
+        padding-left: 15px; /* Indentasi bertingkat */
+    }
+
+    .has-dropdown.open-sub > .dropdown {
+        display: block !important;
+    }
+}
 /* ==================================================
    SECTION GLOBAL
 ================================================== */
@@ -1314,6 +1418,36 @@ iframe,
         height: 80vh;
     }
 }
+
+/* Warna untuk tipe PDF (Merah) */
+.pengumuman-item.type-pdf {
+    background-color: #fef2f2; /* Merah sangat muda */
+    border-color: #fee2e2;
+}
+
+.pengumuman-item.type-pdf:hover {
+    border-color: #b91919;
+    background-color: #fff1f1;
+}
+
+/* Warna untuk tipe Gambar (Biru) */
+.pengumuman-item.type-image {
+    background-color: #eff6ff; /* Biru sangat muda */
+    border-color: #dbeafe;
+}
+
+.pengumuman-item.type-image:hover {
+    border-color: #125dd6;
+    background-color: #f0f7ff;
+}
+
+/* Penyesuaian ikon agar kontras */
+.type-pdf .doc-icon { color: #b91919; }
+.type-image .doc-icon { color: #125dd6; }
+
+/* Garis dekorasi mengikuti tipe file */
+.pengumuman-item.type-pdf::before { background: #b91919; }
+.pengumuman-item.type-image::before { background: #125dd6; }
 
 /* ==================================================
    MASKOT
@@ -2909,176 +3043,201 @@ body {
     }
 }
 
-/* ===== TOKOH BAHASA & SASTRA ===== */
+/* =======================================================
+   TOKOH BAHASA & SASTRA (STATIC CARD & FIXED LAYOUT)
+   ======================================================= */
+
+/* --- RESET & BASIC SETUP --- */
+.tokoh-section * { box-sizing: border-box; }
+
 .tokoh-section {
     padding: 60px 0;
+    background-color: #ffffff !important; /* Paksa Putih */
+    position: relative;
+    width: 100%;
 }
 
-.tokoh-title {
-    text-align: center;
-    font-size: 30px;
-    margin-bottom: 20px;
+.tokoh-container {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
 }
 
-.tokoh-title span {
-    font-weight: 700;
+/* --- HEADER --- */
+.tokoh-header { text-align: center; margin-bottom: 20px; }
+.tokoh-title { font-size: 2.5rem; font-weight: 800; color: #0f172a; margin: 0; }
+.tokoh-title span { color: #2563eb; }
+.title-line { width: 70px; height: 5px; background: #2563eb; margin: 15px auto 0; border-radius: 20px; }
+
+/* --- SLIDER WRAPPER --- */
+.slider-wrapper-relative {
+    position: relative;
+    padding: 0 60px; /* Space untuk panah */
 }
 
-/* FILTER */
-.tokoh-filter {
-    display: inline-flex;
-    gap: 8px;
-    padding: 6px;
-    background-color: #f5f7fa; /* abu terang, clean */
-    border-radius: 6px;
-    margin-bottom: 40px;
-}
-.filter-btn {
-    background: transparent;
-    border: none;
-    padding: 8px 14px;
-    font-size: 14px;
-    color: #1e3a8a;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: all 0.25s ease;
+/* FIX PADDING AGAR TIDAK KEPOTONG SAAT HOVER */
+.swiper.tokohSlider {
+    padding-top: 50px !important;     /* Ruang aman atas */
+    padding-bottom: 50px !important;  /* Ruang aman bawah */
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    margin-top: -20px; /* Kompensasi visual */
+    overflow: hidden;
 }
 
-.filter-btn.active {
-    background-color: #1e3a8a;
-    color: #fff;
+.swiper-slide {
+    height: auto;
+    display: flex;
+    background: transparent !important;
 }
 
-/* HOVER */
-.filter-btn:hover:not(.active) {
-    background-color: rgba(0, 86, 179, 0.1);
-}
-/* GRID */
-.tokoh-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
-}
-
+/* --- CARD DESIGN (STATIS - TIDAK NAIK) --- */
 .tokoh-card {
-    border: 1px solid #e5e5e5;
-    padding: 10px;
+    width: 100%;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 12px; 
     text-align: center;
-    transition: 0.3s;
+    /* Transisi hanya pada border & shadow */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; 
+    cursor: pointer;
+    border: 1px solid #f1f5f9;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .tokoh-card:hover {
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    /* HAPUS TRANSFORM NAIK */
+    transform: none; 
+    
+    /* Efek aktif: Border biru & shadow sedikit lebih tebal */
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.15); 
+    border-color: #2563eb;
+    z-index: 10;
+}
+
+/* GAMBAR */
+.card-img-wrapper {
+    width: 100%;
+    height: 240px; 
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 15px;
+    background-color: #f8fafc;
 }
 
 .tokoh-card img {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
+    width: 100%; height: 100%; object-fit: cover;
 }
 
-.tokoh-card p {
-    margin-top: 10px;
-    font-size: 14px;
-    font-weight: 500;
+/* LABEL FLOATING */
+.label-tokoh {
+    position: absolute; top: 15px; left: 15px;
+    padding: 5px 12px; border-radius: 50px;
+    font-size: 10px; font-weight: 700; color: #fff;
+    text-transform: uppercase; z-index: 5;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+.bg-blue { background: #2563eb; }
+.bg-orange { background: #f97316; }
+.bg-green { background: #10b981; }
+
+/* INFO TEKS */
+.tokoh-info h3 { font-size: 1.2rem; font-weight: 800; color: #1e293b; margin-bottom: 5px; }
+.tokoh-info p { font-size: 0.9rem; color: #64748b; margin: 0; font-weight: 500; }
+
+/* --- NAVIGASI PANAH --- */
+.tokoh-next, .tokoh-prev {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 45px; height: 45px;
+    background-color: #ffffff;
+    border-radius: 50%; color: #1e293b;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    z-index: 20; display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: all 0.3s;
+    border: 1px solid #e2e8f0;
 }
 
-/* RESPONSIVE */
-@media (max-width: 992px) {
-    .tokoh-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
+.tokoh-next:hover, .tokoh-prev:hover {
+    background-color: #2563eb; color: #fff;
+    transform: translateY(-50%) scale(1.1);
 }
 
-@media (max-width: 768px) {
-    .tokoh-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+.tokoh-prev { left: 0; }
+.tokoh-next { right: 0; }
+
+/* --- MODAL POPUP (COMPACT SIZE) --- */
+.custom-modal {
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 10000; justify-content: center; align-items: center;
+    opacity: 0; transition: opacity 0.3s ease;
 }
 
-@media (max-width: 480px) {
-    .tokoh-grid {
-        grid-template-columns: 1fr;
-    }
+.custom-modal.active { display: flex; opacity: 1; }
+
+.modal-backdrop {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(4px);
 }
 
-/* ===== POPUP / MODAL TOKOH ===== */
-.tokoh-modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.55);
-    z-index: 9999;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
-
-.tokoh-modal.show {
-    display: flex;
-}
-
-.tokoh-modal-content {
-    background: #ffffff;
-    max-width: 500px;
-    width: 100%;
-    border-radius: 6px;
-    padding: 20px;
+.modal-panel {
     position: relative;
-    text-align: center;
-    animation: popupFade 0.25s ease;
+    width: 650px; 
+    max-width: 90%;
+    background: #fff;
+    border-radius: 20px;
+    display: flex; 
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    transform: scale(0.9); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    max-height: 80vh;
 }
 
-/* Image */
-.tokoh-modal-content img {
-    width: 100%;
-    height: 260px;
-    object-fit: cover;
-    margin-bottom: 15px;
+.custom-modal.active .modal-panel { transform: scale(1); }
+
+.modal-left { width: 40%; background-color: #f1f5f9; position: relative; }
+.modal-left img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.modal-right {
+    width: 60%; padding: 30px; position: relative; overflow-y: auto;
+    display: flex; flex-direction: column; justify-content: center;
 }
 
-/* Title */
-.tokoh-modal-content h3 {
-    font-size: 20px;
-    margin-bottom: 10px;
-    font-weight: 600;
+.modal-tag { 
+    display: inline-block; padding: 5px 12px; border-radius: 50px; 
+    font-size: 10px; font-weight: 700; color: #fff; 
+    text-transform: uppercase; margin-bottom: 10px;
 }
 
-/* Description */
-.tokoh-modal-content p {
-    font-size: 14px;
-    line-height: 1.6;
-    color: #444;
+.modal-title { font-size: 1.8rem; color: #0f172a; margin: 0 0 10px 0; font-weight: 800; line-height: 1.2; }
+.modal-divider { width: 40px; height: 4px; background: #2563eb; margin-bottom: 15px; border-radius: 10px; }
+.modal-desc { line-height: 1.6; color: #475569; font-size: 0.95rem; }
+
+.close-btn {
+    position: absolute; top: 15px; right: 15px;
+    width: 30px; height: 30px; border-radius: 50%;
+    background: #f1f5f9; border: none;
+    cursor: pointer; font-size: 16px; color: #64748b;
+    display: flex; align-items: center; justify-content: center;
+    transition: 0.2s; z-index: 10;
+}
+.close-btn:hover { background: #ef4444; color: #fff; }
+
+/* RESPONSIF */
+@media (max-width: 768px) {
+    .slider-wrapper-relative { padding: 0; }
+    .tokoh-next, .tokoh-prev { display: none; }
+    
+    .modal-panel { flex-direction: column; width: 400px; }
+    .modal-left { width: 100%; height: 200px; }
+    .modal-right { width: 100%; padding: 25px; }
 }
 
-/* Close button */
-.tokoh-modal-close {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 22px;
-    cursor: pointer;
-    color: #333;
-}
-
-/* Animation */
-@keyframes popupFade {
-    from {
-        opacity: 0;
-        transform: scale(0.95);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-/* Mobile */
-@media (max-width: 480px) {
-    .tokoh-modal-content img {
-        height: 200px;
-    }
-}
 
 /* ==================================================
    FASILITAS SLIDER (rapi + responsif mobile)
@@ -3096,8 +3255,8 @@ body {
 }
 
 /* ============================
-           FASILITAS SECTION
-           ============================ */
+    FASILITAS SECTION
+============================ */
 .fasilitas-section {
     padding: 80px 20px;
     overflow: hidden;
@@ -3319,6 +3478,7 @@ body {
     font-weight: 600;
 }
 
+
 /* Dropdown utama */
 .nav-item {
     position: relative;
@@ -3337,12 +3497,21 @@ body {
 .dropdown-submenu > .dropdown-menu {
     top: 0;
     left: 100%;
-    display: none;
+    margin-top: -6px;
+    margin-left: -1px;
+    display: none; /* Sembunyikan secara default */
 }
-
 /* Hover submenu */
 .dropdown-submenu:hover > .dropdown-menu {
     display: block;
+}
+
+/* Fix untuk Mobile agar bisa diklik bertahap */
+@media (max-width: 991px) {
+    .nav-menu .dropdown .dropdown {
+        padding-left: 15px; /* Memberi jarak agar terlihat berjenjang */
+        background: rgba(0,0,0,0.03);
+    }
 }
 
 /* Link style */
@@ -3680,109 +3849,32 @@ body {
         max-width: 140px;
     }
 }
-
-/* ===========================
-   POPUP PANTUN
-   =========================== */
-.pantun-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7); /* Latar gelap transparan */
-    z-index: 9999; /* Paling depan */
-    display: none; /* Default sembunyi, JS akan memunculkannya */
-    justify-content: center;
-    align-items: center;
-    backdrop-filter: blur(5px); /* Efek blur di belakang */
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-/* Class untuk memunculkan popup */
-.pantun-overlay.show {
-    display: flex;
-    opacity: 1;
-}
-
-.pantun-box {
-    position: relative;
-    width: 90%;
-    max-width: 500px; /* Ukuran maksimal gambar */
-    background: transparent;
-    border-radius: 15px;
-    transform: scale(0.8);
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.pantun-overlay.show .pantun-box {
-    transform: scale(1); /* Efek zoom in saat muncul */
-}
-
-.pantun-img {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    border: 4px solid #fff; /* Bingkai putih */
-}
-
-/* Tombol Close */
-.close-pantun {
-    position: absolute;
-    top: -15px;
-    right: -15px;
-    background: #ef4444;
-    color: white;
-    border: none;
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    font-size: 18px;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.2s;
-    z-index: 10;
-}
-
-.close-pantun:hover {
-    transform: scale(1.1) rotate(90deg);
-    background: #dc2626;
-}
-
-/* ===========================
-   STYLE POPUP PANTUN
-   =========================== */
-/* ===========================
-   STYLE POPUP TENGAH (FIXED SIZE)
-   =========================== */
+/* =======================================================
+   POPUP PANTUN - STYLES
+   ======================================================= */
 .popup-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.85); /* Background Gelap Pekat */
+    background: rgba(0, 0, 0, 0.85); /* Latar belakang gelap */
     backdrop-filter: blur(5px);
-    z-index: 10000; /* Paling Depan */
-
+    z-index: 99999; /* Sangat tinggi agar di atas navbar/slider */
+    
+    /* Centering content */
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px; /* Tambah padding agar tidak nempel pinggir layar HP */
+    padding: 20px;
 
-    /* Default: Sembunyi */
+    /* Status Sembunyi untuk Animasi */
     opacity: 0;
     visibility: hidden;
-    transition: all 0.5s ease-in-out;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
 }
 
-/* Class saat popup muncul */
+/* Munculkan popup */
 .popup-overlay.show {
     opacity: 1;
     visibility: visible;
@@ -3790,17 +3882,14 @@ body {
 
 .popup-box {
     position: relative;
-    /* HAPUS width dan max-width fix disini agar mengikuti ukuran gambar */
     background: transparent;
-
-    /* Animasi Zoom In */
-    transform: scale(0.5);
-    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-
-    /* Pastikan box tidak melebihi layar */
     max-width: 100%;
     max-height: 100%;
-    display: flex; /* Penting agar gambar di dalamnya bisa diatur max-height nya */
+    display: flex;
+    
+    /* Efek Zoom In */
+    transform: scale(0.5);
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .popup-overlay.show .popup-box {
@@ -3808,28 +3897,22 @@ body {
 }
 
 .popup-img {
-    /* LOGIKA BARU AGAR RESPONSIF & TIDAK NEMBUS ATAS */
     display: block;
-    width: auto; /* Biarkan lebar menyesuaikan */
-    height: auto; /* Biarkan tinggi menyesuaikan */
-
-    /* Batasi Maksimal Lebar & Tinggi berdasarkan ukuran layar */
-    max-width: 90vw; /* Maksimal 90% dari Lebar Layar */
-    max-height: 85vh; /* Maksimal 85% dari Tinggi Layar (Sisa 15% untuk tombol close di atas) */
-
+    width: auto;
+    height: auto;
+    max-width: 90vw; /* Responsif lebar */
+    max-height: 80vh; /* Responsif tinggi */
     border-radius: 15px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
     border: 4px solid rgba(255, 255, 255, 0.2);
-    object-fit: contain; /* Menjaga gambar tidak gepeng */
+    object-fit: contain;
 }
 
-/* Tombol Close Besar */
+/* Tombol Close (X) */
 .close-btn {
     position: absolute;
-    /* Posisi disesuaikan agar tidak terlalu jauh jika gambar kecil */
     top: -20px;
     right: -20px;
-
     width: 45px;
     height: 45px;
     background: #ef4444;
@@ -3843,7 +3926,7 @@ body {
     justify-content: center;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     transition: 0.3s;
-    z-index: 10;
+    z-index: 100001;
 }
 
 .close-btn:hover {
@@ -3851,7 +3934,7 @@ body {
     transform: rotate(90deg) scale(1.1);
 }
 
-/* RESPONSIVE UNTUK HP KECIL */
+/* Penyesuaian untuk layar HP */
 @media (max-width: 480px) {
     .close-btn {
         width: 35px;
@@ -3859,77 +3942,293 @@ body {
         font-size: 16px;
         top: -15px;
         right: -15px;
-        border-width: 3px;
     }
 }
 
-.mahkota-kalam {
-    padding: 80px 0;
-    background: #f8fafc;
+/* =======================================================
+   MAHKOTA KALAM SECTION (COMPACT & STATIC)
+   ======================================================= */
+.mahkota-section * { box-sizing: border-box; }
+
+.mahkota-section {
+    padding: 40px 0;
+    background-color: #ffffff;
+    position: relative;
+    width: 100%;
+    font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
-.mahkota-kalam .section-header {
-    margin-bottom: 28px;
+.mahkota-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
 }
 
-.mahkota-kalam h2 {
-    font-size: 30px;
-    font-weight: 700;
+/* HEADER & TITLES */
+.mahkota-header { text-align: left; margin-bottom: 25px; }
+.mahkota-title-group { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.mahkota-main-title { font-size: 1.8rem; font-weight: 800; color: #1e3a8a; margin: 0; }
+.mahkota-sub-text { color: #64748b; font-size: 0.95rem; margin: 0; }
+
+/* TABS NAVIGATION */
+.mahkota-tabs { display: flex; justify-content: flex-start; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
+.mk-tab-btn {
+    background: #ffffff; border: 1px solid #e2e8f0; padding: 8px 18px;
+    border-radius: 6px; font-size: 13px; font-weight: 600; color: #334155;
+    cursor: pointer; transition: all 0.3s;
+}
+.mk-tab-btn.active { background: #1e3a8a; color: #ffffff; border-color: #1e3a8a; }
+
+/* SLIDER & ARROWS */
+.mk-slider-wrapper { position: relative; padding: 0 45px; }
+.swiper.mahkotaSwiper { padding: 10px 5px 20px 5px !important; overflow: hidden; }
+.mk-arrow {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 35px; height: 35px; background: #ffffff; border: 1px solid #e2e8f0;
+    border-radius: 50%; color: #1e293b; display: flex; align-items: center;
+    justify-content: center; cursor: pointer; z-index: 10;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05); transition: 0.3s;
+}
+.mk-arrow:hover { background: #1e3a8a; color: #ffffff; }
+.mk-prev { left: 0; }
+.mk-next { right: 0; }
+
+/* COMPACT CARD DESIGN */
+.mk-card-box {
+    width: 100%; background: #ffffff; border-radius: 15px;
+    border: 1px solid #f1f5f9; overflow: hidden; padding: 12px;
+    text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.mk-img-frame {
+    width: 100%; height: 220px; border-radius: 10px;
+    overflow: hidden; position: relative; margin-bottom: 12px; background-color: #f8fafc;
+}
+.mk-img-frame img { width: 100%; height: 100%; object-fit: cover; }
+
+/* LABELS & TEXT */
+.mk-label {
+    position: absolute; top: 10px; left: 10px; padding: 4px 10px;
+    border-radius: 4px; color: #ffffff; font-size: 9px;
+    font-weight: 800; text-transform: uppercase; z-index: 5;
+}
+.label-bahasa { background: #3b82f6; }
+.label-sastra { background: #ea580c; }
+.mk-name { font-size: 1.15rem; font-weight: 700; color: #1e293b; margin-bottom: 4px; }
+.mk-info { color: #64748b; font-size: 0.85rem; margin: 0; line-height: 1.4; }
+
+.mahkota-pane { display: none; }
+.mahkota-pane.active { display: block; }
+.mk-empty-msg { text-align: center; padding: 30px; color: #94a3b8; font-style: italic; }
+
+@media (max-width: 768px) {
+    .mk-slider-wrapper { padding: 0; }
+    .mk-arrow { display: none; }
+    .mk-img-frame { height: 200px; }
 }
 
-.mahkota-kalam p {
-    color: #64748b;
+/* ===========================
+   Slider Hero Fullscreen
+   =========================== */
+/* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* Tabs */
-.mahkota-tabs {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 32px;
-    flex-wrap: wrap;
-}
-
-.mk-tab {
-    padding: 10px 18px;
-    border-radius: 8px;
-    border: 1px solid #e2e8f0;
-    background: white;
-    cursor: pointer;
-}
-
-.mk-tab.active {
-    background: #1e3a8a;
-    color: white;
-    border-color: #1e3a8a;
-}
-
-/* Content */
-.mahkota-content {
-    display: none;
-}
-
-.mahkota-content.active {
+/* Container Full Screen */
+.hero-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: #000;
+    
+    /* FIX GAP: Menghilangkan garis putih antara header dan slider */
+    margin-top: -5px !important; 
     display: block;
 }
 
-/* Card */
-.mk-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 24px;
-}
-
-.mk-card {
-    background: white;
-    border-radius: 14px;
-    padding: 16px;
-    text-align: center;
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
-}
-
-.mk-card img {
+/* Swiper Styles */
+.swiper {
     width: 100%;
-    aspect-ratio: 3/4;
-    object-fit: cover;
-    border-radius: 10px;
+    height: 100%;
 }
+
+/* Pastikan Flexbox aktif sempurna untuk memusatkan isi */
+.swiper-slide {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    
+    /* SETTINGAN POSISI TENGAH */
+    display: flex !important;             /* Paksa Flexbox */
+    justify-content: center !important;   /* Tengah secara Horizontal (Kiri-Kanan) */
+    align-items: center !important;       /* Tengah secara Vertikal (Atas-Bawah) */
+    text-align: center !important;        /* Teks rata tengah */
+    
+    background: #000;
+    overflow: hidden;
+}
+/* Gambar Background */
+.slide-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    display: block; /* Mencegah margin inline */
+}
+
+/* Overlay Gelap */
+.slide-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7));
+    z-index: 2;
+}
+
+.slide-content {
+    position: relative;
+    z-index: 3;
+    color: #fff;
+    
+    /* Agar teks tidak melebar ke pinggir layar */
+    width: 100%;         
+    max-width: 900px;    /* Batasi lebar agar enak dibaca */
+    margin: 0 auto;      /* Pastikan margin kanan-kiri otomatis */
+    padding: 20px;
+    
+    /* Paksa teks rata tengah di dalam kotak */
+    text-align: center !important; 
+    
+    animation: fadeInUp 1s ease-out;
+}
+
+.slide-title {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.slide-desc {
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+/* Pagination (Titik-titik bawah) - Warna Putih */
+.swiper-pagination-bullet-active {
+    background: #fff;
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+}
+
+.scroll-indicator:hover {
+    opacity: 1;
+}
+
+.scroll-text {
+    display: block;
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Popup Style */
+.popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-box {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+}
+
+.popup-img {
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.close-btn {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    background: #ff0000;
+    color: white;
+    border: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+/* Animations */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .slide-title { font-size: 2rem; }
+    .slide-desc { font-size: 1rem; }
+}
+
+/* --- KUSTOMISASI DOTS (TITIK NAVIGASI) --- */
+
+/* Warna titik saat TIDAK aktif */
+.swiper-pagination-bullet {
+    background-color: #ffffff !important; /* Paksa jadi putih */
+    opacity: 0.5 !important;              /* Agak transparan (50%) supaya beda */
+    width: 10px;                          /* (Opsional) Sesuaikan ukuran */
+    height: 10px;
+}
+
+/* Warna titik saat SEDANG aktif */
+.swiper-pagination-bullet-active {
+    background-color: #ffffff !important; /* Putih terang mutlak */
+    opacity: 1 !important;                /* Tidak transparan sama sekali */
+    transform: scale(1.2);                /* (Opsional) Sedikit lebih besar saat aktif */
+}
+
+
