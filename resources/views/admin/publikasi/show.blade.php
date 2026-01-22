@@ -48,7 +48,6 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 
 
-
 <div class="card border-0 shadow-sm position-relative">
     <div class="card-body p-4">
 
@@ -81,59 +80,68 @@ document.addEventListener("DOMContentLoaded", function () {
         </div>
 
         <!-- PREVIEW AREA -->
-<div class="mb-4">
-    @if($data->file)
-        @php $ext = strtolower(pathinfo($data->file, PATHINFO_EXTENSION)); @endphp
+        <div class="mb-4">
+            @if($data->file)
+                @php $ext = strtolower(pathinfo($data->file, PATHINFO_EXTENSION)); @endphp
 
-        @if($ext === 'pdf')
-            <!-- Jika PDF → preview PDF -->
-            <iframe src="{{ $data->file }}" class="w-100 rounded border mb-3" style="height:450px;"></iframe>
-        @else
-            @if($data->gambar)
-                <!-- Jika bukan PDF dan ada gambar → preview gambar -->
-                <img src="{{ $data->gambar }}" class="img-fluid rounded mb-3"
-                     style="max-width: 100%; height: auto;">
+                @if($ext === 'pdf')
+                    <!-- Jika PDF → preview PDF -->
+                    <iframe src="{{ $data->file }}" class="w-100 rounded border mb-3" style="height:450px;"></iframe>
+                @else
+                    @if($data->gambar)
+                        <!-- Jika bukan PDF dan ada gambar → preview gambar -->
+                        <div class="row mx-n4 mb-4">
+                            <div class="col-12 px-20">
+                                <img src="{{ $data->gambar }}" class="publication-image-wide">
+                            </div>
+                        </div>
+                    @else
+                        <!-- Jika bukan PDF dan tidak ada gambar → tampil file langsung -->
+                        <div class="border rounded p-3 text-center text-muted">
+                            Lampiran tidak dapat ditampilkan sebagai gambar, silakan buka file.
+                        </div>
+                    @endif
+                @endif
+
+                <!-- ALERT KUNING (link klik buka file) hanya jika file bukan PDF -->
+                @if($ext !== 'pdf')
+                <div class="mt-3">
+                    <a href="{{ $data->file }}" target="_blank"
+                    class="alert alert-warning small rounded border d-block text-decoration-none text-dark">
+                        <strong>File terlampir:</strong> {{ basename($data->file) }}
+                        <br><small>(Klik untuk membuka file)</small>
+                    </a>
+                </div>
+                @endif
+
+                <!-- Tombol Download jika diizinkan -->
+                @if($data->allow_download == 1)
+                <div class="mt-2">
+                    <a href="{{ route('admin.publikasi.download', $data->publikasi_id) }}"
+                    class="btn btn-sm fw-semibold"
+                    style="color:#067ac1;">
+                    <i class="bi bi-download me-1"></i> Unduh Lampiran
+                    </a>
+                </div>
+                @endif
+
+            @elseif($data->gambar && !$data->file)
+                <!-- Jika hanya ada gambar → preview gambar -->
+                <div class="row mx-n4 mb-4">
+                    <div class="col-12 px-20">
+                        <img src="{{ $data->gambar }}" class="publication-image-wide">
+                    </div>
+                </div>
+
             @else
-                <!-- Jika bukan PDF dan tidak ada gambar → tampil file langsung -->
-                <div class="border rounded p-3 text-center text-muted">
-                    Lampiran tidak dapat ditampilkan sebagai gambar, silakan buka file.
+                <!-- Jika tidak ada file & tidak ada gambar → gambar default -->
+                <div class="row mx-n4 mb-4">
+                    <div class="col-12 px-20">
+                        <img src="{{ asset('img/logobbpr.png') }}" class="publication-image-wide">
+                    </div>
                 </div>
             @endif
-        @endif
-
-        <!-- ALERT KUNING (link klik buka file) hanya jika file bukan PDF -->
-        @if($ext !== 'pdf')
-        <div class="mt-3">
-            <a href="{{ $data->file }}" target="_blank"
-               class="alert alert-warning small rounded border d-block text-decoration-none text-dark">
-                <strong>File terlampir:</strong> {{ basename($data->file) }}
-                <br><small>(Klik untuk membuka file)</small>
-            </a>
         </div>
-        @endif
-
-        <!-- Tombol Download jika diizinkan -->
-        @if($data->allow_download == 1)
-        <div class="mt-2">
-            <a href="{{ route('admin.publikasi.download', $data->publikasi_id) }}"
-               class="btn btn-sm fw-semibold"
-               style="color:#067ac1;">
-               <i class="bi bi-download me-1"></i> Unduh Lampiran
-            </a>
-        </div>
-        @endif
-
-    @elseif($data->gambar && !$data->file)
-        <!-- Jika hanya ada gambar → preview gambar -->
-        <img src="{{ $data->gambar }}" class="img-fluid rounded mb-3"
-             style="max-width: 100%; height: auto;">
-
-    @else
-        <!-- Jika tidak ada file & tidak ada gambar → gambar default -->
-        <img src="{{ asset('img/logobbpr.png') }}" class="img-fluid rounded mb-3"
-             style="max-width: 100%; height: auto;">
-    @endif
-</div>
 
         <!-- ISI PUBLIKASI -->
         <div class="content-publication">

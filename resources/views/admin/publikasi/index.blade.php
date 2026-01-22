@@ -9,14 +9,15 @@
 
 <div class="page-header d-flex justify-content-between align-items-center mb-4">
     <div>
-        <h3 class="mb-1">Publikasi</h3>
-        <p class="text-muted mb-0">
-            Total publikasi: {{ $total }}
-        </p>
-    </div>
+    <h3 class="mb-1" style="color:#ffffff;">Publikasi</h3>
+    <p class="mb-0" style="color:#ffffff;">
+        Total publikasi: {{ $total }}
+    </p>
+</div>
+
 
     <div class="header-logo">
-        <img src="/img/logobbpr.png"
+        <img src="/img/logobbpr4.png"
              alt="Logo Balai Bahasa Provinsi Riau"
              class="img-fluid header-logo">
     </div>
@@ -59,7 +60,7 @@
 
 
 {{-- ================= DRAF ================= --}}
-<h6 class="text-uppercase text-muted fw-semibold mb-3">Draf</h6>
+<h6 class="text-uppercase fw-semibold mb-3 text-white">Draf</h6>
 
 @foreach($list->where('status','draf') as $item)
 <div class="publication-card d-flex gap-4 mb-3"
@@ -125,7 +126,7 @@
 @endforeach
 
 {{-- ================= TERBIT ================= --}}
-<h6 class="text-uppercase text-muted fw-semibold mb-3 mt-4">Terbit</h6>
+<h6 class="text-uppercase fw-semibold text-white mb-3 mt-4">Terbit</h6>
 
 @foreach($list->where('status','terbit') as $item)
 <div class="publication-card d-flex gap-4 mb-3"

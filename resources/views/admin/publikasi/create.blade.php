@@ -1,7 +1,6 @@
 @extends('admin.layout')
 @section('content')
 
-
 @if(session('success') || session('error'))
 <div id="notif-top" class="notif-top">
     {{ session('success') ?? session('error') }}
@@ -26,12 +25,12 @@
     animation: slideDown 0.5s ease-out forwards;
     opacity: 0;
 }
-
 @keyframes slideDown {
     0% { transform: translate(-50%, -30px); opacity: 0; }
     100% { transform: translate(-50%, 0); opacity: 1; }
 }
 </style>
+
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     const notif = document.getElementById("notif-top");
@@ -39,15 +38,13 @@ document.addEventListener("DOMContentLoaded", function () {
         setTimeout(() => {
             notif.style.opacity = "0";
             notif.style.transition = "0.5s ease";
-        }, 2500); // mulai fade out di 2,5 detik
-
+        }, 2500);
         setTimeout(() => {
             notif.remove();
-        }, 3000); // hilang total di 3 detik
+        }, 3000);
     }
 });
 </script>
-
 
 <div class="page-header d-flex justify-content-between align-items-center mb-4">
     <div>
@@ -69,13 +66,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
             <!-- TANGGAL | KATEGORI | PENULIS -->
             <div class="row mb-3">
-                <!-- TANGGAL -->
                 <div class="col-md-4">
                     <label class="form-label fw-semibold">Tanggal Terbit</label>
                     <input type="date" class="form-control" name="tanggal" value="{{ date('Y-m-d') }}">
                 </div>
 
-                <!-- KATEGORI -->
                 <div class="col-md-4">
                     <label class="form-label fw-semibold">
                         Kategori <span class="text-danger">*</span>
@@ -89,7 +84,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     </select>
                 </div>
 
-                <!-- PENULIS -->
                 <div class="col-md-4">
                     <label class="form-label fw-semibold">Penulis</label>
                     <input type="text" class="form-control" name="penulis" placeholder="Nama penulis">
@@ -104,21 +98,36 @@ document.addEventListener("DOMContentLoaded", function () {
                 <input type="text" class="form-control" name="judul" placeholder="Judul tulisan" required>
             </div>
 
-            <!-- GAMBAR + PREVIEW -->
+            <!-- GAMBAR + PREVIEW (DIUBAH) -->
             <div class="mb-3">
                 <label class="form-label fw-semibold">Gambar Publikasi</label>
-                <input type="file" class="form-control" name="gambar" accept="image/*" onchange="previewImage(event)">
-                <img id="preview" src="{{ asset('img/logobbpr.png') }}" class="img-fluid rounded mt-3" style="max-height:220px;">
+                <input type="file" class="form-control" name="gambar" id="gambarInput"
+                       accept="image/*" onchange="previewImage(event)">
+
+                <div class="position-relative d-inline-block mt-3">
+                    <img id="preview" src="{{ asset('img/logobbpr.png') }}"
+                         class="img-fluid rounded"
+                         style="max-height:220px;">
+
+                    <button type="button"
+                            id="removeImageBtn"
+                            onclick="removeImage()"
+                            class="btn btn-sm btn-danger position-absolute top-0 end-0"
+                            style="display:none;border-radius:50%;">
+                        ✕
+                    </button>
+                </div>
             </div>
 
-            <!-- UPLOAD FILE + PREVIEW -->
+            <!-- UPLOAD FILE + PREVIEW (DIUBAH) -->
             <div class="mb-3">
                 <label class="form-label fw-semibold">Lampiran File (PDF / Excel / Doc)</label>
-                <input type="file" class="form-control" name="file" accept=".pdf,.xls,.xlsx,.doc,.docx" onchange="previewFile(event)">
-
-                <!-- Preview Area -->
+                <input type="file" class="form-control" name="file" id="fileInput"
+                       accept=".pdf,.xls,.xlsx,.doc,.docx"
+                       onchange="previewFile(event)">
                 <div id="filePreview" class="mt-3"></div>
             </div>
+
             <!-- CEKLIS IZIN UNDUH -->
             <div class="form-check mb-4">
                 <input class="form-check-input" type="checkbox" name="allow_download" id="allowDownloadCheck" value="1">
@@ -145,18 +154,24 @@ document.addEventListener("DOMContentLoaded", function () {
 </div>
 
 <script>
+/* ===== PREVIEW GAMBAR ===== */
 function previewImage(event) {
     const img = document.getElementById('preview');
+    const btn = document.getElementById('removeImageBtn');
 
     if (event.target.files.length > 0) {
         img.src = URL.createObjectURL(event.target.files[0]);
-    } else {
-        img.src = "{{ asset('img/logobbpr.png') }}"; // reset ke default jika batal pilih file
+        btn.style.display = 'block';
     }
-
-    img.classList.add('d-block');
 }
 
+function removeImage() {
+    document.getElementById('gambarInput').value = "";
+    document.getElementById('preview').src = "{{ asset('img/logobbpr.png') }}";
+    document.getElementById('removeImageBtn').style.display = 'none';
+}
+
+/* ===== PREVIEW FILE ===== */
 function previewFile(event) {
     const file = event.target.files[0];
     const previewArea = document.getElementById('filePreview');
@@ -166,38 +181,34 @@ function previewFile(event) {
         return;
     }
 
-    const fileURL = URL.createObjectURL(file);
-    const fileType = file.type;
-
-    // Jika PDF → tampilkan di iframe
-    if (fileType === "application/pdf") {
-        previewArea.innerHTML = `<iframe src="${fileURL}" class="w-100 rounded border" style="height:400px;"></iframe>`;
-    }
-
-    // Jika selain PDF → tampil alert kuning yang bisa diklik untuk buka file
-    else {
     const url = URL.createObjectURL(file);
 
     previewArea.innerHTML = `
-    <div class="mt-3">
-        <a href="#" onclick="return false" id="previewLink"
-           class="alert alert-warning small rounded border d-block text-decoration-none text-dark"
-           style="font-weight:400; background:#fff3cd; border-color:#ffeeba; cursor:pointer;">
-            <strong>File terlampir:</strong> ${file.name}
-            <br><small>(Klik untuk membuka file)</small>
-        </a>
-    </div>`;
-
-    // Tambahkan event listener biar alert bisa diklik dan buka file tanpa download
-    document.getElementById("previewLink").addEventListener("click", function (e) {
-        e.preventDefault();
-        window.open(url, '_blank');
-    });
+        <div class="alert d-flex justify-content-between align-items-center rounded"
+             style="background:#fff3cd; border:1px solid #ffeeba;">
+            <div>
+                <strong>${file.name}</strong><br>
+            </div>
+            <div class="d-flex gap-2">
+                <button type="button"
+                        class="btn btn-sm text-white"
+                        style="background:#067ac1"
+                        onclick="window.open('${url}','_blank')">
+                    Buka
+                </button>
+                <button type="button"
+                        class="btn btn-sm btn-outline-danger"
+                        onclick="removeFile()">✕</button>
+            </div>
+        </div>
+    `;
 }
 
-
-
+function removeFile() {
+    document.getElementById('fileInput').value = "";
+    document.getElementById('filePreview').innerHTML = "";
 }
 
 </script>
+
 @endsection

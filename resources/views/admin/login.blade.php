@@ -25,7 +25,7 @@
 
 </head>
 
-<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4" style="background-color:#1e3a8a;">
     <div class="bg-white p-6 sm:p-8 rounded-xl shadow-md w-full max-w-sm sm:max-w-md transition-all">
 
         <!-- Logo -->

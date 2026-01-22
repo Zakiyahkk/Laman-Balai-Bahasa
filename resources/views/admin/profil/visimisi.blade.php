@@ -1,25 +1,48 @@
 @extends('admin.layout')
 
 @section('content')
+<div id="notif-top" class="notif-top d-none"></div>
+<style>
+.notif-top {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #0485c7;
+    color: white;
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 16px;
+    min-width: 300px;
+    text-align: center;
+    z-index: 9999;
+    animation: slideDown 0.5s ease-out forwards;
+    opacity: 0;
+}
 
-@php
-$visi = "Menjadi Lembaga Penyuluhan Pertanian yang profesional dan terpercaya dalam mendukung pembangunan pertanian yang berkelanjutan di Provinsi Riau.";
-$misi = [
-    "Meningkatkan kapasitas dan kompetensi penyuluh pertanian",
-    "Mengembangkan sistem penyuluhan yang inovatif dan adaptif",
-    "Memperkuat kemitraan dengan stakeholder pertanian",
-    "Mendorong adopsi teknologi pertanian modern",
-    "Meningkatkan kesejahteraan petani melalui program pemberdayaan",
-];
-@endphp
+@keyframes slideDown {
+    0% { transform: translate(-50%, -30px); opacity: 0; }
+    100% { transform: translate(-50%, 0); opacity: 1; }
+}
+
+.notif-top.show {
+    opacity: 1;
+}
+
+.notif-top.hide {
+    opacity: 0;
+    transition: 0.5s ease;
+}
+</style>
 
 <!-- ================= HEADER ================= -->
 <div class="page-header d-flex justify-content-between align-items-center mb-4">
     <div>
-        <h3 class="mb-1">Visi & Misi</h3>
-        <p class="text-muted mb-0">Kelola visi dan misi BPP Riau</p>
+        <h3 class="mb-1" style="color:#ffffff;">Visi & Misi</h3>
+        <p class="mb-0" style="color:#ffffff;">Kelola visi dan misi BPP Riau</p>
     </div>
-    <img src="/img/logobbpr.png" class="header-logo">
+    <img src="/img/logobbpr4.png" class="header-logo">
 </div>
 
 <div class="row">
@@ -58,15 +81,16 @@ $misi = [
                       class="form-control mb-3 d-none"
                       rows="6">@foreach($misi as $i => $m){{ ($i+1).'. '.$m."\n" }}@endforeach</textarea>
 
-            <!-- ACTION BUTTON (HANYA EDIT MODE) -->
-            <div id="actionButtons" class="gap-2 d-none">
-                <button class="btn btn-dark px-4">
-                    <i class="bi bi-save me-1"></i> Simpan
-                </button>
+            <!-- ACTION BUTTON -->
+            <div id="actionButtons" class="d-flex gap-2 justify-content-end d-none">
                 <button type="button"
-                        class="btn btn-outline-secondary px-4"
+                        class="btn-action btn-cancel"
                         onclick="cancelEdit()">
                     Batal
+                </button>
+                <button type="button"
+                        class="btn-action btn-save">
+                    Simpan
                 </button>
             </div>
 
@@ -77,20 +101,19 @@ $misi = [
     <div class="col-md-6">
         <div class="card p-4 position-relative h-100">
 
-            <!-- TOMBOL EDIT -->
-            <button class="btn btn-outline-primary btn-sm position-absolute top-0 end-0 m-3"
-                    onclick="enableEdit()">
-                <i class="bi bi-pencil-square"></i> Edit
-            </button>
+            <i class="bi bi-pencil-square position-absolute top-0 end-0 m-3 text-primary"
+               style="cursor:pointer; font-size:1.25rem;"
+               title="Edit"
+               onclick="enableEdit()"></i>
 
             <h5 class="fw-bold mb-3">
                 <i class="bi bi-eye me-1"></i> Preview
             </h5>
 
-            <h6 class="text-primary fw-bold">VISI</h6>
+            <h6 class="fw-bold" style="color:#067ac1;">Visi</h6>
             <p id="visiPreview">{{ $visi }}</p>
 
-            <h6 class="text-primary fw-bold mt-3">MISI</h6>
+            <h6 class="fw-bold mt-3" style="color:#067ac1;">Misi</h6>
             <ol id="misiPreview">
                 @foreach($misi as $item)
                     <li>{{ $item }}</li>
@@ -112,6 +135,7 @@ const actionButtons = document.getElementById('actionButtons');
 const visiPreview = document.getElementById('visiPreview');
 const misiPreview = document.getElementById('misiPreview');
 
+/* ===== MODE EDIT ===== */
 function enableEdit() {
     visiView.classList.add('d-none');
     misiView.classList.add('d-none');
@@ -120,8 +144,11 @@ function enableEdit() {
     misiInput.classList.remove('d-none');
 
     actionButtons.classList.remove('d-none');
+
+    attachSaveHandler();
 }
 
+/* ===== BATAL EDIT (HANYA TOGGLE UI, TIDAK RESET DATA) ===== */
 function cancelEdit() {
     visiInput.classList.add('d-none');
     misiInput.classList.add('d-none');
@@ -130,13 +157,9 @@ function cancelEdit() {
     misiView.classList.remove('d-none');
 
     actionButtons.classList.add('d-none');
-
-    // reset preview
-    visiPreview.innerText = visiView.innerText;
-    misiPreview.innerHTML = misiView.innerHTML;
 }
 
-// LIVE PREVIEW
+/* ===== LIVE PREVIEW ===== */
 visiInput.addEventListener('input', () => {
     visiPreview.innerText = visiInput.value;
 });
@@ -147,6 +170,76 @@ misiInput.addEventListener('input', () => {
         .map(l => `<li>${l.replace(/^\d+\.\s*/, '')}</li>`)
         .join('');
 });
+
+/* ===== SIMPAN ===== */
+function attachSaveHandler() {
+    const saveBtn = document.querySelector('.btn-save');
+
+    saveBtn.onclick = async () => {
+        const visi = visiInput.value;
+        const misi = misiInput.value;
+
+        try {
+            const response = await fetch("{{ route('profil.visimisi.update') }}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                },
+                credentials: "same-origin",
+                body: JSON.stringify({ visi, misi })
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                showNotif(result.message || 'Gagal menyimpan data');
+                return;
+            }
+
+            /* ===== UPDATE DOM SETELAH SIMPAN ===== */
+            visiView.innerText = visi;
+            visiPreview.innerText = visi;
+
+            const lines = misi.split('\n').filter(l => l.trim() !== '');
+            const misiHtml = '<ol>' +
+                lines.map(l => `<li>${l.replace(/^\d+\.\s*/, '')}</li>`).join('')
+                + '</ol>';
+
+            misiView.innerHTML = misiHtml;
+            misiPreview.innerHTML = misiHtml;
+
+            cancelEdit();
+            showNotif('Visi & Misi berhasil disimpan');
+
+        } catch (error) {
+            alert('Terjadi kesalahan server');
+            console.error(error);
+        }
+    };
+}
 </script>
+
+<script>
+function showNotif(message) {
+    const notif = document.getElementById('notif-top');
+
+    notif.textContent = message;
+    notif.classList.remove('d-none', 'hide');
+    notif.classList.add('show');
+
+    // mulai fade out
+    setTimeout(() => {
+        notif.classList.remove('show');
+        notif.classList.add('hide');
+    }, 2500);
+
+    // hapus total
+    setTimeout(() => {
+        notif.classList.add('d-none');
+    }, 3000);
+}
+</script>
+
 
 @endsection

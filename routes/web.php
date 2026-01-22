@@ -13,6 +13,7 @@ use App\Http\Controllers\User\WbsController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\GaleriController;
 use App\Http\Controllers\Admin\PublikasiController;
+use App\Http\Controllers\Admin\AProfilController;
 use App\Http\Controllers\User\ArtikelController;
 
 /*
@@ -30,10 +31,10 @@ Route::get('/berita/{slug}', [BeritaController::class, 'show'])
     ->name('berita.show');
 
 Route::prefix('profil')->group(function () {
-    Route::get('/visi-misi', [ProfileController::class, 'visiMisi']);
+    Route::get('/visimisi', [ProfileController::class, 'visiMisi']);
     Route::get('/sejarah-singkat', [ProfileController::class, 'sejarahSingkat']);
     Route::get('/tugas-dan-fungsi', [ProfileController::class, 'tugasDanFungsi']);
-    Route::get('/struktur-organisasi', [ProfileController::class, 'strukturOrganisasi']);
+    Route::get('/struktur-organisasi',[ProfileController::class, 'strukturOrganisasi']);
     Route::get('/pegawai', [ProfileController::class, 'pegawai']);
     Route::get('/logo-bpp-riau', [ProfileController::class, 'logobppriau']);
 });
@@ -134,20 +135,40 @@ Route::prefix('admin')
         Route::get('/galeri/show', [GaleriController::class, 'show'])->name('admin.galeri.');
 
         Route::prefix('profil')->group(function () {
-            Route::get('/visimisi', function () {
-                return view('admin.profil.visimisi');
-            })->name('admin.profil.visimisi');
-        });
+            // ===== VISI & MISI =====
+            Route::get('/visimisi', [AProfilController::class, 'visiMisi'])
+                ->name('admin.profil.visimisi');
+            Route::post('/visimisi', [AProfilController::class, 'updateVisiMisi'])
+                ->name('profil.visimisi.update');
 
-        Route::prefix('profil')->group(function () {
-            Route::get('/tugasfungsi', function () {
-                return view('admin.profil.tugasfungsi');
-            })->name('admin.profil.tugasfungsi');
-        });
+            // ===== TUGAS & FUNGSI =====
+            Route::get('/tugasfungsi', [AProfilController::class, 'tugasFungsi'])
+                ->name('admin.profil.tugasfungsi');
+            Route::post('/tugasfungsi', [AProfilController::class, 'updateTugasFungsi'])
+                ->name('profil.tugasfungsi.update');
 
+            // ===== STRUKTUR ORGANISASI =====
+            Route::get('/strukturorganisasi', [AProfilController::class, 'strukturorganisasi'])
+                ->name('admin.profil.strukturorganisasi');
+
+            // ===== PEGAWAI =====
+            Route::get('/pegawai', [AProfilController::class, 'pegawai'])
+                ->name('admin.profil.pegawai');
+            Route::post('/pegawai', [AProfilController::class, 'storePegawai'])
+                ->name('admin.profil.pegawai.store');
+            Route::put('/pegawai/{id}', [AProfilController::class, 'updatePegawai'])
+                ->name('admin.profil.pegawai.update');
+            Route::put( '/admin/profil/pegawai/strategis', [AProfilController::class, 'updateStrategis'])
+                ->name('admin.profil.pegawai.updateStrategis');
+            Route::delete('/pegawai/{id}', [AProfilController::class, 'destroyPegawai'])
+                ->name('admin.profil.pegawai.destroy');
+
+
+        });
 
         Route::get('/halamanweb', fn () => view('admin.halamanweb'))->name('admin.halamanweb');
         Route::get('/pengaturan', fn () => view('admin.pengaturan'))->name('admin.pengaturan');
 
-    });
+});
+
 
