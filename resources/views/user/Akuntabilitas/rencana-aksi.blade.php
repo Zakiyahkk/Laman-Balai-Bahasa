@@ -3,50 +3,98 @@
 @section('title', 'Rencana Aksi')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/akuntabilitas.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/akuntabilitas.css') }}">
 @endsection
 
 @section('content')
 
-<div class="ak-container ak-rencana-aksi">
+    <div class="ak-container ak-ra-ui">
 
-    <div class="ak-title">
-        <h1>Rencana Aksi</h1>
-        <p>Pratinjau dokumen Rencana Aksi</p>
-    </div>
-
-    <div class="ak-card">
-
-        <div class="ak-preview">
-            <iframe
-                src="{{ asset('document/dokumentesting1.pdf') }}#zoom=page-width"
-                title="Preview Rencana Aksi">
-            </iframe>
-        </div>
-
-        <div class="ak-content">
-            <h3>Rencana Aksi</h3>
-            <p>
-                Rencana Aksi merupakan dokumen yang memuat langkah-langkah
-                operasional untuk mencapai target kinerja yang telah ditetapkan.
-            </p>
-
-            <p>
-                Dokumen ini digunakan sebagai panduan pelaksanaan dan
-                pemantauan capaian kinerja secara terukur.
-            </p>
-
-            <div class="ak-actions">
-                <a href="{{ asset('document/dokumentesting1.pdf') }}#zoom=page-width"
-                    target="_blank"
-                    class="ak-btn">
-                    <i class="fa-solid fa-file-pdf"></i>
-                    Buka Dokumen Lengkap
-                </a>
+        {{-- Header --}}
+        <div class="ak-pagehead">
+            <h1>Dokumen</h1>
+            <div class="ak-breadcrumb">
+                <a href="{{ url('/') }}">Beranda</a>
+                <span>/</span>
+                <span>Rencana Aksi</span>
             </div>
         </div>
 
+        {{-- Card Judul --}}
+        <div class="ak-card ak-card-section">
+            <div class="ak-section-title">Rencana Aksi</div>
+            <div class="ak-section-subtitle">Rencana Aksi</div>
+        </div>
+
+        {{-- Card Dokumen --}}
+        <div class="ak-card ak-doc-card">
+
+            <form class="ak-tools" method="GET" action="{{ url('/akuntabilitas/rencana-aksi') }}">
+                <div class="ak-tools-row">
+                    <div class="ak-search">
+                        <span class="ak-search-icon">🔎</span>
+                        <input type="text" name="q" value="{{ $q ?? '' }}" placeholder="Masukkan kata kunci">
+                    </div>
+
+                    <select class="ak-year" name="year">
+                        <option value="">Pilih Tahun</option>
+                        @foreach ($years ?? [] as $y)
+                            <option value="{{ $y }}" @selected((string) ($selectedYear ?? '') === (string) $y)>
+                                {{ $y }}
+                            </option>
+                        @endforeach
+                    </select>
+
+                    <button class="ak-btn ak-btn-primary" type="submit">Cari</button>
+
+                    @if (!empty($q) || !empty($selectedYear))
+                        <a class="ak-btn ak-btn-ghost" href="{{ url('/akuntabilitas/rencana-aksi') }}">Reset</a>
+                    @endif
+                </div>
+            </form>
+
+            <div class="ak-table">
+                <div class="ak-thead">
+                    <div>Judul Dokumen</div>
+                    <div class="c">Tahun</div>
+                    <div class="c">Bentuk Berkas</div>
+                    <div class="c">Unduh</div>
+                </div>
+
+                <div class="ak-tbody">
+                    @forelse(($docs ?? []) as $doc)
+                        <div class="ak-row">
+                            <div class="ak-docname">
+                                {{ \Illuminate\Support\Str::title(strtolower($doc['judul'] ?? '-')) }}
+                            </div>
+
+                            <div class="c">
+                                <span class="ak-badge">{{ $doc['tahun'] ?? '-' }}</span>
+                            </div>
+
+                            <div class="c">
+                                <span class="ak-filepill">
+                                    <span class="ak-file-ico">📄</span>
+                                    {{ strtoupper($doc['tipe'] ?? 'PDF') }}
+                                </span>
+                            </div>
+
+                            <div class="c">
+                                <a class="ak-download"
+                                    href="{{ isset($doc['file']) ? asset('storage/' . $doc['file']) : '#' }}"
+                                    target="_blank">
+                                    <i class="fa fa-download" style="font-size: 15px;"></i>
+                                </a>
+                            </div>
+                        </div>
+                    @empty
+                        <div class="ak-empty">Dokumen tidak ditemukan.</div>
+                    @endforelse
+                </div>
+            </div>
+
+        </div>
+
     </div>
-</div>
 
 @endsection

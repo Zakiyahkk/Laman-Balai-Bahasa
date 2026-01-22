@@ -1,167 +1,157 @@
 /* ==================================================
-    Perjanjian Kinerja
+   PERJANJIAN KINERJA
+   (CLONE 100% DARI LAKIN)
 ================================================== */
+.ak-pk-ui {
+    padding: 18px 0 60px;
+}
+/* Header */
+.ak-pk-ui .ak-pagehead {
+    background: #0b2a4a;
+    color: #fff;
+    border-radius: 14px;
+    padding: 22px 20px;
+}
 
+.ak-pk-ui .ak-pagehead h1 {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 900;
+}
+
+.ak-pk-ui .ak-breadcrumb {
+    margin-top: 8px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.ak-pk-ui .ak-breadcrumb a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Card */
+.ak-pk-ui .ak-card {
+    background: #fff;
+    border: 1px solid #e6ecf5;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(16, 24, 40, 0.08);
+}
+
+/* Card Judul */
+.ak-pk-ui .ak-card-section {
+    margin-top: 14px;
+    padding: 16px 20px;
+}
+
+.ak-pk-ui .ak-section-title {
+    font-size: 18px;
+    font-weight: 900;
+}
+
+.ak-pk-ui .ak-section-subtitle {
+    margin-top: 6px;
+    font-size: 14px;
+    color: #6b7a90;
+}
+
+/* Tools */
+.ak-pk-ui .ak-tools {
+    padding: 14px 20px;
+    border-bottom: 1px solid #e6ecf5;
+}
+
+.ak-pk-ui .ak-tools-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.ak-pk-ui .ak-search input,
+.ak-pk-ui .ak-year {
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid #e6ecf5;
+}
+
+/* Button */
+.ak-pk-ui .ak-btn-primary {
+    background: #1d5aa6;
+    color: #fff;
+}
+
+.ak-pk-ui .ak-btn-ghost {
+    border: 1px solid #e6ecf5;
+    background: transparent;
+}
+
+/* Table */
+.ak-pk-ui .ak-thead,
+.ak-pk-ui .ak-row {
+    display: grid;
+    grid-template-columns: 1fr 110px 150px 90px;
+    padding: 14px 20px;
+}
+
+.ak-pk-ui .ak-row {
+    border-top: 1px solid #e6ecf5;
+}
+
+.ak-pk-ui .ak-docname {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 1.35;
+}
+
+/* Badge */
+.ak-pk-ui .ak-badge {
+    background: #eaf2ff;
+    color: #2d5aa6;
+    padding: 6px 10px;
+    border-radius: 999px;
+}
+
+/* File */
+.ak-pk-ui .ak-filepill {
+    padding: 7px 10px;
+    border-radius: 999px;
+    border: 1px solid #e6ecf5;
+}
+
+/* Download */
+.ak-pk-ui .ak-download {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    border: 1px solid #e6ecf5;
+}
+
+/* Empty */
+.ak-pk-ui .ak-empty {
+    padding: 18px 20px;
+    color: #6b7a90;
+}
+
+/* Mobile */
+@media (max-width: 820px) {
+    .ak-pk-ui .ak-thead {
+        display: none;
+    }
+    .ak-pk-ui .ak-row {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+}
+
+/* ======================
+   CONTAINER (GLOBAL)
+====================== */
 .ak-container {
     max-width: 1200px;
     margin: auto;
     margin-top: -40px;
-    padding: 30px 20px;
-}
-
-.ak-title {
-    text-align: center;
-    margin-bottom: 18px;
-}
-
-.ak-title h1 {
-    font-size: 42px;
-    font-weight: 800;
-    letter-spacing: 0.5px;
-    color: #0f172a;
-    position: relative;
-    display: inline-block;
-    padding-bottom: 14px;
-}
-
-.ak-title h1::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 4px;
-    border-radius: 999px;
-    background: linear-gradient(90deg, #1e3a8a, #2563eb);
-}
-
-.ak-title p {
-    margin-top: 18px;
-    font-size: 16px;
-    color: #64748b;
-    letter-spacing: 0.3px;
-}
-
-/* CARD */
-.ak-card {
-    background: #ffffff;
-    border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.ak-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 30px 60px rgba(15, 23, 42, 0.12);
-}
-
-/* PREVIEW */
-.ak-preview {
-    background: #f8fafc;
-    padding: 24px;
-}
-
-.ak-preview iframe {
-    width: 100%;
-    height: 85vh; /* hampir 1 halaman penuh */
-    min-height: 900px; /* rasa A4 */
-    border-radius: 16px;
-    border: 1px solid #e5e7eb;
-    background: #fff;
-}
-
-/* CONTENT */
-.ak-content {
-    padding: 28px 32px;
-}
-
-.ak-content h3 {
-    font-size: 22px;
-    font-weight: 700;
-    color: #1e293b;
-    margin-bottom: 12px;
-}
-
-.ak-content p {
-    font-size: 15px;
-    color: #475569;
-    line-height: 1.7;
-}
-
-/* BUTTON */
-.ak-actions {
-    margin-top: 24px;
-}
-
-.ak-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 22px;
-    background: linear-gradient(135deg, #2563eb, #1d4ed8);
-    color: #ffffff;
-    font-weight: 600;
-    border-radius: 999px;
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
-
-.ak-btn:hover {
-    background: linear-gradient(135deg, #1e40af, #1e3a8a);
-    transform: translateY(-2px);
-}
-
-/* ==================================================
-   MOBILE OPTIMIZATION (HP)
-================================================== */
-@media (max-width: 768px) {
-    .ak-container {
-        padding: 32px 16px;
-    }
-
-    .ak-title h1 {
-        font-size: 28px;
-    }
-
-    .ak-title h1::after {
-        width: 56px;
-        height: 3px;
-    }
-
-    .ak-title p {
-        font-size: 14px;
-    }
-
-    /* Preview PDF di HP */
-    .ak-preview iframe {
-        height: 60vh; /* tidak kepanjangan */
-        min-height: 520px;
-        border-radius: 12px;
-    }
-
-    /* Konten lebih ringkas */
-    .ak-content {
-        padding: 20px 20px 24px;
-    }
-
-    .ak-content h3 {
-        font-size: 18px;
-    }
-
-    .ak-content p {
-        font-size: 14px;
-        line-height: 1.6;
-    }
-
-    /* Tombol full-width biar gampang ditekan */
-    .ak-btn {
-        width: 100%;
-        justify-content: center;
-        font-size: 14px;
-        padding: 12px 16px;
-    }
 }
 
 /* ==================================================
@@ -304,7 +294,6 @@
 .ak-docname {
     font-weight: 400;
     font-size: 13px;
-    text-transform: uppercase;
     line-height: 1.35;
 }
 .c {
@@ -415,9 +404,9 @@
 .ak-renstra-ui .ak-card:hover,
 .ak-renstra-ui .ak-card:focus,
 .ak-renstra-ui .ak-card:active {
-    background: inherit;
-    box-shadow: inherit;
-    transform: none;
+    background: #fff !important;
+    box-shadow: 0 10px 30px rgba(16, 24, 40, 0.08) !important;
+    transform: none !important;
 }
 
 /* Tombol tidak berubah saat hover */
@@ -456,6 +445,8 @@
 
 /* Cursor tetap normal (bukan pointer) di card */
 .ak-renstra-ui .ak-card {
+    transition: none !important;
+    transform: none !important;
     cursor: default;
 }
 
@@ -602,6 +593,23 @@
     border-radius: 12px;
 }
 
+/* =========================================
+   DIPA — MATIKAN SEMUA EFEK HOVER CARD
+========================================= */
+
+.ak-dipa-ui .ak-card {
+    transition: none !important;
+    transform: none !important;
+    cursor: default;
+}
+
+.ak-dipa-ui .ak-card:hover,
+.ak-dipa-ui .ak-card:focus,
+.ak-dipa-ui .ak-card:active {
+    background: #fff !important;
+    box-shadow: 0 10px 30px rgba(16, 24, 40, 0.08) !important;
+    transform: none !important;
+}
 /* Mobile */
 @media (max-width: 820px) {
     .ak-dipa-thead {
@@ -614,11 +622,305 @@
 }
 
 /* ==================================================
-    Lakin
+    LAKIN (SAMA PERSIS RENSTRA & DIPA)
 ================================================== */
+
+.ak-lakin-ui {
+    padding: 18px 0 60px;
+}
+
+/* Header */
+.ak-lakin-ui .ak-pagehead {
+    background: #0b2a4a;
+    color: #fff;
+    border-radius: 14px;
+    padding: 22px 20px;
+}
+
+.ak-lakin-ui .ak-pagehead h1 {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 900;
+}
+
+.ak-lakin-ui .ak-breadcrumb {
+    margin-top: 8px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.ak-lakin-ui .ak-breadcrumb a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Card */
+.ak-lakin-ui .ak-card {
+    background: #fff;
+    border: 1px solid #e6ecf5;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(16, 24, 40, 0.08);
+}
+
+/* Card Judul */
+.ak-lakin-ui .ak-card-section {
+    margin-top: 14px;
+    padding: 16px 20px;
+}
+
+.ak-lakin-ui .ak-section-title {
+    font-size: 18px;
+    font-weight: 900;
+}
+
+.ak-lakin-ui .ak-section-subtitle {
+    margin-top: 6px;
+    font-size: 14px;
+    color: #6b7a90;
+}
+
+/* Tools */
+.ak-lakin-ui .ak-tools {
+    padding: 14px 20px;
+    border-bottom: 1px solid #e6ecf5;
+}
+
+.ak-lakin-ui .ak-tools-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.ak-lakin-ui .ak-search input,
+.ak-lakin-ui .ak-year {
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid #e6ecf5;
+}
+
+/* Button */
+.ak-lakin-ui .ak-btn-primary {
+    background: #1d5aa6;
+    color: #fff;
+}
+
+.ak-lakin-ui .ak-btn-ghost {
+    border: 1px solid #e6ecf5;
+    background: transparent;
+}
+
+/* Table */
+.ak-lakin-ui .ak-thead,
+.ak-lakin-ui .ak-row {
+    display: grid;
+    grid-template-columns: 1fr 110px 150px 90px;
+    padding: 14px 20px;
+}
+
+.ak-lakin-ui .ak-row {
+    border-top: 1px solid #e6ecf5;
+}
+
+.ak-lakin-ui .ak-docname {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 1.35;
+}
+
+/* Badge */
+.ak-lakin-ui .ak-badge {
+    background: #eaf2ff;
+    color: #2d5aa6;
+    padding: 6px 10px;
+    border-radius: 999px;
+}
+
+/* File */
+.ak-lakin-ui .ak-filepill {
+    padding: 7px 10px;
+    border-radius: 999px;
+    border: 1px solid #e6ecf5;
+}
+
+/* Download */
+.ak-lakin-ui .ak-download {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    border: 1px solid #e6ecf5;
+}
+
+/* Empty */
+.ak-lakin-ui .ak-empty {
+    padding: 18px 20px;
+    color: #6b7a90;
+}
+
+/* Mobile */
+@media (max-width: 820px) {
+    .ak-lakin-ui .ak-thead {
+        display: none;
+    }
+    .ak-lakin-ui .ak-row {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+}
+
 /* ==================================================
     Rencana Aksi
 ================================================== */
+
+/* ==================================================
+   RENCANA AKSI
+   (CLONE 100% DARI LAKIN)
+================================================== */
+
+.ak-ra-ui {
+    padding: 18px 0 60px;
+}
+
+/* Header */
+.ak-ra-ui .ak-pagehead {
+    background: #0b2a4a;
+    color: #fff;
+    border-radius: 14px;
+    padding: 22px 20px;
+}
+
+.ak-ra-ui .ak-pagehead h1 {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 900;
+}
+
+.ak-ra-ui .ak-breadcrumb {
+    margin-top: 8px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.ak-ra-ui .ak-breadcrumb a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Card */
+.ak-ra-ui .ak-card {
+    background: #fff;
+    border: 1px solid #e6ecf5;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(16, 24, 40, 0.08);
+}
+
+/* Card Judul */
+.ak-ra-ui .ak-card-section {
+    margin-top: 14px;
+    padding: 16px 20px;
+}
+
+.ak-ra-ui .ak-section-title {
+    font-size: 18px;
+    font-weight: 900;
+}
+
+.ak-ra-ui .ak-section-subtitle {
+    margin-top: 6px;
+    font-size: 14px;
+    color: #6b7a90;
+}
+
+/* Tools */
+.ak-ra-ui .ak-tools {
+    padding: 14px 20px;
+    border-bottom: 1px solid #e6ecf5;
+}
+
+.ak-ra-ui .ak-tools-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.ak-ra-ui .ak-search input,
+.ak-ra-ui .ak-year {
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid #e6ecf5;
+}
+
+/* Button */
+.ak-ra-ui .ak-btn-primary {
+    background: #1d5aa6;
+    color: #fff;
+}
+
+.ak-ra-ui .ak-btn-ghost {
+    border: 1px solid #e6ecf5;
+    background: transparent;
+}
+
+/* Table */
+.ak-ra-ui .ak-thead,
+.ak-ra-ui .ak-row {
+    display: grid;
+    grid-template-columns: 1fr 110px 150px 90px;
+    padding: 14px 20px;
+}
+
+.ak-ra-ui .ak-row {
+    border-top: 1px solid #e6ecf5;
+}
+
+.ak-ra-ui .ak-docname {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 1.35;
+}
+
+/* Badge */
+.ak-ra-ui .ak-badge {
+    background: #eaf2ff;
+    color: #2d5aa6;
+    padding: 6px 10px;
+    border-radius: 999px;
+}
+
+/* File */
+.ak-ra-ui .ak-filepill {
+    padding: 7px 10px;
+    border-radius: 999px;
+    border: 1px solid #e6ecf5;
+}
+
+/* Download */
+.ak-ra-ui .ak-download {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    border: 1px solid #e6ecf5;
+}
+
+/* Empty */
+.ak-ra-ui .ak-empty {
+    padding: 18px 20px;
+    color: #6b7a90;
+}
+
+/* Mobile */
+@media (max-width: 820px) {
+    .ak-ra-ui .ak-thead {
+        display: none;
+    }
+    .ak-ra-ui .ak-row {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+}
 
 /* ==================================================
     sakai

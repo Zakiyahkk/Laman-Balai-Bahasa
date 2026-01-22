@@ -16,7 +16,7 @@
             <div class="ak-breadcrumb">
                 <a href="{{ url('/') }}">Beranda</a>
                 <span>/</span>
-                <span>Dokumen</span>
+                <span>Renstra</span>
             </div>
         </div>
 
@@ -62,7 +62,9 @@
                 <div class="ak-tbody">
                     @forelse(($docs ?? []) as $doc)
                         <div class="ak-row">
-                            <div class="ak-docname">{{ $doc['judul'] ?? '-' }}</div>
+                            <div class="ak-docname">
+                                {{ \Illuminate\Support\Str::title(strtolower($doc['judul'] ?? '-')) }}
+                            </div>
 
                             <div class="c">
                                 <span class="ak-badge">{{ $doc['tahun'] ?? '-' }}</span>
