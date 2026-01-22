@@ -1,31 +1,33 @@
 @extends('layouts.user')
 
-@section('title', 'Berita')
+@section('title', 'Artikel & Alinea')
 
 @section('content')
 
-    <section class="section berita-terbaru artikel-preview">
+    <section class="section berita-terbaru artikel-index">
         <div class="container">
 
             <h2 class="judul-center">
-                Berita <span>Terbaru</span>
+                Artikel dan Alinea <span>Terbaru</span>
             </h2>
 
             <div class="berita-grid">
-
-                @forelse ($berita as $item)
+                @forelse (($items ?? []) as $item)
                     <div class="berita-card">
                         <div class="berita-img">
-                            <span class="badge">BERITA</span>
+                            <span class="badge">
+                                {{ strtoupper($item['kategori'] ?? 'ARTIKEL') }}
+                            </span>
 
-                            <a href="{{ route('berita.show', $item['publikasi_id']) }}">
-                                <img src="{{ $item['gambar_url'] ?? asset('img/img1.png') }}" alt="{{ $item['judul'] }}">
+                            <a href="{{ route('artikel.show', $item['publikasi_id']) }}">
+                                <img src="{{ $item['gambar_url'] ?? asset('img/img1.png') }}"
+                                    alt="{{ $item['judul'] ?? 'Konten' }}">
                             </a>
                         </div>
 
                         <div class="berita-body">
-                            <a href="{{ route('berita.show', $item['publikasi_id']) }}">
-                                <h4>{{ $item['judul'] }}</h4>
+                            <a href="{{ route('artikel.show', $item['publikasi_id']) }}">
+                                <h4>{{ $item['judul'] ?? '-' }}</h4>
                             </a>
 
                             <p>
@@ -34,7 +36,11 @@
 
                             <div class="berita-meta">
                                 <span>
-                                    {{ \Carbon\Carbon::parse($item['tanggal'])->translatedFormat('d F Y') }}
+                                    @if (!empty($item['tanggal']))
+                                        {{ \Carbon\Carbon::parse($item['tanggal'])->translatedFormat('d F Y') }}
+                                    @else
+                                        -
+                                    @endif
                                 </span>
 
                                 <div class="meta-right">
@@ -48,9 +54,8 @@
                         </div>
                     </div>
                 @empty
-                    <p style="text-align:center;">Belum ada berita.</p>
+                    <p style="text-align:center; width:100%;">Belum ada artikel/alinea.</p>
                 @endforelse
-
             </div>
 
         </div>

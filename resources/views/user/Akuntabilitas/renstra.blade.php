@@ -77,9 +77,10 @@
 
                             <div class="c">
                                 <a class="ak-download"
-                                    href="{{ isset($doc['file']) ? asset('storage/' . $doc['file']) : '#' }}" target="_blank"
-                                    title="Unduh">
-                                    <span class="ak-download-ico">⬇️</span>
+                                    href="{{ isset($doc['file']) ? asset('storage/' . $doc['file']) : '#' }}"
+                                    target="_blank" title="Unduh">
+                                    <i class="fa fa-download font-24" data-acc-orgfontsize="15"
+                                        style="font-size: 15px;"></i>
                                 </a>
                             </div>
                         </div>

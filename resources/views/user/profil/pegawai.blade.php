@@ -7,7 +7,10 @@
 @endsection
 
 @section('content')
-    <section class="profil-page profil-pegawai profil-hero" data-bg="{{ asset('img/latar.jpg') }}">
+    <section class="profil-page profil-pegawai profil-hero profil-theme">
+        <div class="hero-bg">
+            <img src="https://ppidbbpriau.kemendikdasmen.go.id/images/gedung-balai.jpeg" alt="Gedung Balai">
+        </div>
         <div class="container profil-container">
 
             <!-- Header -->

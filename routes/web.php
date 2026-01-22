@@ -44,7 +44,6 @@ Route::prefix('artikel')->name('artikel.')->group(function () {
     Route::get('/{slug}', [ArtikelController::class, 'show'])->name('show');
 });
 
-
 Route::prefix('akuntabilitas')->group(function () {
     Route::get('/perjanjian-kinerja', [AkuntabilitasController::class, 'perjanjianKinerja']);
     Route::get('/renstra', [AkuntabilitasController::class, 'renstra']);

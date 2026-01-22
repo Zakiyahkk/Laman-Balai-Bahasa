@@ -7,9 +7,12 @@
 @endsection
 
 @section('content')
-    <section class="profil-page profil-visi-misi profil-hero" data-bg="{{ asset('img/latar.jpg') }}">
-        <div class="container profil-container">
+    <section class="profil-page profil-visi-misi profil-hero profil-theme">
+        <div class="hero-bg">
+            <img src="https://ppidbbpriau.kemendikdasmen.go.id/images/gedung-balai.jpeg" alt="Gedung Balai">
+        </div>
 
+        <div class="container profil-container">
             <div class="profil-header hero-header">
                 <h1>Visi dan Misi</h1>
                 <p class="profil-subtitle">Balai Bahasa Provinsi Riau</p>
@@ -32,7 +35,7 @@
                     <li>Mengembangkan peran bahasa Indonesia di tingkat nasional.</li>
                 </ol>
             </div>
-
         </div>
+
     </section>
 @endsection

@@ -1,192 +1,354 @@
-<header class="bbp-navbar">
-    <div class="bbp-overlay" id="bbpOverlay"></div>
-
-    <!-- TOP BAR -->
+<header class="bbp-navbar" id="navbar">
     <div class="bbp-top">
         <div class="container">
             <div class="bbp-top-left">
-                <span><i class="fa-solid fa-phone"></i>081217352004</span>
-                <span><i class="fa-solid fa-bullhorn"></i>Pengaduan ULT</span>
+                <div class="top-item-box">
+                    <i class="fa-regular fa-clock top-icon-big"></i>
+                    <div class="top-text-stack">
+                        <span class="label-top">JAM PELAYANAN:</span>
+                        <span class="value-top" style="font-size: 11px; line-height: 1.2;">
+                            Senin–Kamis 08.00–16.00 WIB <br> Jumat 08.00–11.00 WIB
+                        </span>
+                    </div>
+                </div>
+
+                <div class="top-item-box">
+                    <i class="fa-brands fa-whatsapp top-icon-big"></i>
+                    <div class="top-text-stack">
+                        <span class="label-top">WhatsApp :</span>
+                        <a href="https://wa.me/6281234567890" target="_blank" class="value-top" style="text-decoration: none; color: inherit;">
+                            +62 812-3456-7890
+                        </a>
+                    </div>
+                </div>
+
+                <div class="top-item-box">
+                    <i class="fa-regular fa-comment-dots top-icon-big"></i>
+                    <div class="top-text-stack">
+                        <span class="label-top">Pengaduan ULT:</span>
+                        <a href="{{ url('/wbs/wbs') }}" class="btn-ult-big">Klik disini untuk melakukan pengaduan</a>
+                    </div>
+                </div>
             </div>
-            <div class="bbp-social">
+            <div class="bbp-social-top">
                 <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#"><i class="fa-brands fa-tiktok"></i></a>
                 <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
                 <a href="#"><i class="fa-brands fa-youtube"></i></a>
             </div>
         </div>
     </div>
 
-    <!-- NAV -->
     <div class="bbp-nav">
         <div class="nav-container">
-
             <div class="logo">
-                <img src="{{ asset('img/logobalai.png') }}" alt="BBP Riau">
+                {{-- Gunakan asset() untuk gambar juga --}}
+                <img src="{{ asset('img/logobalai.png') }}" alt="Logo">
             </div>
 
-            <ul class="nav-menu">
-
-                <li class="mobile-sidebar-header">
-                    <img src="{{ asset('img/logobbpr4.png') }}" alt="BBP Riau">
-                </li>
-
-                <li><a href="/" class="{{ request()->is('/') ? 'active' : '' }}">
-                        Beranda
-                    </a>
-                </li>
-
-                <li class="has-dropdown {{ request()->is('profil*') ? 'active open' : '' }}">
-                    <a href="#" class="dropdown-toggle">
-                        Profil
-                        <i class="fa-solid fa-chevron-down dropdown-icon"></i>
-                    </a>
-
-                    <!-- Menu Dekstop Aktif -->
-                    <ul class="dropdown">
-                        <li>
-                            <a href="{{ url('/profil/sejarah-singkat') }}"
-                                class="{{ request()->is('profil/sejarah-singkat') ? 'active' : '' }}">
-                                Sejarah Singkat
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ url('/profil/visi-misi') }}"
-                                class="{{ request()->is('profil/visi-misi') ? 'active' : '' }}">
-                                Visi & Misi
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="{{ url('/profil/tugas-dan-fungsi') }}"
-                                class="{{ request()->is('profil/tugas-dan-fungsi') ? 'active' : '' }}">
-                                Tugas & Fungsi
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="{{ url('/profil/struktur-organisasi') }}"
-                                class="{{ request()->is('profil/struktur-organisasi') ? 'active' : '' }}">
-                                Struktur Organisasi
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="{{ url('/profil/pegawai') }}"
-                                class="{{ request()->is('profil/pegawai') ? 'active' : '' }}">
-                                Pegawai
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="{{ url('/profil/logo-bpp-riau') }}"
-                                class="{{ request()->is('profil/logo-bpp-riau') ? 'active' : '' }}">
-                                Logo
-                            </a>
-                        </li>
-                    </ul>
-
-
-                </li>
-
-                <li class="has-dropdown">
-                    <a href="#" class="dropdown-toggle">
-                        Produk
-                        <i class="fa-solid fa-chevron-down dropdown-icon"></i>
-                    </a>
-                    <div class="dropdown">
-                        <a href="{{ url('/produk/terbitan-bbpr') }}"
-                            class="{{ request()->is('produk/terbitan-bbpr') ? 'active' : '' }}">Terbitan BBPR
-                        </a>
-                        <a href="{{ url('/produk/jurnal') }}"
-                            class="{{ request()->is('produk/jurnal') ? 'active' : '' }}">Jurnal</a>
-                        <a href="{{ url('/produk/majalah') }}"
-                            class="{{ request()->is('produk/majalah') ? 'active' : '' }}">Majalah Serindit</a>
-                        <a href="{{ url('/produk/sembari') }}"
-                            class="{{ request()->is('produk/sembari') ? 'active' : '' }}">Sembari (Serial
-                            Terjemahan BBPR)</a>
-                        <a href="{{ url('/produk/peta-pembinaan-bahasa') }}"
-                            class="{{ request()->is('produk/peta-pembinaan-bahasa') ? 'active' : '' }}">Peta
-                            Pembinaan
-                            Bahasa</a>
-                        <a href="{{ url('/produk/peta-pembinaan-sastra') }}"
-                            class="{{ request()->is('produk/peta-pembinaan-sastra') ? 'active' : '' }}">Peta
-                            Pembinaan
-                            Sastra</a>
-                        <a href="{{ url('/produk/bipa') }}"
-                            class="{{ request()->is('produk/bipa') ? 'active' : '' }}">Bipa</a>
-                        <a href="{{ url('/produk/kemala') }}"
-                            class="{{ request()->is('produk/kemala') ? 'active' : '' }}">kemala</a>
-                    </div>
-                </li>
-
-                <li class="has-dropdown">
-                    <a href="#" class="dropdown-toggle">Akuntabilitas
-                        <i class="fa-solid fa-chevron-down dropdown-icon"></i>
-                    </a>
-                    <div class="dropdown">
-                        <a href="{{ url('/akuntabilitas/renstra') }}"
-                            class="{{ request()->is('akuntabilitas/renstra') ? 'active' : '' }}">Renstra</a>
-                        <a href="{{ url('/akuntabilitas/dipa') }}"
-                            class="{{ request()->is('akuntabilitas/dipa') ? 'active' : '' }}">DIPA</a>
-                        <a href="{{ url('/akuntabilitas/perjanjian-kinerja') }}"
-                            class="{{ request()->is('akuntabilitas/perjanjian-kinerja') ? 'active' : '' }}">Perjanjian
-                            Kinerja</a>
-                        <a href="{{ url('/akuntabilitas/rencana-aksi') }}"
-                            class="{{ request()->is('akuntabilitas/rencana-aksi') ? 'active' : '' }}">Rencana Aksi</a>
-                        <a href="{{ url('/akuntabilitas/lakin') }}"
-                            class="{{ request()->is('akuntabilitas/lakin') ? 'active' : '' }}">LAKIN</a>
-                        <a href="{{ url('/akuntabilitas/sakai') }}"
-                            class="{{ request()->is('akuntabilitas/saki') ? 'active' : '' }}">SAKAI</a>
-                    </div>
-                </li>
-
-                <li class="has-dropdown">
-                    <a href="#" class="dropdown-toggle">Layanan
-                        <i class="fa-solid fa-chevron-down dropdown-icon"></i>
-                    </a>
-                    <div class="dropdown">
-                        <a href="#">Layanan Ahli Bahasa Balai Bahasa Provinsi Riau</a>
-                        <a href="#">Layanan Penerjemahan Balai Bahasa Provinsi Riau</a>
-                        <a href="#">Layanan Bahasa Indonesia Untuk Penutur Asing (BIPA) Balai Bahasa Provinsi
-                            Riau</a>
-                        <a href="#">Layanan Uji Kemahiran Berbahasa Indonesia (UKBI) Adaptif Balai Bahasa Provinsi
-                            Riau</a>
-                        <a href="#">Layanan Perpustakaan</a>
-                        <a href="#">Layanan Magang</a>
-                    </div>
-                </li>
-
-
-                <li>
-                    <a href="{{ url('/ppid/ppid') }}" class="{{ request()->is('ppid*') ? 'active' : '' }}">
-                        PPID
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{{ url('/survei/survei') }}" class="{{ request()->is('survei*') ? 'active' : '' }}">
-                        Survei
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{{ url('/wbs/wbs') }}" class="{{ request()->is('wbs') ? 'active' : '' }}">
-                        WBS
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{{ url('/ziwbk/ziwbk') }}" class="{{ request()->is('ziwbk*') ? 'active' : '' }}">
-                        ZI-WBK
-                    </a>
-                </li>
-
-            </ul>
-            <button class="menu-toggle" id="menuToggle">
+            <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle navigation">
                 <i class="fa-solid fa-bars"></i>
             </button>
 
+            <ul class="nav-menu">
+                <li class="close-menu-item">
+                    <button class="close-btn-inner" onclick="toggleMenu()">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </li>
+
+                <li class="mobile-only-logo">
+                    <img src="{{ asset('img/logobalai.png') }}" alt="Logo Mobile">
+                </li>
+
+                <li><a href="/" class="{{ request()->is('/') ? 'active' : '' }}"><i
+                            class="fa-regular fa-home menu-icon"></i> Beranda</a></li>
+                <li><a href="{{ url('/ziwbk/ziwbk') }}" class="{{ request()->is('ziwbk*') ? 'active' : '' }}"><i
+                            class="fa-regular fa-book-bookmark menu-icon"></i>SAPA</a></li>
+                <li class="has-dropdown">
+                    <a href="javascript:void(0)" onclick="toggleSub(this)"
+                        class="{{ request()->is('profil*') ? 'active' : '' }}">
+                        Profil <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+                    </a>
+                    <ul class="dropdown">
+                        <li><a href="{{ url('/profil/sejarah-singkat') }}"><i class="fa-regular fa-address-book"></i>
+                                Sejarah Singkat</a></li>
+                        <li><a href="{{ url('/profil/visi-misi') }}"><i class="fa-regular fa-lightbulb"></i> Visi &
+                                Misi</a></li>
+                        <li><a href="{{ url('/profil/tugas-dan-fungsi') }}"><i class="fa-regular fa-id-badge"></i> Tugas
+                                & Fungsi</a></li>
+                        <li><a href="{{ url('/profil/struktur-organisasi') }}"><i class="fa-solid fa-sitemap"></i>
+                                Struktur Organisasi</a></li>
+                        <li><a href="{{ url('/profil/pegawai') }}"><i class="fa-regular fa-user"></i> Pegawai</a></li>
+                        <li><a href="{{ url('/profil/logo-bpp-riau') }}"><i class="fa-regular fa-image"></i> Logo</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="has-dropdown">
+                    <a href="javascript:void(0)" onclick="toggleSub(this)"
+                        class="{{ request()->is('produk*') ? 'active' : '' }}">
+                        Produk <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+                    </a>
+                    <ul class="dropdown">
+                        <li><a href="{{ url('/produk/terbitan-bbpr') }}"><i class="fa-regular fa-copy"></i> Terbitan
+                                BBPR</a></li>
+                        <li><a href="{{ url('/produk/jurnal') }}"><i class="fa-regular fa-newspaper"></i> Jurnal
+                                Madah</a>
+                        </li>
+                        <li><a href="{{ url('/produk/majalah') }}"><i class="fa-solid fa-book-open"></i> Majalah
+                                Serindit</a></li>
+                        <li><a href="{{ url('/produk/sembari') }}"><i class="fa-solid fa-gem"></i>
+                                Sembari ( Serial Terjemahan BBPR)</a>
+                        <li><a href="{{ url('/produk/peta-pembinaan-bahasa') }}"><i class="fa-solid fa-map"></i>
+                                Peta Pembinaan Bahasa</a>
+                        </li>
+                        <li><a href="{{ url('/produk/peta-pembinaan-sastra') }}"><i class="fa-solid fa-map"></i>
+                                Peta Pembinaan Sastra</a>
+                        </li>
+                        <li><a href="{{ url('/produk/bipa') }}"><i class="fa-solid fa-globe-asia"></i> SAPA BIPA</a>
+                        </li>
+                        <li><a href="https://kamusbahasariau.kemendikdasmen.go.id/"><i class="fa-regular fa-language"></i> Kemala (Kamus
+                                Elektronik Bahasa Melayu Riau)</a></li>
+                    </ul>
+                </li>
+
+                <li class="has-dropdown">
+                    <a href="javascript:void(0)" onclick="toggleSub(this)"
+                        class="{{ request()->is('akuntabilitas*') ? 'active' : '' }}">
+                        Akuntabilitas <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+                    </a>
+                    <ul class="dropdown">
+                        <li><a href="{{ url('/akuntabilitas/renstra') }}"><i class="fa-regular fa-folder"></i>
+                                Renstra</a>
+                        </li>
+                        <li><a href="{{ url('/akuntabilitas/dipa') }}"><i class="fa-solid fa-calculator"></i>
+                                DIPA</a></li>
+                        <li><a href="{{ url('/akuntabilitas/lakin') }}"><i class="fa-solid fa-folder-minus"></i>
+                                Lakin</a></li>
+                        <li><a href="{{ url('/akuntabilitas/perjanjian-kinerja') }}"><i
+                                    class="fa-regular fa-file-lines"></i> Perjanjian Kinerja</a></li>
+                        <li><a href="{{ url('/akuntabilitas/rencana-aksi') }}"><i
+                                    class="fa-regular fa-rectangle-list"></i> Rencana Aksi</a></li>
+                        <li><a href="{{ url('/akuntabilitas/sakai') }}"><i class="fa-regular fa-file-lines"></i>
+                                SAKAI
+                            </a></li>
+                    </ul>
+                </li>
+
+                <li class="has-dropdown">
+                    <a href="javascript:void(0)" onclick="toggleSub(this)"
+                        class="{{ request()->is('layanan*') ? 'active' : '' }}">
+                        Layanan <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+                    </a>
+                    <ul class="dropdown">
+                        <li><a href="#"><i class="fa-solid fa-user-tie"></i> Ahli Bahasa</a></li>
+                        <li><a href="#"><i class="fa-solid fa-pen-nib"></i> Penerjemahan</a></li>
+                        <li><a href="#"><i class="fa-solid fa-graduation-cap"></i> UKBI Adaptif</a></li>
+                        <li><a href="#"><i class="fa-solid fa-globe-asia"></i> BIPA </a></li>
+                        <li><a href="#"><i class="fa-solid fa-book"></i> Perpustakaan</a></li>
+                        <li><a href="#"><i class="fa-solid fa-users"></i> Magang </a></li>
+                    </ul>
+                </li>
+
+                <li class="has-dropdown">
+                    <a href="javascript:void(0)" onclick="toggleSub(this)"
+                        class="{{ request()->is('layanan*') ? 'active' : '' }}">
+                        Survei <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+                    </a>
+                    <ul class="dropdown">
+                        <li><a href="{{ url('#') }}" class="{{ request()->is('skm*') ? 'active' : '' }}"><i
+                                    class="fa-regular fa-file-lines menu-icon"></i> Survei Kepuasan Masyarakat</a></li>
+                        <li><a href="{{ url('#') }}" class="{{ request()->is('spkp*') ? 'active' : '' }}"><i
+                                    class="fa-regular fa-file-lines menu-icon"></i> Survei Persepsi Kualitas
+                                Pelayanan</a></li>
+                        <li><a href="{{ url('#') }}" class="{{ request()->is('spak*') ? 'active' : '' }}"><i
+                                    class="fa-regular fa-file-lines menu-icon"></i> Survei Persepsi Antikorupsi</a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                <li><a href="{{ url('https://ppidbbpriau.kemendikdasmen.go.id/') }}"
+                        class="{{ request()->is('ppid*') ? 'active' : '' }}"><i
+                            class="fa-regular fa-file-lines menu-icon"></i> PPID</a>
+                </li>
+
+                <li><a href="{{ url('/wbs/wbs') }}" class="{{ request()->is('wbs*') ? 'active' : '' }}"><i
+                            class="fa-solid fa-bullhorn menu-icon"></i> WBS</a></li>
+                <li class="has-dropdown dropdown-reverse">
+                    <a href="javascript:void(0)" onclick="toggleSub(this)" class="{{ request()->is('ziwbk*') ? 'active' : '' }}">
+                        <i class="fa-regular fa-star menu-icon"></i> ZI-WBK <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+                    </a>
+                    <ul class="dropdown">
+                        <li class="has-dropdown">
+                            <a href="javascript:void(0)" onclick="toggleSub(this)">
+                                2021-2022 <i class="fa-solid fa-chevron-right dropdown-arrow"></i>
+                            </a>
+                            <ul class="dropdown">
+                                <li class="has-dropdown">
+                                    <a href="javascript:void(0)" onclick="toggleSub(this)">
+                                        Manajemen Perubahan <i class="fa-solid fa-chevron-right dropdown-arrow"></i>
+                                    </a>
+                                    <ul class="dropdown">
+                                        <li><a href="{{ url('/timkerja/detail/2022') }}">Tim Kerja</a></li>
+                                        <li><a href="{{ url('/rencanawbk/detail/2022') }}">Rencana Pembangunan WBK</a></li>
+                                        <li><a href="{{ url('/monevwbk/detail/2022') }}">Pemantauan & Evaluasi</a></li>
+                                        <li><a href="{{ url('/budayakerja/detail/2022') }}">Pola Pikir & Budaya Kerja</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-dropdown">
+                                    <a href="javascript:void(0)" onclick="toggleSub(this)">
+                                        Penguatan Tata Laksana <i class="fa-solid fa-chevron-right dropdown-arrow"></i>
+                                    </a>
+                                    <ul class="dropdown">
+                                        <li><a href="{{ url('/pos/detail/2022') }}">POS</a></li>
+                                        <li><a href="{{ url('/sinde/detail/2022') }}">Sistem Elektronik</a></li>
+                                        <li><a href="{{ url('/keterbukaaninformasi/detail/2022') }}">Keterbukaan Informasi</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-dropdown">
+                                    <a href="javascript:void(0)" onclick="toggleSub(this)">
+                                        Manajemen SDM <i class="fa-solid fa-chevron-right dropdown-arrow"></i>
+                                    </a>
+                                    <ul class="dropdown">
+                                        <li><a href="{{ url('/rencanakebutuhan/detail/2022') }}">Perencanaan Kebutuhan</a></li>
+                                        <li><a href="{{ url('/mutasiinternal/detail/2022') }}">Pola Mutasi Internal</a></li>
+                                        <li><a href="{{ url('/pbk/detail/2022') }}">Pengembangan Pegawai</a></li>
+                                        <li><a href="{{ url('/kinerjaindividu/detail/2022') }}">Penetapan Kinerja</a></li>
+                                        <li><a href="{{ url('/penegakandisiplin/detail/2022') }}">Penegakan Disiplin</a></li>
+                                        <li><a href="{{ url('/Informasikepegawaian/detail/2022') }}">Sistem Informasi</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-dropdown">
+                                    <a href="javascript:void(0)" onclick="toggleSub(this)">
+                                        Penguatan Akuntabilitas <i class="fa-solid fa-chevron-right dropdown-arrow"></i>
+                                    </a>
+                                    <ul class="dropdown">
+                                        <li><a href="{{ url('/keterlibatanpimpinan/detail/2022') }}">Keterlibatan Pimpinan</a></li>
+                                        <li><a href="{{ url('/akuntabilitaskinerja/detail/2022') }}">Akuntabilitas Kinerja</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-dropdown">
+                                    <a href="javascript:void(0)" onclick="toggleSub(this)">
+                                        Penguatan Pengawasan <i class="fa-solid fa-chevron-right dropdown-arrow"></i>
+                                    </a>
+                                    <ul class="dropdown">
+                                        <li><a href="{{ url('/gratifikasi/detail/2022') }}">Gratifikasi</a></li>
+                                        <li><a href="{{ url('/SpiWbk/detail/2022') }}">SPI</a></li>
+                                        <li><a href="{{ url('/aduanmasyarakat/detail/2022') }}">Pengaduan Masyarakat</a></li>
+                                        <li><a href="{{ url('/whistleblowing/detail/2022') }}">Whistle Blowing</a></li>
+                                        <li><a href="{{ url('/benturankepentingan/detail/2022') }}">Benturan Kepentingan</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-dropdown">
+                                    <a href="javascript:void(0)" onclick="toggleSub(this)">
+                                        Layanan Publik <i class="fa-solid fa-chevron-right dropdown-arrow"></i>
+                                    </a>
+                                    <ul class="dropdown">
+                                        <li><a href="{{ url('/standarpelayanan/detail/2022') }}">Standar Pelayanan</a></li>
+                                        <li><a href="{{ url('/pelayananprima/detail/2022') }}">Budaya Pelayanan Prima</a></li>
+                                        <li><a href="{{ url('/pemanfaatantik/detail/2022') }}">Pemanfaatan TIK</a></li>
+                                        <li><a href="{{ url('/kepuasanmasyarakat/detail/2022') }}">Kepuasan Masyarakat</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="has-dropdown">
+                            <a href="javascript:void(0)" onclick="toggleSub(this)">
+                                2023 <i class="fa-solid fa-chevron-right dropdown-arrow"></i>
+                            </a>
+                            <ul class="dropdown">
+                                <li class="has-dropdown">
+                                    <a href="javascript:void(0)" onclick="toggleSub(this)">
+                                        Manajemen Perubahan <i class="fa-solid fa-chevron-right dropdown-arrow"></i>
+                                    </a>
+                                    <ul class="dropdown">
+                                        <li><a href="{{ url('/timkerja/detail/2022') }}">Tim Kerja</a></li>
+                                        <li><a href="{{ url('/rencanawbk/detail/2022') }}">Rencana Pembangunan WBK</a></li>
+                                        <li><a href="{{ url('/monevwbk/detail/2022') }}">Pemantauan & Evaluasi</a></li>
+                                        <li><a href="{{ url('/budayakerja/detail/2022') }}">Pola Pikir & Budaya Kerja</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-dropdown">
+                                    <a href="javascript:void(0)" onclick="toggleSub(this)">
+                                        Penguatan Tata Laksana <i class="fa-solid fa-chevron-right dropdown-arrow"></i>
+                                    </a>
+                                    <ul class="dropdown">
+                                        <li><a href="{{ url('/pos/detail/2022') }}">POS</a></li>
+                                        <li><a href="{{ url('/sinde/detail/2022') }}">Sistem Elektronik</a></li>
+                                        <li><a href="{{ url('/keterbukaaninformasi/detail/2022') }}">Keterbukaan Informasi</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-dropdown">
+                                    <a href="javascript:void(0)" onclick="toggleSub(this)">
+                                        Manajemen SDM <i class="fa-solid fa-chevron-right dropdown-arrow"></i>
+                                    </a>
+                                    <ul class="dropdown">
+                                        <li><a href="{{ url('/rencanakebutuhan/detail/2022') }}">Perencanaan Kebutuhan</a></li>
+                                        <li><a href="{{ url('/mutasiinternal/detail/2022') }}">Pola Mutasi Internal</a></li>
+                                        <li><a href="{{ url('/pbk/detail/2022') }}">Pengembangan Pegawai</a></li>
+                                        <li><a href="{{ url('/kinerjaindividu/detail/2022') }}">Penetapan Kinerja</a></li>
+                                        <li><a href="{{ url('/penegakandisiplin/detail/2022') }}">Penegakan Disiplin</a></li>
+                                        <li><a href="{{ url('/Informasikepegawaian/detail/2022') }}">Sistem Informasi</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-dropdown">
+                                    <a href="javascript:void(0)" onclick="toggleSub(this)">
+                                        Penguatan Akuntabilitas <i class="fa-solid fa-chevron-right dropdown-arrow"></i>
+                                    </a>
+                                    <ul class="dropdown">
+                                        <li><a href="{{ url('/keterlibatanpimpinan/detail/2022') }}">Keterlibatan Pimpinan</a></li>
+                                        <li><a href="{{ url('/akuntabilitaskinerja/detail/2022') }}">Akuntabilitas Kinerja</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-dropdown">
+                                    <a href="javascript:void(0)" onclick="toggleSub(this)">
+                                        Penguatan Pengawasan <i class="fa-solid fa-chevron-right dropdown-arrow"></i>
+                                    </a>
+                                    <ul class="dropdown">
+                                        <li><a href="{{ url('/gratifikasi/detail/2022') }}">Gratifikasi</a></li>
+                                        <li><a href="{{ url('/SpiWbk/detail/2022') }}">SPI</a></li>
+                                        <li><a href="{{ url('/aduanmasyarakat/detail/2022') }}">Pengaduan Masyarakat</a></li>
+                                        <li><a href="{{ url('/whistleblowing/detail/2022') }}">Whistle Blowing</a></li>
+                                        <li><a href="{{ url('/benturankepentingan/detail/2022') }}">Benturan Kepentingan</a></li>
+                                    </ul>
+                                </li>
+                                <li class="has-dropdown">
+                                    <a href="javascript:void(0)" onclick="toggleSub(this)">
+                                        Layanan Publik <i class="fa-solid fa-chevron-right dropdown-arrow"></i>
+                                    </a>
+                                    <ul class="dropdown">
+                                        <li><a href="{{ url('/standarpelayanan/detail/2022') }}">Standar Pelayanan</a></li>
+                                        <li><a href="{{ url('/pelayananprima/detail/2022') }}">Budaya Pelayanan Prima</a></li>
+                                        <li><a href="{{ url('/pemanfaatantik/detail/2022') }}">Pemanfaatan TIK</a></li>
+                                        <li><a href="{{ url('/kepuasanmasyarakat/detail/2022') }}">Kepuasan Masyarakat</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="mobile-extra-content">
+                    <div class="mob-item">
+                        <i class="fa-regular fa-envelope"></i>
+                        <span>balaibahasaprovriau@gmail.com</span>
+                    </div>
+
+                    <a href="{{ url('/wbs/wbs') }}" class="mob-btn">
+                        <i class="fa-regular fa-comment-dots"></i> Pengaduan ULT
+                    </a>
+
+                    <div class="mob-social">
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </li>
+            </ul>
         </div>
     </div>
 </header>
