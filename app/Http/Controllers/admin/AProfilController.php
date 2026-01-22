@@ -27,7 +27,7 @@ class AProfilController extends Controller
                 ? preg_split("/\r\n|\n|\r/", $data['misi'])
                 : [],
         ]);
-}
+    }
 
     public function updateVisiMisi(Request $request)
     {
@@ -121,50 +121,49 @@ class AProfilController extends Controller
         ]);
     }
 
- public function pegawai(Request $request)
-{
-    $search = $request->query('search');
+    public function pegawai(Request $request)
+    {
+        $search = $request->query('search');
 
-    $headers = [
-        'apikey'        => env('SUPABASE_SERVICE_ROLE_KEY'),
-        'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
-        'Accept'        => 'application/json',
-    ];
+        $headers = [
+            'apikey'        => env('SUPABASE_SERVICE_ROLE_KEY'),
+            'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
+            'Accept'        => 'application/json',
+        ];
 
-    /* ================= WAJIB: INISIALISASI ================= */
-    $kepalaBalai  = null;
-    $kasubbagUmum = null;
+        /* ================= WAJIB: INISIALISASI ================= */
+        $kepalaBalai  = null;
+        $kasubbagUmum = null;
 
-    /* ================= AMBIL JABATAN STRATEGIS ================= */
-    $kepalaBalai = Http::withHeaders($headers)->get(
-        rtrim(env('SUPABASE_URL'), '/') .
-        '/rest/v1/pegawai?select=pegawai_id,nama,jabatan,foto&jabatan=eq.Kepala Balai&limit=1'
-    )->json()[0] ?? null;
+        /* ================= AMBIL JABATAN STRATEGIS ================= */
+        $kepalaBalai = Http::withHeaders($headers)->get(
+            rtrim(env('SUPABASE_URL'), '/') .
+            '/rest/v1/pegawai?select=pegawai_id,nama,jabatan,foto&jabatan=eq.Kepala Balai&limit=1'
+        )->json()[0] ?? null;
 
-    $kasubbagUmum = Http::withHeaders($headers)->get(
-        rtrim(env('SUPABASE_URL'), '/') .
-        '/rest/v1/pegawai?select=pegawai_id,nama,jabatan,foto&jabatan=eq.Kasubbag Umum&limit=1'
-    )->json()[0] ?? null;
+        $kasubbagUmum = Http::withHeaders($headers)->get(
+            rtrim(env('SUPABASE_URL'), '/') .
+            '/rest/v1/pegawai?select=pegawai_id,nama,jabatan,foto&jabatan=eq.Kasubbag Umum&limit=1'
+        )->json()[0] ?? null;
 
-    /* ================= LIST PEGAWAI (TANPA STRATEGIS) ================= */
-    $url = rtrim(env('SUPABASE_URL'), '/') .
-        '/rest/v1/pegawai?select=pegawai_id,nama,jabatan,foto&order=created_at.desc' .
-        '&jabatan=not.in.(Kepala Balai,Kasubbag Umum)';
+        /* ================= LIST PEGAWAI (TANPA STRATEGIS) ================= */
+        $url = rtrim(env('SUPABASE_URL'), '/') .
+            '/rest/v1/pegawai?select=pegawai_id,nama,jabatan,foto&order=created_at.desc' .
+            '&jabatan=not.in.(Kepala Balai,Kasubbag Umum)';
 
-    if (!empty($search)) {
-        $search = urlencode($search);
-        $url .= "&or=(nama.ilike.*{$search}*,jabatan.ilike.*{$search}*)";
+        if (!empty($search)) {
+            $search = urlencode($search);
+            $url .= "&or=(nama.ilike.*{$search}*,jabatan.ilike.*{$search}*)";
+        }
+
+        $pegawai = Http::withHeaders($headers)->get($url)->json() ?? [];
+
+        return view('admin.profil.pegawai', compact(
+            'pegawai',
+            'kepalaBalai',
+            'kasubbagUmum'
+        ));
     }
-
-    $pegawai = Http::withHeaders($headers)->get($url)->json() ?? [];
-
-    return view('admin.profil.pegawai', compact(
-        'pegawai',
-        'kepalaBalai',
-        'kasubbagUmum'
-    ));
-}
-
 
     public function storePegawai(Request $request)
     {
@@ -223,88 +222,86 @@ class AProfilController extends Controller
             ->with('success', 'Pegawai berhasil ditambahkan');
     }
 
-    public function updatePegawai(Request $request, $id)
-{
-    $request->validate([
-        'nama'    => 'required|string',
-        'jabatan' => 'required|string',
-        'foto'    => 'nullable|image|max:2048',
-    ]);
+        public function updatePegawai(Request $request, $id)
+    {
+        $request->validate([
+            'nama'    => 'required|string',
+            'jabatan' => 'required|string',
+            'foto'    => 'nullable|image|max:2048',
+        ]);
 
-    $headers = [
-        'apikey'        => env('SUPABASE_SERVICE_ROLE_KEY'),
-        'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
-        'Accept'        => 'application/json',
-    ];
+        $headers = [
+            'apikey'        => env('SUPABASE_SERVICE_ROLE_KEY'),
+            'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
+            'Accept'        => 'application/json',
+        ];
 
-    /* ================= AMBIL DATA PEGAWAI LAMA ================= */
-    $pegawaiLama = Http::withHeaders($headers)->get(
-        rtrim(env('SUPABASE_URL'), '/') .
-        "/rest/v1/pegawai?pegawai_id=eq.{$id}&select=pegawai_id,nama,jabatan,foto"
-    )->json()[0] ?? null;
+        /* ================= AMBIL DATA PEGAWAI LAMA ================= */
+        $pegawaiLama = Http::withHeaders($headers)->get(
+            rtrim(env('SUPABASE_URL'), '/') .
+            "/rest/v1/pegawai?pegawai_id=eq.{$id}&select=pegawai_id,nama,jabatan,foto"
+        )->json()[0] ?? null;
 
-    /* ================= CEK PERUBAHAN JABATAN STRATEGIS ================= */
-    $jabatanLama = $pegawaiLama['jabatan'] ?? null;
-    $jabatanBaru = $request->jabatan;
-
-
-    /* ================= SIAPKAN DATA UPDATE ================= */
-    $data = [
-        'nama'    => $request->nama,
-        'jabatan' => $jabatanBaru,
-    ];
-
-    // JIKA GANTI FOTO
-if ($request->hasFile('foto')) {
-
-    // 🔥 HAPUS FOTO LAMA (JIKA ADA)
-    $this->deleteFotoFromSupabase($pegawaiLama['foto'] ?? null);
-
-    // UPLOAD FOTO BARU
-    $bucket = env('SUPABASE_BUCKET');
-    $file   = $request->file('foto');
-    $name   = 'pegawai/' . Str::uuid() . '.' . $file->getClientOriginalExtension();
-
-    Http::withHeaders([
-        'apikey'        => env('SUPABASE_SERVICE_ROLE_KEY'),
-        'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
-    ])->withBody(
-        file_get_contents($file),
-        $file->getMimeType()
-    )->post(
-        rtrim(env('SUPABASE_URL'), '/') .
-        "/storage/v1/object/{$bucket}/{$name}"
-    );
-
-    $data['foto'] = rtrim(env('SUPABASE_URL'), '/') .
-                    "/storage/v1/object/public/{$bucket}/{$name}";
-}
-
-    /* ================= UPDATE KE SUPABASE ================= */
-    Http::withHeaders([
-        'apikey'        => env('SUPABASE_SERVICE_ROLE_KEY'),
-        'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
-        'Content-Type'  => 'application/json',
-    ])->patch(
-        rtrim(env('SUPABASE_URL'), '/') .
-        "/rest/v1/pegawai?pegawai_id=eq.{$id}",
-        $data
-    );
-
-    /* ================= SNAPSHOT JIKA STRATEGIS ================= */
-$jabatanStrategis = ['Kepala Balai', 'Kasubbag Umum'];
-
-if (
-    in_array($jabatanLama, $jabatanStrategis) ||
-    in_array($jabatanBaru, $jabatanStrategis)
-) {
-    $this->simpanSnapshotStruktur();
-}
+        /* ================= CEK PERUBAHAN JABATAN STRATEGIS ================= */
+        $jabatanLama = $pegawaiLama['jabatan'] ?? null;
+        $jabatanBaru = $request->jabatan;
 
 
-    return redirect()->route('admin.profil.pegawai')
-        ->with('success', 'Data berhasil diperbarui');
-}
+        /* ================= SIAPKAN DATA UPDATE ================= */
+        $data = [
+            'nama'    => $request->nama,
+            'jabatan' => $jabatanBaru,
+        ];
+
+        // JIKA GANTI FOTO
+        if ($request->hasFile('foto')) {
+
+            // 🔥 HAPUS FOTO LAMA (JIKA ADA)
+            $this->deleteFotoFromSupabase($pegawaiLama['foto'] ?? null);
+
+            // UPLOAD FOTO BARU
+            $bucket = env('SUPABASE_BUCKET');
+            $file   = $request->file('foto');
+            $name   = 'pegawai/' . Str::uuid() . '.' . $file->getClientOriginalExtension();
+
+            Http::withHeaders([
+                'apikey'        => env('SUPABASE_SERVICE_ROLE_KEY'),
+                'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
+            ])->withBody(
+                file_get_contents($file),
+                $file->getMimeType()
+            )->post(
+                rtrim(env('SUPABASE_URL'), '/') .
+                "/storage/v1/object/{$bucket}/{$name}"
+            );
+
+            $data['foto'] = rtrim(env('SUPABASE_URL'), '/') .
+                            "/storage/v1/object/public/{$bucket}/{$name}";
+        }
+
+        /* ================= UPDATE KE SUPABASE ================= */
+        Http::withHeaders([
+            'apikey'        => env('SUPABASE_SERVICE_ROLE_KEY'),
+            'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
+            'Content-Type'  => 'application/json',
+        ])->patch(
+            rtrim(env('SUPABASE_URL'), '/') .
+            "/rest/v1/pegawai?pegawai_id=eq.{$id}",
+            $data
+        );
+
+        /* ================= SNAPSHOT JIKA STRATEGIS ================= */
+        $jabatanStrategis = ['Kepala Balai', 'Kasubbag Umum'];
+
+        if (
+            in_array($jabatanLama, $jabatanStrategis) ||
+            in_array($jabatanBaru, $jabatanStrategis)
+        ) {
+            $this->simpanSnapshotStruktur();
+        }
+        return redirect()->route('admin.profil.pegawai')
+            ->with('success', 'Data berhasil diperbarui');
+    }
 
     public function destroyPegawai($id)
     {
@@ -355,215 +352,206 @@ if (
             ->with('success', 'Pegawai berhasil dihapus');
     }
 
-    public function strukturorganisasi(Request $request)
-{
-    $headers = [
-        'apikey'        => env('SUPABASE_SERVICE_ROLE_KEY'),
-        'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
-        'Accept'        => 'application/json',
-    ];
+        public function strukturorganisasi(Request $request)
+    {
+        $headers = [
+            'apikey'        => env('SUPABASE_SERVICE_ROLE_KEY'),
+            'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
+            'Accept'        => 'application/json',
+        ];
 
-    /* ================= AMBIL RIWAYAT STRUKTUR ================= */
-    $riwayat = Http::withHeaders($headers)->get(
-        rtrim(env('SUPABASE_URL'), '/') .
-        '/rest/v1/struktur_organisasi?order=created_at.desc'
-    )->json() ?? [];
-
-    /* ================= TENTUKAN STRUKTUR YANG DITAMPILKAN ================= */
-    $strukturAktif = null;
-
-    // JIKA KLIK RIWAYAT (?struktur=ID)
-    if ($request->struktur) {
-        $strukturAktif = Http::withHeaders($headers)->get(
+        /* ================= AMBIL RIWAYAT STRUKTUR ================= */
+        $riwayat = Http::withHeaders($headers)->get(
             rtrim(env('SUPABASE_URL'), '/') .
-            "/rest/v1/struktur_organisasi?struktur_id=eq.{$request->struktur}"
-        )->json()[0] ?? null;
+            '/rest/v1/struktur_organisasi?order=created_at.desc'
+        )->json() ?? [];
+
+        /* ================= TENTUKAN STRUKTUR YANG DITAMPILKAN ================= */
+        $strukturAktif = null;
+
+        // JIKA KLIK RIWAYAT (?struktur=ID)
+        if ($request->struktur) {
+            $strukturAktif = Http::withHeaders($headers)->get(
+                rtrim(env('SUPABASE_URL'), '/') .
+                "/rest/v1/struktur_organisasi?struktur_id=eq.{$request->struktur}"
+            )->json()[0] ?? null;
+        }
+        if (!$strukturAktif) {
+            $strukturAktif = collect($riwayat)->firstWhere('status', true);
+        }
+        if ($strukturAktif) {
+            // DARI SNAPSHOT STRUKTUR
+            $kepalaBalai  = $strukturAktif['kepala_balai'];
+            $kasubbagUmum = $strukturAktif['kasubbag_umum'];
+        } else {
+            // FALLBACK DARI PEGAWAI (JIKA RIWAYAT KOSONG)
+            $kepalaBalai = Http::withHeaders($headers)->get(
+                rtrim(env('SUPABASE_URL'), '/') .
+                '/rest/v1/pegawai?jabatan=eq.Kepala Balai&limit=1'
+            )->json()[0] ?? null;
+
+            $kasubbagUmum = Http::withHeaders($headers)->get(
+                rtrim(env('SUPABASE_URL'), '/') .
+                '/rest/v1/pegawai?jabatan=eq.Kasubbag Umum&limit=1'
+            )->json()[0] ?? null;
+        }
+
+        return view('admin.profil.strukturorganisasi', compact(
+            'kepalaBalai',
+            'kasubbagUmum',
+            'riwayat',
+            'strukturAktif'
+        ));
     }
 
-    // JIKA TIDAK ADA KLIK → PAKAI STRUKTUR AKTIF
-    if (!$strukturAktif) {
-        $strukturAktif = collect($riwayat)->firstWhere('status', true);
-    }
+    private function simpanSnapshotStruktur()
+    {
+        $headers = [
+            'apikey'        => env('SUPABASE_SERVICE_ROLE_KEY'),
+            'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
+            'Content-Type'  => 'application/json',
+        ];
 
-    /* ================= DATA UNTUK BAGAN ================= */
-    if ($strukturAktif) {
-        // DARI SNAPSHOT STRUKTUR
-        $kepalaBalai  = $strukturAktif['kepala_balai'];
-        $kasubbagUmum = $strukturAktif['kasubbag_umum'];
-    } else {
-        // FALLBACK DARI PEGAWAI (JIKA RIWAYAT KOSONG)
-        $kepalaBalai = Http::withHeaders($headers)->get(
+        $kepala = Http::withHeaders($headers)->get(
             rtrim(env('SUPABASE_URL'), '/') .
             '/rest/v1/pegawai?jabatan=eq.Kepala Balai&limit=1'
         )->json()[0] ?? null;
 
-        $kasubbagUmum = Http::withHeaders($headers)->get(
+        $kasubbag = Http::withHeaders($headers)->get(
             rtrim(env('SUPABASE_URL'), '/') .
             '/rest/v1/pegawai?jabatan=eq.Kasubbag Umum&limit=1'
         )->json()[0] ?? null;
-    }
 
-    return view('admin.profil.strukturorganisasi', compact(
-        'kepalaBalai',
-        'kasubbagUmum',
-        'riwayat',
-        'strukturAktif'
-    ));
-}
-
-private function simpanSnapshotStruktur()
-{
-    $headers = [
-        'apikey'        => env('SUPABASE_SERVICE_ROLE_KEY'),
-        'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
-        'Content-Type'  => 'application/json',
-    ];
-
-    // ambil struktur aktif sekarang
-    $kepala = Http::withHeaders($headers)->get(
-        rtrim(env('SUPABASE_URL'), '/') .
-        '/rest/v1/pegawai?jabatan=eq.Kepala Balai&limit=1'
-    )->json()[0] ?? null;
-
-    $kasubbag = Http::withHeaders($headers)->get(
-        rtrim(env('SUPABASE_URL'), '/') .
-        '/rest/v1/pegawai?jabatan=eq.Kasubbag Umum&limit=1'
-    )->json()[0] ?? null;
-
-    if (!$kepala && !$kasubbag) return;
-
-    // nonaktifkan struktur lama
-    Http::withHeaders($headers)->patch(
-        rtrim(env('SUPABASE_URL'), '/') .
-        '/rest/v1/struktur_organisasi?status=eq.true',
-        ['status' => false]
-    );
-
-    // simpan snapshot baru
-    Http::withHeaders($headers)->post(
-        rtrim(env('SUPABASE_URL'), '/') .
-        '/rest/v1/struktur_organisasi',
-        [
-            'versi'          => now()->year,
-            'kepala_balai'   => $kepala,
-            'kasubbag_umum'  => $kasubbag,
-            'status'         => true,
-        ]
-    );
-}
-
-public function updateStrategis(Request $request)
-{
-    $headers = [
-        'apikey'        => env('SUPABASE_SERVICE_ROLE_KEY'),
-        'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
-        'Content-Type'  => 'application/json',
-    ];
-
-    /* ================= KEPALA BALAI ================= */
-    if ($request->kepala_id) {
-
-        // ambil foto lama
-        $old = Http::withHeaders($headers)->get(
-            rtrim(env('SUPABASE_URL'), '/') .
-            "/rest/v1/pegawai?pegawai_id=eq.{$request->kepala_id}&select=foto"
-        )->json()[0] ?? null;
-
-        $data = [
-            'nama'    => $request->kepala_nama,
-            'jabatan' => 'Kepala Balai',
-        ];
-
-        if ($request->hasFile('kepala_foto')) {
-            // JANGAN HAPUS FOTO LAMA
-            $data['foto'] = $this->uploadFoto(
-                $request->file('kepala_foto')
-            );
-        }
+        if (!$kepala && !$kasubbag) return;
 
         Http::withHeaders($headers)->patch(
             rtrim(env('SUPABASE_URL'), '/') .
-            "/rest/v1/pegawai?pegawai_id=eq.{$request->kepala_id}",
-            $data
+            '/rest/v1/struktur_organisasi?status=eq.true',
+            ['status' => false]
+        );
+
+        Http::withHeaders($headers)->post(
+            rtrim(env('SUPABASE_URL'), '/') .
+            '/rest/v1/struktur_organisasi',
+            [
+                'versi'          => now()->year,
+                'kepala_balai'   => $kepala,
+                'kasubbag_umum'  => $kasubbag,
+                'status'         => true,
+            ]
         );
     }
 
-    /* ================= KASUBBAG UMUM ================= */
-    if ($request->kasubbag_id) {
-
-        $old = Http::withHeaders($headers)->get(
-            rtrim(env('SUPABASE_URL'), '/') .
-            "/rest/v1/pegawai?pegawai_id=eq.{$request->kasubbag_id}&select=foto"
-        )->json()[0] ?? null;
-
-        $data = [
-            'nama'    => $request->kasubbag_nama,
-            'jabatan' => 'Kasubbag Umum',
+    public function updateStrategis(Request $request)
+    {
+        $headers = [
+            'apikey'        => env('SUPABASE_SERVICE_ROLE_KEY'),
+            'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
+            'Content-Type'  => 'application/json',
         ];
 
-        if ($request->hasFile('kasubbag_foto')) {
-            $this->deleteFotoFromSupabase($old['foto'] ?? null);
-            $data['foto'] = $this->uploadFoto(
-                $request->file('kasubbag_foto')
+        /* ================= KEPALA BALAI ================= */
+        if ($request->kepala_id) {
+
+            $old = Http::withHeaders($headers)->get(
+                rtrim(env('SUPABASE_URL'), '/') .
+                "/rest/v1/pegawai?pegawai_id=eq.{$request->kepala_id}&select=foto"
+            )->json()[0] ?? null;
+
+            $data = [
+                'nama'    => $request->kepala_nama,
+                'jabatan' => 'Kepala Balai',
+            ];
+
+            if ($request->hasFile('kepala_foto')) {
+                $data['foto'] = $this->uploadFoto(
+                    $request->file('kepala_foto')
+                );
+            }
+
+            Http::withHeaders($headers)->patch(
+                rtrim(env('SUPABASE_URL'), '/') .
+                "/rest/v1/pegawai?pegawai_id=eq.{$request->kepala_id}",
+                $data
             );
         }
 
-        Http::withHeaders($headers)->patch(
-            rtrim(env('SUPABASE_URL'), '/') .
-            "/rest/v1/pegawai?pegawai_id=eq.{$request->kasubbag_id}",
-            $data
-        );
+        /* ================= KASUBBAG UMUM ================= */
+        if ($request->kasubbag_id) {
+
+            $old = Http::withHeaders($headers)->get(
+                rtrim(env('SUPABASE_URL'), '/') .
+                "/rest/v1/pegawai?pegawai_id=eq.{$request->kasubbag_id}&select=foto"
+            )->json()[0] ?? null;
+
+            $data = [
+                'nama'    => $request->kasubbag_nama,
+                'jabatan' => 'Kasubbag Umum',
+            ];
+
+            if ($request->hasFile('kasubbag_foto')) {
+                $this->deleteFotoFromSupabase($old['foto'] ?? null);
+                $data['foto'] = $this->uploadFoto(
+                    $request->file('kasubbag_foto')
+                );
+            }
+
+            Http::withHeaders($headers)->patch(
+                rtrim(env('SUPABASE_URL'), '/') .
+                "/rest/v1/pegawai?pegawai_id=eq.{$request->kasubbag_id}",
+                $data
+            );
+        }
+
+        /* ================= SNAPSHOT STRUKTUR BARU ================= */
+        $this->simpanSnapshotStruktur();
+
+
+            return redirect()
+                ->route('admin.profil.pegawai')
+                ->with('success', 'Jabatan strategis berhasil diperbarui');
+        }
+
+        private function uploadFoto($file)
+        {
+            $bucket = env('SUPABASE_BUCKET');
+            $name = 'pegawai/' . Str::uuid() . '.' . $file->getClientOriginalExtension();
+
+            Http::withHeaders([
+                'apikey'        => env('SUPABASE_SERVICE_ROLE_KEY'),
+                'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
+            ])->withBody(
+                file_get_contents($file),
+                $file->getMimeType()
+            )->post(
+                rtrim(env('SUPABASE_URL'), '/') .
+                "/storage/v1/object/{$bucket}/{$name}"
+            );
+
+            return rtrim(env('SUPABASE_URL'), '/') .
+                "/storage/v1/object/public/{$bucket}/{$name}";
     }
 
-    /* ================= SNAPSHOT STRUKTUR BARU ================= */
-$this->simpanSnapshotStruktur();
+    private function deleteFotoFromSupabase(?string $fotoUrl)
+    {
+        if (!$fotoUrl) return;
 
+        $bucket = env('SUPABASE_BUCKET');
 
-    return redirect()
-        ->route('admin.profil.pegawai')
-        ->with('success', 'Jabatan strategis berhasil diperbarui');
-}
+        $path = str_replace(
+            rtrim(env('SUPABASE_URL'), '/') .
+            "/storage/v1/object/public/{$bucket}/",
+            '',
+            $fotoUrl
+        );
 
-private function uploadFoto($file)
-{
-    $bucket = env('SUPABASE_BUCKET');
-    $name = 'pegawai/' . Str::uuid() . '.' . $file->getClientOriginalExtension();
-
-    Http::withHeaders([
-        'apikey'        => env('SUPABASE_SERVICE_ROLE_KEY'),
-        'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
-    ])->withBody(
-        file_get_contents($file),
-        $file->getMimeType()
-    )->post(
-        rtrim(env('SUPABASE_URL'), '/') .
-        "/storage/v1/object/{$bucket}/{$name}"
-    );
-
-    return rtrim(env('SUPABASE_URL'), '/') .
-           "/storage/v1/object/public/{$bucket}/{$name}";
-}
-
-private function deleteFotoFromSupabase(?string $fotoUrl)
-{
-    if (!$fotoUrl) return;
-
-    $bucket = env('SUPABASE_BUCKET');
-
-    $path = str_replace(
-        rtrim(env('SUPABASE_URL'), '/') .
-        "/storage/v1/object/public/{$bucket}/",
-        '',
-        $fotoUrl
-    );
-
-    Http::withHeaders([
-        'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
-    ])->delete(
-        rtrim(env('SUPABASE_URL'), '/') .
-        "/storage/v1/object/{$bucket}/{$path}"
-    );
-}
+        Http::withHeaders([
+            'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
+        ])->delete(
+            rtrim(env('SUPABASE_URL'), '/') .
+            "/storage/v1/object/{$bucket}/{$path}"
+        );
+    }
 
 
 }

@@ -116,15 +116,46 @@
                     <i class="bi submenu-arrow {{ $akuntabilitasOpen ? 'bi-caret-down-fill' : 'bi-caret-right-fill' }}"></i>
                 </a>
 
-                <ul id="SubMenu"
-                    class="nav flex-column ms-3"
-                    @if($akuntabilitasOpen) style="display:block" @else style="display:none" @endif>
-                    <li><a class="nav-link" href="#">Sub Menu 1</a></li>
-                    <li><a class="nav-link" href="#">Sub Menu 2</a></li>
-                    <li><a class="nav-link" href="#">Sub Menu 3</a></li>
-                    <li><a class="nav-link" href="#">Sub Menu 4</a></li>
-                    <li><a class="nav-link" href="#">Sub Menu 5</a></li>
-                </ul>
+<ul class="nav flex-column ms-3 submenu-list"
+    @if($akuntabilitasOpen)
+        style="display:block"
+    @else
+        style="display:none"
+    @endif>
+    <li>
+        <a class="nav-link {{ request()->routeIs('admin.akuntabilitas.renstra') ? 'active' : '' }}"
+           href="{{ route('admin.akuntabilitas.renstra') }}">
+            <i class="fas fa-arrow-right me-2"></i>Renstra
+        </a>
+    </li>
+    <li>
+        <a class="nav-link {{ request()->routeIs('admin.akuntabilitas.dipa') ? 'active' : '' }}"
+           href="{{ route('admin.akuntabilitas.dipa') }}">
+            <i class="fas fa-dollar-sign me-2"></i>DIPA
+        </a>
+    </li>
+    <li>
+        <a class="nav-link {{ request()->routeIs('admin.akuntabilitas.pk') ? 'active' : '' }}"
+           href="{{ route('admin.akuntabilitas.pk') }}">
+            <i class="fas fa-file-signature me-2"></i>Perjanjian Kinerja
+        </a>
+    </li>
+    <li>
+        <a class="nav-link {{ request()->routeIs('admin.akuntabilitas.ra') ? 'active' : '' }}"
+           href="{{ route('admin.akuntabilitas.ra') }}">
+            <i class="fas fa-list-check me-2"></i>Rencana Aksi
+        </a>
+    </li>
+    <li><a class="nav-link {{ request()->routeIs('admin.akuntabilitas.lakin') ? 'active' : '' }}"
+           href="{{ route('admin.akuntabilitas.lakin') }}">
+            <i class="fas fa-list-check me-2"></i>Lakin
+        </a></li>
+        <li><a class="nav-link {{ request()->routeIs('admin.akuntabilitas.sakai') ? 'active' : '' }}"
+           href="{{ route('admin.akuntabilitas.sakai') }}">
+            <i class="fas fa-list-check me-2"></i>SAKAI
+        </a>
+        </li>
+    </ul>
             </li>
 
             <!-- PENGATURAN -->

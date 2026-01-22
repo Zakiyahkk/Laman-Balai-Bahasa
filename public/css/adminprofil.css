@@ -128,7 +128,7 @@
 /* ================= CENTER BAGAN DI SECTION KIRI ================= */
 .bagan-container {
     display: flex;
-    justify-content: center; /* center kiri-kanan */
+    justify-content: center;
 }
 
 
@@ -171,26 +171,22 @@
 
 /*
   Garis vertikal:
-  - keluar dari tengah card Kepala Balai
-  - turun sampai titik belok
 */
 .line.vertical {
     width: 2px;
     height: 250px;
-    top: 170px;     /* tepat di bawah card Kepala Balai */
-    left: 110px;    /* tengah card (300px / 2) */
+    top: 170px;
+    left: 110px;
 }
 
 /*
   Garis horizontal:
-  - dari garis vertikal
-  - menuju card Kasubbag Umum
 */
 .line.horizontal {
     width: 180px;
     height: 2px;
-    top: 310px;     /* sejajar tengah card Kasubbag */
-    left: 110px;    /* mulai dari tengah Kepala Balai */
+    top: 310px;
+    left: 110px;
 }
 
 /* ================= RIWAYAT VERSI (KANAN) ================= */
@@ -216,13 +212,11 @@
     background: #f8fafc;
 }
 
-
 .riwayat-card.selected {
     border: 2px solid #1e3a8a;
     background: #eff6ff;
     box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
 }
-
 
 /* JUDUL */
 .riwayat-card .fw-semibold {
