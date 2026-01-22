@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\GaleriController;
 use App\Http\Controllers\Admin\PublikasiController;
 use App\Http\Controllers\Admin\AProfilController;
+use App\Http\Controllers\Admin\AAkuntabilitasController;
 use App\Http\Controllers\User\ArtikelController;
 
 /*
@@ -31,7 +32,7 @@ Route::get('/berita/{slug}', [BeritaController::class, 'show'])
     ->name('berita.show');
 
 Route::prefix('profil')->group(function () {
-    Route::get('/visimisi', [ProfileController::class, 'visiMisi']);
+    Route::get('/visi-misi', [ProfileController::class, 'visiMisi']);
     Route::get('/sejarah-singkat', [ProfileController::class, 'sejarahSingkat']);
     Route::get('/tugas-dan-fungsi', [ProfileController::class, 'tugasDanFungsi']);
     Route::get('/struktur-organisasi',[ProfileController::class, 'strukturOrganisasi']);
@@ -139,17 +140,14 @@ Route::prefix('admin')
                 ->name('admin.profil.visimisi');
             Route::post('/visimisi', [AProfilController::class, 'updateVisiMisi'])
                 ->name('profil.visimisi.update');
-
             // ===== TUGAS & FUNGSI =====
             Route::get('/tugasfungsi', [AProfilController::class, 'tugasFungsi'])
                 ->name('admin.profil.tugasfungsi');
             Route::post('/tugasfungsi', [AProfilController::class, 'updateTugasFungsi'])
                 ->name('profil.tugasfungsi.update');
-
             // ===== STRUKTUR ORGANISASI =====
             Route::get('/strukturorganisasi', [AProfilController::class, 'strukturorganisasi'])
                 ->name('admin.profil.strukturorganisasi');
-
             // ===== PEGAWAI =====
             Route::get('/pegawai', [AProfilController::class, 'pegawai'])
                 ->name('admin.profil.pegawai');
@@ -161,9 +159,19 @@ Route::prefix('admin')
                 ->name('admin.profil.pegawai.updateStrategis');
             Route::delete('/pegawai/{id}', [AProfilController::class, 'destroyPegawai'])
                 ->name('admin.profil.pegawai.destroy');
-
-
         });
+
+        Route::prefix('akuntabilitas')
+            ->name('admin.akuntabilitas.')
+            ->group(function () {
+                Route::get('/renstra', [AAkuntabilitasController::class, 'renstra'])->name('renstra');
+                Route::get('/dipa', [AAkuntabilitasController::class, 'dipa'])->name('dipa');
+                Route::get('/perjanjian-kinerja', [AAkuntabilitasController::class, 'pk'])->name('pk');
+                Route::get('/rencana-aksi', [AAkuntabilitasController::class, 'ra'])->name('ra');
+                Route::get('/lakin', [AAkuntabilitasController::class, 'lakin'])->name('lakin');
+                Route::get('/sakai', [AAkuntabilitasController::class, 'sakai'])->name('sakai');
+            });
+
 
         Route::get('/halamanweb', fn () => view('admin.halamanweb'))->name('admin.halamanweb');
         Route::get('/pengaturan', fn () => view('admin.pengaturan'))->name('admin.pengaturan');

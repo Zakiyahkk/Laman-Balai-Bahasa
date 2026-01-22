@@ -96,39 +96,34 @@
 
                 <!-- LIST RIWAYAT -->
                 <div class="riwayat-list">
+                @foreach($riwayat as $item)
+                    <div class="riwayat-card
+                        {{ isset($strukturAktif) && $strukturAktif['struktur_id'] == $item['struktur_id'] ? 'selected' : '' }}"
+                        data-id="{{ $item['struktur_id'] }}"
+                        onclick="location.href='?struktur=' + this.dataset.id">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <div class="fw-semibold">
+                                    Struktur Organisasi {{ $item['versi'] ?? '-' }}
+                                </div>
+                            <div class="small text-muted">
+                                    <i class="bi bi-calendar3"></i>
+                                {{ \Carbon\Carbon::parse($item['created_at'], 'UTC')
+                                        ->setTimezone('Asia/Jakarta')
+                                        ->translatedFormat('d F Y, H:i') }}
+                                </div>
+                            </div>
 
-@foreach($riwayat as $item)
-    <div class="riwayat-card
-        {{ isset($strukturAktif) && $strukturAktif['struktur_id'] == $item['struktur_id'] ? 'selected' : '' }}"
-        data-id="{{ $item['struktur_id'] }}"
-        onclick="location.href='?struktur=' + this.dataset.id">
-        <div class="d-flex justify-content-between align-items-start">
-            <div>
-                <div class="fw-semibold">
-                    Struktur Organisasi {{ $item['versi'] ?? '-' }}
-                </div>
-               <div class="small text-muted">
-                    <i class="bi bi-calendar3"></i>
-                   {{ \Carbon\Carbon::parse($item['created_at'], 'UTC')
-                        ->setTimezone('Asia/Jakarta')
-                        ->translatedFormat('d F Y, H:i') }}
+                            @if($item['status'])
+                                <i class="bi bi-check-circle-fill fs-5"></i>
+                            @endif
+                        </div>
+
+                    </div>
+                @endforeach
                 </div>
             </div>
-
-            @if($item['status'])
-                <i class="bi bi-check-circle-fill fs-5"></i>
-            @endif
         </div>
-
     </div>
-@endforeach
-
-</div>
-
-            </div>
-        </div>
-
-    </div>
-
 </div>
 @endsection
