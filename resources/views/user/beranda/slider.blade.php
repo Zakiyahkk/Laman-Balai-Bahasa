@@ -53,16 +53,6 @@
             <div class="swiper-pagination"></div>
         </div>
 
-        <div id="welcomePopup" class="popup-overlay">
-            <div class="popup-box">
-                <button class="close-btn" onclick="closeWelcomePopup()" aria-label="Tutup Popup">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-
-                <img src="{{ asset('img/pantun2.png') }}" alt="Pantun Hari Ini" class="popup-img">
-            </div>
-        </div>
-
     </section>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -70,5 +60,6 @@
     <script src="{{ asset('js/slider.js') }}"></script>
 
 </body>
+@include('user.beranda.poppantun')
 
 </html>

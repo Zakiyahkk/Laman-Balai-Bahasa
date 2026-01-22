@@ -458,69 +458,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // ================================
 // Popup Pantun & Slider Text
 // ================================
-// Gunakan window load agar lebih stabil
-window.addEventListener("load", function () {
-    
-    // --- 1. POPUP PANTUN ---
-    const popup = document.getElementById("welcomePopup");
 
-    if (popup) {
-        // Berikan delay 1 detik agar transisi terlihat halus
-        setTimeout(() => {
-            popup.classList.add("show");
-        }, 1000);
-
-        // Fungsi Global untuk Menutup Popup
-        window.closeWelcomePopup = function () {
-            popup.classList.remove("show");
-        };
-
-        // Tutup jika mengklik area gelap di luar gambar
-        popup.addEventListener("click", function (e) {
-            if (e.target === this) {
-                closeWelcomePopup();
-            }
-        });
-    }
-
-    // --- 2. TYPED.JS (Jika digunakan) ---
-    const typingEl = document.querySelector("#typing-element");
-    if (typingEl && typeof Typed !== 'undefined') {
-        new Typed("#typing-element", {
-            strings: ["Ligat.", "Giat.", "Loyal.", "Inovatif.", "Akuntabel."],
-            typeSpeed: 60,
-            backSpeed: 40,
-            backDelay: 1500,
-            loop: true
-        });
-    }
-
-    // --- 3. SLIDER SEQUENCE ---
-    const seqBrand = document.getElementById("seq-brand");
-    const seqService = document.getElementById("seq-service");
-
-    if (seqBrand && seqService) {
-        const showTime = 5000;
-        const serviceTime = 6000;
-
-        function switchState(state) {
-            if (state === "brand") {
-                seqService.classList.remove("active");
-                setTimeout(() => { seqBrand.classList.add("active"); }, 500);
-            } else if (state === "service") {
-                seqBrand.classList.remove("active");
-                setTimeout(() => { seqService.classList.add("active"); }, 500);
-            }
-        }
-
-        // Jalankan loop slider
-        setTimeout(() => { switchState("service"); }, showTime);
-        setInterval(() => {
-            switchState("brand");
-            setTimeout(() => { switchState("service"); }, showTime);
-        }, showTime + serviceTime);
-    }
-});
 
 // ================================
 // Pengumuman
