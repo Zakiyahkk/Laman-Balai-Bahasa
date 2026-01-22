@@ -984,10 +984,6 @@ select {
     }
 }
 
-/* =========================
-   SEJARAH - ELEGANT UPGRADE
-========================= */
-
 /* ===============================
    SEJARAH PAGE LAYOUT
 ================================ */
@@ -1055,18 +1051,40 @@ select {
 }
 
 .sejarah-deskripsi h4 {
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 600;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
     color: #111827;
 }
 
 .text-box {
     font-size: 14px;
-    line-height: 1.8;
-    color: #374151;
+    font-weight: 400;
+    line-height: 1.9;
+
+    color: #111827;
+
+    text-align: justify; /* rata kanan–kiri */
+    text-justify: inter-word;
+
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+
+    letter-spacing: 0.15px;
+    word-spacing: 0.5px;
 }
 
+.text-box p {
+    text-indent: 2.1em;
+    margin-bottom: 16px;
+    color: #111827;
+}
+.sejarah-deskripsi,
+.sejarah-deskripsi h4,
+.text-box {
+    font-family: "Montserrat", sans-serif;
+}
 /* ===============================
    GAMBAR ILUSTRASI (LANDSCAPE)
 ================================ */
@@ -1107,65 +1125,293 @@ select {
 }
 
 /* ===============================
-   GALERI FOTO (PORTRAIT)
+   GALERI TOKOH PIMPINAN (PORTRAIT)
 ================================ */
 
 .sejarah-galeri {
-    border-top: 1px solid #ffffff;
-    padding-top: 28px;
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
+    padding-top: 20px;
+    margin-top: 24px;
 }
 
+/* Judul */
 .sejarah-galeri h4 {
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 600;
-    margin-bottom: 5px;
+    margin-bottom: 4px;
     color: #ffffff;
 }
 
+/* Deskripsi */
+.galeri-desc {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 16px;
+    max-width: 640px;
+}
 .sejarah-galeri-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
+    gap: 20px;
 }
 
 .galeri-box {
-    height: 180px;
-    border: 2px dashed #d1d5db;
-    border-radius: 10px;
-    background: #f9fafb;
+    flex: 0 0 calc(25% - 15px); /* 4 ITEM */
+    max-width: 220px;
+    margin: 0 auto;
+
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 16px;
+    padding: 10px;
+
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: 0.25s ease;
+
+    transition: 0.3s ease;
 }
 
+/* WRAPPER (AMAN UNTUK SLIDER JS) */
+.galeri-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+/* CONTAINER ITEM (HORIZONTAL / GRID) */
+.sejarah-galeri-grid {
+    display: flex;
+    gap: 20px;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+/* Hover halus */
 .galeri-box:hover {
-    border-color: #2563eb;
-    background: #eff6ff;
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-4px);
 }
 
+/* GAMBAR – TIDAK TERPOTONG */
+.galeri-box img {
+    width: 100%;
+    height: auto; /* JANGAN 100% */
+    max-height: 360px; /* BATAS TINGGI */
+    object-fit: contain; /* TIDAK TERPOTONG */
+    border-radius: 12px;
+}
+
+/* Placeholder */
 .galeri-box span {
     font-size: 13px;
-    color: #9ca3af;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* PANAH */
+.galeri-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    font-size: 20px;
+
+    z-index: 5;
+}
+
+.galeri-nav.prev {
+    left: -8px;
+}
+.galeri-nav.next {
+    right: -8px;
+}
+
+.galeri-nav:hover {
+    background: rgba(0, 0, 0, 0.8);
 }
 
 /* ===============================
-   RESPONSIVE
+   FIX KHUSUS MOBILE & TABLET
 ================================ */
 
+/* TABLET */
 @media (max-width: 992px) {
-    .sejarah-content {
-        grid-template-columns: 1fr;
+    .sejarah-galeri {
+        padding-top: 16px;
+    }
+
+    .galeri-wrapper {
+        padding: 0 10px; /* beri ruang kiri kanan */
     }
 
     .sejarah-galeri-grid {
-        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+    }
+
+    .galeri-box {
+        flex: 0 0 48%; /* 2 card rapi */
+        max-width: 100%;
+        padding: 8px;
+    }
+
+    .galeri-box img {
+        max-height: 260px;
+    }
+
+    /* Panah jangan nutup gambar */
+    .galeri-nav {
+        width: 36px;
+        height: 36px;
+        font-size: 18px;
+    }
+
+    .galeri-nav.prev {
+        left: 0;
+    }
+
+    .galeri-nav.next {
+        right: 0;
+    }
+    .sejarah-content {
+        grid-template-columns: 1fr; /* jadi 1 kolom */
+        gap: 20px;
+    }
+
+    .sejarah-deskripsi {
+        padding: 18px;
+    }
+
+    .text-box {
+        font-size: 13.5px;
+        line-height: 1.8;
+    }
+
+    .sejarah-illustration {
+        grid-template-columns: repeat(2, 1fr); /* 2 foto per baris */
+        gap: 12px;
+    }
+
+    .upload-box {
+        height: 120px;
     }
 }
 
-@media (max-width: 480px) {
+/* ===============================
+   MOBILE RESPONSIVE (≤ 576px)
+   FINAL & STABIL
+================================ */
+
+@media (max-width: 576px) {
+    /* Hindari tabrakan navbar */
+    .sejarah-page {
+        padding-top: 76px;
+    }
+
+    /* Container */
+    .sejarah-container {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    /* Header */
+    .sejarah-header {
+        margin-bottom: 16px;
+    }
+
+    .sejarah-header h1 {
+        font-size: 22px;
+        line-height: 1.35;
+    }
+
+    .sejarah-header p {
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    /* ===============================
+       DESKRIPSI
+    ============================== */
+
+    .sejarah-deskripsi {
+        margin-top: 0;
+        padding: 16px;
+        border-radius: 14px;
+    }
+
+    .sejarah-deskripsi h4 {
+        font-size: 15px;
+        margin-bottom: 10px;
+    }
+
+    .text-box {
+        font-size: 13px;
+        line-height: 1.75;
+        text-indent: 1em;
+        text-align: justify;
+    }
+
+    /* ===============================
+       ILUSTRASI
+    ============================== */
+
+    .sejarah-illustration {
+        margin-top: 6px;
+        gap: 12px;
+    }
+
+    .upload-box {
+        height: 110px;
+        border-radius: 12px;
+    }
+
+    /* ===============================
+       GALERI TOKOH
+    ============================== */
+
+    .sejarah-galeri h4 {
+        font-size: 15px;
+        margin-bottom: 4px;
+    }
+
+    .galeri-desc {
+        font-size: 12px;
+        margin-bottom: 12px;
+    }
+
+    .galeri-wrapper {
+        padding: 0 6px;
+    }
+
     .sejarah-galeri-grid {
-        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .galeri-box {
+        flex: 0 0 100%; /* 1 card per layar */
+        max-width: 100%;
+        padding: 10px;
+        border-radius: 14px;
+    }
+
+    .galeri-box img {
+        max-height: 240px;
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+
+    /* Panah slider */
+    .galeri-nav {
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+        opacity: 0.85;
     }
 }
 

@@ -43,10 +43,41 @@ class AkuntabilitasController extends Controller
         return view('user.akuntabilitas.lakin');
     }
 
-    public function dipa()
-    {
-        return view('user.akuntabilitas.dipa');
-    }
+        /* ================= DIPA ================= */
+        public function dipa(Request $request)
+        {
+            // DATA DUMMY DIPA
+            $docs = collect([
+                ['judul' => 'DIPA Balai Bahasa Provinsi Tahun Anggaran 2025', 'tahun' => 2025, 'tipe' => 'pdf', 'file' => 'dipa/dipa-2025.pdf'],
+                ['judul' => 'DIPA Revisi I Tahun Anggaran 2025', 'tahun' => 2025, 'tipe' => 'pdf', 'file' => 'dipa/dipa-revisi-2025.pdf'],
+                ['judul' => 'DIPA Balai Bahasa Provinsi Tahun Anggaran 2024', 'tahun' => 2024, 'tipe' => 'pdf', 'file' => 'dipa/dipa-2024.pdf'],
+                ['judul' => 'DIPA dan Rincian Anggaran Tahun 2023', 'tahun' => 2023, 'tipe' => 'pdf', 'file' => 'dipa/dipa-2023.pdf'],
+            ]);
+    
+            $q = trim((string) $request->query('q', ''));
+            $year = $request->query('year');
+    
+            // FILTER (SAMA DENGAN RENSTRA)
+            $filtered = $docs
+                ->when($q !== '', fn ($c) =>
+                    $c->filter(fn ($d) =>
+                        str_contains(strtolower($d['judul']), strtolower($q))
+                    )
+                )
+                ->when($year, fn ($c) =>
+                    $c->where('tahun', (int) $year)
+                )
+                ->values();
+    
+            $years = $docs->pluck('tahun')->unique()->sortDesc()->values();
+    
+            return view('user.akuntabilitas.dipa', [
+                'docs' => $filtered,
+                'years' => $years,
+                'q' => $q,
+                'selectedYear' => $year,
+            ]);
+        }
 
     public function sakai()
     {

@@ -459,7 +459,6 @@ document.addEventListener("DOMContentLoaded", function () {
 // Popup Pantun & Slider Text
 // ================================
 
-
 // ================================
 // Pengumuman
 // ================================
@@ -783,7 +782,7 @@ document.addEventListener("DOMContentLoaded", function () {
 /* =========================================
    Slider Swiper di halaman Beranda
 ========================================= */
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     // Inisialisasi Swiper
     var swiper = new Swiper(".mySwiper", {
         spaceBetween: 0,
@@ -801,13 +800,13 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // Script Popup
-    const popup = document.getElementById('welcomePopup');
-    const closeBtn = document.querySelector('.close-btn');
+    const popup = document.getElementById("welcomePopup");
+    const closeBtn = document.querySelector(".close-btn");
 
     // Fungsi tutup popup
-    window.closeWelcomePopup = function() {
-        if(popup) popup.style.display = 'none';
-    }
+    window.closeWelcomePopup = function () {
+        if (popup) popup.style.display = "none";
+    };
 
     // Jika ingin popup muncul otomatis saat load, uncomment baris di bawah:
     // if(popup) popup.style.display = 'flex';
@@ -816,22 +815,20 @@ document.addEventListener("DOMContentLoaded", function() {
 /* =========================================
    SCRIPT TOKOH BAHASA (INIT CHECK)
    ========================================= */
-document.addEventListener("DOMContentLoaded", function() {
-    
+document.addEventListener("DOMContentLoaded", function () {
     // --- 1. CONFIG SWIPER ---
     // Cek apakah slider ada di halaman sebelum inisialisasi
-    if (document.querySelector('.tokohSlider')) {
-        
+    if (document.querySelector(".tokohSlider")) {
         // Cek library Swiper
-        if (typeof Swiper !== 'undefined') {
+        if (typeof Swiper !== "undefined") {
             var swiper = new Swiper(".tokohSlider", {
-                slidesPerView: 1, 
+                slidesPerView: 1,
                 spaceBetween: 25,
                 loop: true,
                 autoplay: {
                     delay: 4000,
                     disableOnInteraction: false,
-                    pauseOnMouseEnter: true, 
+                    pauseOnMouseEnter: true,
                 },
                 navigation: {
                     nextEl: ".tokoh-next",
@@ -841,78 +838,79 @@ document.addEventListener("DOMContentLoaded", function() {
                     640: { slidesPerView: 2, spaceBetween: 20 },
                     768: { slidesPerView: 3, spaceBetween: 25 },
                     1024: { slidesPerView: 4, spaceBetween: 30 },
-                }
+                },
             });
         }
     }
 
     // --- 2. LOGIC MODAL POPUP ---
-    const modal = document.getElementById('modalTokoh');
-    const mFoto = document.getElementById('mFoto');
-    const mNama = document.getElementById('mNama');
-    const mDesc = document.getElementById('mDesc');
-    const mKat = document.getElementById('mKategori');
+    const modal = document.getElementById("modalTokoh");
+    const mFoto = document.getElementById("mFoto");
+    const mNama = document.getElementById("mNama");
+    const mDesc = document.getElementById("mDesc");
+    const mKat = document.getElementById("mKategori");
 
     // Fungsi Global Buka Modal
-    window.openTokohModal = function(nama, foto, deskripsi, kategori) {
+    window.openTokohModal = function (nama, foto, deskripsi, kategori) {
         // Set Data
-        if(mNama) mNama.innerText = nama;
-        if(mFoto) mFoto.src = foto;
-        if(mDesc) mDesc.innerText = deskripsi;
+        if (mNama) mNama.innerText = nama;
+        if (mFoto) mFoto.src = foto;
+        if (mDesc) mDesc.innerText = deskripsi;
 
         // Set Warna Badge
-        if(mKat) {
-            mKat.className = 'modal-tag'; // Reset class
-            if(kategori === 'bahasa') {
+        if (mKat) {
+            mKat.className = "modal-tag"; // Reset class
+            if (kategori === "bahasa") {
                 mKat.innerText = "Tokoh Bahasa";
-                mKat.className += ' bg-blue';
-            } else if (kategori === 'sastra') {
+                mKat.className += " bg-blue";
+            } else if (kategori === "sastra") {
                 mKat.innerText = "Tokoh Sastra";
-                mKat.className += ' bg-orange';
+                mKat.className += " bg-orange";
             } else {
                 mKat.innerText = "Tokoh Budaya";
-                mKat.className += ' bg-green';
+                mKat.className += " bg-green";
             }
         }
-        
+
         // Tampilkan Modal
-        if(modal) {
-            modal.style.display = 'flex';
+        if (modal) {
+            modal.style.display = "flex";
             setTimeout(() => {
-                modal.classList.add('active');
+                modal.classList.add("active");
             }, 10);
         }
-    }
+    };
 
     // Fungsi Global Tutup Modal
-    window.closeTokohModal = function() {
-        if(modal) {
-            modal.classList.remove('active');
+    window.closeTokohModal = function () {
+        if (modal) {
+            modal.classList.remove("active");
             setTimeout(() => {
-                modal.style.display = 'none';
-            }, 300); 
+                modal.style.display = "none";
+            }, 300);
         }
-    }
+    };
 
     // Close jika klik backdrop
-    if(modal) {
-        modal.addEventListener('click', function(e) {
-            if(e.target === modal || e.target.classList.contains('modal-backdrop')) {
+    if (modal) {
+        modal.addEventListener("click", function (e) {
+            if (
+                e.target === modal ||
+                e.target.classList.contains("modal-backdrop")
+            ) {
                 closeTokohModal();
             }
         });
     }
 });
 
-
 /* =========================================
    SCRIPT MAHKOTA KALAM (TAB & SLIDER)
    ========================================= */
-document.addEventListener("DOMContentLoaded", function() {
-    
+document.addEventListener("DOMContentLoaded", function () {
     // Inisialisasi Swiper
     const initMahkotaSwiper = () => {
-        if (document.querySelector('.mahkotaSwiper')) {
+        if (document.querySelector(".mahkotaSwiper")) {
             return new Swiper(".mahkotaSwiper", {
                 slidesPerView: 1,
                 spaceBetween: 15,
@@ -924,8 +922,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 breakpoints: {
                     480: { slidesPerView: 2 },
                     768: { slidesPerView: 3 },
-                    1024: { slidesPerView: 4 }
-                }
+                    1024: { slidesPerView: 4 },
+                },
             });
         }
         return null;
@@ -937,16 +935,16 @@ document.addEventListener("DOMContentLoaded", function() {
     const mkTabs = document.querySelectorAll(".mk-tab-btn");
     const mkPanes = document.querySelectorAll(".mahkota-pane");
 
-    mkTabs.forEach(tab => {
+    mkTabs.forEach((tab) => {
         tab.addEventListener("click", () => {
             const target = tab.getAttribute("data-tab");
 
             // Update Active Tab Button
-            mkTabs.forEach(t => t.classList.remove("active"));
+            mkTabs.forEach((t) => t.classList.remove("active"));
             tab.classList.add("active");
 
             // Update Active Pane
-            mkPanes.forEach(pane => {
+            mkPanes.forEach((pane) => {
                 pane.classList.remove("active");
                 if (pane.id === target) {
                     pane.classList.add("active");
@@ -956,7 +954,7 @@ document.addEventListener("DOMContentLoaded", function() {
             // Re-inisialisasi Swiper agar tidak rusak di tab baru
             if (mahkotaSlider) {
                 if (Array.isArray(mahkotaSlider)) {
-                    mahkotaSlider.forEach(s => s.destroy());
+                    mahkotaSlider.forEach((s) => s.destroy());
                 } else {
                     mahkotaSlider.destroy();
                 }
@@ -965,3 +963,113 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
+
+/* ===============================
+   SLIDER TOKOH PIMPINAN
+   Aman untuk user.js
+================================ */
+
+(function () {
+    document.addEventListener("DOMContentLoaded", function () {
+        const tokohPimpinanSlider = document.getElementById(
+            "tokohPimpinanSlider"
+        );
+        const tokohPrev = document.getElementById("tokohPimpinanPrev");
+        const tokohNext = document.getElementById("tokohPimpinanNext");
+
+        // Jika halaman tidak punya galeri ini, hentikan
+        if (!tokohPimpinanSlider) return;
+
+        function getTokohSlideAmount() {
+            const card = tokohPimpinanSlider.querySelector(".galeri-box");
+            if (!card) return 0;
+
+            const style = window.getComputedStyle(tokohPimpinanSlider);
+            const gap = parseInt(style.columnGap || style.gap || 20);
+
+            return card.offsetWidth + gap;
+        }
+
+        if (tokohNext) {
+            tokohNext.addEventListener("click", function () {
+                tokohPimpinanSlider.scrollBy({
+                    left: getTokohSlideAmount(),
+                    behavior: "smooth",
+                });
+            });
+        }
+
+        if (tokohPrev) {
+            tokohPrev.addEventListener("click", function () {
+                tokohPimpinanSlider.scrollBy({
+                    left: -getTokohSlideAmount(),
+                    behavior: "smooth",
+                });
+            });
+        }
+    });
+})();
+/* ===============================
+   SWIPE MOBILE - TOKOH PIMPINAN
+================================ */
+
+(function () {
+    document.addEventListener("DOMContentLoaded", function () {
+        const slider = document.getElementById("tokohPimpinanSlider");
+        if (!slider) return;
+
+        let startX = 0;
+        let currentX = 0;
+        let isDragging = false;
+
+        const swipeThreshold = 50; // minimal geser (px)
+
+        function getSlideAmount() {
+            const card = slider.querySelector(".galeri-box");
+            if (!card) return 0;
+
+            const style = window.getComputedStyle(slider);
+            const gap = parseInt(style.gap || style.columnGap || 20);
+
+            return card.offsetWidth + gap;
+        }
+
+        /* TOUCH START */
+        slider.addEventListener(
+            "touchstart",
+            function (e) {
+                startX = e.touches[0].clientX;
+                isDragging = true;
+            },
+            { passive: true }
+        );
+
+        /* TOUCH MOVE */
+        slider.addEventListener(
+            "touchmove",
+            function (e) {
+                if (!isDragging) return;
+                currentX = e.touches[0].clientX;
+            },
+            { passive: true }
+        );
+
+        /* TOUCH END */
+        slider.addEventListener("touchend", function () {
+            if (!isDragging) return;
+
+            const diffX = startX - currentX;
+
+            if (Math.abs(diffX) > swipeThreshold) {
+                slider.scrollBy({
+                    left: diffX > 0 ? getSlideAmount() : -getSlideAmount(),
+                    behavior: "smooth",
+                });
+            }
+
+            isDragging = false;
+            startX = 0;
+            currentX = 0;
+        });
+    });
+})();
