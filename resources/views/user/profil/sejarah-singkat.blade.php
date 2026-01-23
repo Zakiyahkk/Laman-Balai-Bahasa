@@ -91,10 +91,7 @@
 
             {{-- GALERI FOTO --}}
             <div class="sejarah-galeri">
-                <h4>Tokoh Pimpinan Terdahulu</h4>
-                <p class="galeri-desc">
-                    Dokumentasi para tokoh yang pernah memimpin Balai Bahasa Provinsi Riau dari masa ke masa.
-                </p>
+                <h4>Kepala Balai dari Masa ke Masa</h4>
                 <div class="galeri-wrapper">
                     <button class="galeri-nav prev" id="tokohPimpinanPrev">&#10094;</button>
                     <div class="sejarah-galeri-grid" id="tokohPimpinanSlider">

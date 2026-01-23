@@ -2,7 +2,7 @@
 
     <button id="icak-trigger-btn" onclick="toggleChat()">
         <i class="fa-solid fa-robot fa-bounce"></i>
-        <span class="tooltip-text">SIBALAI</span>
+        <span class="tooltip-text">Serindit</span>
     </button>
 
     <div id="icak-chat-window">
@@ -10,7 +10,7 @@
             <div class="header-info">
                 <i class="fa-solid fa-robot header-icon"></i>
                 <div>
-                    <h4>SIBALAI</h4>
+                    <h4>Serindit</h4>
                     <span class="status-dot"></span> Online
                 </div>
             </div>
@@ -325,7 +325,8 @@
 
             // Jika chat kosong, mulai percakapan
             if (chatBody.children.length === 0) {
-                botSay("Halo! Saya <b>SIBALAI</b>, asisten virtual Balai Bahasa Riau. 👋<br>Ada yang bisa saya bantu?");
+                botSay(
+                "Halo! Saya <b>Serindit</b>, asisten virtual Balai Bahasa Riau. 👋<br>Ada yang bisa saya bantu?");
                 renderOptions(); // Tampilkan kartu pertanyaan
             }
         } else {
@@ -381,7 +382,8 @@
         userSay(item.question);
 
         // 2. Sembunyikan opsi sementara (efek loading)
-        optionsArea.innerHTML = '<div style="text-align:center; padding:10px; color:#94a3b8; font-size:12px;"><i class="fa-solid fa-circle-notch fa-spin"></i> Icak sedang mengetik...</div>';
+        optionsArea.innerHTML =
+            '<div style="text-align:center; padding:10px; color:#94a3b8; font-size:12px;"><i class="fa-solid fa-circle-notch fa-spin"></i> Icak sedang mengetik...</div>';
 
         // 3. Bot menjawab (delay 1 detik biar alami)
         setTimeout(() => {

@@ -7,8 +7,8 @@
         <div class="mahkota-header">
             <div class="mahkota-title-group">
                 <h2 class="mahkota-main-title">Mahkota Kalam Melayu Riau</h2>
-                <p class="mahkota-sub-text">Tokoh dan Komunitas Penggerak Bahasa dan Sastra Melayu</p>
             </div>
+            <p class="mahkota-sub-text">Tokoh dan Komunitas Penggerak Bahasa dan Sastra Melayu</p>
         </div>
 
         <div class="mahkota-tabs">
