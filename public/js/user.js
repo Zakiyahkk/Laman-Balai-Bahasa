@@ -456,10 +456,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // ================================
-// Popup Pantun & Slider Text
-// ================================
-
-// ================================
 // Pengumuman
 // ================================
 document.addEventListener("DOMContentLoaded", function () {
