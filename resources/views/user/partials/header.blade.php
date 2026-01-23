@@ -27,7 +27,8 @@
                     <i class="fa-regular fa-comment-dots top-icon-big"></i>
                     <div class="top-text-stack">
                         <span class="label-top">Pengaduan ULT</span>
-                        <a href="{{ url('/wbs/wbs') }}" class="btn-ult-big">Klik di sini untuk melakukan pengaduan</a>
+                        <a href="{{ url('https://forms.gle/NJxsM3CyZJVUfrzC8') }}" class="btn-ult-big">Klik di sini
+                            untuk melakukan pengaduan</a>
                     </div>
                 </div>
             </div>

@@ -32,8 +32,8 @@
             <form class="ak-tools" method="GET" action="{{ url('/akuntabilitas/renstra') }}">
                 <div class="ak-tools-row">
                     <div class="ak-search">
-                        <span class="ak-search-icon">🔎</span>
-                        <input type="text" name="q" value="{{ $q ?? '' }}" placeholder="Masukkan kata kunci">
+                        <input type="text" name="q" value="{{ $q ?? '' }}"
+                            placeholder="Masukkan Judul Dokumen">
                     </div>
 
                     <select class="ak-year" name="year">
