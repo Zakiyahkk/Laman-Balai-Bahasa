@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-<section class="mahkota-section">
+<section class="mahkota-section" style="margin-top: -90px;">
     <div class="mahkota-container">
 
         <div class="mahkota-header">

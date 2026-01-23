@@ -4141,3 +4141,229 @@ body {
 }
 
 
+/* ===========================
+   Chatbot
+   =========================== */
+/* --- RESET & FIX OVERFLOW --- */
+#icak-chatbot-container, 
+#icak-chatbot-container * {
+    box-sizing: border-box;
+}
+
+#icak-chatbot-container {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    z-index: 9999;
+}
+
+/* --- TOMBOL FLOATING --- */
+#icak-trigger-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 28px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(30, 58, 138, 0.4);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+#icak-trigger-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Mematikan animasi lompat saat chat terbuka */
+#icak-trigger-btn.stop-bounce i {
+    animation: none !important;
+}
+
+.tooltip-text {
+    position: absolute;
+    right: 70px;
+    background: #333;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+    white-space: nowrap;
+}
+
+#icak-trigger-btn:hover .tooltip-text {
+    opacity: 1;
+    visibility: visible;
+    right: 75px;
+}
+
+/* --- JENDELA CHAT --- */
+#icak-chat-window {
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    width: 350px;
+    max-width: 90vw;
+    height: 500px;
+    max-height: 70vh;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 10000;
+    animation: slideUpChat 0.4s ease forwards;
+    border: 1px solid #e2e8f0;
+}
+
+@keyframes slideUpChat {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.icak-header {
+    background: #1e3a8a;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.header-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-icon {
+    font-size: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px;
+    border-radius: 50%;
+}
+
+.icak-header h4 {
+    font-size: 16px;
+    margin: 0;
+    font-weight: 700;
+}
+
+.status-container {
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    opacity: 0.9;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background: #22c55e;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.close-chat {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.icak-body {
+    flex: 1;
+    background: #f8fafc;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.chat-bubble {
+    max-width: 85%;
+    padding: 10px 15px;
+    border-radius: 12px;
+    font-size: 13px;
+    line-height: 1.5;
+    position: relative;
+    animation: fadeInChat 0.3s ease;
+    word-wrap: break-word;
+}
+
+.bot-msg {
+    align-self: flex-start;
+    background: #fff;
+    color: #334155;
+    border-bottom-left-radius: 2px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+}
+
+.user-msg {
+    align-self: flex-end;
+    background: #3b82f6;
+    color: white;
+    border-bottom-right-radius: 2px;
+}
+
+.icak-options {
+    padding: 15px;
+    background: #fff;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 180px;
+    overflow-y: auto;
+    flex-shrink: 0;
+}
+
+.option-card {
+    background: #fff;
+    border: 1px solid #cbd5e1;
+    padding: 10px 12px;
+    border-radius: 8px;
+    text-align: left;
+    font-size: 12px;
+    color: #1e293b;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.option-card:hover {
+    background: #eff6ff;
+    border-color: #3b82f6;
+    color: #1d4ed8;
+}
+
+@keyframes fadeInChat {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 480px) {
+    #icak-chat-window {
+        width: 85%;
+        right: 7.5%;
+        bottom: 100px;
+    }
+}
