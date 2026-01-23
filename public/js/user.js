@@ -1073,3 +1073,94 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 })();
+
+
+/* ===============================
+   ChatBot
+================================ */
+const botData = [
+    { id: 1, question: "Dimana alamat Balai Bahasa Provinsi Riau?", answer: "Balai Bahasa Provinsi Riau beralamat di <br><b>Jl. H.R. Soebrantas, Kampus Bina Widya UNRI, Pekanbaru.</b>" },
+    { id: 2, question: "Apa saja jam pelayanan kantor?", answer: "Pelayanan kami buka pada:<br><b>Senin - Kamis:</b> 08.00 - 16.00 WIB<br><b>Jumat:</b> 08.00 - 16.30 WIB" },
+    { id: 3, question: "Bagaimana cara ikut uji UKBI?", answer: "Daftar UKBI di: <a href='https://ukbi.kemdikbud.go.id' target='_blank'>ukbi.kemdikbud.go.id</a>" },
+    { id: 4, question: "Saya ingin menerjemahkan dokumen, bisa?", answer: "Bisa! Silakan ajukan permohonan melalui email resmi kami atau datang ke bagian layanan teknis." },
+    { id: 5, question: "Apa kontak WhatsApp yang bisa dihubungi?", answer: "Hubungi WA kami: <br><b><a href='https://wa.me/6281234567890'>+62 812-3456-7890</a></b>" }
+];
+
+const chatWindow = document.getElementById('icak-chat-window');
+const triggerBtn = document.getElementById('icak-trigger-btn');
+const chatBody = document.getElementById('icak-body');
+const optionsArea = document.getElementById('icak-options');
+let isChatOpen = false;
+
+// Fungsi Utama Toggle
+function toggleChat() {
+    if (!isChatOpen) {
+        chatWindow.style.display = 'flex';
+        triggerBtn.classList.add('stop-bounce'); 
+        isChatOpen = true;
+
+        if (chatBody.children.length === 0) {
+            setTimeout(() => {
+                botSay("Halo! Saya <b>SIBALAI</b>. 👋<br>Ada yang bisa saya bantu?");
+                renderOptions();
+            }, 300);
+        }
+    } else {
+        chatWindow.style.display = 'none';
+        triggerBtn.classList.remove('stop-bounce'); 
+        isChatOpen = false;
+    }
+}
+
+function botSay(htmlMsg) {
+    const bubble = document.createElement('div');
+    bubble.className = 'chat-bubble bot-msg';
+    bubble.innerHTML = htmlMsg;
+    chatBody.appendChild(bubble);
+    scrollToBottom();
+}
+
+function userSay(text) {
+    const bubble = document.createElement('div');
+    bubble.className = 'chat-bubble user-msg';
+    bubble.innerText = text;
+    chatBody.appendChild(bubble);
+    scrollToBottom();
+}
+
+function renderOptions() {
+    optionsArea.innerHTML = '<div style="font-size:11px; color:#64748b; margin-bottom:5px;">Pilih topik bantuan:</div>';
+    botData.forEach(item => {
+        const btn = document.createElement('div');
+        btn.className = 'option-card';
+        btn.innerHTML = `<i class="fa-regular fa-comments"></i> ${item.question}`;
+        btn.onclick = () => handleSelection(item);
+        optionsArea.appendChild(btn);
+    });
+}
+
+function handleSelection(item) {
+    userSay(item.question);
+    optionsArea.innerHTML = '<div style="text-align:center; width:100%; padding:10px; color:#94a3b8; font-size:12px;"><i class="fa-solid fa-circle-notch fa-spin"></i> Mengetik...</div>';
+
+    setTimeout(() => {
+        botSay(item.answer);
+        showBackToMenu();
+    }, 800);
+}
+
+function showBackToMenu() {
+    optionsArea.innerHTML = '';
+    const btnReset = document.createElement('div');
+    btnReset.className = 'option-card';
+    btnReset.style.background = '#f1f5f9';
+    btnReset.style.justifyContent = 'center';
+    btnReset.style.fontWeight = 'bold';
+    btnReset.innerHTML = `<i class="fa-solid fa-rotate-left"></i> Menu Utama`;
+    btnReset.onclick = () => renderOptions();
+    optionsArea.appendChild(btnReset);
+}
+
+function scrollToBottom() {
+    chatBody.scrollTo({ top: chatBody.scrollHeight, behavior: 'smooth' });
+}
