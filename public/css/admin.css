@@ -9,7 +9,7 @@ body {
 }
 
 .bg-content {
-    background-color: #e5f7ff;
+    background-color: #1e3a8a;
 }
 
 .page-header h3,
@@ -29,7 +29,7 @@ main {
     min-width: 220px;
     flex-shrink: 0;
     min-height: 100vh;
-    background-color: #fef8eb;
+    background-color: #f9a703;
     padding: 16px;
     position: fixed;
     top: 0;
@@ -63,12 +63,12 @@ main {
 
 /* LOGIN */
 .login-btn {
-    background-color: #067ac1;;
+    background-color: #f9a703;
     color: white !important;
 }
 
 .login-btn:hover {
-    background: #0369a1; /* Biru lebih gelap */
+    background: rgb(195, 140, 0); /* Biru lebih gelap */
 }
 
 .form-login {
@@ -85,7 +85,7 @@ main {
 
 /* menu umum */
 .sidebar .nav-link {
-    color: #067ac1;
+    color: #1e3a81;
     padding: 10px 14px;
     border-radius: 10px;
     margin-bottom: 6px;
@@ -96,7 +96,7 @@ main {
 /* hover & active (SATU SUMBER) */
 .sidebar .nav-link:hover,
 .sidebar .nav-link.active {
-    background-color: #067ac1;
+    background-color: #1e3a8a;
     color: white;
 }
 
@@ -107,7 +107,7 @@ main {
 
 /* ===== CONTENT ===== */
 .content {
-    background-color: #067ac1;
+    background-color: #1e3a8a;
     padding: 24px;
     width: 100%;
 }
@@ -201,7 +201,7 @@ main {
 }
 
 .btn-add-article {
-    background-color: #067ac1;
+    background-color: #f9a703;
     color: #ffffff;
     border: none;
     height: 38px;
@@ -221,7 +221,7 @@ main {
 
 /* hover lebih gelap */
 .btn-add-article:hover {
-    background-color: #0369a1; /* lebih gelap dari #0485c7 */
+    background-color: rgb(195, 140, 0); /* lebih gelap dari #0485c7 */
     color: #ffffff;
 }
 
@@ -249,7 +249,7 @@ main {
 
 /* tombol SIMPAN (biru) */
 .btn-save {
-    background-color: #067ac1; /* biru */
+    background-color: #1e3a8a;
     color: #ffffff;
     border: none;
 }
@@ -399,6 +399,14 @@ main {
     box-shadow: 0 12px 28px rgba(0,0,0,0.12);
 }
 
+
+.publication-image-wide {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+}
+
 /* animasi saat halaman dibuka */
 @keyframes cardFadeUp {
     from {
@@ -508,7 +516,7 @@ main {
   text-decoration: none;
   background: transparent;
   font-size: 14px;
-  color: #067ac1;
+  color: #1e3a8a;
   text-align: left;
   padding: 5px 14px;
   display: flex;
@@ -675,7 +683,7 @@ main {
 }
 
 .media-type-badge.video {
-    background-color: #067ac1;
+    background-color: #1e3a8a;
 }
 
 /* Area Preview */

@@ -7,7 +7,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/adminprofil.css') }}">
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
 
@@ -24,8 +26,8 @@
             <div class="d-flex align-items-center">
                 <img src="/img/AkunLogo.png" alt="Foto Profil Admin" class="avatar-circle me-1">
                 <div class="admin-info">
-                    <div class="fw-bold fs-6">{{ session('admin_username', '-') }}</div>
-                    <div class="small text-muted">{{ session('admin_role', '-') }}</div>
+                    <div class="fw-bold fs-6" style="color:#1e3a8a;">{{ session('admin_username', '-') }}</div>
+                    <div class="small" style="color:#1e3a8a; font-weight:600;">{{ session('admin_role', '-') }}</div>
                 </div>
             </div>
         </div>
@@ -68,34 +70,38 @@
                     </div>
                     <i class="bi submenu-arrow {{ $profilOpen ? 'bi-caret-down-fill' : 'bi-caret-right-fill' }}"></i>
                 </a>
-
                 <ul id="SubMenu"
                     class="nav flex-column ms-3"
                     @if($profilOpen) style="display:block" @else style="display:none" @endif>
-
                     <li>
                         <a class="nav-link" href="#">
                             <i class="bi bi-clock-history me-2"></i>Sejarah Singkat
                         </a>
                     </li>
-
                     <li>
                         <a class="nav-link {{ request()->routeIs('admin.profil.visimisi*') ? 'active' : '' }}"
                            href="{{ route('admin.profil.visimisi') }}">
                             <i class="bi bi-bullseye me-2"></i>Visi & Misi
                         </a>
                     </li>
-
                     <li>
                         <a class="nav-link {{ request()->routeIs('admin.profil.tugasfungsi*') ? 'active' : '' }}"
                            href="{{ route('admin.profil.tugasfungsi') }}">
                             <i class="bi bi-list-task me-2"></i>Tugas & Fungsi
                         </a>
                     </li>
-
-                    <li><a class="nav-link" href="#"><i class="bi bi-diagram-3 me-2"></i>Struktur Organisasi</a></li>
-                    <li><a class="nav-link" href="#"><i class="bi bi-people me-2"></i>Pegawai</a></li>
-                    <li><a class="nav-link" href="#"><i class="bi bi-image me-2"></i>Logo</a></li>
+                    <li>
+                        <a class="nav-link {{ request()->routeIs('admin.profil.pegawai') ? 'active' : '' }}"
+                        href="{{ route('admin.profil.pegawai') }}">
+                            <i class="bi bi-people me-2"></i>Pegawai
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link {{ request()->routeIs('admin.profil.strukturorganisasi') ? 'active' : '' }}"
+                        href="{{ route('admin.profil.strukturorganisasi') }}">
+                            <i class="bi bi-diagram-3 me-2"></i>Struktur Organisasi
+                        </a>
+                    </li>
                 </ul>
             </li>
 
@@ -110,15 +116,46 @@
                     <i class="bi submenu-arrow {{ $akuntabilitasOpen ? 'bi-caret-down-fill' : 'bi-caret-right-fill' }}"></i>
                 </a>
 
-                <ul id="SubMenu"
-                    class="nav flex-column ms-3"
-                    @if($akuntabilitasOpen) style="display:block" @else style="display:none" @endif>
-                    <li><a class="nav-link" href="#">Sub Menu 1</a></li>
-                    <li><a class="nav-link" href="#">Sub Menu 2</a></li>
-                    <li><a class="nav-link" href="#">Sub Menu 3</a></li>
-                    <li><a class="nav-link" href="#">Sub Menu 4</a></li>
-                    <li><a class="nav-link" href="#">Sub Menu 5</a></li>
-                </ul>
+<ul class="nav flex-column ms-3 submenu-list"
+    @if($akuntabilitasOpen)
+        style="display:block"
+    @else
+        style="display:none"
+    @endif>
+    <li>
+        <a class="nav-link {{ request()->routeIs('admin.akuntabilitas.renstra') ? 'active' : '' }}"
+           href="{{ route('admin.akuntabilitas.renstra') }}">
+            <i class="fas fa-arrow-right me-2"></i>Renstra
+        </a>
+    </li>
+    <li>
+        <a class="nav-link {{ request()->routeIs('admin.akuntabilitas.dipa') ? 'active' : '' }}"
+           href="{{ route('admin.akuntabilitas.dipa') }}">
+            <i class="fas fa-dollar-sign me-2"></i>DIPA
+        </a>
+    </li>
+    <li>
+        <a class="nav-link {{ request()->routeIs('admin.akuntabilitas.pk') ? 'active' : '' }}"
+           href="{{ route('admin.akuntabilitas.pk') }}">
+            <i class="fas fa-file-signature me-2"></i>Perjanjian Kinerja
+        </a>
+    </li>
+    <li>
+        <a class="nav-link {{ request()->routeIs('admin.akuntabilitas.ra') ? 'active' : '' }}"
+           href="{{ route('admin.akuntabilitas.ra') }}">
+            <i class="fas fa-list-check me-2"></i>Rencana Aksi
+        </a>
+    </li>
+    <li><a class="nav-link {{ request()->routeIs('admin.akuntabilitas.lakin') ? 'active' : '' }}"
+           href="{{ route('admin.akuntabilitas.lakin') }}">
+            <i class="fas fa-list-check me-2"></i>Lakin
+        </a></li>
+        <li><a class="nav-link {{ request()->routeIs('admin.akuntabilitas.sakai') ? 'active' : '' }}"
+           href="{{ route('admin.akuntabilitas.sakai') }}">
+            <i class="fas fa-list-check me-2"></i>SAKAI
+        </a>
+        </li>
+    </ul>
             </li>
 
             <!-- PENGATURAN -->

@@ -7,7 +7,7 @@
 
             <div class="footer-brand" data-aos="fade-up">
                 <div class="footer-logo">
-                    <img src="{{ asset('img/logobbpr4.png') }}" alt="Logo Balai Bahasa Riau">
+                    <img src="{{ asset('img/logobalai.png') }}" alt="Logo Balai Bahasa Riau">
                 </div>
                 <p class="footer-desc">
                     Balai Bahasa Provinsi Riau berperan dalam pengembangan,

@@ -152,97 +152,149 @@ class PublikasiController extends Controller
                 'file'     => 'nullable|mimes:pdf,doc,docx,xls,xlsx,zip,rar|max:5120'
             ]);
 
-            $dataLama = DB::table('publikasi')->where('publikasi_id', $id)->first();
-            if (!$dataLama) abort(404);
+            $data = DB::table('publikasi')->where('publikasi_id', $id)->first();
+            if (!$data) abort(404);
 
-            $gambarUrl = $dataLama->gambar;
-            $fileUrl = $dataLama->file;
-            $fileType = $dataLama->file_type;
+            $gambarUrl = $data->gambar;
+            $fileUrl   = $data->file;
+            $fileType  = $data->file_type;
 
+            // HAPUS GAMBAR (klik ✕ lalu submit)
+            if ($request->remove_image == 1 && !$request->hasFile('gambar') && $data->gambar) {
+                $path = str_replace(
+                    env('SUPABASE_URL') . '/storage/v1/object/public/' . env('SUPABASE_BUCKET') . '/',
+                    '',
+                    $data->gambar
+                );
+
+                Http::withHeaders([
+                    'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
+                ])->delete(env('SUPABASE_URL') . '/storage/v1/object/' . env('SUPABASE_BUCKET') . '/' . $path);
+
+                $gambarUrl = null;
+            }
+
+            // GANTI GAMBAR
             if ($request->hasFile('gambar')) {
+                if ($data->gambar) {
+                    $oldPath = str_replace(
+                        env('SUPABASE_URL') . '/storage/v1/object/public/' . env('SUPABASE_BUCKET') . '/',
+                        '',
+                        $data->gambar
+                    );
+
+                    Http::withHeaders([
+                        'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
+                    ])->delete(env('SUPABASE_URL') . '/storage/v1/object/' . env('SUPABASE_BUCKET') . '/' . $oldPath);
+                }
+
                 $file = $request->file('gambar');
-                $fileName = time() . '_' . $file->getClientOriginalName();
+                $name = time() . '_' . $file->getClientOriginalName();
 
-                $response = Http::withHeaders([
+                Http::withHeaders([
                     'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
-                ])->attach('file', file_get_contents($file), $fileName)
-                ->post(env('SUPABASE_URL') . '/storage/v1/object/' . env('SUPABASE_BUCKET') . '/' . $fileName);
+                ])->attach('file', file_get_contents($file), $name)
+                ->post(env('SUPABASE_URL') . '/storage/v1/object/' . env('SUPABASE_BUCKET') . '/' . $name);
 
-                if ($response->failed()) {
-                    return back()->with('error', 'Gagal upload gambar ke storage')->withInput();
-                }
-
-                $gambarUrl = env('SUPABASE_URL') . '/storage/v1/object/public/' . env('SUPABASE_BUCKET') . '/' . $fileName;
+                $gambarUrl = env('SUPABASE_URL') . '/storage/v1/object/public/' . env('SUPABASE_BUCKET') . '/' . $name;
             }
 
+            // HAPUS FILE
+            if ($request->remove_file == 1 && !$request->hasFile('file') && $data->file) {
+                $path = str_replace(
+                    env('SUPABASE_URL') . '/storage/v1/object/public/' . env('SUPABASE_BUCKET') . '/',
+                    '',
+                    $data->file
+                );
+
+                Http::withHeaders([
+                    'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
+                ])->delete(env('SUPABASE_URL') . '/storage/v1/object/' . env('SUPABASE_BUCKET') . '/' . $path);
+
+                $fileUrl  = null;
+                $fileType = null;
+            }
+
+            // GANTI FILE
             if ($request->hasFile('file')) {
-                $file = $request->file('file');
-                $fileName = time() . '_' . $file->getClientOriginalName();
-                $fileType = $file->getClientOriginalExtension();
+                if ($data->file) {
+                    $oldPath = str_replace(
+                        env('SUPABASE_URL') . '/storage/v1/object/public/' . env('SUPABASE_BUCKET') . '/',
+                        '',
+                        $data->file
+                    );
 
-                $response = Http::withHeaders([
-                    'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
-                ])->attach('file', file_get_contents($file), $fileName)
-                ->post(env('SUPABASE_URL') . '/storage/v1/object/' . env('SUPABASE_BUCKET') . '/' . $fileName);
-
-                if ($response->failed()) {
-                    return back()->with('error', 'Gagal upload file ke storage')->withInput();
+                    Http::withHeaders([
+                        'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
+                    ])->delete(env('SUPABASE_URL') . '/storage/v1/object/' . env('SUPABASE_BUCKET') . '/' . $oldPath);
                 }
 
-                $fileUrl = env('SUPABASE_URL') . '/storage/v1/object/public/' . env('SUPABASE_BUCKET') . '/' . $fileName;
+                $file = $request->file('file');
+                $name = time() . '_' . $file->getClientOriginalName();
+
+                Http::withHeaders([
+                    'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
+                ])->attach('file', file_get_contents($file), $name)
+                ->post(env('SUPABASE_URL') . '/storage/v1/object/' . env('SUPABASE_BUCKET') . '/' . $name);
+
+                $fileUrl  = env('SUPABASE_URL') . '/storage/v1/object/public/' . env('SUPABASE_BUCKET') . '/' . $name;
+                $fileType = $file->getClientOriginalExtension();
             }
 
-            $allowDownload = $request->has('allow_download') ? 1 : 0;
+            /*
+            |--------------------------------------------------------------------------
+            | UPDATE DATABASE
+            |--------------------------------------------------------------------------
+            */
 
             DB::table('publikasi')->where('publikasi_id', $id)->update([
-                'tanggal'  => $request->tanggal,
-                'kategori' => $request->kategori,
-                'judul'    => $request->judul,
-                'penulis'  => $request->penulis,
-                'isi'      => $request->isi,
-                'gambar'   => $gambarUrl,
-                'file'     => $fileUrl,
-                'file_type'=> $fileType,
-                'allow_download' => $allowDownload,
+                'tanggal'        => $request->tanggal,
+                'kategori'       => $request->kategori,
+                'judul'          => $request->judul,
+                'penulis'        => $request->penulis,
+                'isi'            => $request->isi,
+                'gambar'         => $gambarUrl,
+                'file'           => $fileUrl,
+                'file_type'      => $fileType,
+                'allow_download' => $request->has('allow_download') ? 1 : 0,
             ]);
 
             return redirect()->route('admin.publikasi.show', $id)
                 ->with('success', 'Publikasi berhasil diperbarui');
 
-        } catch (\Illuminate\Validation\ValidationException $e) {
-            return back()->with('error', 'Validasi gagal: ' . $e->getMessage())->withInput();
         } catch (\Exception $e) {
+            Log::error($e);
             return back()->with('error', $e->getMessage())->withInput();
         }
     }
 
- public function destroy($id)
-{
-    $data = DB::table('publikasi')->where('publikasi_id', $id)->first();
-    if (!$data) abort(404);
+    public function destroy($id)
+    {
+        $data = DB::table('publikasi')->where('publikasi_id', $id)->first();
+        if (!$data) abort(404);
 
-    try {
-        if ($data->file) {
-            $pathFile = str_replace(env('SUPABASE_URL') . '/storage/v1/object/public/' . env('SUPABASE_BUCKET') . '/', '', $data->file);
-            Http::withHeaders([
-                'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
-            ])->delete(env('SUPABASE_URL') . '/storage/v1/object/' . env('SUPABASE_BUCKET') . '/' . $pathFile);
+        try {
+            if ($data->file) {
+                $pathFile = str_replace(env('SUPABASE_URL') . '/storage/v1/object/public/' . env('SUPABASE_BUCKET') . '/', '', $data->file);
+                Http::withHeaders([
+                    'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
+                ])->delete(env('SUPABASE_URL') . '/storage/v1/object/' . env('SUPABASE_BUCKET') . '/' . $pathFile);
+            }
+
+            if ($data->gambar) {
+                $pathGambar = str_replace(env('SUPABASE_URL') . '/storage/v1/object/public/' . env('SUPABASE_BUCKET') . '/', '', $data->gambar);
+                Http::withHeaders([
+                    'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
+                ])->delete(env('SUPABASE_URL') . '/storage/v1/object/' . env('SUPABASE_BUCKET') . '/' . $pathGambar);
+            }
+
+            DB::table('publikasi')->where('publikasi_id', $id)->delete();
+
+            return back()->with('success', 'Publikasi berhasil dihapus.');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Gagal menghapus dari storage: ' . $e->getMessage());
         }
-
-        if ($data->gambar) {
-            $pathGambar = str_replace(env('SUPABASE_URL') . '/storage/v1/object/public/' . env('SUPABASE_BUCKET') . '/', '', $data->gambar);
-            Http::withHeaders([
-                'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
-            ])->delete(env('SUPABASE_URL') . '/storage/v1/object/' . env('SUPABASE_BUCKET') . '/' . $pathGambar);
-        }
-
-        DB::table('publikasi')->where('publikasi_id', $id)->delete();
-
-        return back()->with('success', 'Publikasi berhasil dihapus.');
-    } catch (\Exception $e) {
-        return back()->with('error', 'Gagal menghapus dari storage: ' . $e->getMessage());
     }
-}
 
     public function download($id)
     {
