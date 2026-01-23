@@ -108,8 +108,11 @@
                         </li>
                         <li><a href="{{ url('/produk/bipa') }}"><i class="fa-solid fa-globe-asia"></i> SAPA BIPA</a>
                         </li>
-                        <li><a href="https://kamusbahasariau.kemendikdasmen.go.id/"><i class="fa-regular fa-language"></i> Kemala (Kamus
-                                Elektronik Bahasa Melayu Riau)</a></li>
+                        <li>
+                            <a href="https://kamusbahasariau.kemendikdasmen.go.id/" target="_blank" rel="noopener noreferrer">
+                                <i class="fa-regular fa-language"></i> Kemala (Kamus Elektronik Bahasa Melayu Riau)
+                            </a>
+                        </li>
                     </ul>
                 </li>
 
@@ -170,7 +173,7 @@
 
 
                 <li><a href="{{ url('https://ppidbbpriau.kemendikdasmen.go.id/') }}"
-                        class="{{ request()->is('ppid*') ? 'active' : '' }}"><i
+                        class="{{ request()->is('ppid*') ? 'active' : '' }}" target="_blank" rel="noopener noreferrer"><i
                             class="fa-regular fa-file-lines menu-icon"></i> PPID</a>
                 </li>
 

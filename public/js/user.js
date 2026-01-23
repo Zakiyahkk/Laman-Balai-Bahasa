@@ -1160,3 +1160,8 @@ function showBackToMenu() {
 function scrollToBottom() {
     chatBody.scrollTo({ top: chatBody.scrollHeight, behavior: 'smooth' });
 }
+
+
+// ================================
+// Linked Tab Baru
+// ================================

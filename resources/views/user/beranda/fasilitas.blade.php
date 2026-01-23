@@ -14,11 +14,11 @@
         <div class="container">
 
              <div class="section-header">
-                <h2 class="judul-section">Fasilitas Balai Bahasa Provinsi Riau</h2>
-                <div class="header-line"></div>
+                <h2 class="judul-section" style="margin-top: -80px;">Fasilitas Balai Bahasa Provinsi Riau</h2>
+                <div class="header-line" style="margin-top: -70px;"></div>
             </div>
 
-            <div class="fasilitas-wrapper">
+            <div class="fasilitas-wrapper" style="margin-top: -60px ; margin-bottom: -85px;">
 
                 <button class="fasilitas-arrow fasilitas-arrow-left" id="prevBtn" aria-label="Sebelumnya">
                     <svg viewBox="0 0 24 24" aria-hidden="true">

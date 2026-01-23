@@ -12,8 +12,8 @@
 
 <body>
 
-    <section class="dokpres-hero">
-        <div class="container">
+    <section class="dokpres-hero" style="margin-top: -20px;">
+        <div class="container" style="margin-top: -70px; margin-bottom: -40px;">
             <h2>Piagam Penghargaan</h2>
             <p>
                 Bukti nyata dedikasi dan komitmen Balai Bahasa Provinsi Riau dalam memberikan pelayanan prima, inovasi, dan akuntabilitas kinerja.
@@ -21,8 +21,8 @@
         </div>
     </section>
 
-    <section class="dokpres-section">
-        <div class="container">
+    <section class="dokpres-section" style="margin-top: -10px;">
+        <div class="container" style="margin-top: -40px;">
             <div class="section-header">
                 <h3>Capaian & Prestasi</h3>
                 <p>Klik pada kartu untuk melihat sertifikat secara penuh.</p>
