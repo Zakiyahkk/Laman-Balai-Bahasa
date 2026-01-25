@@ -360,3 +360,103 @@ document.addEventListener("DOMContentLoaded", function () {
     initFooterChart();
 });
 /* --- Batas Script: Footer Stats --- */
+
+
+/* ===========================
+   Chatbot
+   =========================== */
+
+const botData = [
+    { id: 1, question: "Dimana alamat Balai Bahasa Provinsi Riau?", answer: "Balai Bahasa Provinsi Riau beralamat di <br><b>Jl. H.R. Soebrantas, Kampus Bina Widya UNRI, Pekanbaru.</b> <br><br>Gedung kami berada di dalam kompleks kampus UNRI Panam." },
+    { id: 2, question: "Apa saja jam pelayanan kantor?", answer: "Pelayanan kami buka pada:<br><b>Senin - Kamis:</b> 08.00 - 16.00 WIB<br><b>Jumat:</b> 08.00 - 16.30 WIB<br>Sabtu & Minggu Libur." },
+    { id: 3, question: "Bagaimana cara ikut uji UKBI?", answer: "Untuk mendaftar UKBI (Uji Kemahiran Berbahasa Indonesia), silakan kunjungi laman resmi: <a href='https://ukbi.kemdikbud.go.id' target='_blank'>ukbi.kemdikbud.go.id</a> atau datang langsung ke layanan ULT kami." },
+    { id: 4, question: "Saya ingin menerjemahkan dokumen, bisa?", answer: "Bisa! Kami menyediakan layanan penerjemahan. Silakan ajukan permohonan melalui email resmi kami atau datang ke bagian layanan teknis." },
+    { id: 5, question: "Apa kontak WhatsApp yang bisa dihubungi?", answer: "Anda dapat menghubungi kami via WhatsApp di nomor: <br><b><a href='https://wa.me/6281234567890'>+62 812-3456-7890</a></b>" }
+];
+
+let isChatOpen = false;
+
+// Fungsi-fungsi ini dibuat global agar bisa dipanggil dari atribut onclick di HTML
+window.toggleChat = function() {
+    const chatWindow = document.getElementById('icak-chat-window');
+    const chatBody = document.getElementById('icak-body');
+
+    if (!isChatOpen) {
+        chatWindow.style.display = 'flex';
+        isChatOpen = true;
+
+        if (chatBody.children.length === 0) {
+            botSay("Halo! Saya <b>SIBALAI</b>, asisten virtual Balai Bahasa Riau. 👋<br>Ada yang bisa saya bantu?");
+            renderOptions();
+        }
+    } else {
+        chatWindow.style.display = 'none';
+        isChatOpen = false;
+    }
+};
+
+function botSay(htmlMsg) {
+    const chatBody = document.getElementById('icak-body');
+    const bubble = document.createElement('div');
+    bubble.className = 'chat-bubble bot-msg';
+    bubble.innerHTML = htmlMsg;
+    chatBody.appendChild(bubble);
+    scrollToBottom();
+}
+
+function userSay(text) {
+    const chatBody = document.getElementById('icak-body');
+    const bubble = document.createElement('div');
+    bubble.className = 'chat-bubble user-msg';
+    bubble.innerText = text;
+    chatBody.appendChild(bubble);
+    scrollToBottom();
+}
+
+function renderOptions() {
+    const optionsArea = document.getElementById('icak-options');
+    optionsArea.innerHTML = ''; 
+
+    const label = document.createElement('div');
+    label.setAttribute('style', 'font-size: 11px; color: #64748b; margin-bottom: 5px;');
+    label.innerText = 'Pilih topik bantuan:';
+    optionsArea.appendChild(label);
+
+    botData.forEach(item => {
+        const btn = document.createElement('div');
+        btn.className = 'option-card';
+        btn.innerHTML = `<i class="fa-regular fa-comments"></i> ${item.question}`;
+        btn.onclick = () => handleSelection(item);
+        optionsArea.appendChild(btn);
+    });
+}
+
+function handleSelection(item) {
+    const optionsArea = document.getElementById('icak-options');
+    userSay(item.question);
+
+    optionsArea.innerHTML = `<div style="text-align:center; padding:10px; color:#94a3b8; font-size:12px;">
+        <i class="fa-solid fa-circle-notch fa-spin"></i> SIBALAI sedang mengetik...
+    </div>`;
+
+    setTimeout(() => {
+        botSay(item.answer);
+        showBackToMenu();
+    }, 800);
+}
+
+function showBackToMenu() {
+    const optionsArea = document.getElementById('icak-options');
+    optionsArea.innerHTML = '';
+    const btnReset = document.createElement('div');
+    btnReset.className = 'option-card';
+    btnReset.setAttribute('style', 'background: #f1f5f9; justify-content: center; font-weight: bold;');
+    btnReset.innerHTML = `<i class="fa-solid fa-rotate-left"></i> Kembali ke Menu Utama`;
+    btnReset.onclick = () => renderOptions();
+    optionsArea.appendChild(btnReset);
+}
+
+function scrollToBottom() {
+    const chatBody = document.getElementById('icak-body');
+    chatBody.scrollTop = chatBody.scrollHeight;
+}

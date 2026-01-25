@@ -75,6 +75,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 
 .bbp-top-left {
@@ -4142,21 +4143,38 @@ body {
 }
 
 
-/* ===========================
-   Chatbot
-   =========================== */
-/* --- RESET & FIX OVERFLOW --- */
-#icak-chatbot-container, 
-#icak-chatbot-container * {
-    box-sizing: border-box;
-}
+/* ==========================================================
+   CHATBOT
+   ========================================================== */
 
+/* 1. GLOBAL FIX & FONTS */
 #icak-chatbot-container {
     font-family: 'Plus Jakarta Sans', sans-serif;
     z-index: 9999;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    pointer-events: none; /* Agar container tidak menghalangi klik di web */
 }
 
-/* --- TOMBOL FLOATING --- */
+#icak-chatbot-container * {
+    box-sizing: border-box;
+    /* JANGAN masukkan font-family di sini agar icon tidak hilang */
+}
+
+/* Aktifkan klik hanya untuk elemen chatbot */
+#icak-chatbot-container #icak-trigger-btn,
+#icak-chatbot-container #icak-chat-window {
+    pointer-events: auto;
+}
+
+/* Pastikan icon FontAwesome menggunakan font aslinya */
+#icak-chatbot-container i {
+    font-family: "Font Awesome 6 Free" !important;
+    font-weight: 900;
+}
+
+/* 2. TOMBOL FLOATING (TRIGGER) */
 #icak-trigger-btn {
     position: fixed;
     bottom: 30px;
@@ -4170,11 +4188,11 @@ body {
     font-size: 28px;
     cursor: pointer;
     box-shadow: 0 4px 15px rgba(30, 58, 138, 0.4);
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    z-index: 10000;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 10000;
     padding: 0;
 }
 
@@ -4182,14 +4200,9 @@ body {
     transform: scale(1.1);
 }
 
-/* Mematikan animasi lompat saat chat terbuka */
-#icak-trigger-btn.stop-bounce i {
-    animation: none !important;
-}
-
 .tooltip-text {
     position: absolute;
-    right: 70px;
+    right: 75px;
     background: #333;
     color: #fff;
     padding: 5px 10px;
@@ -4204,16 +4217,15 @@ body {
 #icak-trigger-btn:hover .tooltip-text {
     opacity: 1;
     visibility: visible;
-    right: 75px;
 }
 
-/* --- JENDELA CHAT --- */
+/* 3. JENDELA CHAT */
 #icak-chat-window {
     position: fixed;
     bottom: 100px;
     right: 30px;
     width: 350px;
-    max-width: 90vw;
+    max-width: calc(100vw - 60px); /* Anti-overflow untuk laptop teman */
     height: 500px;
     max-height: 70vh;
     background: #fff;
@@ -4223,15 +4235,11 @@ body {
     flex-direction: column;
     overflow: hidden;
     z-index: 10000;
-    animation: slideUpChat 0.4s ease forwards;
     border: 1px solid #e2e8f0;
+    animation: slideUpChat 0.4s ease forwards;
 }
 
-@keyframes slideUpChat {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
+/* 4. HEADER */
 .icak-header {
     background: #1e3a8a;
     color: white;
@@ -4246,6 +4254,7 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
+    color: white;
 }
 
 .header-icon {
@@ -4253,19 +4262,14 @@ body {
     background: rgba(255, 255, 255, 0.2);
     padding: 8px;
     border-radius: 50%;
+    color: white !important;
 }
 
 .icak-header h4 {
     font-size: 16px;
     margin: 0;
     font-weight: 700;
-}
-
-.status-container {
-    font-size: 11px;
-    display: flex;
-    align-items: center;
-    opacity: 0.9;
+    color: white;
 }
 
 .status-dot {
@@ -4286,6 +4290,7 @@ body {
     opacity: 0.8;
 }
 
+/* 5. BODY & BUBBLES */
 .icak-body {
     flex: 1;
     background: #f8fafc;
@@ -4303,8 +4308,8 @@ body {
     font-size: 13px;
     line-height: 1.5;
     position: relative;
-    animation: fadeInChat 0.3s ease;
     word-wrap: break-word;
+    animation: fadeInChat 0.3s ease;
 }
 
 .bot-msg {
@@ -4323,6 +4328,7 @@ body {
     border-bottom-right-radius: 2px;
 }
 
+/* 6. OPTIONS */
 .icak-options {
     padding: 15px;
     background: #fff;
@@ -4356,15 +4362,23 @@ body {
     color: #1d4ed8;
 }
 
+/* 7. ANIMATIONS */
+@keyframes slideUpChat {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 @keyframes fadeInChat {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* 8. MOBILE RESPONSIVE */
 @media (max-width: 480px) {
     #icak-chat-window {
-        width: 85%;
-        right: 7.5%;
-        bottom: 100px;
+        width: 90%;
+        right: 5%;
+        bottom: 90px;
+        height: 65vh;
     }
 }
