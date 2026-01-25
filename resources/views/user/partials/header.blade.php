@@ -203,8 +203,9 @@
                 </a>
                 <ul class="dropdown">
                     <li><a href="{{ url('https://ppidbbpriau.kemendikdasmen.go.id/portal/survei') }}"
-                            class="{{ request()->is('skm*') ? 'active' : '' }}"><i
-                                class="fa-regular fa-file-lines menu-icon"></i> Survei Kepuasan Masyarakat</a></li>
+                            class="{{ request()->is('skm*') ? 'active' : '' }}"target="_blank"
+                            rel="noopener noreferrer"><i class="fa-regular fa-file-lines menu-icon"></i> Survei
+                            Kepuasan Masyarakat</a></li>
                     <li><a href="{{ url('#') }}" class="{{ request()->is('spkp*') ? 'active' : '' }}"><i
                                 class="fa-regular fa-file-lines menu-icon"></i> Survei Persepsi Kualitas
                             Pelayanan</a></li>
