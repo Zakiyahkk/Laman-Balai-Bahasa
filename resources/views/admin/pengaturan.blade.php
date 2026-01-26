@@ -34,8 +34,6 @@
 
 <!-- WRAPPER ABU-ABU -->
 <div class="admin-table-wrapper mb-4">
-
-    <!-- CARD PUTIH -->
     <div class="card border-0 shadow-sm admin-table-card">
         <div class="card-body p-0">
 
@@ -52,16 +50,16 @@
                 </thead>
 
                 <tbody>
-                @forelse($admins as $index => $admin)
+                @forelse($admin as $item)
                     <tr>
                         <td class="ps-4">{{ $loop->iteration }}</td>
 
                         <td class="fw-medium">
-                            {{ $admin['email'] }}
+                            {{ $item->email }}
                         </td>
 
                         <td>
-                            {{ $admin['username'] }}
+                            {{ $item->username }}
                         </td>
 
                         <td class="text-muted">
@@ -70,7 +68,7 @@
 
                         <td>
                             <span class="badge bg-primary-subtle text-primary">
-                                {{ ucfirst(str_replace('_',' ', $admin['role'])) }}
+                                {{ ucfirst(str_replace('_',' ', $item->role)) }}
                             </span>
                         </td>
 
@@ -80,21 +78,14 @@
                                 <!-- EDIT -->
                                 <button class="btn btn-link text-secondary p-1"
                                         title="Edit"
-                                        data-id="{{ $admin['id'] }}">
+                                        data-email="{{ $item->email }}">
                                     <i class="bi bi-pencil"></i>
-                                </button>
-
-                                <!-- RESET PASSWORD -->
-                                <button class="btn btn-link text-warning p-1"
-                                        title="Reset Password"
-                                        data-id="{{ $admin['id'] }}">
-                                    <i class="bi bi-key"></i>
                                 </button>
 
                                 <!-- HAPUS -->
                                 <button class="btn btn-link text-danger p-1"
                                         title="Hapus"
-                                        data-id="{{ $admin['id'] }}">
+                                        data-email="{{ $item->email }}">
                                     <i class="bi bi-trash"></i>
                                 </button>
 
@@ -114,17 +105,15 @@
 
         </div>
     </div>
-
 </div>
 
 <!-- ================= MODAL TAMBAH ADMIN ================= -->
-<div class="modal fade" id="modalTambahAdmin" tabindex="-1"
-     aria-labelledby="modalTambahAdminLabel" aria-hidden="true">
+<div class="modal fade" id="modalTambahAdmin" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0 rounded-4">
 
             <div class="modal-header border-0">
-                <h5 class="modal-title fw-bold" id="modalTambahAdminLabel">
+                <h5 class="modal-title fw-bold">
                     Tambah Admin Baru
                 </h5>
                 <button type="button" class="btn-close"
@@ -132,59 +121,40 @@
             </div>
 
             <div class="modal-body px-4">
-                <form action="#" method="POST">
+                <form method="POST">
                     @csrf
 
-                    <!-- Email -->
                     <div class="mb-3">
                         <label class="form-label">Email</label>
-                        <input type="email"
-                               name="email"
+                        <input type="email" name="email"
                                class="form-control"
-                               placeholder="admin@example.com"
-                               required>
+                               placeholder="admin@example.com" required>
                     </div>
 
-                    <!-- Username -->
                     <div class="mb-3">
                         <label class="form-label">Username</label>
-                        <input type="text"
-                               name="username"
-                               class="form-control"
-                               placeholder="Masukkan username"
-                               required>
+                        <input type="text" name="username"
+                               class="form-control" required>
                     </div>
 
-                    <!-- Password -->
                     <div class="mb-3">
                         <label class="form-label">Password</label>
-                        <div class="input-group">
-                            <input type="password"
-                                   name="password"
-                                   class="form-control"
-                                   placeholder="Masukkan password"
-                                   required>
-                            <span class="input-group-text bg-white">
-                                <i class="bi bi-eye"></i>
-                            </span>
-                        </div>
+                        <input type="password" name="password"
+                               class="form-control" required>
                     </div>
 
-                    <!-- Role -->
                     <div class="mb-4">
                         <label class="form-label">Role</label>
                         <select name="role" class="form-select" required>
-                            <option value="" selected disabled>Pilih role</option>
+                            <option value="" disabled selected>Pilih role</option>
                             <option value="admin">Admin</option>
                             <option value="super_admin">Super Admin</option>
                         </select>
                     </div>
 
-                    <!-- Button -->
-                    <button class="btn btn-dark w-100 btn-submit-tokoh">
+                    <button class="btn btn-dark w-100">
                         Tambah Admin
                     </button>
-
                 </form>
             </div>
 
