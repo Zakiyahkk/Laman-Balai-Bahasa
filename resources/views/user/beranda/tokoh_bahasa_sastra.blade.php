@@ -4,13 +4,13 @@
 <section class="tokoh-section">
     <div class="tokoh-container">
 
-        <div class="tokoh-header">
+        <div class="tokoh-header" style="margin-top: -40px;">
             <h2 class="section-title">
-                Tokoh <span>Bahasa dan Sastra</span>
+                Tokoh <span>Bahasa dan Sastra Riau</span>
             </h2>
         </div>
 
-        <div class="slider-wrapper-relative">
+        <div class="slider-wrapper-relative" style="margin-top: -70px;">
 
             <div class="tokoh-next"><i class="fa-solid fa-chevron-right"></i></div>
             <div class="tokoh-prev"><i class="fa-solid fa-chevron-left"></i></div>
@@ -19,9 +19,9 @@
                 <div class="swiper-wrapper">
 
                     <div class="swiper-slide">
-                        <div class="tokoh-card" onclick="openTokohModal('Raja Ali Haji', 'img/maskot-serindit.png', 'Pahlawan Nasional di bidang bahasa. Terkenal dengan karya Gurindam Dua Belas.', 'bahasa')">
+                        <div class="tokoh-card"
+                            onclick="openTokohModal('Raja Ali Haji', 'img/maskot-serindit.png', 'Pahlawan Nasional di bidang bahasa. Terkenal dengan karya Gurindam Dua Belas.', 'bahasa')">
                             <div class="card-img-wrapper">
-                                <span class="label-tokoh bg-blue">Tokoh Bahasa</span>
                                 <img src="img/maskot-serindit.png" alt="Raja Ali Haji">
                             </div>
                             <div class="tokoh-info">
@@ -32,9 +32,9 @@
                     </div>
 
                     <div class="swiper-slide">
-                        <div class="tokoh-card" onclick="openTokohModal('Soeman Hs', 'img/maskot-serindit.png', 'Sastrawan pelopor angkatan Balai Pustaka. Bapak cerita detektif Indonesia.', 'sastra')">
+                        <div class="tokoh-card"
+                            onclick="openTokohModal('Soeman Hs', 'img/maskot-serindit.png', 'Sastrawan pelopor angkatan Balai Pustaka. Bapak cerita detektif Indonesia.', 'sastra')">
                             <div class="card-img-wrapper">
-                                <span class="label-tokoh bg-orange">Tokoh Sastra</span>
                                 <img src="img/maskot-serindit.png" alt="Soeman Hs">
                             </div>
                             <div class="tokoh-info">
@@ -45,9 +45,9 @@
                     </div>
 
                     <div class="swiper-slide">
-                        <div class="tokoh-card" onclick="openTokohModal('Chairil Anwar', 'img/maskot-serindit.png', 'Penyair terkemuka Indonesia. Pelopor Angkatan 45.', 'sastra')">
+                        <div class="tokoh-card"
+                            onclick="openTokohModal('Chairil Anwar', 'img/maskot-serindit.png', 'Penyair terkemuka Indonesia. Pelopor Angkatan 45.', 'sastra')">
                             <div class="card-img-wrapper">
-                                <span class="label-tokoh bg-orange">Tokoh Sastra</span>
                                 <img src="img/maskot-serindit.png" alt="Chairil Anwar">
                             </div>
                             <div class="tokoh-info">
@@ -58,9 +58,9 @@
                     </div>
 
                     <div class="swiper-slide">
-                        <div class="tokoh-card" onclick="openTokohModal('Sutan Takdir A.', 'img/maskot-serindit.png', 'Sastrawan dan ahli tata bahasa Indonesia.', 'bahasa')">
+                        <div class="tokoh-card"
+                            onclick="openTokohModal('Sutan Takdir A.', 'img/maskot-serindit.png', 'Sastrawan dan ahli tata bahasa Indonesia.', 'bahasa')">
                             <div class="card-img-wrapper">
-                                <span class="label-tokoh bg-blue">Tokoh Bahasa</span>
                                 <img src="img/maskot-serindit.png" alt="Sutan Takdir">
                             </div>
                             <div class="tokoh-info">
@@ -71,9 +71,9 @@
                     </div>
 
                     <div class="swiper-slide">
-                        <div class="tokoh-card" onclick="openTokohModal('Tenas Effendy', 'img/maskot-serindit.png', 'Budayawan Riau yang menjaga Tunjuk Ajar Melayu.', 'budaya')">
+                        <div class="tokoh-card"
+                            onclick="openTokohModal('Tenas Effendy', 'img/maskot-serindit.png', 'Budayawan Riau yang menjaga Tunjuk Ajar Melayu.', 'budaya')">
                             <div class="card-img-wrapper">
-                                <span class="label-tokoh bg-green">Tokoh Budaya</span>
                                 <img src="img/maskot-serindit.png" alt="Tenas Effendy">
                             </div>
                             <div class="tokoh-info">

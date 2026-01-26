@@ -35,9 +35,6 @@
                 Salam dari <strong>Si Serindit!</strong>
             </p>
         </div>
-
     </div>
 
-    <!-- GARIS PEMBATAS -->
-    <div class="section-divider"></div>
 </section>

@@ -1,32 +1,221 @@
-/* ==================================================
-   Ruang Konsultasi Styles
-================================================== */
-.wbs-container {
-    max-width: 1400px;
-    margin: auto;
-    padding: 60px 20px;
+/* ===============================
+   SECTION: ABOUT WBS
+================================ */
+.cleaning-about-area-wrap {
+    background: #ffffff;
 }
 
-.wbs-header {
-    text-align: center;
-    margin-bottom: 48px;
+.left-content-wrap .img-wrap {
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
-.wbs-header h1 {
-    font-size: 40px;
-    font-weight: 800;
+.left-content-wrap img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* KONTEN KANAN */
+.right-content-wrap {
+    padding-left: 24px;
+}
+
+.right-content-wrap .subtitle {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #2563eb;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.right-content-wrap .title {
+    font-size: 32px;
+    font-weight: 700;
     color: #0f172a;
+    margin-bottom: 18px;
 }
 
-.wbs-header p {
-    font-size: 16px;
-    color: #64748b;
-    margin-top: 10px;
+.right-content-wrap .paragraph p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #334155;
+    margin-bottom: 14px;
 }
 
-/* GRID */
-.wbs-grid {
+/* ===============================
+   SECTION: TEXT EDITOR
+================================ */
+.text-editor-widget-wrapper {
+    background: #f8fafc;
+}
+
+.text-editor-content-wrap {
+    background: #ffffff;
+    padding: 32px;
+    border-radius: 14px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.text-editor-content-wrap p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #334155;
+}
+
+.text-editor-content-wrap ol {
+    padding-left: 18px;
+}
+
+.text-editor-content-wrap ol li {
+    font-size: 15px;
+    line-height: 1.8;
+    margin-bottom: 10px;
+    color: #334155;
+}
+
+/* ===============================
+   SECTION: KEY FEATURE (LINK WBS)
+================================ */
+.logistics-key-feature-area {
+    background: #ffffff;
+}
+
+.lkey-features-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 28px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+.single-logistic-key-feature-one {
+    background: #f8fafc;
+    border-radius: 14px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    transition: all 0.3s ease;
+    border: 1px solid #e2e8f0;
+}
+
+.single-logistic-key-feature-one:hover {
+    background: #2563eb;
+    transform: translateY(-6px);
+}
+
+.single-logistic-key-feature-one .icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #2563eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 22px;
+    flex-shrink: 0;
+}
+
+.single-logistic-key-feature-one:hover .icon {
+    background: #ffffff;
+    color: #2563eb;
+}
+
+.single-logistic-key-feature-one .title {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.single-logistic-key-feature-one .title a {
+    color: #0f172a;
+    text-decoration: none;
+}
+
+.single-logistic-key-feature-one:hover .title a {
+    color: #ffffff;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+@media (max-width: 991px) {
+    .right-content-wrap {
+        padding-left: 0;
+        margin-top: 24px;
+    }
+
+    .right-content-wrap .title {
+        font-size: 26px;
+    }
+
+    .text-editor-content-wrap {
+        padding: 24px;
+    }
+}
+
+@media (max-width: 576px) {
+    .right-content-wrap .title {
+        font-size: 22px;
+    }
+
+    .single-logistic-key-feature-one {
+        padding: 20px;
+    }
+}
+
+/* ===============================
+   SAMAKAN POSISI GAMBAR & DESKRIPSI
+================================ */
+.wbs-align {
+    display: flex;
+    align-items: stretch; /* tinggi kiri & kanan sama */
+}
+
+/* KIRI (GAMBAR) */
+.wbs-align .left-content-wrap,
+.wbs-align .right-content-wrap {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* konten vertikal sejajar */
+}
+
+/* WRAPPER GAMBAR */
+.wbs-align .img-wrap {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+/* GAMBAR */
+.wbs-align img {
+    width: 100%;
+    height: auto;
+    max-height: 420px;
+    object-fit: cover;
+    border-radius: 14px;
+}
+
+/* DESKRIPSI */
+.right-content-wrap {
+    padding-left: 32px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 991px) {
+    .wbs-align {
+        flex-direction: column;
+    }
+
+    .right-content-wrap {
+        padding-left: 0;
+        margin-top: 24px;
+    }
 }

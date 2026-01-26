@@ -1,53 +1,53 @@
-<section class="section berita-terbaru artikel-preview">
+<section class="section berita-terbaru artikel-preview" style="margin-top: 10px;">
     <div class="container">
 
         <h2 class="judul-center">
-            Berita <span>Terbaru</span>
+            Berita <span style="color: #0ea5e9;">Terbaru</span>
         </h2>
 
         <div class="berita-grid">
 
             @forelse ($berita ?? [] as $item)
-                <div class="berita-card">
-                    <div class="berita-img">
-                        <span class="badge">BERITA</span>
+            <div class="berita-card">
+                <div class="berita-img">
+                    <span class="badge">BERITA</span>
 
-                        <a href="{{ route('berita.show', $item['publikasi_id']) }}">
-                            <img src="{{ $item['gambar_url'] ?? asset('img/img1.png') }}"
-                                alt="{{ $item['judul'] ?? 'Berita' }}">
-                        </a>
-                    </div>
+                    <a href="{{ route('berita.show', $item['publikasi_id']) }}">
+                        <img src="{{ $item['gambar_url'] ?? asset('img/img1.png') }}"
+                            alt="{{ $item['judul'] ?? 'Berita' }}">
+                    </a>
+                </div>
 
-                    <div class="berita-body">
-                        <a href="{{ route('berita.show', $item['publikasi_id']) }}">
-                            <h4>{{ $item['judul'] ?? '-' }}</h4>
-                        </a>
+                <div class="berita-body">
+                    <a href="{{ route('berita.show', $item['publikasi_id']) }}">
+                        <h4>{{ $item['judul'] ?? '-' }}</h4>
+                    </a>
 
-                        <p>
-                            {{ \Illuminate\Support\Str::limit(strip_tags($item['isi'] ?? ''), 120) }}
-                        </p>
+                    <p>
+                        {{ \Illuminate\Support\Str::limit(strip_tags($item['isi'] ?? ''), 120) }}
+                    </p>
 
-                        <div class="berita-meta">
-                            <span>
-                                @if (!empty($item['tanggal']))
-                                    {{ \Carbon\Carbon::parse($item['tanggal'])->translatedFormat('d F Y') }}
-                                @else
-                                    -
-                                @endif
+                    <div class="berita-meta">
+                        <span>
+                            @if (!empty($item['tanggal']))
+                            {{ \Carbon\Carbon::parse($item['tanggal'])->translatedFormat('d F Y') }}
+                            @else
+                            -
+                            @endif
+                        </span>
+
+                        <div class="meta-right">
+                            <span>{{ $item['penulis'] ?? 'Admin' }}</span>
+                            <span class="views">
+                                <i class="fa-regular fa-eye"></i>
                             </span>
-
-                            <div class="meta-right">
-                                <span>{{ $item['penulis'] ?? 'Admin' }}</span>
-                                <span class="views">
-                                    <i class="fa-regular fa-eye"></i>
-                                </span>
-                                {{ $item['pembaca'] ?? 0 }}
-                            </div>
+                            {{ $item['pembaca'] ?? 0 }}
                         </div>
                     </div>
                 </div>
+            </div>
             @empty
-                <p style="text-align:center; width:100%;">Belum ada berita.</p>
+            <p style="text-align:center; width:100%;">Belum ada berita.</p>
             @endforelse
 
         </div>

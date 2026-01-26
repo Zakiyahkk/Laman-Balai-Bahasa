@@ -1,14 +1,14 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-<section class="mahkota-section">
+<section class="mahkota-section" style="margin-top: -90px;">
     <div class="mahkota-container">
 
         <div class="mahkota-header">
             <div class="mahkota-title-group">
                 <h2 class="mahkota-main-title">Mahkota Kalam Melayu Riau</h2>
-                <p class="mahkota-sub-text">Tokoh dan Komunitas Penggerak Bahasa dan Sastra Melayu</p>
             </div>
+            <p class="mahkota-sub-text">Tokoh dan Komunitas Penggerak Bahasa dan Sastra Melayu</p>
         </div>
 
         <div class="mahkota-tabs">
@@ -27,7 +27,6 @@
                         <div class="swiper-slide">
                             <div class="mk-card-box">
                                 <div class="mk-img-frame">
-                                    <span class="mk-label label-bahasa">TOKOH BAHASA</span>
                                     <img src="{{ asset('img/maskot-serindit.png') }}" alt="Tokoh">
                                 </div>
                                 <h4 class="mk-name">Raja Ali Haji</h4>
@@ -37,7 +36,6 @@
                         <div class="swiper-slide">
                             <div class="mk-card-box">
                                 <div class="mk-img-frame">
-                                    <span class="mk-label label-bahasa">TOKOH BAHASA</span>
                                     <img src="{{ asset('img/maskot-serindit.png') }}" alt="Tokoh">
                                 </div>
                                 <h4 class="mk-name">Raja Ali Haji</h4>
@@ -47,7 +45,6 @@
                         <div class="swiper-slide">
                             <div class="mk-card-box">
                                 <div class="mk-img-frame">
-                                    <span class="mk-label label-bahasa">TOKOH BAHASA</span>
                                     <img src="{{ asset('img/maskot-serindit.png') }}" alt="Tokoh">
                                 </div>
                                 <h4 class="mk-name">Raja Ali Haji</h4>
@@ -57,7 +54,6 @@
                         <div class="swiper-slide">
                             <div class="mk-card-box">
                                 <div class="mk-img-frame">
-                                    <span class="mk-label label-bahasa">TOKOH BAHASA</span>
                                     <img src="{{ asset('img/maskot-serindit.png') }}" alt="Tokoh">
                                 </div>
                                 <h4 class="mk-name">Raja Ali Haji</h4>
@@ -67,7 +63,6 @@
                         <div class="swiper-slide">
                             <div class="mk-card-box">
                                 <div class="mk-img-frame">
-                                    <span class="mk-label label-bahasa">TOKOH BAHASA</span>
                                     <img src="{{ asset('img/maskot-serindit.png') }}" alt="Tokoh">
                                 </div>
                                 <h4 class="mk-name">Raja Ali Haji</h4>
@@ -88,5 +83,24 @@
 
     </div>
 </section>
+<div class="custom-modal" id="modalTokoh">
+    <div class="modal-backdrop" onclick="closeTokohModal()"></div>
+    <div class="modal-panel">
 
+        <button class="close-btn" onclick="closeTokohModal()"><i class="fa-solid fa-xmark"></i></button>
+
+        <div class="modal-left">
+            <img id="mFoto" src="" alt="Foto">
+        </div>
+
+        <div class="modal-right">
+            <div>
+                <span id="mKategori" class="modal-tag"></span>
+                <h3 id="mNama" class="modal-title"></h3>
+                <div class="modal-divider"></div>
+                <p id="mDesc" class="modal-desc"></p>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>

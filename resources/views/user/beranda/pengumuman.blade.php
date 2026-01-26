@@ -13,8 +13,8 @@
 
 <body>
 
-    <section class="section pengumuman-section">
-        <div class="container">
+    <section class="section pengumuman-section" style="margin-top: -10px;">
+        <div class="container" style="margin-top: -10px;">
 
             <div class="section-header">
                 <h2 class="judul-section">Pengumuman Terbaru</h2>

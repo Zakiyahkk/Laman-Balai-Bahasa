@@ -8,6 +8,7 @@ use App\Http\Controllers\User\ProdukController;
 use App\Http\Controllers\User\PpidController;
 use App\Http\Controllers\User\SurveiController;
 use App\Http\Controllers\User\AkuntabilitasController;
+use App\Http\Controllers\User\LayananController;
 use App\Http\Controllers\User\ZiwbkController;
 use App\Http\Controllers\User\WbsController;
 use App\Http\Controllers\Admin\AdminAuthController;
@@ -53,6 +54,16 @@ Route::prefix('akuntabilitas')->group(function () {
     Route::get('/lakin', [AkuntabilitasController::class, 'lakin']);
     Route::get('/rencana-aksi', [AkuntabilitasController::class, 'rencanaAksi']);
     Route::get('/sakai', [AkuntabilitasController::class, 'sakai']);
+});
+
+Route::prefix('layanan')->group(function () {
+    Route::get('/ahli-bahasa', [LayananController::class, 'ahliBahasa']);
+    Route::get('/penerjemahan', [LayananController::class, 'penerjemahan']);
+    Route::get('/ukbi-adaptif', [LayananController::class, 'ukbiAdaptif']);
+    Route::get('/bipa', [LayananController::class, 'bipa']);
+    Route::get('/perpustakaan', [LayananController::class, 'perpustakaan']);
+    Route::get('/magang', [LayananController::class, 'magang']);
+
 });
 
 Route::prefix('produk')->group(function () {

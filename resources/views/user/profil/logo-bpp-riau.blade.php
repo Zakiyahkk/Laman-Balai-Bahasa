@@ -49,7 +49,7 @@
 
                 <div class="brand-card">
                     <div class="card-visual bg-pattern-light">
-                        <img src="{{ asset('img/logobalai.png') }}" alt="Logo Sekunder">
+                        <img src="{{ asset('img/Logo Kemendikdasmen.png') }}" alt="Logo Sekunder">
                     </div>
                     <div class="card-details">
                         <div class="info">
@@ -57,10 +57,10 @@
                             <p>Full Color</p>
                         </div>
                         <div class="actions">
-                            <a href="{{ asset('img/logobalai.png') }}" download class="btn-dl btn-png">
+                            <a href="{{ asset('img/Logo Kemendikdasmen.png') }}" download class="btn-dl btn-png">
                                 <i class="fa-regular fa-image"></i> PNG
                             </a>
-                            <a href="{{ asset('document/buku6.pdf') }}" download class="btn-dl btn-pdf">
+                            <a href="{{ asset('document/Logo Kemendikdasmen.pdf') }}" download class="btn-dl btn-pdf">
                                 <i class="fa-regular fa-file-pdf"></i> PDF
                             </a>
                         </div>
@@ -69,7 +69,7 @@
 
                 <div class="brand-card">
                     <div class="card-visual bg-pattern-light">
-                        <img src="{{ asset('img/logobalai.png') }}" alt="Logo Alternatif">
+                        <img src="{{ asset('img/Logo Pendidikan Bermutu.png') }}" alt="Logo Alternatif">
                     </div>
                     <div class="card-details">
                         <div class="info">
@@ -77,7 +77,7 @@
                             <p>Full Color</p>
                         </div>
                         <div class="actions">
-                            <a href="{{ asset('img/logobalai.png') }}" download class="btn-dl btn-png">
+                            <a href="{{ asset('img/Logo Pendidikan Bermutu.png') }}" download class="btn-dl btn-png">
                                 <i class="fa-regular fa-image"></i> PNG
                             </a>
                             <a href="{{ asset('document/buku6.pdf') }}" download class="btn-dl btn-pdf">
@@ -89,7 +89,7 @@
 
                 <div class="brand-card">
                     <div class="card-visual bg-pattern-light">
-                        <img src="{{ asset('img/logobalai.png') }}" alt="Simbol Logo">
+                        <img src="{{ asset('img/Logo Andal.png') }}" alt="Simbol Logo">
                     </div>
                     <div class="card-details">
                         <div class="info">
@@ -97,7 +97,47 @@
                             <p>Full Color</p>
                         </div>
                         <div class="actions">
-                            <a href="{{ asset('img/logobalai.png') }}" download class="btn-dl btn-png">
+                            <a href="{{ asset('img/Logo Andal.png') }}" download class="btn-dl btn-png">
+                                <i class="fa-regular fa-image"></i> PNG
+                            </a>
+                            <a href="{{ asset('document/buku6.pdf') }}" download class="btn-dl btn-pdf">
+                                <i class="fa-regular fa-file-pdf"></i> PDF
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="brand-card">
+                    <div class="card-visual bg-pattern-light">
+                        <img src="{{ asset('img/Logo Ramah.png') }}" alt="Simbol Logo">
+                    </div>
+                    <div class="card-details">
+                        <div class="info">
+                            <h3>Simbol / Icon</h3>
+                            <p>Full Color</p>
+                        </div>
+                        <div class="actions">
+                            <a href="{{ asset('img/Logo Ramah.png') }}" download class="btn-dl btn-png">
+                                <i class="fa-regular fa-image"></i> PNG
+                            </a>
+                            <a href="{{ asset('document/buku6.pdf') }}" download class="btn-dl btn-pdf">
+                                <i class="fa-regular fa-file-pdf"></i> PDF
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="brand-card">
+                    <div class="card-visual bg-pattern-light">
+                        <img src="{{ asset('img/Logo_Kemala.png') }}" alt="Simbol Logo">
+                    </div>
+                    <div class="card-details">
+                        <div class="info">
+                            <h3>Simbol / Icon</h3>
+                            <p>Full Color</p>
+                        </div>
+                        <div class="actions">
+                            <a href="{{ asset('img/Logo_Kemala.png') }}" download class="btn-dl btn-png">
                                 <i class="fa-regular fa-image"></i> PNG
                             </a>
                             <a href="{{ asset('document/buku6.pdf') }}" download class="btn-dl btn-pdf">

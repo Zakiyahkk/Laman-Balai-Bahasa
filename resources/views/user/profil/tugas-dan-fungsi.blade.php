@@ -17,7 +17,7 @@
 
             <!-- Header -->
             <div class="profil-header ">
-                <h1>Tugas Pokok dan Fungsi</h1>
+                <h1>Tugas dan Fungsi</h1>
                 <p class="profil-subtitle">
                     Balai Bahasa Provinsi Riau
                 </p>
@@ -25,7 +25,7 @@
 
             <!-- Tugas Pokok -->
             <div class="profil-card">
-                <h3>Tugas Pokok</h3>
+                <h3>Tugas</h3>
                 <p>
                     Balai Bahasa Provinsi Riau mempunyai tugas melaksanakan
                     pengembangan, pembinaan, dan pelindungan bahasa dan sastra

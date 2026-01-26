@@ -62,39 +62,31 @@
 
                 {{-- GAMBAR ILUSTRASI (LANDSCAPE) --}}
                 <div class="sejarah-illustration">
+
                     <div class="upload-box">
-                        <div class="upload-placeholder">
-                            Tidak ada gambar
-                        </div>
+                        <img src="{{ asset('img/fotobalai.png') }}" alt="Dokumentasi 1">
                     </div>
 
                     <div class="upload-box">
-                        <div class="upload-placeholder">
-                            Tidak ada gambar
-                        </div>
+                        <img src="{{ asset('img/fotobalai.png') }}" alt="Dokumentasi 2">
                     </div>
 
                     <div class="upload-box">
-                        <div class="upload-placeholder">
-                            Tidak ada gambar
-                        </div>
+                        <img src="{{ asset('img/fotobalai.png') }}" alt="Dokumentasi 3">
                     </div>
 
                     <div class="upload-box">
-                        <div class="upload-placeholder">
-                            Tidak ada gambar
-                        </div>
+                        <img src="{{ asset('img/fotobalai.png') }}" alt="Dokumentasi 4">
                     </div>
+
                 </div>
+
 
             </div>
 
             {{-- GALERI FOTO --}}
             <div class="sejarah-galeri">
-                <h4>Tokoh Pimpinan Terdahulu</h4>
-                <p class="galeri-desc">
-                    Dokumentasi para tokoh yang pernah memimpin Balai Bahasa Provinsi Riau dari masa ke masa.
-                </p>
+                <h4>Kepala Balai dari Masa ke Masa</h4>
                 <div class="galeri-wrapper">
                     <button class="galeri-nav prev" id="tokohPimpinanPrev">&#10094;</button>
                     <div class="sejarah-galeri-grid" id="tokohPimpinanSlider">
@@ -141,3 +133,46 @@
         </div>
     </section>
 @endsection
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const slider = document.getElementById("tokohPimpinanSlider");
+        const prevBtn = document.getElementById("tokohPimpinanPrev");
+        const nextBtn = document.getElementById("tokohPimpinanNext");
+
+        const scrollStep = 280; // jarak geser
+        const duration = 500; // durasi animasi (ms)
+
+        function smoothScroll(element, distance, duration) {
+            const start = element.scrollLeft;
+            const startTime = performance.now();
+
+            function easeInOutCubic(t) {
+                return t < 0.5 ?
+                    4 * t * t * t :
+                    1 - Math.pow(-2 * t + 2, 3) / 2;
+            }
+
+            function animate(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const ease = easeInOutCubic(progress);
+
+                element.scrollLeft = start + distance * ease;
+
+                if (progress < 1) {
+                    requestAnimationFrame(animate);
+                }
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        nextBtn.addEventListener("click", () => {
+            smoothScroll(slider, scrollStep, duration);
+        });
+
+        prevBtn.addEventListener("click", () => {
+            smoothScroll(slider, -scrollStep, duration);
+        });
+    });
+</script>
