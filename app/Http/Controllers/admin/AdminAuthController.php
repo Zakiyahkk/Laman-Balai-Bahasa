@@ -46,13 +46,6 @@ class AdminAuthController extends Controller
             ])->withInput();
         }
 
-        // Kalau akun belum aktif
-        if (!$admin->hak_akses) {
-            return back()->withErrors([
-                'login' => 'Akun admin belum diaktifkan.'
-            ]);
-        }
-
         // Simpan session
         Session::put('admin_logged_in', true);
         Session::put('admin_email', $admin->email);

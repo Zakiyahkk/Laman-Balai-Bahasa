@@ -74,7 +74,7 @@
         if ($item->gambar) {
             $img = asset($item->gambar);
         } else {
-            $img = asset('img/logobbpr.png');
+            $img = asset('img/logobbpr4.png');
         }
     @endphp
     <img src="{{ $img }}" class="publication-thumb-lg">
@@ -139,7 +139,7 @@
         if ($item->gambar) {
             $img = asset($item->gambar);
         } else {
-            $img = asset('img/logobbpr.png');
+            $img = asset('img/logobbpr4.png');
         }
     @endphp
     <img src="{{ $img }}" class="publication-thumb-lg">

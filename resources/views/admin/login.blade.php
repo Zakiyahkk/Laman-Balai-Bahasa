@@ -30,7 +30,7 @@
 
         <!-- Logo -->
         <div class="flex justify-center mb-4">
-            <img src="{{ asset('img/logobbpr.png') }}" class="logo-admin w-auto transition-all">
+            <img src="{{ asset('img/logobbpr4.png') }}" class="logo-admin w-auto transition-all">
         </div>
 
         <p class="text-xs sm:text-sm text-center text-gray-600 mb-1">

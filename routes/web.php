@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\AProfilController;
 use App\Http\Controllers\Admin\AAkuntabilitasController;
 use App\Http\Controllers\Admin\ATokohController;
 use App\Http\Controllers\User\ArtikelController;
+use App\Http\Controllers\Admin\APengaturanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -194,8 +195,7 @@ Route::prefix('admin')
                 ->name('admin.tokoh.destroy');
 
         Route::get('/halamanweb', fn () => view('admin.halamanweb'))->name('admin.halamanweb');
-        Route::get('/pengaturan', fn () => view('admin.pengaturan'))->name('admin.pengaturan');
-
+        Route::get('/pengaturan', [APengaturanController::class, 'index'])->name('admin.pengaturan');
 });
 
 
