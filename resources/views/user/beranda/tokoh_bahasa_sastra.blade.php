@@ -22,7 +22,6 @@
                         <div class="tokoh-card"
                             onclick="openTokohModal('Raja Ali Haji', 'img/maskot-serindit.png', 'Pahlawan Nasional di bidang bahasa. Terkenal dengan karya Gurindam Dua Belas.', 'bahasa')">
                             <div class="card-img-wrapper">
-                                <span class="label-tokoh bg-blue">Tokoh Bahasa</span>
                                 <img src="img/maskot-serindit.png" alt="Raja Ali Haji">
                             </div>
                             <div class="tokoh-info">
@@ -36,7 +35,6 @@
                         <div class="tokoh-card"
                             onclick="openTokohModal('Soeman Hs', 'img/maskot-serindit.png', 'Sastrawan pelopor angkatan Balai Pustaka. Bapak cerita detektif Indonesia.', 'sastra')">
                             <div class="card-img-wrapper">
-                                <span class="label-tokoh bg-orange">Tokoh Sastra</span>
                                 <img src="img/maskot-serindit.png" alt="Soeman Hs">
                             </div>
                             <div class="tokoh-info">
@@ -50,7 +48,6 @@
                         <div class="tokoh-card"
                             onclick="openTokohModal('Chairil Anwar', 'img/maskot-serindit.png', 'Penyair terkemuka Indonesia. Pelopor Angkatan 45.', 'sastra')">
                             <div class="card-img-wrapper">
-                                <span class="label-tokoh bg-orange">Tokoh Sastra</span>
                                 <img src="img/maskot-serindit.png" alt="Chairil Anwar">
                             </div>
                             <div class="tokoh-info">
@@ -64,7 +61,6 @@
                         <div class="tokoh-card"
                             onclick="openTokohModal('Sutan Takdir A.', 'img/maskot-serindit.png', 'Sastrawan dan ahli tata bahasa Indonesia.', 'bahasa')">
                             <div class="card-img-wrapper">
-                                <span class="label-tokoh bg-blue">Tokoh Bahasa</span>
                                 <img src="img/maskot-serindit.png" alt="Sutan Takdir">
                             </div>
                             <div class="tokoh-info">
@@ -78,7 +74,6 @@
                         <div class="tokoh-card"
                             onclick="openTokohModal('Tenas Effendy', 'img/maskot-serindit.png', 'Budayawan Riau yang menjaga Tunjuk Ajar Melayu.', 'budaya')">
                             <div class="card-img-wrapper">
-                                <span class="label-tokoh bg-green">Tokoh Budaya</span>
                                 <img src="img/maskot-serindit.png" alt="Tenas Effendy">
                             </div>
                             <div class="tokoh-info">

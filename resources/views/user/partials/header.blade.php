@@ -5,9 +5,18 @@
                 <div class="top-item-box">
                     <i class="fa-regular fa-clock top-icon-big"></i>
                     <div class="top-text-stack">
-                        <span class="label-top">JAM PELAYANAN </span>
-                        <span class="value-top" style="font-size: 11px; line-height: 1.2;">
-                            Senin––Kamis: 08.00–16.00 WIB <br> Jumat: 08.00–16.30 WIB
+                        <span class="label-top">JAM PELAYANAN</span>
+
+                        <span class="jam-row">
+                            <span class="hari">Senin––Kamis</span>
+                            <span class="colon">:</span>
+                            <span class="waktu">08.00––16.00 WIB</span>
+                        </span>
+
+                        <span class="jam-row">
+                            <span class="hari">Jumat</span>
+                            <span class="colon">:</span>
+                            <span class="waktu">08.00–16.30 WIB</span>
                         </span>
                     </div>
                 </div>
