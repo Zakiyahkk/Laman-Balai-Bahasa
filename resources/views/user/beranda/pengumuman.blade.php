@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pengumuman Modern dengan Preview</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
 </head>
 
 <body>
@@ -23,79 +23,45 @@
 
             <div class="pengumuman-list">
 
-                <div class="pengumuman-item trigger-modal"
-                    data-doc="document/dokumentesting1.pdf"
-                    data-type="pdf">
+                @foreach ($items as $item)
+                    @php
+                        $tanggal = \Carbon\Carbon::parse($item['tanggal']);
+                    @endphp
 
-                    <div class="date-badge">
-                        <span class="day">15</span>
-                        <span class="month">Jan</span>
-                        <span class="year">2025</span>
-                    </div>
-                    <div class="doc-icon">
-                        <i class="fa-solid fa-file-pdf"></i>
-                    </div>
-                    <div class="item-content">
-                        <span class="doc-title">Pengumuman Lomba Kebahasaan Tingkat Provinsi</span>
-                        <div class="doc-meta">
-                            <i class="fa-solid fa-eye"></i> Klik untuk melihat dokumen
+                    <div class="pengumuman-item trigger-modal" data-doc="{{ $item['file_url'] ?? $item['gambar_url'] }}"
+                        data-type="{{ $item['type'] }}">
+
+                        <div class="date-badge">
+                            <span class="day">{{ $tanggal->format('d') }}</span>
+                            <span class="month">{{ $tanggal->translatedFormat('M') }}</span>
+                            <span class="year">{{ $tanggal->format('Y') }}</span>
+                        </div>
+
+                        <div class="doc-icon {{ $item['type'] === 'image' ? 'image-type' : '' }}">
+                            <i class="fa-solid {{ $item['type'] === 'pdf' ? 'fa-file-pdf' : 'fa-image' }}"></i>
+                        </div>
+
+                        <div class="item-content">
+                            <span class="doc-title">
+                                {{ $item['judul'] }}
+                            </span>
+                            <div class="doc-meta">
+                                <i class="fa-solid fa-eye"></i>
+                                {{ $item['type'] === 'pdf' ? 'Klik untuk melihat dokumen' : 'Klik untuk melihat poster' }}
+                            </div>
+                        </div>
+
+                        <div class="action-btn">
+                            <i class="fa-solid fa-chevron-right"></i>
                         </div>
                     </div>
-                    <div class="action-btn">
-                        <i class="fa-solid fa-chevron-right"></i>
-                    </div>
-                </div>
-
-                <div class="pengumuman-item trigger-modal"
-                    data-doc="img/pantun2.png"
-                    data-type="image">
-
-                    <div class="date-badge">
-                        <span class="day">10</span>
-                        <span class="month">Jan</span>
-                        <span class="year">2025</span>
-                    </div>
-                    <div class="doc-icon image-type">
-                        <i class="fa-regular fa-image"></i>
-                    </div>
-                    <div class="item-content">
-                        <span class="doc-title">Informasi Terusan dari Badan Bahasa (Poster)</span>
-                        <div class="doc-meta">
-                            <i class="fa-solid fa-eye"></i> Klik untuk melihat poster
-                        </div>
-                    </div>
-                    <div class="action-btn">
-                        <i class="fa-solid fa-chevron-right"></i>
-                    </div>
-                </div>
-
-                <div class="pengumuman-item trigger-modal"
-                    data-doc="document/buku6.pdf"
-                    data-type="pdf">
-
-                    <div class="date-badge">
-                        <span class="day">05</span>
-                        <span class="month">Jan</span>
-                        <span class="year">2025</span>
-                    </div>
-                    <div class="doc-icon">
-                        <i class="fa-solid fa-file-pdf"></i>
-                    </div>
-                    <div class="item-content">
-                        <span class="doc-title">Juknis Kegiatan Balai Bahasa Tahun 2025</span>
-                        <div class="doc-meta">
-                            <i class="fa-solid fa-eye"></i> Klik untuk melihat dokumen
-                        </div>
-                    </div>
-                    <div class="action-btn">
-                        <i class="fa-solid fa-chevron-right"></i>
-                    </div>
-                </div>
+                @endforeach
 
             </div>
         </div>
     </section>
 
+    {{-- MODAL TIDAK DIUBAH --}}
     <div id="docModal" class="modal-overlay">
         <div class="modal-container">
             <div class="modal-header">
@@ -112,7 +78,6 @@
 
             <div class="modal-body">
                 <iframe id="pdfViewer" src="" frameborder="0"></iframe>
-
                 <img id="imageViewer" src="" alt="Preview">
 
                 <div id="fallbackMessage" class="fallback-msg">
@@ -123,6 +88,7 @@
             </div>
         </div>
     </div>
+
 </body>
 
 </html>

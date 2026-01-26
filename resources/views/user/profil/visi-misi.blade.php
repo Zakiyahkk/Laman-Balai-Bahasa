@@ -21,18 +21,18 @@
             <div class="profil-card">
                 <h3>Visi</h3>
                 <p>
-                    Terwujudnya pengutamaan bahasa Indonesia, pelindungan bahasa daerah,
-                    dan penginternasionalan bahasa Indonesia di Provinsi Riau.
+                    {{ $profil['visi'] }}
                 </p>
             </div>
 
             <div class="profil-card">
                 <h3>Misi</h3>
                 <ol>
-                    <li>Meningkatkan sikap positif masyarakat terhadap bahasa Indonesia.</li>
-                    <li>Melindungi dan melestarikan bahasa serta sastra daerah.</li>
-                    <li>Meningkatkan mutu layanan kebahasaan dan kesastraan.</li>
-                    <li>Mengembangkan peran bahasa Indonesia di tingkat nasional.</li>
+                    @foreach (preg_split('/\r\n|\r|\n/', $profil['misi']) as $misi)
+                        @if (trim($misi) !== '')
+                            <li>{{ $misi }}</li>
+                        @endif
+                    @endforeach
                 </ol>
             </div>
         </div>

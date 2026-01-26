@@ -81,8 +81,11 @@ window.closeDocModal = function () {
     const modal = document.getElementById("docModal");
     if (modal) modal.classList.remove("active");
 
-    document.getElementById("pdfViewer").src = "";
-    document.getElementById("imageViewer").src = "";
+    const pdfViewer = document.getElementById("pdfViewer");
+    const imageViewer = document.getElementById("imageViewer");
+
+    if (pdfViewer) pdfViewer.src = "";
+    if (imageViewer) imageViewer.src = "";
 
     document.body.classList.remove("modal-open");
 };
