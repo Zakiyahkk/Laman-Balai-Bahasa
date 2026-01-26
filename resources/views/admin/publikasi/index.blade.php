@@ -46,8 +46,9 @@
       <div class="filter-dropdown" id="filterDropdown">
         <div class="filter-header">Kategori</div>
         <a href="{{ request('search') ? '?search='.request('search').'&kategori=alinea' : '?kategori=alinea' }}" class="filter-item">Alinea</a>
-        <a href="{{ request('search') ? '?search='.request('search').'&kategori=artikel' : '?kategori=artikel' }}" class="filter-item">Artikel</a>
         <a href="{{ request('search') ? '?search='.request('search').'&kategori=berita' : '?kategori=berita' }}" class="filter-item">Berita</a>
+        <a href="{{ request('search') ? '?search='.request('search').'&kategori=lensa' : '?kategori=lensa' }}" class="filter-item">Lensa</a>
+        <a href="{{ request('search') ? '?search='.request('search').'&kategori=ragam' : '?kategori=ragam' }}" class="filter-item">Ragam</a>
         <a href="{{ request('search') ? '?search='.request('search').'&kategori=pengumuman' : '?kategori=pengumuman' }}" class="filter-item">Pengumuman</a>
       </div>
     </div>
@@ -70,12 +71,11 @@
      data-kategori="{{ strtolower($item->kategori) }}">
 
     @php
-    // Jika ada gambar dan file → pakai gambar
-    // Jika hanya file saja → pakai gambar default
-    // Jika hanya gambar saja → pakai gambar
-        $img = ($item->gambar && $item->file)
-            ? $item->gambar
-            : (($item->file && !$item->gambar) ? asset('img/logobbpr.png') : ($item->gambar ?: asset('img/logobbpr.png')));
+        if ($item->gambar) {
+            $img = asset($item->gambar);
+        } else {
+            $img = asset('img/logobbpr.png');
+        }
     @endphp
     <img src="{{ $img }}" class="publication-thumb-lg">
 
@@ -136,9 +136,11 @@
      data-kategori="{{ strtolower($item->kategori) }}">
 
     @php
-        $img = ($item->gambar && $item->file)
-            ? $item->gambar
-            : (($item->file && !$item->gambar) ? asset('img/logobbpr.png') : ($item->gambar ?: asset('img/logobbpr.png')));
+        if ($item->gambar) {
+            $img = asset($item->gambar);
+        } else {
+            $img = asset('img/logobbpr.png');
+        }
     @endphp
     <img src="{{ $img }}" class="publication-thumb-lg">
 

@@ -7,6 +7,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/adminpengaturan.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admintokoh.css') }}">
     <link rel="stylesheet" href="{{ asset('css/adminprofil.css') }}">
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -115,6 +117,14 @@
                     </div>
                     <i class="bi submenu-arrow {{ $akuntabilitasOpen ? 'bi-caret-down-fill' : 'bi-caret-right-fill' }}"></i>
                 </a>
+
+                <!-- TOKOH -->
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('admin.tokoh*') ? 'active' : '' }}"
+                    href="{{ route('admin.tokoh') }}">
+                        <i class="bi bi-person-badge me-2"></i>Tokoh
+                    </a>
+                </li>
 
 <ul class="nav flex-column ms-3 submenu-list"
     @if($akuntabilitasOpen)

@@ -16,17 +16,24 @@
     flex-direction: column;
 }
 
-/* ================= AVATAR ================= */
+/* ================= AVATAR (TELUR / LONJONG KE ATAS) ================= */
 .avatar-wrapper {
-    width: 96px;
-    height: 96px;
+    width: 80px;
+    height: 105px;
+    overflow: hidden;
 }
+
 .avatar-img {
-    width: 96px;
-    height: 96px;
-    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    border-radius: 50px; /* efek telur */
     object-fit: cover;
 }
+
+.pegawai-card .text-muted.small {
+    margin-bottom: 10px;
+}
+
 
 /* ================= BUTTON ================= */
 .btn-action-fixed {
@@ -93,7 +100,7 @@
 }
 
 .notif-add {
-    background: #1e3a8a;
+    background: #0dbf4e;
     color: #ffffff;
 }
 .notif-update {

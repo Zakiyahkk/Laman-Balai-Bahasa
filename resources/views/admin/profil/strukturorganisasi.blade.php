@@ -44,7 +44,7 @@
                         @if($kepalaBalai)
                             <div class="card pegawai-card p-3 text-center">
                                 <div class="avatar-wrapper mx-auto mb-2">
-                                    <img src="{{ $kepalaBalai['foto'] }}" class="avatar-img">
+                                    <img src="{{ asset($kepalaBalai['foto']) }}" class="avatar-img">
                                 </div>
                                 <div class="fw-semibold">{{ $kepalaBalai['nama'] }}</div>
                                 <div class="text-muted small">{{ $kepalaBalai['jabatan'] }}</div>
@@ -57,7 +57,7 @@
                         @if($kasubbagUmum)
                             <div class="card pegawai-card p-3 text-center">
                                 <div class="avatar-wrapper mx-auto mb-2">
-                                    <img src="{{ $kasubbagUmum['foto'] }}" class="avatar-img">
+                                    <img src="{{ asset($kasubbagUmum['foto']) }}" class="avatar-img">
                                 </div>
                                 <div class="fw-semibold">{{ $kasubbagUmum['nama'] }}</div>
                                 <div class="text-muted small">{{ $kasubbagUmum['jabatan'] }}</div>

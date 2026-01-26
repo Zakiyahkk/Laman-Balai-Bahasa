@@ -344,8 +344,8 @@ main {
     letter-spacing: 0.2px;
 }
 
-/* Artikel — Biru */
-.category-artikel {
+/* Lensa — Biru */
+.category-lensa {
     color: #0d6efd;
 }
 
@@ -359,9 +359,14 @@ main {
     color: #6f42c1;
 }
 
-/* Pengumuman — Hijau */
+/* Pengumuman — Oren */
 .category-pengumuman {
     color: #df5a0d;
+}
+
+/* Ragam — Toska */
+.category-ragam {
+    color: #3fa3a3;
 }
 
 /* ===============================

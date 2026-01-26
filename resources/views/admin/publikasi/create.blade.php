@@ -48,14 +48,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <div class="page-header d-flex justify-content-between align-items-center mb-4">
     <div>
-        <h3 class="mb-1">Tambah Publikasi Baru</h3>
-        <p class="text-muted mb-0">
+        <h3 class="mb-1" style="color:#ffffff;">Tambah Publikasi Baru</h3>
+        <p class="mb-0" style="color:#ffffff;">
             Silakan lengkapi data publikasi yang akan ditampilkan di laman
         </p>
     </div>
 
     <div class="header-logo">
-        <img src="/img/logobbpr.png" class="img-fluid header-logo">
+        <img src="/img/logobbpr4.png" class="img-fluid header-logo">
     </div>
 </div>
 
@@ -78,9 +78,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     <select class="form-select" name="kategori" required>
                         <option value="" selected disabled>-- Pilih Kategori --</option>
                         <option value="alinea">Alinea</option>
-                        <option value="artikel">Artikel</option>
                         <option value="berita">Berita</option>
+                        <option value="lensa">Lensa</option>
                         <option value="pengumuman">Pengumuman</option>
+                        <option value="ragam">Ragam</option>
                     </select>
                 </div>
 

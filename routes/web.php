@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\GaleriController;
 use App\Http\Controllers\Admin\PublikasiController;
 use App\Http\Controllers\Admin\AProfilController;
 use App\Http\Controllers\Admin\AAkuntabilitasController;
+use App\Http\Controllers\Admin\ATokohController;
 use App\Http\Controllers\User\ArtikelController;
 
 /*
@@ -172,6 +173,14 @@ Route::prefix('admin')
                 Route::get('/sakai', [AAkuntabilitasController::class, 'sakai'])->name('sakai');
             });
 
+            Route::get('/tokoh', [ATokohController::class, 'index'])
+                ->name('admin.tokoh');
+            Route::post('/tokoh', [ATokohController::class, 'store'])
+                ->name('admin.tokoh.store');
+            Route::put('/tokoh/{id}', [ATokohController::class, 'update'])
+                ->name('admin.tokoh.update');
+            Route::delete('/tokoh/{id}', [ATokohController::class, 'destroy'])
+                ->name('admin.tokoh.destroy');
 
         Route::get('/halamanweb', fn () => view('admin.halamanweb'))->name('admin.halamanweb');
         Route::get('/pengaturan', fn () => view('admin.pengaturan'))->name('admin.pengaturan');

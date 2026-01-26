@@ -64,8 +64,9 @@ document.addEventListener("DOMContentLoaded",()=>{
         <label class="form-label fw-semibold">Kategori *</label>
         <select class="form-select" name="kategori" required>
             <option value="alinea" {{ $data->kategori=='alinea'?'selected':'' }}>Alinea</option>
-            <option value="artikel" {{ $data->kategori=='artikel'?'selected':'' }}>Artikel</option>
             <option value="berita" {{ $data->kategori=='berita'?'selected':'' }}>Berita</option>
+            <option value="lensa" {{ $data->kategori=='lensa'?'selected':'' }}>Lensa</option>
+            <option value="ragam" {{ $data->kategori=='ragam'?'selected':'' }}>Ragam</option>
             <option value="pengumuman" {{ $data->kategori=='pengumuman'?'selected':'' }}>Pengumuman</option>
         </select>
     </div>
@@ -89,8 +90,9 @@ document.addEventListener("DOMContentLoaded",()=>{
 
     <div class="position-relative d-inline-block mt-3">
         <img id="preview"
-             src="{{ $data->gambar ?? asset('img/logobbpr.png') }}"
-             class="img-fluid rounded" style="max-height:220px">
+            src="{{ $data->gambar ? asset($data->gambar) : asset('img/logobbpr.png') }}"
+            class="img-fluid rounded"
+            style="max-height:220px">
         <button type="button"
                 id="removeImageBtn"
                 onclick="removeImage()"
