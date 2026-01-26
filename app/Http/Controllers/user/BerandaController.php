@@ -26,20 +26,31 @@ class BerandaController extends Controller
     {
         if (!$gambar) return null;
 
-        // kalau sudah URL lengkap
         if (preg_match('/^https?:\/\//i', $gambar)) return $gambar;
 
-        // kalau masih path/nama file -> bucket "gambar"
         return rtrim(env('SUPABASE_URL'), '/')
             . '/storage/v1/object/public/gambar/'
             . ltrim($gambar, '/');
+    }
+
+    private function publicFileUrl(?string $file): ?string
+    {
+        if (!$file) return null;
+
+        if (preg_match('/^https?:\/\//i', $file)) return $file;
+
+        return rtrim(env('SUPABASE_URL'), '/')
+            . '/storage/v1/object/public/file/'
+            . ltrim($file, '/');
     }
 
     public function dashboard()
     {
         $baseUrl = rtrim(env('SUPABASE_URL'), '/') . '/rest/v1/publikasi';
 
-        // 1) Berita terbaru (preview)
+        // =========================
+        // 1) Berita Terbaru
+        // =========================
         $berita = $this->supabase()->get($baseUrl, [
             'select' => 'publikasi_id,judul,tanggal,penulis,gambar,isi,pembaca,status,kategori,created_at',
             'kategori' => 'eq.berita',
@@ -53,7 +64,9 @@ class BerandaController extends Controller
             return $row;
         }, $berita);
 
-        // 2) Artikel + Alinea (slider preview)
+        // =========================
+        // 2) Artikel + Alinea
+        // =========================
         $artikelAlinea = $this->supabase()->get($baseUrl, [
             'select' => 'publikasi_id,judul,tanggal,penulis,gambar,isi,pembaca,status,kategori,created_at',
             'kategori' => 'in.(artikel,alinea)',
@@ -67,6 +80,34 @@ class BerandaController extends Controller
             return $row;
         }, $artikelAlinea);
 
-        return view('user.beranda.dashboard', compact('berita', 'artikelAlinea'));
+        // =========================
+        // 3) 🔥 PENGUMUMAN TERBARU (BARU)
+        // =========================
+        $pengumumanRaw = $this->supabase()->get($baseUrl, [
+            'select' => 'publikasi_id,judul,tanggal,file,gambar,status,kategori,created_at',
+            'kategori' => 'eq.pengumuman',
+            'status' => 'eq.terbit',
+            'order' => 'tanggal.desc,created_at.desc,publikasi_id.desc',
+            'limit' => 3,
+        ])->throw()->json();
+
+        $items = array_map(function ($row) {
+            return [
+                'judul'      => $row['judul'],
+                'tanggal'    => $row['tanggal'],
+                'file_url'   => $this->publicFileUrl($row['file'] ?? null),
+                'gambar_url' => $this->publicImageUrl($row['gambar'] ?? null),
+                'type'       => !empty($row['file']) ? 'pdf' : 'image',
+            ];
+        }, $pengumumanRaw);
+
+        // =========================
+        // RETURN VIEW
+        // =========================
+        return view('user.beranda.dashboard', compact(
+            'berita',
+            'artikelAlinea',
+            'items' // 🔥 INI YANG DIPAKAI pengumuman.blade.php
+        ));
     }
 }
