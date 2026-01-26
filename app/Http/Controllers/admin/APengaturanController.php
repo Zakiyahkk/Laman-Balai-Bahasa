@@ -15,18 +15,24 @@ class APengaturanController extends Controller
         'Accept'        => 'application/json',
     ];
 
-    // Ambil data admin dari Supabase
-    $admins = Http::withHeaders($headers)->get(
-        rtrim(env('SUPABASE_URL'), '/') . '/rest/v1/admin?select=id,email,username,role'
-    )->json() ?? [];
+    $response = Http::withHeaders($headers)->get(
+        rtrim(env('SUPABASE_URL'), '/') .
+        '/rest/v1/admin?select=id,email,username,role'
+    );
 
-    // Hitung total admin
-    $totalAdmin = count($admins);
+    // DEFAULT KOSONG
+    $admins = [];
+
+    // PASTIKAN RESPONSE ARRAY
+    if ($response->ok() && is_array($response->json())) {
+        $admins = $response->json();
+    }
 
     return view('admin.pengaturan', [
-        'admins'      => $admins,
-        'totalAdmin'  => $totalAdmin,
+        'admins'     => $admins,
+        'totalAdmin' => count($admins),
     ]);
 }
+
 
 }
