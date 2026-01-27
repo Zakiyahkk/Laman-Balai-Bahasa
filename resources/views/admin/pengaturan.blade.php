@@ -18,7 +18,6 @@
 </div>
 
 <!-- =================  ISI MAIN CONTENT ================= -->
-
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h5 class="fw-semibold mb-0 text-white">
         Total Admin: {{ $totalAdmin }}
@@ -85,12 +84,15 @@
                                 </button>
 
                                 <!-- HAPUS -->
-                                <button class="btn btn-link text-danger p-1 btn-delete-admin"
-                                        title="Hapus"
-                                        data-email="{{ $item->email }}">
-                                    <i class="bi bi-trash"></i>
-                                </button>
-
+                                <form action="{{ route('admin.pengaturan.destroy', $item->email) }}"
+                                    method="POST"
+                                    onsubmit="return confirmDeleteAdmin('{{ $item->email }}', this)">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-link text-danger p-1">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
                             </div>
                         </td>
                     </tr>
@@ -282,21 +284,80 @@ document.getElementById('toggleEditPassword').addEventListener('click', function
 </form>
 
 <script>
-document.querySelectorAll('.btn-delete-admin').forEach(btn => {
-    btn.addEventListener('click', function () {
+document.addEventListener("DOMContentLoaded", function () {
 
-        const email = this.dataset.email;
+    let deleteFormTarget = null;
 
-        if (!confirm(`Yakin ingin menghapus admin ${email}?`)) {
-            return;
-        }
+    window.confirmDeleteAdmin = function (email, formEl) {
+        event.preventDefault();
+        deleteFormTarget = formEl;
 
-        const form = document.getElementById('formDeleteAdmin');
-        form.action = `/admin/pengaturan/${encodeURIComponent(email)}`;
-        form.submit();
+        document.getElementById("deleteText").innerHTML =
+            "<span class='fw-light'>Apakah anda yakin ingin menghapus Admin </span>" +
+            "<span class='fw-bold'>" + email + "</span><span class='fw-light'>?</span>";
+
+        const modal = document.getElementById("deleteModal");
+        modal.style.display = "block";
+
+        setTimeout(() => modal.classList.add("show"), 60);
+        return false;
+    };
+
+    document.getElementById("btnYes").addEventListener("click", function () {
+        if (deleteFormTarget) deleteFormTarget.submit();
     });
+
+    document.getElementById("btnNo").addEventListener("click", function () {
+        const modal = document.getElementById("deleteModal");
+        modal.classList.remove("show");
+
+        setTimeout(() => {
+            modal.style.display = "none";
+            deleteFormTarget = null;
+        }, 600);
+    });
+
 });
 </script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    let notif = document.getElementById("notif-top");
+    if (notif) {
+        notif.classList.add("show");
+
+        setTimeout(() => {
+            notif.classList.add("fade-out");
+        }, 2500);
+
+        setTimeout(() => {
+            notif.remove();
+        }, 3000);
+    }
+});
+</script>
+
+{{-- NOTIFIKASI SLIDE-DOWN --}}
+@if(session('success') || session('error'))
+@php
+    $msg = strtolower(session('success') ?? session('error'));
+    $status = str_contains($msg, 'hapus') ? 'delete'
+            : (str_contains($msg, 'tambah') ? 'terbit' : 'draf');
+@endphp
+<div id="notif-top" class="notif-top notif-{{ $status }}">
+    {{ session('success') ?? session('error') }}
+</div>
+@endif
+
+{{-- MODAL KONFIRMASI DELETE --}}
+<div id="deleteModal" class="delete-modal">
+    <p id="deleteText"></p>
+    <div class="d-flex justify-content-center gap-3 mt-4">
+        <button id="btnYes" class="btn-yes">Ya</button>
+        <button id="btnNo" class="btn-no">Tidak</button>
+    </div>
+</div>
 
 
 @endsection
