@@ -28,8 +28,19 @@
             <div class="d-flex align-items-center">
                 <img src="/img/AkunLogo.png" alt="Foto Profil Admin" class="avatar-circle me-1">
                 <div class="admin-info">
-                    <div class="fw-bold fs-6" style="color:#1e3a8a;">{{ session('admin_username', '-') }}</div>
-                    <div class="small" style="color:#1e3a8a; font-weight:600;">{{ session('admin_role', '-') }}</div>
+                    @php
+                        $adminLogin = (object) [
+                            'username' => session('admin_username'),
+                            'role' => session('admin_role'),
+                        ];
+                    @endphp
+
+                    <div class="fw-bold fs-6" style="color:#1e3a8a;">
+                        {{ $adminLogin->username ?? '-' }}
+                    </div>
+                    <div class="small" style="color:#1e3a8a; font-weight:600;">
+                        {{ $adminLogin->role ? ucwords(strtolower($adminLogin->role)) : '-' }}
+                    </div>
                 </div>
             </div>
         </div>
@@ -169,12 +180,14 @@
             </li>
 
             <!-- PENGATURAN -->
+            @if(strtolower(session('admin_role')) === 'super admin')
             <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('admin.pengaturan') ? 'active' : '' }}"
-                   href="{{ route('admin.pengaturan') }}">
+                href="{{ route('admin.pengaturan') }}">
                     <i class="bi bi-gear me-2"></i>Pengaturan
                 </a>
             </li>
+            @endif
 
             <li class="nav-item">
                 <a href="#" class="nav-link logout-link"

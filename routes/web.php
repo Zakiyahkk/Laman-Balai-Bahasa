@@ -195,7 +195,12 @@ Route::prefix('admin')
                 ->name('admin.tokoh.destroy');
 
         Route::get('/halamanweb', fn () => view('admin.halamanweb'))->name('admin.halamanweb');
+
         Route::get('/pengaturan', [APengaturanController::class, 'index'])->name('admin.pengaturan');
+        Route::post('/pengaturan', [APengaturanController::class, 'store'])->name('admin.pengaturan.store');
+        Route::put('/pengaturan/{email}', [APengaturanController::class, 'update'])->name('admin.pengaturan.update');
+        Route::delete('/pengaturan/{email}', [APengaturanController::class, 'destroy'])->name('admin.pengaturan.destroy');
+
 });
 
 

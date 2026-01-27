@@ -67,8 +67,9 @@
                         </td>
 
                         <td>
-                            <span class="badge bg-primary-subtle text-primary">
-                                {{ ucfirst(str_replace('_',' ', $item->role)) }}
+                            <span class="badge
+                                {{ strtolower($item->role) === 'super admin' ? 'badge-super-admin' : 'badge-admin' }}">
+                                {{ $item->role }}
                             </span>
                         </td>
 
@@ -76,14 +77,15 @@
                             <div class="d-flex justify-content-center gap-2">
 
                                 <!-- EDIT -->
-                                <button class="btn btn-link text-secondary p-1"
-                                        title="Edit"
-                                        data-email="{{ $item->email }}">
+                                <button class="btn btn-link text-secondary p-1 btn-edit-admin"
+                                    data-email="{{ $item->email }}"
+                                    data-username="{{ $item->username }}"
+                                    data-role="{{ $item->role }}">
                                     <i class="bi bi-pencil"></i>
                                 </button>
 
                                 <!-- HAPUS -->
-                                <button class="btn btn-link text-danger p-1"
+                                <button class="btn btn-link text-danger p-1 btn-delete-admin"
                                         title="Hapus"
                                         data-email="{{ $item->email }}">
                                     <i class="bi bi-trash"></i>
@@ -121,9 +123,8 @@
             </div>
 
             <div class="modal-body px-4">
-                <form method="POST">
-                    @csrf
-
+                <form action="{{ route('admin.pengaturan.store') }}" method="POST">
+                 @csrf
                     <div class="mb-3">
                         <label class="form-label">Email</label>
                         <input type="email" name="email"
@@ -151,9 +152,86 @@
                             <option value="super_admin">Super Admin</option>
                         </select>
                     </div>
-
-                    <button class="btn btn-dark w-100">
+                    <button type="submit" class="btn btn-dark w-100 btn-submit-tokoh">
                         Tambah Admin
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ================= MODAL EDIT ADMIN ================= -->
+<div class="modal fade" id="modalEditAdmin" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 rounded-4">
+
+            <div class="modal-header border-0">
+                <h5 class="modal-title fw-bold">Edit Admin</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body px-4">
+                <form id="formEditAdmin" method="POST">
+                    @csrf
+                    @method('PUT')
+
+                    <!-- EMAIL (PK, TIDAK BOLEH DIUBAH) -->
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email"
+                               name="email"
+                               id="editEmail"
+                               class="form-control"
+                               readonly>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Username</label>
+                        <input type="text"
+                               name="username"
+                               id="editUsername"
+                               class="form-control"
+                               required>
+                    </div>
+
+                    <!-- PASSWORD -->
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+
+                        <div class="input-group">
+                            <input type="password"
+                                   name="password"
+                                   id="editPassword"
+                                   class="form-control"
+                                   placeholder="Kosongkan jika tidak diubah">
+
+                            <button type="button"
+                                    class="btn btn-outline-secondary"
+                                    id="toggleEditPassword">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div>
+
+                        <small class="text-muted">
+                            Kosongkan jika tidak ingin mengubah password
+                        </small>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label">Role</label>
+                        <select name="role"
+                                id="editRole"
+                                class="form-select"
+                                required>
+                            <option value="admin">Admin</option>
+                            <option value="super_admin">Super Admin</option>
+                        </select>
+                    </div>
+
+                    <button type="submit"
+                            class="btn btn-dark w-100 btn-submit-tokoh">
+                        Simpan Perubahan
                     </button>
                 </form>
             </div>
@@ -161,4 +239,64 @@
         </div>
     </div>
 </div>
+
+<script>
+document.querySelectorAll('.btn-edit-admin').forEach(btn => {
+    btn.addEventListener('click', function () {
+
+        const email = this.dataset.email;
+
+        document.getElementById('editEmail').value = email;
+        document.getElementById('editUsername').value = this.dataset.username;
+        document.getElementById('editRole').value = this.dataset.role;
+        document.getElementById('editPassword').value = '';
+
+        // set action form (EMAIL sebagai PK)
+        document.getElementById('formEditAdmin').action =
+            `/admin/pengaturan/${encodeURIComponent(email)}`;
+
+        new bootstrap.Modal(
+            document.getElementById('modalEditAdmin')
+        ).show();
+    });
+});
+
+// toggle password (ikon mata)
+document.getElementById('toggleEditPassword').addEventListener('click', function () {
+    const input = document.getElementById('editPassword');
+    const icon = this.querySelector('i');
+
+    if (input.type === 'password') {
+        input.type = 'text';
+        icon.classList.replace('bi-eye', 'bi-eye-slash');
+    } else {
+        input.type = 'password';
+        icon.classList.replace('bi-eye-slash', 'bi-eye');
+    }
+});
+</script>
+
+<form id="formDeleteAdmin" method="POST" style="display:none;">
+    @csrf
+    @method('DELETE')
+</form>
+
+<script>
+document.querySelectorAll('.btn-delete-admin').forEach(btn => {
+    btn.addEventListener('click', function () {
+
+        const email = this.dataset.email;
+
+        if (!confirm(`Yakin ingin menghapus admin ${email}?`)) {
+            return;
+        }
+
+        const form = document.getElementById('formDeleteAdmin');
+        form.action = `/admin/pengaturan/${encodeURIComponent(email)}`;
+        form.submit();
+    });
+});
+</script>
+
+
 @endsection
