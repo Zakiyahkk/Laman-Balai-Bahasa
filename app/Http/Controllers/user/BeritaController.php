@@ -8,11 +8,11 @@ use Illuminate\Support\Facades\Http;
 class BeritaController extends Controller
 {
     /**
-     * Client Supabase (PASTI ada API key)
+     * Client Supabase
      */
     private function supabase()
     {
-        $key = env('SUPABASE_ANON_KEY'); // 🔥 LANGSUNG dari env (tanpa config)
+        $key = env('SUPABASE_ANON_KEY');
 
         if (!$key) {
             abort(500, 'SUPABASE_ANON_KEY tidak ditemukan di .env');
@@ -25,18 +25,25 @@ class BeritaController extends Controller
         ]);
     }
 
+    /**
+     * 🔥 FIX UTAMA:
+     * SEMUA gambar berita diambil dari public/img/publikasi
+     */
     private function publicImageUrl(?string $gambar): ?string
     {
-        if (!$gambar) return null;
+        if (!$gambar) {
+            return asset('img/default.jpg'); // opsional fallback
+        }
 
+        // kalau sudah URL (jarang, tapi aman)
         if (preg_match('/^https?:\/\//i', $gambar)) {
             return $gambar;
         }
 
-        return rtrim(env('SUPABASE_URL'), '/')
-            . '/storage/v1/object/public/gambar/'
-            . ltrim($gambar, '/');
-    }
+        // AMBIL DARI PUBLIC
+        // pastikan tidak dobel slash
+    return asset(ltrim($gambar, '/'));
+}
 
     public function index()
     {
@@ -60,7 +67,7 @@ class BeritaController extends Controller
         return view('user.berita.index', compact('berita'));
     }
 
-    // route: /berita/{slug} -> slug = publikasi_id
+    // /berita/{slug}
     public function show($slug)
     {
         $response = $this->supabase()->get(

@@ -12,7 +12,7 @@ const mmData = [
     {
         type: "Yel-Yel",
         title: "Yel-Yel Balai Bahasa Riau",
-        videoId: "Is1PyvA0MAU",
+        videoId: "Vh_EdTzUN2g",
         desc: "Membawa pesan perubahan menuju Zona Integritas Wilayah Bebas dari Korupsi (ZI-WBK).",
     },
     {
@@ -79,13 +79,20 @@ window.changeVideo = function (dir) {
 // B. Logika Modal Pengumuman (FIX FINAL)
 window.closeDocModal = function () {
     const modal = document.getElementById("docModal");
-    if (modal) modal.classList.remove("active");
-
     const pdfViewer = document.getElementById("pdfViewer");
     const imageViewer = document.getElementById("imageViewer");
 
-    if (pdfViewer) pdfViewer.src = "";
-    if (imageViewer) imageViewer.src = "";
+    if (modal) modal.classList.remove("active");
+
+    if (pdfViewer) {
+        pdfViewer.src = "";
+        pdfViewer.style.display = "none";
+    }
+
+    if (imageViewer) {
+        imageViewer.src = "";
+        imageViewer.style.display = "none";
+    }
 
     document.body.classList.remove("modal-open");
 };
@@ -123,13 +130,26 @@ window.openTokohModal = function (nama, foto, deskripsi, kategori) {
     document.getElementById("mDesc").innerText = deskripsi;
 
     const katBadge = document.getElementById("mKategori");
+
+    // =====================
+    // NORMALISASI KATEGORI
+    // =====================
+    const kat = (kategori || "").toLowerCase();
+
     katBadge.innerText = "Tokoh " + kategori;
 
-    // Reset & Set Kategori Warna
-    katBadge.className = "modal-tag";
-    if (kategori === "bahasa") katBadge.classList.add("bg-blue");
-    else if (kategori === "sastra") katBadge.classList.add("bg-orange");
-    else katBadge.classList.add("bg-green");
+    // Reset class (AMAN)
+    katBadge.classList.remove("bg-blue", "bg-orange", "bg-green");
+    katBadge.classList.add("modal-tag");
+
+    // Set warna berdasarkan isi kategori (fleksibel dari DB)
+    if (kat.includes("bahasa")) {
+        katBadge.classList.add("bg-blue");
+    } else if (kat.includes("sastra")) {
+        katBadge.classList.add("bg-orange");
+    } else {
+        katBadge.classList.add("bg-green");
+    }
 
     modal.classList.add("active");
     document.body.classList.add("modal-open");
@@ -141,14 +161,17 @@ window.closeTokohModal = function () {
 
     document.body.classList.remove("modal-open");
 
-    // 🔥 FIX UTAMA: refresh Swiper setelah modal ditutup
+    // 🔥 AMAN: refresh swiper jika ada
     setTimeout(() => {
-        if (window.tokohSwiper) {
+        if (
+            window.tokohSwiper &&
+            typeof window.tokohSwiper.update === "function"
+        ) {
             window.tokohSwiper.update();
-            window.tokohSwiper.slideTo(window.tokohSwiper.activeIndex, 0);
         }
     }, 50);
 };
+
 /* --- Batas Script: Modal Tokoh Bahasa & Sastra --- */
 
 /* --- 4. INISIALISASI (Dijalankan Saat Halaman Siap) --- */
@@ -171,20 +194,31 @@ document.addEventListener("DOMContentLoaded", function () {
     // 2. Pewarnaan Badge Pengumuman Otomatis
     document.querySelectorAll(".pengumuman-item").forEach((item) => {
         const type = item.getAttribute("data-type");
+
         if (type === "pdf") item.classList.add("type-pdf");
-        else if (type === "image") item.classList.add("type-image");
+        if (type === "image") item.classList.add("type-image");
 
         // Listener klik untuk buka modal pengumuman
         item.addEventListener("click", function () {
             const docUrl = this.getAttribute("data-doc");
             const docType = this.getAttribute("data-type");
+
+            if (!docUrl) {
+                console.error("URL dokumen kosong");
+                return;
+            }
+
             const modal = document.getElementById("docModal");
             const pdfView = document.getElementById("pdfViewer");
             const imgView = document.getElementById("imageViewer");
 
+            // reset
             pdfView.style.display = "none";
             imgView.style.display = "none";
+            pdfView.src = "";
+            imgView.src = "";
 
+            // 🔥 PAKAI URL APA ADANYA (JANGAN DIUBAH)
             if (docType === "pdf") {
                 pdfView.src = docUrl;
                 pdfView.style.display = "block";
@@ -194,7 +228,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             modal.classList.add("active");
-            document.body.classList.add("modal-open"); // ✅ BENAR
+            document.body.classList.add("modal-open");
         });
     });
     // 3. Fasilitas Slider Logic

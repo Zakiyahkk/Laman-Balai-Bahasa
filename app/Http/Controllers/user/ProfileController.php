@@ -78,16 +78,93 @@ class ProfileController extends Controller
     // =========================
     public function strukturOrganisasi()
     {
-        return view('user.profil.struktur-organisasi');
+        $baseUrl = rtrim(env('SUPABASE_URL'), '/') . '/rest/v1/struktur_organisasi';
+    
+        $response = Http::withHeaders([
+            'apikey'        => env('SUPABASE_ANON_KEY'),
+            'Authorization' => 'Bearer ' . env('SUPABASE_ANON_KEY'),
+            'Accept'        => 'application/json',
+        ])->get($baseUrl, [
+            'select' => '*',
+            'status' => 'eq.true',
+            'limit'  => 1,
+        ])->throw()->json();
+    
+        abort_if(empty($response), 404);
+    
+        $struktur = $response[0];
+    
+        // helper url foto
+        $fotoUrl = function ($path) {
+            return $path
+                ? asset($path)
+                : asset('img/default-user.png');
+        };
+    
+        $kepala = [
+            'nama'    => $struktur['kepala_balai']['nama'] ?? '',
+            'jabatan' => $struktur['kepala_balai']['jabatan'] ?? '',
+            'foto'    => $fotoUrl($struktur['kepala_balai']['foto'] ?? null),
+        ];
+    
+        $kasubbag = [
+            'nama'    => $struktur['kasubbag_umum']['nama'] ?? '',
+            'jabatan' => $struktur['kasubbag_umum']['jabatan'] ?? '',
+            'foto'    => $fotoUrl($struktur['kasubbag_umum']['foto'] ?? null),
+        ];
+    
+        return view('user.profil.struktur-organisasi', compact(
+            'kepala',
+            'kasubbag'
+        ));
     }
 
     // =========================
     // PEGAWAI
     // =========================
     public function pegawai()
-    {
-        return view('user.profil.pegawai');
-    }
+{
+    $baseUrl = rtrim(env('SUPABASE_URL'), '/') . '/rest/v1/pegawai';
+
+    $data = Http::withHeaders([
+        'apikey' => env('SUPABASE_ANON_KEY'),
+        'Authorization' => 'Bearer ' . env('SUPABASE_ANON_KEY'),
+        'Accept' => 'application/json',
+    ])->get($baseUrl, [
+        'select' => '*',
+        'order' => 'created_at.asc',
+    ])->throw()->json();
+
+    // Kepala Balai
+    $kepala = collect($data)->first(function ($item) {
+        return str_contains(strtolower($item['jabatan']), 'kepala');
+    });
+
+    // Kasubbag
+    $kasubbag = collect($data)->first(function ($item) {
+        return str_contains(strtolower($item['jabatan']), 'kasubbag');
+    });
+
+    // Pegawai lain
+    $anggota = collect($data)->filter(function ($item) {
+        return !str_contains(strtolower($item['jabatan']), 'kepala')
+            && !str_contains(strtolower($item['jabatan']), 'kasubbag');
+    })->values();
+
+    // URL foto
+    $mapFoto = function ($item) {
+        $item['foto_url'] = $item['foto']
+            ? asset($item['foto'])
+            : asset('img/default-user.png');
+        return $item;
+    };
+
+    return view('user.profil.pegawai', [
+        'kepala'   => $kepala ? $mapFoto($kepala) : null,
+        'kasubbag' => $kasubbag ? $mapFoto($kasubbag) : null,
+        'anggota'  => $anggota->map($mapFoto),
+    ]);
+}
 
     // =========================
     // LOGO BBP RIAU

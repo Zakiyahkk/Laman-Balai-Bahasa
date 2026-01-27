@@ -11,39 +11,56 @@
         <div class="hero-bg">
             <img src="https://ppidbbpriau.kemendikdasmen.go.id/images/gedung-balai.jpeg" alt="Gedung Balai">
         </div>
+
         <div class="container profil-container">
 
             <!-- Header -->
             <div class="profil-header hero-header">
                 <h1>Pegawai</h1>
-                <p class="profil-subtitle">
-                    Balai Bahasa Provinsi Riau
-                </p>
+                <p class="profil-subtitle">Balai Bahasa Provinsi Riau</p>
             </div>
 
-            <!-- Grid Pegawai -->
+            {{-- ===================== --}}
+            {{-- PIMPINAN / STRATEGIS --}}
+            {{-- ===================== --}}
+            <div class="pegawai-pimpinan">
+                @if ($kepala)
+                    <div class="pegawai-card glass-card pegawai-kepala">
+                        <div class="foto-pegawai">
+                            <img src="{{ $kepala['foto_url'] }}" alt="{{ $kepala['nama'] }}">
+                        </div>
+                        <h4>{{ $kepala['nama'] }}</h4>
+                        <p>{{ $kepala['jabatan'] }}</p>
+                    </div>
+                @endif
+
+                @if ($kasubbag)
+                    <div class="pegawai-card glass-card pegawai-kasubbag">
+                        <div class="foto-pegawai">
+                            <img src="{{ $kasubbag['foto_url'] }}" alt="{{ $kasubbag['nama'] }}">
+                        </div>
+                        <h4>{{ $kasubbag['nama'] }}</h4>
+                        <p>{{ $kasubbag['jabatan'] }}</p>
+                    </div>
+                @endif
+            </div>
+
+            {{-- ===================== --}}
+            {{-- PEGAWAI LAIN --}}
+            {{-- ===================== --}}
             <div class="pegawai-grid">
-
-                <div class="pegawai-card">
-                    <img src="{{ asset('images/pegawai/kepala.png') }}" alt="Kepala Balai">
-                    <h4>Nama Kepala Balai</h4>
-                    <p>Kepala Balai Bahasa</p>
-                </div>
-
-                <div class="pegawai-card">
-                    <img src="{{ asset('images/pegawai/tu.png') }}" alt="Kasubbag TU">
-                    <h4>Nama Kasubbag TU</h4>
-                    <p>Kepala Subbagian Tata Usaha</p>
-                </div>
-
-                <div class="pegawai-card">
-                    <img src="{{ asset('images/pegawai/fungsional.png') }}" alt="JF">
-                    <h4>Nama Pegawai</h4>
-                    <p>Jabatan Fungsional</p>
-                </div>
-
+                @foreach ($anggota as $item)
+                    <div class="pegawai-card glass-card">
+                        <div class="foto-pegawai">
+                            <img src="{{ $item['foto_url'] }}" alt="{{ $item['nama'] }}">
+                        </div>
+                        <h4>{{ $item['nama'] }}</h4>
+                        <p>{{ $item['jabatan'] }}</p>
+                    </div>
+                @endforeach
             </div>
 
         </div>
+
     </section>
 @endsection
