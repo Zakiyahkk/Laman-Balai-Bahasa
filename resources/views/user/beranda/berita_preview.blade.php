@@ -8,46 +8,47 @@
         <div class="berita-grid">
 
             @forelse ($berita ?? [] as $item)
-            <div class="berita-card">
-                <div class="berita-img">
-                    <span class="badge">BERITA</span>
+                <div class="berita-card">
 
-                    <a href="{{ route('berita.show', $item['publikasi_id']) }}">
-                        <img src="{{ $item['gambar_url'] ?? asset('img/img1.png') }}"
-                            alt="{{ $item['judul'] ?? 'Berita' }}">
-                    </a>
-                </div>
+                    <div class="berita-img">
+                        <span class="badge">BERITA</span>
 
-                <div class="berita-body">
-                    <a href="{{ route('berita.show', $item['publikasi_id']) }}">
-                        <h4>{{ $item['judul'] ?? '-' }}</h4>
-                    </a>
+                        <a href="{{ route('berita.show', $item['publikasi_id']) }}">
+                            <img src="{{ $item['gambar_url'] }}" alt="{{ $item['judul'] ?? 'Berita' }}" loading="lazy"
+                                onerror="this.onerror=null;this.src='{{ asset('img/default.jpg') }}';">
+                        </a>
+                    </div>
 
-                    <p>
-                        {{ \Illuminate\Support\Str::limit(strip_tags($item['isi'] ?? ''), 120) }}
-                    </p>
+                    <div class="berita-body">
+                        <a href="{{ route('berita.show', $item['publikasi_id']) }}">
+                            <h4>{{ $item['judul'] ?? '-' }}</h4>
+                        </a>
 
-                    <div class="berita-meta">
-                        <span>
-                            @if (!empty($item['tanggal']))
-                            {{ \Carbon\Carbon::parse($item['tanggal'])->translatedFormat('d F Y') }}
-                            @else
-                            -
-                            @endif
-                        </span>
+                        <p>
+                            {{ \Illuminate\Support\Str::limit(strip_tags($item['isi'] ?? ''), 120) }}
+                        </p>
 
-                        <div class="meta-right">
-                            <span>{{ $item['penulis'] ?? 'Admin' }}</span>
-                            <span class="views">
-                                <i class="fa-regular fa-eye"></i>
+                        <div class="berita-meta">
+                            <span>
+                                @if (!empty($item['tanggal']))
+                                    {{ \Carbon\Carbon::parse($item['tanggal'])->translatedFormat('d F Y') }}
+                                @else
+                                    -
+                                @endif
                             </span>
-                            {{ $item['pembaca'] ?? 0 }}
+
+                            <div class="meta-right">
+                                <span>{{ $item['penulis'] ?? 'Admin' }}</span>
+                                <span class="views">
+                                    <i class="fa-regular fa-eye"></i> {{ $item['pembaca'] ?? 0 }}
+                                </span>
+                            </div>
                         </div>
                     </div>
+
                 </div>
-            </div>
             @empty
-            <p style="text-align:center; width:100%;">Belum ada berita.</p>
+                <p style="text-align:center; width:100%;">Belum ada berita.</p>
             @endforelse
 
         </div>

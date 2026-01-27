@@ -15,11 +15,13 @@
 
                 @forelse ($berita as $item)
                     <div class="berita-card">
+
                         <div class="berita-img">
                             <span class="badge">BERITA</span>
 
                             <a href="{{ route('berita.show', $item['publikasi_id']) }}">
-                                <img src="{{ $item['gambar_url'] ?? asset('img/img1.png') }}" alt="{{ $item['judul'] }}">
+                                <img src="{{ $item['gambar_url'] }}" alt="{{ $item['judul'] }}" loading="lazy"
+                                    onerror="this.src='{{ asset('img/default.jpg') }}'">
                             </a>
                         </div>
 
@@ -46,9 +48,10 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 @empty
-                    <p style="text-align:center;">Belum ada berita.</p>
+                    <p style="text-align:center;color:#94a3b8;">Belum ada berita.</p>
                 @endforelse
 
             </div>

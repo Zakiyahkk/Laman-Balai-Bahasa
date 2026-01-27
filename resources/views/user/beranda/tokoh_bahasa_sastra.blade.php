@@ -18,70 +18,25 @@
             <div class="swiper tokohSlider">
                 <div class="swiper-wrapper">
 
-                    <div class="swiper-slide">
-                        <div class="tokoh-card"
-                            onclick="openTokohModal('Raja Ali Haji', 'img/maskot-serindit.png', 'Pahlawan Nasional di bidang bahasa. Terkenal dengan karya Gurindam Dua Belas.', 'bahasa')">
-                            <div class="card-img-wrapper">
-                                <img src="img/maskot-serindit.png" alt="Raja Ali Haji">
-                            </div>
-                            <div class="tokoh-info">
-                                <h3>Raja Ali Haji</h3>
-                                <p>Bapak Bahasa Indonesia</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <div class="tokoh-card"
-                            onclick="openTokohModal('Soeman Hs', 'img/maskot-serindit.png', 'Sastrawan pelopor angkatan Balai Pustaka. Bapak cerita detektif Indonesia.', 'sastra')">
-                            <div class="card-img-wrapper">
-                                <img src="img/maskot-serindit.png" alt="Soeman Hs">
-                            </div>
-                            <div class="tokoh-info">
-                                <h3>Soeman Hs</h3>
-                                <p>Pelopor Cerita Detektif</p>
+                    @foreach ($tokoh as $item)
+                        <div class="swiper-slide">
+                            <div class="tokoh-card"
+                                onclick="openTokohModal(
+                                    '{{ e($item['nama']) }}',
+                                    '{{ $item['foto_url'] }}',
+                                    '{{ e($item['deskripsi']) }}',
+                                    '{{ e($item['kategori']) }}'
+                                )">
+                                <div class="card-img-wrapper">
+                                    <img src="{{ $item['foto_url'] }}" alt="{{ $item['nama'] }}">
+                                </div>
+                                <div class="tokoh-info">
+                                    <h3>{{ $item['nama'] }}</h3>
+                                    <p>{{ $item['deskripsi'] }}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <div class="tokoh-card"
-                            onclick="openTokohModal('Chairil Anwar', 'img/maskot-serindit.png', 'Penyair terkemuka Indonesia. Pelopor Angkatan 45.', 'sastra')">
-                            <div class="card-img-wrapper">
-                                <img src="img/maskot-serindit.png" alt="Chairil Anwar">
-                            </div>
-                            <div class="tokoh-info">
-                                <h3>Chairil Anwar</h3>
-                                <p>Si Binatang Jalang</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <div class="tokoh-card"
-                            onclick="openTokohModal('Sutan Takdir A.', 'img/maskot-serindit.png', 'Sastrawan dan ahli tata bahasa Indonesia.', 'bahasa')">
-                            <div class="card-img-wrapper">
-                                <img src="img/maskot-serindit.png" alt="Sutan Takdir">
-                            </div>
-                            <div class="tokoh-info">
-                                <h3>Sutan Takdir A.</h3>
-                                <p>Tokoh Pujangga Baru</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <div class="tokoh-card"
-                            onclick="openTokohModal('Tenas Effendy', 'img/maskot-serindit.png', 'Budayawan Riau yang menjaga Tunjuk Ajar Melayu.', 'budaya')">
-                            <div class="card-img-wrapper">
-                                <img src="img/maskot-serindit.png" alt="Tenas Effendy">
-                            </div>
-                            <div class="tokoh-info">
-                                <h3>Tenas Effendy</h3>
-                                <p>Tunjuk Ajar Melayu</p>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
 
                 </div>
             </div>
@@ -90,14 +45,19 @@
     </div>
 </section>
 
+{{-- ===================== --}}
+{{-- MODAL TOKOH --}}
+{{-- ===================== --}}
 <div class="custom-modal" id="modalTokoh">
     <div class="modal-backdrop" onclick="closeTokohModal()"></div>
     <div class="modal-panel">
 
-        <button class="close-btn" onclick="closeTokohModal()"><i class="fa-solid fa-xmark"></i></button>
+        <button class="close-btn" onclick="closeTokohModal()">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
 
         <div class="modal-left">
-            <img id="mFoto" src="" alt="Foto">
+            <img id="mFoto" src="" alt="Foto Tokoh">
         </div>
 
         <div class="modal-right">
@@ -108,7 +68,49 @@
                 <p id="mDesc" class="modal-desc"></p>
             </div>
         </div>
+
     </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+    // =====================
+    // SWIPER TOKOH
+    // =====================
+    const tokohSwiper = new Swiper(".tokohSlider", {
+        slidesPerView: 1.2,
+        spaceBetween: 20,
+        loop: true,
+        navigation: {
+            nextEl: ".tokoh-next",
+            prevEl: ".tokoh-prev",
+        },
+        breakpoints: {
+            640: {
+                slidesPerView: 2
+            },
+            1024: {
+                slidesPerView: 4
+            },
+        },
+    });
+
+    // =====================
+    // MODAL TOKOH
+    // =====================
+    function openTokohModal(nama, foto, desc, kategori) {
+        document.getElementById("mNama").innerText = nama;
+        document.getElementById("mFoto").src = foto;
+        document.getElementById("mDesc").innerText = desc;
+        document.getElementById("mKategori").innerText = kategori;
+
+        document.getElementById("modalTokoh").classList.add("active");
+        document.body.classList.add("modal-open");
+    }
+
+    function closeTokohModal() {
+        document.getElementById("modalTokoh").classList.remove("active");
+        document.body.classList.remove("modal-open");
+    }
+</script>
