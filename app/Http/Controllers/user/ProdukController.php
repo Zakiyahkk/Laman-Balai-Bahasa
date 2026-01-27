@@ -22,11 +22,68 @@ class ProdukController extends Controller
         return view('user.produk.majalah');
     }
 
-    public function Sembari()
+    public function sembari(Request $request)
     {
-        return view('user.produk.sembari');
+        // ===============================
+        // DOKUMEN CONTOH (DUMMY)
+        // ===============================
+        $docs = collect([
+            [
+                'judul' => 'Pedoman Penggunaan Aplikasi SEMBARI Tahun 2025',
+                'tahun' => 2025,
+                'tipe'  => 'pdf',
+                'file'  => 'sembari/sembari-pedoman-2025.pdf',
+            ],
+            [
+                'judul' => 'Laporan Implementasi SEMBARI Balai Bahasa Provinsi Riau Tahun 2024',
+                'tahun' => 2024,
+                'tipe'  => 'pdf',
+                'file'  => 'sembari/sembari-laporan-2024.pdf',
+            ],
+            [
+                'judul' => 'Dokumen Teknis Sistem Manajemen Berbasis Riset (SEMBARI)',
+                'tahun' => 2023,
+                'tipe'  => 'pdf',
+                'file'  => 'sembari/sembari-teknis-2023.pdf',
+            ],
+            [
+                'judul' => 'Panduan Admin SEMBARI',
+                'tahun' => 2022,
+                'tipe'  => 'pdf',
+                'file'  => 'sembari/sembari-panduan-admin-2022.pdf',
+            ],
+        ]);
+    
+        // ===============================
+        // FILTER
+        // ===============================
+        $q = trim((string) $request->query('q', ''));
+        $year = $request->query('year');
+    
+        $filtered = $docs
+            ->when($q !== '', fn ($c) =>
+                $c->filter(fn ($d) =>
+                    str_contains(
+                        strtolower($d['judul']),
+                        strtolower($q)
+                    )
+                )
+            )
+            ->when($year, fn ($c) =>
+                $c->where('tahun', (int) $year)
+            )
+            ->values();
+    
+        $years = $docs->pluck('tahun')->unique()->sortDesc()->values();
+    
+        return view('user.produk.sembari', [
+            'docs' => $filtered,
+            'years' => $years,
+            'q' => $q,
+            'selectedYear' => $year,
+        ]);
     }
-
+    
     public function petaPembinaanBahasa()
     {
         return view('user.produk.peta-pembinaan-bahasa');

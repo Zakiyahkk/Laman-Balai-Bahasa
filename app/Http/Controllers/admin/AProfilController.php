@@ -173,43 +173,25 @@ class AProfilController extends Controller
             'foto'    => 'required|image|max:2048',
         ]);
 
-        $bucket = env('SUPABASE_BUCKET'); // gambar
+        /* ================= SIMPAN FOTO KE LARAVEL ================= */
+        $file = $request->file('foto');
+        $namaFile = Str::uuid() . '.' . $file->getClientOriginalExtension();
 
-        /* ================= UPLOAD FOTO ================= */
-        $file     = $request->file('foto');
-        $filename = 'pegawai/' . Str::uuid() . '.' . $file->getClientOriginalExtension();
+        $file->move(public_path('img/pegawai'), $namaFile);
 
-        $upload = Http::withHeaders([
-        'apikey'        => env('SUPABASE_SERVICE_ROLE_KEY'),
-        'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
-    ])->withBody(
-        file_get_contents($file),
-        $file->getMimeType()
-    )->post(
-        rtrim(env('SUPABASE_URL'), '/') .
-        "/storage/v1/object/{$bucket}/{$filename}"
-    );
+        $fotoPath = 'img/pegawai/' . $namaFile;
 
-        if ($upload->failed()) {
-            return back()->with('error', 'Gagal upload foto ke Supabase');
-        }
-
-        /* ================= URL PUBLIK FOTO ================= */
-        $fotoUrl = rtrim(env('SUPABASE_URL'), '/') .
-                "/storage/v1/object/public/{$bucket}/{$filename}";
-
-        /* ================= SIMPAN KE TABEL PEGAWAI ================= */
+        /* ================= SIMPAN KE SUPABASE (DB SAJA) ================= */
         $insert = Http::withHeaders([
             'apikey'        => env('SUPABASE_SERVICE_ROLE_KEY'),
             'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
             'Content-Type'  => 'application/json',
-            'Prefer'        => 'return=minimal',
         ])->post(
             rtrim(env('SUPABASE_URL'), '/') . '/rest/v1/pegawai',
             [
                 'nama'    => $request->nama,
                 'jabatan' => $request->jabatan,
-                'foto'    => $fotoUrl,
+                'foto'    => $fotoPath,
             ]
         );
 
@@ -222,7 +204,7 @@ class AProfilController extends Controller
             ->with('success', 'Pegawai berhasil ditambahkan');
     }
 
-        public function updatePegawai(Request $request, $id)
+    public function updatePegawai(Request $request, $id)
     {
         $request->validate([
             'nama'    => 'required|string',
@@ -236,50 +218,37 @@ class AProfilController extends Controller
             'Accept'        => 'application/json',
         ];
 
-        /* ================= AMBIL DATA PEGAWAI LAMA ================= */
+        /* ================= DATA LAMA ================= */
         $pegawaiLama = Http::withHeaders($headers)->get(
             rtrim(env('SUPABASE_URL'), '/') .
-            "/rest/v1/pegawai?pegawai_id=eq.{$id}&select=pegawai_id,nama,jabatan,foto"
+            "/rest/v1/pegawai?pegawai_id=eq.{$id}&select=foto,jabatan"
         )->json()[0] ?? null;
 
-        /* ================= CEK PERUBAHAN JABATAN STRATEGIS ================= */
-        $jabatanLama = $pegawaiLama['jabatan'] ?? null;
-        $jabatanBaru = $request->jabatan;
-
-
-        /* ================= SIAPKAN DATA UPDATE ================= */
-        $data = [
+        $dataUpdate = [
             'nama'    => $request->nama,
-            'jabatan' => $jabatanBaru,
+            'jabatan' => $request->jabatan,
         ];
 
-        // JIKA GANTI FOTO
+        /* ================= JIKA GANTI FOTO ================= */
         if ($request->hasFile('foto')) {
 
-            // 🔥 HAPUS FOTO LAMA (JIKA ADA)
-            $this->deleteFotoFromSupabase($pegawaiLama['foto'] ?? null);
+            // hapus foto lama lokal
+            if (!empty($pegawaiLama['foto'])) {
+                $oldPath = public_path($pegawaiLama['foto']);
+                if (file_exists($oldPath)) {
+                    unlink($oldPath);
+                }
+            }
 
-            // UPLOAD FOTO BARU
-            $bucket = env('SUPABASE_BUCKET');
-            $file   = $request->file('foto');
-            $name   = 'pegawai/' . Str::uuid() . '.' . $file->getClientOriginalExtension();
+            // simpan foto baru
+            $file = $request->file('foto');
+            $namaFile = Str::uuid() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('img/pegawai'), $namaFile);
 
-            Http::withHeaders([
-                'apikey'        => env('SUPABASE_SERVICE_ROLE_KEY'),
-                'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
-            ])->withBody(
-                file_get_contents($file),
-                $file->getMimeType()
-            )->post(
-                rtrim(env('SUPABASE_URL'), '/') .
-                "/storage/v1/object/{$bucket}/{$name}"
-            );
-
-            $data['foto'] = rtrim(env('SUPABASE_URL'), '/') .
-                            "/storage/v1/object/public/{$bucket}/{$name}";
+            $dataUpdate['foto'] = 'img/pegawai/' . $namaFile;
         }
 
-        /* ================= UPDATE KE SUPABASE ================= */
+        /* ================= UPDATE DB SUPABASE ================= */
         Http::withHeaders([
             'apikey'        => env('SUPABASE_SERVICE_ROLE_KEY'),
             'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
@@ -287,68 +256,47 @@ class AProfilController extends Controller
         ])->patch(
             rtrim(env('SUPABASE_URL'), '/') .
             "/rest/v1/pegawai?pegawai_id=eq.{$id}",
-            $data
+            $dataUpdate
         );
 
-        /* ================= SNAPSHOT JIKA STRATEGIS ================= */
-        $jabatanStrategis = ['Kepala Balai', 'Kasubbag Umum'];
-
-        if (
-            in_array($jabatanLama, $jabatanStrategis) ||
-            in_array($jabatanBaru, $jabatanStrategis)
-        ) {
-            $this->simpanSnapshotStruktur();
-        }
-        return redirect()->route('admin.profil.pegawai')
-            ->with('success', 'Data berhasil diperbarui');
+        return redirect()
+            ->route('admin.profil.pegawai')
+            ->with('success', 'Data pegawai berhasil diperbarui');
     }
 
     public function destroyPegawai($id)
     {
-        // Ambil data pegawai dulu
-        $get = Http::withHeaders([
+        $headers = [
             'apikey'        => env('SUPABASE_SERVICE_ROLE_KEY'),
             'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
             'Accept'        => 'application/json',
-        ])->get(
+        ];
+
+        $pegawai = Http::withHeaders($headers)->get(
             rtrim(env('SUPABASE_URL'), '/') .
             "/rest/v1/pegawai?pegawai_id=eq.{$id}&select=foto"
-        );
-
-        $pegawai = $get->json()[0] ?? null;
+        )->json()[0] ?? null;
 
         if (!$pegawai) {
-            return redirect()->route('admin.profil.pegawai')
-                ->with('error', 'Data pegawai tidak ditemukan');
+            return back()->with('error', 'Data pegawai tidak ditemukan');
         }
 
-        /* ================= HAPUS FOTO (CARA PUBLIKASI) ================= */
+        /* ================= HAPUS FOTO LOKAL ================= */
         if (!empty($pegawai['foto'])) {
-            $path = str_replace(
-                rtrim(env('SUPABASE_URL'), '/') .
-                '/storage/v1/object/public/' . env('SUPABASE_BUCKET') . '/',
-                '',
-                $pegawai['foto']
-            );
-
-            Http::withHeaders([
-                'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
-            ])->delete(
-                rtrim(env('SUPABASE_URL'), '/') .
-                '/storage/v1/object/' . env('SUPABASE_BUCKET') . '/' . $path
-            );
+            $path = public_path($pegawai['foto']);
+            if (file_exists($path)) {
+                unlink($path);
+            }
         }
 
-        /* ================= HAPUS DATA DI TABEL ================= */
-        Http::withHeaders([
-            'apikey'        => env('SUPABASE_SERVICE_ROLE_KEY'),
-            'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
-        ])->delete(
+        /* ================= HAPUS DATA DB ================= */
+        Http::withHeaders($headers)->delete(
             rtrim(env('SUPABASE_URL'), '/') .
             "/rest/v1/pegawai?pegawai_id=eq.{$id}"
         );
 
-        return redirect()->route('admin.profil.pegawai')
+        return redirect()
+            ->route('admin.profil.pegawai')
             ->with('success', 'Pegawai berhasil dihapus');
     }
 
@@ -490,12 +438,20 @@ class AProfilController extends Controller
             ];
 
             if ($request->hasFile('kasubbag_foto')) {
-                $this->deleteFotoFromSupabase($old['foto'] ?? null);
+
+                // HAPUS FOTO LAMA DI LARAVEL
+                if (!empty($old['foto'])) {
+                    $oldPath = public_path($old['foto']);
+                    if (file_exists($oldPath)) {
+                        unlink($oldPath);
+                    }
+                }
+
+                // SIMPAN FOTO BARU KE LARAVEL
                 $data['foto'] = $this->uploadFoto(
                     $request->file('kasubbag_foto')
                 );
             }
-
             Http::withHeaders($headers)->patch(
                 rtrim(env('SUPABASE_URL'), '/') .
                 "/rest/v1/pegawai?pegawai_id=eq.{$request->kasubbag_id}",
@@ -514,44 +470,15 @@ class AProfilController extends Controller
 
         private function uploadFoto($file)
         {
-            $bucket = env('SUPABASE_BUCKET');
-            $name = 'pegawai/' . Str::uuid() . '.' . $file->getClientOriginalExtension();
+            $path = public_path('img/pegawai');
 
-            Http::withHeaders([
-                'apikey'        => env('SUPABASE_SERVICE_ROLE_KEY'),
-                'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
-            ])->withBody(
-                file_get_contents($file),
-                $file->getMimeType()
-            )->post(
-                rtrim(env('SUPABASE_URL'), '/') .
-                "/storage/v1/object/{$bucket}/{$name}"
-            );
+            if (!file_exists($path)) {
+                mkdir($path, 0755, true);
+            }
 
-            return rtrim(env('SUPABASE_URL'), '/') .
-                "/storage/v1/object/public/{$bucket}/{$name}";
-    }
+            $name = Str::uuid() . '.' . $file->getClientOriginalExtension();
+            $file->move($path, $name);
 
-    private function deleteFotoFromSupabase(?string $fotoUrl)
-    {
-        if (!$fotoUrl) return;
-
-        $bucket = env('SUPABASE_BUCKET');
-
-        $path = str_replace(
-            rtrim(env('SUPABASE_URL'), '/') .
-            "/storage/v1/object/public/{$bucket}/",
-            '',
-            $fotoUrl
-        );
-
-        Http::withHeaders([
-            'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
-        ])->delete(
-            rtrim(env('SUPABASE_URL'), '/') .
-            "/storage/v1/object/{$bucket}/{$path}"
-        );
-    }
-
-
+            return 'img/pegawai/' . $name;
+        }
 }

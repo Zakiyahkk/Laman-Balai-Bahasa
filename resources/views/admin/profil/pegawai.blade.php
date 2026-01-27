@@ -16,7 +16,7 @@
     <div class="flex-grow-1">
         <div class="search-wrapper-inside">
             <i class="bi bi-search search-icon"></i>
-            <form method="GET" action="{{ route('admin.profil.pegawai') }}" class="m-0">
+            <form method="GET" action="{{ route('admin.profil.pegawai') }}" class="flex-grow-1 m-0">
                 <input type="text"
                        name="search"
                        placeholder="Cari pegawai berdasarkan nama atau jabatan"
@@ -51,7 +51,7 @@
                 <div class="card pegawai-card p-3 text-center h-100">
                     <div class="avatar-wrapper mx-auto mb-2">
                 @if($kepalaBalai ?? null)
-                    <img src="{{ $kepalaBalai['foto'] }}" class="avatar-img">
+                    <img src="{{ asset($kepalaBalai['foto']) }}" class="avatar-img">
                 @else
                     <div class="avatar-img d-flex align-items-center justify-content-center bg-light">
                         <i class="bi bi-person fs-1 text-muted"></i>
@@ -71,7 +71,7 @@
 
                     <div class="avatar-wrapper mx-auto mb-2">
                         @if($kasubbagUmum)
-                            <img src="{{ $kasubbagUmum['foto'] }}" class="avatar-img">
+                            <img src="{{ asset($kasubbagUmum['foto']) }}" class="avatar-img">
                         @else
                             <div class="avatar-img d-flex align-items-center justify-content-center bg-light">
                                 <i class="bi bi-person fs-1 text-muted"></i>
@@ -97,7 +97,7 @@
     <div class="card pegawai-card p-3 text-center">
         <div>
             <div class="avatar-wrapper mx-auto mb-2">
-                <img src="{{ $item['foto'] }}" class="avatar-img">
+                <img src="{{ asset($item['foto']) }}" class="avatar-img">
             </div>
             <div class="fw-semibold text-limit-2">{{ $item['nama'] }}</div>
             <div class="text-muted small text-limit-2">{{ $item['jabatan'] }}</div>
@@ -194,8 +194,7 @@ if (str_contains($msg,'hapus')) {
     </div>
      <div class="mb-2 text-center">
         @if(!empty($kepalaBalai['foto']))
-            <img id="previewKepala"
-                 src="{{ $kepalaBalai['foto'] }}"
+            <img id="previewKepala" src="{{ asset($kepalaBalai['foto']) }}"
                  style="width:96px;height:96px;border-radius:50%;object-fit:cover">
         @else
             <i id="previewKepala"
@@ -226,8 +225,7 @@ if (str_contains($msg,'hapus')) {
     </div>
     <div class="mb-2 text-center">
         @if(!empty($kasubbagUmum['foto']))
-            <img id="previewKasubbag"
-                 src="{{ $kasubbagUmum['foto'] }}"
+            <img id="previewKasubbag" src="{{ asset($kasubbagUmum['foto']) }}"
                  style="width:96px;height:96px;border-radius:50%;object-fit:cover">
         @else
             <i id="previewKasubbag"
@@ -361,7 +359,7 @@ document.querySelectorAll('.btn-edit-pegawai').forEach(btn => {
         e.stopPropagation();
         document.getElementById('editNama').value    = this.dataset.nama;
         document.getElementById('editJabatan').value = this.dataset.jabatan;
-        document.getElementById('previewFoto').src   = this.dataset.foto;
+        document.getElementById('previewFoto').src = '/' + this.dataset.foto;
         document.getElementById('formEditPegawai').action =
             `/admin/profil/pegawai/${this.dataset.id}`;
         bootstrap.Modal

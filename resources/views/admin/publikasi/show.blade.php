@@ -86,13 +86,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 @if($ext === 'pdf')
                     <!-- Jika PDF → preview PDF -->
-                    <iframe src="{{ $data->file }}" class="w-100 rounded border mb-3" style="height:450px;"></iframe>
+                    <iframe src="{{ asset($data->file) }}" class="w-100 rounded border mb-3" style="height:450px;"></iframe>
                 @else
                     @if($data->gambar)
                         <!-- Jika bukan PDF dan ada gambar → preview gambar -->
                         <div class="row mx-n4 mb-4">
                             <div class="col-12 px-20">
-                                <img src="{{ $data->gambar }}" class="publication-image-wide">
+                                <img src="{{ asset($data->gambar) }}" class="publication-image-wide">
                             </div>
                         </div>
                     @else
@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <!-- ALERT KUNING (link klik buka file) hanya jika file bukan PDF -->
                 @if($ext !== 'pdf')
                 <div class="mt-3">
-                    <a href="{{ $data->file }}" target="_blank"
+                    <a href="{{ asset($data->file) }}" target="_blank"
                     class="alert alert-warning small rounded border d-block text-decoration-none text-dark">
                         <strong>File terlampir:</strong> {{ basename($data->file) }}
                         <br><small>(Klik untuk membuka file)</small>
@@ -129,7 +129,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <!-- Jika hanya ada gambar → preview gambar -->
                 <div class="row mx-n4 mb-4">
                     <div class="col-12 px-20">
-                        <img src="{{ $data->gambar }}" class="publication-image-wide">
+                        <img src="{{ asset($data->gambar) }}" class="publication-image-wide">
                     </div>
                 </div>
 

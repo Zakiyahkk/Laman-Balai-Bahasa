@@ -1,20 +1,21 @@
-<section class="section berita-terbaru artikel-preview">
+<section class="section berita-terbaru artikel-preview" style="margin-top: 10px;">
     <div class="container">
 
         <h2 class="judul-center">
-            Berita <span>Terbaru</span>
+            Berita <span style="color: #0ea5e9;">Terbaru</span>
         </h2>
 
         <div class="berita-grid">
 
             @forelse ($berita ?? [] as $item)
                 <div class="berita-card">
+
                     <div class="berita-img">
                         <span class="badge">BERITA</span>
 
                         <a href="{{ route('berita.show', $item['publikasi_id']) }}">
-                            <img src="{{ $item['gambar_url'] ?? asset('img/img1.png') }}"
-                                alt="{{ $item['judul'] ?? 'Berita' }}">
+                            <img src="{{ $item['gambar_url'] }}" alt="{{ $item['judul'] ?? 'Berita' }}" loading="lazy"
+                                onerror="this.onerror=null;this.src='{{ asset('img/default.jpg') }}';">
                         </a>
                     </div>
 
@@ -39,12 +40,12 @@
                             <div class="meta-right">
                                 <span>{{ $item['penulis'] ?? 'Admin' }}</span>
                                 <span class="views">
-                                    <i class="fa-regular fa-eye"></i>
+                                    <i class="fa-regular fa-eye"></i> {{ $item['pembaca'] ?? 0 }}
                                 </span>
-                                {{ $item['pembaca'] ?? 0 }}
                             </div>
                         </div>
                     </div>
+
                 </div>
             @empty
                 <p style="text-align:center; width:100%;">Belum ada berita.</p>

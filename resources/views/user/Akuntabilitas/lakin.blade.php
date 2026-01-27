@@ -32,7 +32,6 @@
             <form class="ak-tools" method="GET" action="{{ url('/akuntabilitas/lakin') }}">
                 <div class="ak-tools-row">
                     <div class="ak-search">
-                        <span class="ak-search-icon">🔎</span>
                         <input type="text" name="q" value="{{ $q ?? '' }}" placeholder="Masukkan kata kunci">
                     </div>
 

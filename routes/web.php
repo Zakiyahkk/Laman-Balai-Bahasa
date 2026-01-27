@@ -8,6 +8,7 @@ use App\Http\Controllers\User\ProdukController;
 use App\Http\Controllers\User\PpidController;
 use App\Http\Controllers\User\SurveiController;
 use App\Http\Controllers\User\AkuntabilitasController;
+use App\Http\Controllers\User\LayananController;
 use App\Http\Controllers\User\ZiwbkController;
 use App\Http\Controllers\User\WbsController;
 use App\Http\Controllers\Admin\AdminAuthController;
@@ -15,7 +16,9 @@ use App\Http\Controllers\Admin\GaleriController;
 use App\Http\Controllers\Admin\PublikasiController;
 use App\Http\Controllers\Admin\AProfilController;
 use App\Http\Controllers\Admin\AAkuntabilitasController;
+use App\Http\Controllers\Admin\ATokohController;
 use App\Http\Controllers\User\ArtikelController;
+use App\Http\Controllers\Admin\APengaturanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +55,16 @@ Route::prefix('akuntabilitas')->group(function () {
     Route::get('/lakin', [AkuntabilitasController::class, 'lakin']);
     Route::get('/rencana-aksi', [AkuntabilitasController::class, 'rencanaAksi']);
     Route::get('/sakai', [AkuntabilitasController::class, 'sakai']);
+});
+
+Route::prefix('layanan')->group(function () {
+    Route::get('/ahli-bahasa', [LayananController::class, 'ahliBahasa']);
+    Route::get('/penerjemahan', [LayananController::class, 'penerjemahan']);
+    Route::get('/ukbi-adaptif', [LayananController::class, 'ukbiAdaptif']);
+    Route::get('/bipa', [LayananController::class, 'bipa']);
+    Route::get('/perpustakaan', [LayananController::class, 'perpustakaan']);
+    Route::get('/magang', [LayananController::class, 'magang']);
+
 });
 
 Route::prefix('produk')->group(function () {
@@ -180,9 +193,21 @@ Route::prefix('admin')
            
        
 
+            Route::get('/tokoh', [ATokohController::class, 'index'])
+                ->name('admin.tokoh');
+            Route::post('/tokoh', [ATokohController::class, 'store'])
+                ->name('admin.tokoh.store');
+            Route::put('/tokoh/{id}', [ATokohController::class, 'update'])
+                ->name('admin.tokoh.update');
+            Route::delete('/tokoh/{id}', [ATokohController::class, 'destroy'])
+                ->name('admin.tokoh.destroy');
 
         Route::get('/halamanweb', fn () => view('admin.halamanweb'))->name('admin.halamanweb');
-        Route::get('/pengaturan', fn () => view('admin.pengaturan'))->name('admin.pengaturan');
+
+        Route::get('/pengaturan', [APengaturanController::class, 'index'])->name('admin.pengaturan');
+        Route::post('/pengaturan', [APengaturanController::class, 'store'])->name('admin.pengaturan.store');
+        Route::put('/pengaturan/{email}', [APengaturanController::class, 'update'])->name('admin.pengaturan.update');
+        Route::delete('/pengaturan/{email}', [APengaturanController::class, 'destroy'])->name('admin.pengaturan.destroy');
 
 });
 

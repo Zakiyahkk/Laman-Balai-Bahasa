@@ -1,128 +1,79 @@
-<!DOCTYPE html>
-<html lang="id">
+<section class="section pengumuman-section" style="margin-top: -10px;">
+    <div class="container" style="margin-top: -10px;">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pengumuman Modern dengan Preview</title>
+        <div class="section-header">
+            <h2 class="judul-section">Pengumuman Terbaru</h2>
+            <div class="header-line"></div>
+        </div>
 
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <div class="pengumuman-list">
 
-</head>
+            @forelse ($items as $item)
+                @php
+                    $tanggal = \Carbon\Carbon::parse($item['tanggal']);
+                    $docUrl = !empty($item['file_url']) ? $item['file_url'] : $item['gambar_url'];
+                @endphp
 
-<body>
-
-    <section class="section pengumuman-section">
-        <div class="container">
-
-            <div class="section-header">
-                <h2 class="judul-section">Pengumuman Terbaru</h2>
-                <div class="header-line"></div>
-            </div>
-
-            <div class="pengumuman-list">
-
-                <div class="pengumuman-item trigger-modal"
-                    data-doc="document/dokumentesting1.pdf"
-                    data-type="pdf">
+                <div class="pengumuman-item trigger-modal" data-doc="{{ $docUrl }}" data-type="{{ $item['type'] }}">
 
                     <div class="date-badge">
-                        <span class="day">15</span>
-                        <span class="month">Jan</span>
-                        <span class="year">2025</span>
+                        <span class="day">{{ $tanggal->format('d') }}</span>
+                        <span class="month">{{ $tanggal->translatedFormat('M') }}</span>
+                        <span class="year">{{ $tanggal->format('Y') }}</span>
                     </div>
-                    <div class="doc-icon">
-                        <i class="fa-solid fa-file-pdf"></i>
+
+                    <div class="doc-icon {{ $item['type'] === 'image' ? 'image-type' : '' }}">
+                        <i class="fa-solid {{ $item['type'] === 'pdf' ? 'fa-file-pdf' : 'fa-image' }}"></i>
                     </div>
+
                     <div class="item-content">
-                        <span class="doc-title">Pengumuman Lomba Kebahasaan Tingkat Provinsi</span>
+                        <span class="doc-title">{{ $item['judul'] }}</span>
                         <div class="doc-meta">
-                            <i class="fa-solid fa-eye"></i> Klik untuk melihat dokumen
+                            <i class="fa-solid fa-eye"></i>
+                            {{ $item['type'] === 'pdf' ? 'Klik untuk melihat dokumen' : 'Klik untuk melihat poster' }}
                         </div>
                     </div>
+
                     <div class="action-btn">
                         <i class="fa-solid fa-chevron-right"></i>
                     </div>
                 </div>
+            @empty
+                <p style="text-align:center;color:#94a3b8;">Belum ada pengumuman.</p>
+            @endforelse
 
-                <div class="pengumuman-item trigger-modal"
-                    data-doc="img/pantun2.png"
-                    data-type="image">
 
-                    <div class="date-badge">
-                        <span class="day">10</span>
-                        <span class="month">Jan</span>
-                        <span class="year">2025</span>
-                    </div>
-                    <div class="doc-icon image-type">
-                        <i class="fa-regular fa-image"></i>
-                    </div>
-                    <div class="item-content">
-                        <span class="doc-title">Informasi Terusan dari Badan Bahasa (Poster)</span>
-                        <div class="doc-meta">
-                            <i class="fa-solid fa-eye"></i> Klik untuk melihat poster
-                        </div>
-                    </div>
-                    <div class="action-btn">
-                        <i class="fa-solid fa-chevron-right"></i>
-                    </div>
-                </div>
+        </div>
+    </div>
+</section>
 
-                <div class="pengumuman-item trigger-modal"
-                    data-doc="document/buku6.pdf"
-                    data-type="pdf">
-
-                    <div class="date-badge">
-                        <span class="day">05</span>
-                        <span class="month">Jan</span>
-                        <span class="year">2025</span>
-                    </div>
-                    <div class="doc-icon">
-                        <i class="fa-solid fa-file-pdf"></i>
-                    </div>
-                    <div class="item-content">
-                        <span class="doc-title">Juknis Kegiatan Balai Bahasa Tahun 2025</span>
-                        <div class="doc-meta">
-                            <i class="fa-solid fa-eye"></i> Klik untuk melihat dokumen
-                        </div>
-                    </div>
-                    <div class="action-btn">
-                        <i class="fa-solid fa-chevron-right"></i>
-                    </div>
-                </div>
-
+{{-- MODAL (STRUKTUR TIDAK DIUBAH) --}}
+<div id="docModal" class="modal-overlay">
+    <div class="modal-container">
+        <div class="modal-header">
+            <h3 id="modalTitle">Pratinjau Dokumen</h3>
+            <div class="modal-actions">
+                <a id="downloadBtn" href="#" target="_blank" download class="btn-action btn-download"
+                    title="Unduh File">
+                    <i class="fa-solid fa-download"></i>
+                </a>
+                <button class="btn-action btn-close" onclick="closeDocModal()">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
             </div>
         </div>
-    </section>
 
-    <div id="docModal" class="modal-overlay">
-        <div class="modal-container">
-            <div class="modal-header">
-                <h3 id="modalTitle">Pratinjau Dokumen</h3>
-                <div class="modal-actions">
-                    <a id="downloadBtn" href="#" download class="btn-action btn-download" title="Unduh File">
-                        <i class="fa-solid fa-download"></i>
-                    </a>
-                    <button class="btn-action btn-close" onclick="closeDocModal()">
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
-                </div>
-            </div>
+        <div class="modal-body">
+            <iframe id="pdfViewer" src="" frameborder="0"></iframe>
+            <img id="imageViewer" src="" alt="Preview">
 
-            <div class="modal-body">
-                <iframe id="pdfViewer" src="" frameborder="0"></iframe>
-
-                <img id="imageViewer" src="" alt="Preview">
-
-                <div id="fallbackMessage" class="fallback-msg">
-                    <i class="fa-regular fa-file-excel"></i>
-                    <p>Pratinjau tidak tersedia atau file tidak ditemukan.</p>
-                    <a id="fallbackLink" href="#" class="btn-fallback">Unduh Dokumen Saja</a>
-                </div>
+            <div id="fallbackMessage" class="fallback-msg">
+                <i class="fa-regular fa-file-excel"></i>
+                <p>Pratinjau tidak tersedia atau file tidak ditemukan.</p>
+                <a id="fallbackLink" href="#" target="_blank" class="btn-fallback">
+                    Unduh Dokumen Saja
+                </a>
             </div>
         </div>
     </div>
-</body>
-
-</html>
+</div>

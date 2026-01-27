@@ -1,12 +1,12 @@
 <section class="yelyel-section">
     <div class="yelyel-container">
 
-        <div class="yelyel-header">
+        <div class="yelyel-header" style="margin-top: -50px;">
             <h2>Galeri Multimedia</h2>
             <p>Dokumentasi Yel-Yel & Podcast RESAMBASRA</p>
         </div>
 
-        <div class="yelyel-wrap">
+        <div class="yelyel-wrap" style="margin-top: -80px; margin-bottom: -50px;">
 
             <div class="yelyel-text" id="textContent">
                 <span class="yelyel-badge" id="badgeText">Yel-Yel</span>

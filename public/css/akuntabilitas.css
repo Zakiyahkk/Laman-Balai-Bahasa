@@ -235,7 +235,7 @@
 }
 .ak-search input {
     width: 100%;
-    padding: 10px 12px 10px 36px;
+    padding: 10px 12px; /* kiri-kanan sama */
     border: 1px solid #e6ecf5;
     border-radius: 12px;
     outline: none;
@@ -768,10 +768,6 @@
         gap: 10px;
     }
 }
-
-/* ==================================================
-    Rencana Aksi
-================================================== */
 
 /* ==================================================
    RENCANA AKSI

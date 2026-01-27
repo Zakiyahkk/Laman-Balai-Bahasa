@@ -7,6 +7,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/adminpengaturan.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admintokoh.css') }}">
     <link rel="stylesheet" href="{{ asset('css/adminprofil.css') }}">
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -26,8 +28,19 @@
             <div class="d-flex align-items-center">
                 <img src="/img/AkunLogo.png" alt="Foto Profil Admin" class="avatar-circle me-1">
                 <div class="admin-info">
-                    <div class="fw-bold fs-6" style="color:#1e3a8a;">{{ session('admin_username', '-') }}</div>
-                    <div class="small" style="color:#1e3a8a; font-weight:600;">{{ session('admin_role', '-') }}</div>
+                    @php
+                        $adminLogin = (object) [
+                            'username' => session('admin_username'),
+                            'role' => session('admin_role'),
+                        ];
+                    @endphp
+
+                    <div class="fw-bold fs-6" style="color:#1e3a8a;">
+                        {{ $adminLogin->username ?? '-' }}
+                    </div>
+                    <div class="small" style="color:#1e3a8a; font-weight:600;">
+                        {{ $adminLogin->role ? ucwords(strtolower($adminLogin->role)) : '-' }}
+                    </div>
                 </div>
             </div>
         </div>
@@ -115,56 +128,65 @@
                     </div>
                     <i class="bi submenu-arrow {{ $akuntabilitasOpen ? 'bi-caret-down-fill' : 'bi-caret-right-fill' }}"></i>
                 </a>
-
-<ul class="nav flex-column ms-3 submenu-list"
-    @if($akuntabilitasOpen)
-        style="display:block"
-    @else
-        style="display:none"
-    @endif>
-    <li>
-        <a class="nav-link {{ request()->routeIs('admin.akuntabilitas.renstra') ? 'active' : '' }}"
-           href="{{ route('admin.akuntabilitas.renstra') }}">
-            <i class="fas fa-arrow-right me-2"></i>Renstra
-        </a>
-    </li>
-    <li>
-        <a class="nav-link {{ request()->routeIs('admin.akuntabilitas.dipa') ? 'active' : '' }}"
-           href="{{ route('admin.akuntabilitas.dipa') }}">
-            <i class="fas fa-dollar-sign me-2"></i>DIPA
-        </a>
-    </li>
-    <li>
-        <a class="nav-link {{ request()->routeIs('admin.akuntabilitas.pk') ? 'active' : '' }}"
-           href="{{ route('admin.akuntabilitas.pk') }}">
-            <i class="fas fa-file-signature me-2"></i>Perjanjian Kinerja
-        </a>
-    </li>
-    <li>
-        <a class="nav-link {{ request()->routeIs('admin.akuntabilitas.ra') ? 'active' : '' }}"
-           href="{{ route('admin.akuntabilitas.ra') }}">
-            <i class="fas fa-list-check me-2"></i>Rencana Aksi
-        </a>
-    </li>
-    <li><a class="nav-link {{ request()->routeIs('admin.akuntabilitas.lakin') ? 'active' : '' }}"
-           href="{{ route('admin.akuntabilitas.lakin') }}">
-            <i class="fas fa-list-check me-2"></i>Lakin
-        </a></li>
-        <li><a class="nav-link {{ request()->routeIs('admin.akuntabilitas.sakai') ? 'active' : '' }}"
-           href="{{ route('admin.akuntabilitas.sakai') }}">
-            <i class="fas fa-list-check me-2"></i>SAKAI
-        </a>
-        </li>
-    </ul>
+                <ul class="nav flex-column ms-3 submenu-list"
+                    @if($akuntabilitasOpen)
+                        style="display:block"
+                    @else
+                        style="display:none"
+                    @endif>
+                    <li>
+                        <a class="nav-link {{ request()->routeIs('admin.akuntabilitas.renstra') ? 'active' : '' }}"
+                        href="{{ route('admin.akuntabilitas.renstra') }}">
+                            <i class="fas fa-arrow-right me-2"></i>Renstra
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link {{ request()->routeIs('admin.akuntabilitas.dipa') ? 'active' : '' }}"
+                        href="{{ route('admin.akuntabilitas.dipa') }}">
+                            <i class="fas fa-dollar-sign me-2"></i>DIPA
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link {{ request()->routeIs('admin.akuntabilitas.pk') ? 'active' : '' }}"
+                        href="{{ route('admin.akuntabilitas.pk') }}">
+                            <i class="fas fa-file-signature me-2"></i>Perjanjian Kinerja
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link {{ request()->routeIs('admin.akuntabilitas.ra') ? 'active' : '' }}"
+                        href="{{ route('admin.akuntabilitas.ra') }}">
+                            <i class="fas fa-list-check me-2"></i>Rencana Aksi
+                        </a>
+                    </li>
+                    <li><a class="nav-link {{ request()->routeIs('admin.akuntabilitas.lakin') ? 'active' : '' }}"
+                        href="{{ route('admin.akuntabilitas.lakin') }}">
+                            <i class="fas fa-list-check me-2"></i>Lakin
+                        </a></li>
+                        <li><a class="nav-link {{ request()->routeIs('admin.akuntabilitas.sakai') ? 'active' : '' }}"
+                        href="{{ route('admin.akuntabilitas.sakai') }}">
+                            <i class="fas fa-list-check me-2"></i>SAKAI
+                        </a>
+                        </li>
+                    </ul>
             </li>
 
+            <!-- TOKOH -->
+            <li class="nav-item">
+                <a class="nav-link {{ request()->routeIs('admin.tokoh*') ? 'active' : '' }}"
+                    href="{{ route('admin.tokoh') }}">
+                    <i class="bi bi-person-badge me-2"></i>Tokoh
+                </a>
+             </li>
+
             <!-- PENGATURAN -->
+            @if(strtolower(session('admin_role')) === 'super admin')
             <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('admin.pengaturan') ? 'active' : '' }}"
-                   href="{{ route('admin.pengaturan') }}">
+                href="{{ route('admin.pengaturan') }}">
                     <i class="bi bi-gear me-2"></i>Pengaturan
                 </a>
             </li>
+            @endif
 
             <li class="nav-item">
                 <a href="#" class="nav-link logout-link"

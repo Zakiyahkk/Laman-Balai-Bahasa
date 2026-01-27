@@ -4,6 +4,7 @@
 
 @section('content')
 @include('user.beranda.slider')
+@include('user.beranda.poppantun')
 @include('user.beranda.produk')
 @include('user.beranda.kata_pengantar')
 @include('user.beranda.berita_preview')

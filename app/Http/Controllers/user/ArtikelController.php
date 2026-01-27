@@ -17,90 +17,89 @@ class ArtikelController extends Controller
         }
 
         return Http::withHeaders([
-            'apikey' => $key,
+            'apikey'        => $key,
             'Authorization' => 'Bearer ' . $key,
-            'Accept' => 'application/json',
+            'Accept'        => 'application/json',
         ]);
     }
 
-    private function publicImageUrl(?string $gambar): ?string
+    /**
+     * 🔥 GAMBAR ARTIKEL / RAGAM / LENSA
+     * public Laravel
+     */
+    private function artikelImageUrl(?string $gambar): string
     {
-        if (!$gambar) return null;
+        if (!$gambar) {
+            return asset('img/default.jpg');
+        }
 
-        // kalau sudah URL lengkap
-        if (preg_match('/^https?:\/\//i', $gambar)) return $gambar;
+        if (preg_match('/^https?:\/\//i', $gambar)) {
+            return $gambar;
+        }
 
-        // kalau masih path/nama file -> bucket gambar
-        return rtrim(env('SUPABASE_URL'), '/')
-            . '/storage/v1/object/public/gambar/'
-            . ltrim($gambar, '/');
+        return asset(ltrim($gambar, '/'));
     }
 
     /**
-     * Halaman daftar semua Artikel + Alinea (Supabase)
-     * /artikel?q=keyword
+     * =========================
+     * LIST ARTIKEL
+     * (artikel, ragam, lensa)
+     * =========================
      */
     public function index(Request $request)
     {
         $q = trim((string) $request->get('q', ''));
 
         $params = [
-            'select' => 'publikasi_id,judul,tanggal,penulis,gambar,isi,pembaca,status,kategori,created_at',
-            // gabungkan artikel + alinea
-            'kategori' => 'in.(artikel,alinea)',
-            'status' => 'eq.terbit',
-            'order' => 'tanggal.desc,created_at.desc,publikasi_id.desc',
+            'select'   => 'publikasi_id,judul,tanggal,penulis,gambar,isi,pembaca,status,kategori,created_at',
+            'kategori' => 'in.(artikel,ragam,lensa)',
+            'status'   => 'eq.terbit',
+            'order'    => 'tanggal.desc,created_at.desc,publikasi_id.desc',
         ];
 
         if ($q !== '') {
-            // cari di judul (case-insensitive)
             $params['judul'] = 'ilike.*' . $q . '*';
         }
 
-        $response = $this->supabase()->get(
+        $items = $this->supabase()->get(
             rtrim(env('SUPABASE_URL'), '/') . '/rest/v1/publikasi',
             $params
-        )->throw();
-
-        $items = $response->json();
+        )->throw()->json();
 
         $items = array_map(function ($row) {
-            $row['gambar_url'] = $this->publicImageUrl($row['gambar'] ?? null);
+            $row['gambar_url'] = $this->artikelImageUrl($row['gambar'] ?? null);
             return $row;
         }, $items);
 
-        // ✅ sesuai blade baru: index pakai $items
         return view('user.artikel.index', [
             'items' => $items,
-            'q' => $q,
+            'q'     => $q,
         ]);
     }
 
     /**
-     * Detail Artikel / Alinea
-     * /artikel/{slug} -> sementara {slug} = publikasi_id
+     * =========================
+     * DETAIL ARTIKEL
+     * =========================
      */
-    public function show($slug)
+    public function show($id)
     {
-        $response = $this->supabase()->get(
+        $data = $this->supabase()->get(
             rtrim(env('SUPABASE_URL'), '/') . '/rest/v1/publikasi',
             [
-                'select' => '*',
-                'publikasi_id' => 'eq.' . $slug,
-                // izinkan artikel + alinea
-                'kategori' => 'in.(artikel,alinea)',
-                'status' => 'eq.terbit',
-                'limit' => 1,
+                'select'       => '*',
+                'publikasi_id' => 'eq.' . $id,
+                'kategori'     => 'in.(artikel,ragam,lensa)',
+                'status'       => 'eq.terbit',
+                'limit'        => 1,
             ]
-        )->throw();
+        )->throw()->json();
 
-        $data = $response->json();
         abort_if(empty($data), 404);
 
         $item = $data[0];
-        $item['gambar_url'] = $this->publicImageUrl($item['gambar'] ?? null);
+        $item['gambar_url'] = $this->artikelImageUrl($item['gambar'] ?? null);
 
-        // ✅ sesuai blade baru: show pakai $item
         return view('user.artikel.show', compact('item'));
     }
 }
