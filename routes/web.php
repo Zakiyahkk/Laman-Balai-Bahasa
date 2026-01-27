@@ -169,8 +169,16 @@ Route::prefix('admin')
                 Route::get('/perjanjian-kinerja', [AAkuntabilitasController::class, 'pk'])->name('pk');
                 Route::get('/rencana-aksi', [AAkuntabilitasController::class, 'ra'])->name('ra');
                 Route::get('/lakin', [AAkuntabilitasController::class, 'lakin'])->name('lakin');
+                Route::get('/lakin/create', [AAkuntabilitasController::class, 'create'])->name('create');
+                Route::get('/lakin/edit/{id}', [AAkuntabilitasController::class, 'edit'])->name('edit');
+                Route::put('/lakin/update/{id}', [AAkuntabilitasController::class, 'update'])->name('update');;
+                Route::post('/lakin/store', [AAkuntabilitasController::class, 'store'])->name('store');
+                Route::get('/lakin/download/{id}', [AAkuntabilitasController::class, 'download'])->name('download');                
+                Route::delete('/lakin/delete/{id}', [AAkuntabilitasController::class, 'destroy'])->name('destroy');
                 Route::get('/sakai', [AAkuntabilitasController::class, 'sakai'])->name('sakai');
             });
+           
+       
 
 
         Route::get('/halamanweb', fn () => view('admin.halamanweb'))->name('admin.halamanweb');
