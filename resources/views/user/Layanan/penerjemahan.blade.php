@@ -40,9 +40,10 @@
                 {{-- LINK --}}
                 <div class="layanan-link">
                     <span>Ajukan permohonan layanan Penerjemahan</span>
-                    <a
-                        href="{{ url('https://balaibahasariau.kemendikdasmen.go.id/layananbalai/layanan.php?page=penerjemah') }}">di
-                        sini</a>
+                    <a href="https://balaibahasariau.kemendikdasmen.go.id/layananbalai/layanan.php?page=penerjemah"
+                        target="_blank" rel="noopener noreferrer">
+                        di sini
+                    </a>
                 </div>
 
             </div>

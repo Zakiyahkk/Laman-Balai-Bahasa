@@ -52,7 +52,7 @@ class ArtikelController extends Controller
 
         $params = [
             'select'   => 'publikasi_id,judul,tanggal,penulis,gambar,isi,pembaca,status,kategori,created_at',
-            'kategori' => 'in.(artikel,ragam,lensa)',
+            'kategori' => 'in.(artikel,alinea,ragam,lensa)',
             'status'   => 'eq.terbit',
             'order'    => 'tanggal.desc,created_at.desc,publikasi_id.desc',
         ];
@@ -89,7 +89,7 @@ class ArtikelController extends Controller
             [
                 'select'       => '*',
                 'publikasi_id' => 'eq.' . $id,
-                'kategori'     => 'in.(artikel,ragam,lensa)',
+                'kategori'     => 'in.(artikel,alinea,ragam,lensa)',
                 'status'       => 'eq.terbit',
                 'limit'        => 1,
             ]

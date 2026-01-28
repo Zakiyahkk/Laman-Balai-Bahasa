@@ -40,7 +40,10 @@
                 {{-- LINK --}}
                 <div class="layanan-link">
                     <span>Ajukan permohonan layanan UKBI</span>
-                    <a href="{{ url('/layanan/pengajuan') }}">di sini</a>
+                    <a href="https://balaibahasariau.kemendikdasmen.go.id/layanan/layanan.php?page=ukbi" target="_blank"
+                        rel="noopener noreferrer">
+                        di sini
+                    </a>
                 </div>
 
             </div>

@@ -844,8 +844,8 @@
 .access-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr); /* 4 Kolom */
-    gap: 20px;
-    row-gap: 25px;
+    gap: 60px; /* jarak antar kolom */
+    row-gap: 0px;
 }
 
 /* Item Aplikasi Individual */

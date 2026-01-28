@@ -9,8 +9,8 @@
 @section('content')
 
     <!-- ===============================
-                     SECTION: ABOUT WBS
-                ================================ -->
+                         SECTION: ABOUT WBS
+                    ================================ -->
     <div class="cleaning-about-area-wrap" data-padding-top="60" data-padding-bottom="60">
         <div class="container">
             <div class="row wbs-align">
@@ -52,8 +52,8 @@
     </div>
 
     <!-- ===============================
-                     SECTION: CARA MELAPOR
-                ================================ -->
+                         SECTION: CARA MELAPOR
+                    ================================ -->
     <section class="text-editor-widget-wrapper" data-padding-top="30" data-padding-bottom="40">
         <div class="container">
             <div class="row">
@@ -101,8 +101,8 @@
     </section>
 
     <!-- ===============================
-                     SECTION: LINK WBS
-                ================================ -->
+                         SECTION: LINK WBS
+                    ================================ -->
     <div class="logistics-key-feature-area" data-padding-top="20" data-padding-bottom="100">
         <div class="container">
             <div class="row">
@@ -130,7 +130,8 @@
                                 </div>
                                 <div class="content">
                                     <h3 class="title">
-                                        <a href="#" target="_blank">
+                                        <a href="https://forms.gle/NJxsM3CyZJVUfrzC8" target="_blank"
+                                            rel="noopener noreferrer">
                                             WBS Balai Bahasa Provinsi Riau
                                         </a>
                                     </h3>

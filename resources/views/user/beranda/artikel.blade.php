@@ -2,7 +2,7 @@
     <div class="container">
 
         <h2 class="judul-center" style="margin-top: 0; margin-bottom: 20px; text-align: left;">
-            Konten <span style="color: #0ea5e9;">Terbaru</span>
+            Artikel <span style="color: #0ea5e9;">Terbaru</span>
         </h2>
 
         <div class="berita-grid" style="margin-top: 0; gap: 20px;">
@@ -11,7 +11,7 @@
                 <div class="berita-card">
 
                     <div class="berita-img">
-                        <span class="badge">
+                        <span class="badge badge-{{ $item['kategori'] }}">
                             {{ strtoupper($item['kategori']) }}
                         </span>
 

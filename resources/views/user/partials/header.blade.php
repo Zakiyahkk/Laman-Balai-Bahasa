@@ -36,7 +36,7 @@
                     <i class="fa-regular fa-comment-dots top-icon-big"></i>
                     <div class="top-text-stack">
                         <span class="label-top">Pengaduan ULT</span>
-                        <a href="{{ url('https://forms.gle/NJxsM3CyZJVUfrzC8') }}" class="btn-ult-big">Klik di sini
+                        <a href="{{ url('#') }}" class="btn-ult-big">Klik di sini
                             untuk melakukan pengaduan</a>
                     </div>
                 </div>
@@ -53,8 +53,9 @@
     <div class="bbp-nav">
         <div class="nav-container">
             <div class="logo">
-                {{-- Gunakan asset() untuk gambar juga --}}
-                <img src="{{ asset('img/logobalai.png') }}" alt="Logo">
+                <a href="{{ url('/') }}">
+                    <img src="{{ asset('img/logobalai.png') }}" alt="Logo">
+                </a>
             </div>
 
             <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle navigation">
@@ -433,7 +434,7 @@
                     <span>balaibahasaprovriau@gmail.com</span>
                 </div>
 
-                <a href="{{ url('/wbs/wbs') }}" class="mob-btn">
+                <a href="{{ url('#') }}" class="mob-btn">
                     <i class="fa-regular fa-comment-dots"></i> Pengaduan ULT
                 </a>
 

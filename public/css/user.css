@@ -7,8 +7,11 @@
 
 html,
 body {
+    width: 100%;
+    max-width: 100%;
     margin: 0;
     padding: 0;
+    overflow-x: hidden; /* 🔒 kunci melebar saat zoom */
 }
 
 body {
@@ -708,7 +711,7 @@ body {
 
 .berita-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(4, 1fr); /* 🔒 KUNCI 4 kolom */
     gap: 22px;
     margin-top: 18px;
     align-items: stretch; /* semua card sama tinggi */
@@ -774,6 +777,18 @@ body {
     border: 1px solid rgba(14, 165, 233, 0.22);
 }
 
+.badge-artikel {
+    background: #0ea5e9;
+}
+.badge-alinea {
+    background: #10b981;
+}
+.badge-ragam {
+    background: #f59e0b;
+}
+.badge-lensa {
+    background: #8b5cf6;
+}
 /* =========================================================
    BODY
    ========================================================= */
@@ -2822,7 +2837,8 @@ body {
 .hero-container {
     position: relative;
     width: 100%;
-    height: 100vh;
+    max-width: 100%;
+    height: 50vh;
     background: #020617;
     overflow: hidden;
     font-family: "Plus Jakarta Sans", sans-serif;
@@ -2832,7 +2848,31 @@ body {
 .hero-bg {
     position: absolute;
     inset: 0;
-    z-index: 1;
+    background-size: cover;
+    background-position: center;
+    transform: scale(1.05);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+    color: #fff;
+    padding: 0 20px;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
 }
 
 .hero-bg img {
@@ -4186,6 +4226,50 @@ body {
 /* ===========================
    Slider Hero Fullscreen
    =========================== */
+
+/* SLIDE */
+.slide-maklumat {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* BACKGROUND (blur & gelap tipis) */
+.maklumat-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    filter: blur(12px);
+    transform: scale(1.1);
+    opacity: 0.35;
+}
+
+/* KONTEN UTAMA */
+.maklumat-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: flex-start; /* ⬅️ DARI center */
+    justify-content: center;
+
+    padding-top: 30px; /* ⬅️ jarak aman dari navbar */
+}
+
+/* GAMBAR UTAMA (UTUH & CERAH) */
+.maklumat-content img {
+    max-width: 90%;
+    max-height: 78%;
+    object-fit: contain;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+}
+
 /* Reset & Base */
 * {
     margin: 0;
@@ -4196,8 +4280,8 @@ body {
 /* Container Full Screen */
 .hero-container {
     position: relative;
-    width: 100%;
-    height: 100vh;
+    max-width: 100%;
+    height: 75vh;
     background: #000;
 
     /* FIX GAP: Menghilangkan garis putih antara header dan slider */
@@ -4208,9 +4292,13 @@ body {
 /* Swiper Styles */
 .swiper {
     width: 100%;
+    max-width: 100%;
     height: 100%;
 }
-
+.hero-container .swiper-wrapper {
+    width: 100%;
+    height: 100%;
+}
 /* Pastikan Flexbox aktif sempurna untuk memusatkan isi */
 .swiper-slide {
     position: relative;
@@ -4233,7 +4321,8 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    background: #f8fafc; /* warna pinggir */
     z-index: 1;
     display: block; /* Mencegah margin inline */
 }
@@ -4245,11 +4334,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0.3),
-        rgba(0, 0, 0, 0.7)
-    );
+    background: rgba(0, 0, 0, 0.1);
     z-index: 2;
 }
 
@@ -4271,20 +4356,16 @@ body {
 }
 
 .slide-title {
-    font-size: 3rem;
+    font-size: clamp(28px, 4vw, 46px);
     font-weight: 800;
-    margin-bottom: 10px;
-    text-transform: uppercase;
     letter-spacing: 1px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .slide-desc {
-    font-size: 1.2rem;
-    font-weight: 400;
-    margin-bottom: 20px;
+    margin-top: 10px;
+    font-size: clamp(14px, 1.6vw, 18px);
+    opacity: 0.9;
 }
-
 /* Pagination (Titik-titik bawah) - Warna Putih */
 .swiper-pagination-bullet-active {
     background: #fff;

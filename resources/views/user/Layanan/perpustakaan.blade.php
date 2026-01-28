@@ -38,9 +38,13 @@
                 </div>
 
                 {{-- LINK --}}
+
                 <div class="layanan-link">
                     <span>Informasi dan layanan Perpustakaan</span>
-                    <a href="{{ url('/layanan/pengajuan') }}">di sini</a>
+                    <a href="https://balaibahasariau.kemendikdasmen.go.id/layananbalai/layanan.php?page=perpustakaan"
+                        target="_blank" rel="noopener noreferrer">
+                        di sini
+                    </a>
                 </div>
 
             </div>

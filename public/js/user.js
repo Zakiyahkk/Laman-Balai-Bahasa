@@ -278,62 +278,93 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 4000);
     }
 
-    /* ==========================================================================
-       HALAMAN: TOKOH BAHASA & SASTRA (SWIPER INIT)
-       ========================================================================== */
-    if (
-        typeof Swiper !== "undefined" &&
-        document.querySelector(".tokohSlider")
-    ) {
-        new Swiper(".tokohSlider", {
+    /* ======================================================================
+   FIX FINAL: SWIPER TOKOH BAHASA & SASTRA (SCOPED)
+   ====================================================================== */
+    document.querySelectorAll(".tokoh-section").forEach((section) => {
+        const slider = section.querySelector(".tokohSlider");
+        const nextBtn = section.querySelector(".tokoh-next");
+        const prevBtn = section.querySelector(".tokoh-prev");
+
+        if (!slider || !nextBtn || !prevBtn) return;
+
+        new Swiper(slider, {
             slidesPerView: 1,
             spaceBetween: 25,
             loop: true,
-            navigation: { nextEl: ".tokoh-next", prevEl: ".tokoh-prev" },
+            navigation: {
+                nextEl: nextBtn,
+                prevEl: prevBtn,
+            },
             breakpoints: {
                 640: { slidesPerView: 2 },
                 1024: { slidesPerView: 4 },
             },
         });
-    }
+    });
+
     /* --- Batas Script: Swiper Tokoh Bahasa --- */
 
     /* ==========================================================================
-       HALAMAN: MAHKOTA KALAM MELAYU (TABS & SWIPER)
-       ========================================================================== */
-    if (
-        typeof Swiper !== "undefined" &&
-        document.querySelector(".mahkotaSwiper")
-    ) {
-        const mkSwiper = new Swiper(".mahkotaSwiper", {
-            slidesPerView: 1,
-            spaceBetween: 15,
-            loop: true,
-            observer: true,
-            observeParents: true,
-            navigation: { nextEl: ".mk-next", prevEl: ".mk-prev" },
-            breakpoints: {
-                768: { slidesPerView: 3 },
-                1024: { slidesPerView: 4 },
-            },
-        });
+   HALAMAN: MAHKOTA KALAM MELAYU (FINAL STABLE PER TAB)
+   ========================================================================== */
+    if (typeof Swiper !== "undefined") {
+        const mahkotaSwipers = {};
 
-        // Logika Perpindahan Tab Mahkota
-        const mkTabs = document.querySelectorAll(".mk-tab-btn");
-        mkTabs.forEach((tab) => {
+        function initMahkotaSwiper(paneId) {
+            if (mahkotaSwipers[paneId]) return;
+
+            const pane = document.getElementById(paneId);
+            if (!pane) return;
+
+            const swiperEl = pane.querySelector(".mahkotaSwiper");
+            const nextBtn = pane.querySelector(".mk-next");
+            const prevBtn = pane.querySelector(".mk-prev");
+
+            if (!swiperEl || !nextBtn || !prevBtn) return;
+
+            mahkotaSwipers[paneId] = new Swiper(swiperEl, {
+                slidesPerView: 1,
+                spaceBetween: 15,
+                loop: true,
+                navigation: {
+                    nextEl: nextBtn,
+                    prevEl: prevBtn,
+                },
+                breakpoints: {
+                    768: { slidesPerView: 3 },
+                    1024: { slidesPerView: 4 },
+                },
+            });
+        }
+        // INIT TAB PERTAMA
+        initMahkotaSwiper("mk-tokoh");
+
+        // TAB CLICK LOGIC
+        document.querySelectorAll(".mk-tab-btn").forEach((tab) => {
             tab.addEventListener("click", () => {
-                mkTabs.forEach((t) => t.classList.remove("active"));
+                document
+                    .querySelectorAll(".mk-tab-btn")
+                    .forEach((t) => t.classList.remove("active"));
                 tab.classList.add("active");
 
-                const target = tab.getAttribute("data-tab");
-                document.querySelectorAll(".mahkota-pane").forEach((pane) => {
-                    pane.classList.remove("active");
-                    if (pane.id === target) pane.classList.add("active");
-                });
-                mkSwiper.update(); // Update Swiper agar tidak hancur saat tab dibuka
+                const target = tab.dataset.tab;
+
+                document
+                    .querySelectorAll(".mahkota-pane")
+                    .forEach((pane) => pane.classList.remove("active"));
+
+                const activePane = document.getElementById(target);
+                if (activePane) activePane.classList.add("active");
+
+                setTimeout(() => {
+                    initMahkotaSwiper(target);
+                    mahkotaSwipers[target]?.update();
+                }, 100);
             });
         });
     }
+
     /* --- Batas Script: Mahkota Kalam Melayu --- */
 
     // 5. Init Multimedia

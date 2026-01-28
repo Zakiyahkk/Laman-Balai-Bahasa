@@ -40,7 +40,10 @@
                 {{-- LINK --}}
                 <div class="layanan-link">
                     <span>Ajukan permohonan layanan BIPA</span>
-                    <a href="{{ url('/layanan/pengajuan') }}">di sini</a>
+                    <a href="https://balaibahasariau.kemendikdasmen.go.id/layananbalai/layanan.php?page=bipa"
+                        target="_blank" rel="noopener noreferrer">
+                        di sini
+                    </a>
                 </div>
 
             </div>

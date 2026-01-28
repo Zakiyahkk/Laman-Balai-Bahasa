@@ -134,7 +134,7 @@ private function publikasiUrl(?string $value): ?string
         // ==================================================
         $kontenTerbaru = $this->supabase()->get($basePublikasi, [
             'select'   => 'publikasi_id,judul,tanggal,penulis,gambar,isi,pembaca,status,kategori,created_at',
-            'kategori' => 'in.(artikel,ragam,lensa)',
+            'kategori' => 'in.(artikel,alinea,ragam,lensa)',
             'status'   => 'eq.terbit',
             'order'    => 'tanggal.desc,created_at.desc,publikasi_id.desc',
             'limit'    => 12,
@@ -172,25 +172,87 @@ private function publikasiUrl(?string $value): ?string
             ];
         }, $pengumumanRaw);
         
-        // ==================================================
-        // 4) TOKOH BAHASA & SASTRA
-        // ==================================================
-        $baseTokoh = rtrim(env('SUPABASE_URL'), '/') . '/rest/v1/tokoh';
+       // ==================================================
+// 4) TOKOH BAHASA & SASTRA
+// ==================================================
+$baseTokoh = rtrim(env('SUPABASE_URL'), '/') . '/rest/v1/tokoh';
 
-        $tokoh = $this->supabase()->get($baseTokoh, [
-            'select'   => 'tokoh_id,nama,foto_tokoh,deskripsi,kategori,created_at',
-            'kategori' => 'eq.Tokoh Bahasa dan Sastra',
-            'order'    => 'created_at.desc',
-            'limit'    => 8,
-        ])->throw()->json();
+$tokoh = $this->supabase()->get($baseTokoh, [
+    'select'   => 'tokoh_id,nama,foto_tokoh,deskripsi,kategori,created_at',
+    'kategori' => 'eq.Tokoh Bahasa dan Sastra',
+    'order'    => 'created_at.desc',
+    'limit'    => 8,
+])->throw()->json();
 
-        $tokoh = array_map(function ($row) {
-            $row['foto_url'] = $row['foto_tokoh']
-                ? asset(ltrim($row['foto_tokoh'], '/'))
-                : asset('img/default-user.png');
-            return $row;
-        }, $tokoh);
+$tokoh = array_map(function ($row) {
+    $row['foto_url'] = $row['foto_tokoh']
+        ? asset(ltrim($row['foto_tokoh'], '/'))
+        : asset('img/default-user.png');
+    return $row;
+}, $tokoh);
 
+
+// ==================================================
+// 5) TOKOH SASTRA LISAN (MAHKOTA KALAM) - FIX FINAL
+// ==================================================
+$tokohSastra = $this->supabase()->get($baseTokoh, [
+    'select'   => 'tokoh_id,nama,foto_tokoh,deskripsi,kategori,created_at',
+    'kategori' => 'ilike.*Sastra Lisan*',
+    'order'    => 'created_at.desc',
+])->throw()->json();
+
+$tokohSastra = array_map(function ($row) {
+    return [
+        'nama'      => $row['nama'],
+        'deskripsi' => $row['deskripsi'],
+        'kategori'  => $row['kategori'],
+        'foto_url'  => $row['foto_tokoh']
+            ? asset(ltrim($row['foto_tokoh'], '/'))
+            : asset('img/default-user.png'),
+    ];
+}, $tokohSastra);
+
+// ==================================================
+// KOMUNITAS LITERASI
+// ==================================================
+$komunitasLiterasi = $this->supabase()->get($baseTokoh, [
+    'select'   => 'tokoh_id,nama,foto_tokoh,deskripsi,kategori,created_at',
+    'kategori' => 'eq.Komunitas Literasi',
+    'order'    => 'created_at.desc',
+])->throw()->json();
+
+$komunitasLiterasi = array_map(function ($row) {
+    return [
+        'nama'      => $row['nama'],
+        'deskripsi' => $row['deskripsi'],
+        'kategori'  => $row['kategori'],
+        'foto_url'  => $row['foto_tokoh']
+            ? asset(ltrim($row['foto_tokoh'], '/'))
+            : asset('img/default-user.png'),
+    ];
+}, $komunitasLiterasi);
+
+// ==================================================
+// KOMUNITAS SASTRA
+// ==================================================
+$komunitasSastra = $this->supabase()->get($baseTokoh, [
+    'select'   => 'tokoh_id,nama,foto_tokoh,deskripsi,kategori,created_at',
+    'kategori' => 'eq.Komunitas Sastra',
+    'order'    => 'created_at.desc',
+])->throw()->json();
+
+$komunitasSastra = array_map(function ($row) {
+    return [
+        'nama'      => $row['nama'],
+        'deskripsi' => $row['deskripsi'],
+        'kategori'  => $row['kategori'],
+        'foto_url'  => $row['foto_tokoh']
+            ? asset(ltrim($row['foto_tokoh'], '/'))
+            : asset('img/default-user.png'),
+    ];
+}, $komunitasSastra);
+    
+        
         // ==================================================
         // RETURN VIEW
         // ==================================================
@@ -198,7 +260,10 @@ private function publikasiUrl(?string $value): ?string
             'berita',
             'kontenTerbaru',
             'items',
-            'tokoh'
+            'tokoh',
+            'tokohSastra',
+            'komunitasLiterasi',
+            'komunitasSastra'
         ));
     }
 }

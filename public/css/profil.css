@@ -42,6 +42,11 @@ select {
     position: absolute;
     inset: 0;
     z-index: 0;
+
+    /* MATIKAN EFEK GERAK */
+    animation: none;
+    transition: none;
+    transform: none;
 }
 
 .profil-theme .hero-bg img {
@@ -49,10 +54,15 @@ select {
     height: 100%;
     object-fit: cover;
     display: block;
-    transform: scale(1.05);
+
+    /* HILANGKAN ZOOM / PARALLAX */
+    transform: none;
+    animation: none;
+    transition: none;
+
+    /* OPSIONAL: tetap jaga kualitas warna */
     filter: saturate(1.05) contrast(1.05);
 }
-
 /* overlay elegan biar menyatu dengan background */
 .profil-theme::after {
     content: "";

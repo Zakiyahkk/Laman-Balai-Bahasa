@@ -42,11 +42,11 @@
                 {{-- LINK --}}
                 <div class="layanan-link">
                     <span>Ajukan permohonan layanan Ahli Bahasa</span>
-                    <a
-                        href="{{ url('https://balaibahasariau.kemendikdasmen.go.id/layananbalai/layanan.php?page=ahli_bahasa') }}">di
-                        sini</a>
+                    <a href="https://balaibahasariau.kemendikdasmen.go.id/layananbalai/layanan.php?page=ahli_bahasa"
+                        target="_blank" rel="noopener noreferrer">
+                        di sini
+                    </a>
                 </div>
-
             </div>
 
         </div>
