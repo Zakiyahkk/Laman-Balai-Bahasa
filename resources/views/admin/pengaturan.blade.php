@@ -18,7 +18,6 @@
 </div>
 
 <!-- =================  ISI MAIN CONTENT ================= -->
-
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h5 class="fw-semibold mb-0 text-white">
         Total Admin: {{ $totalAdmin }}
@@ -67,8 +66,9 @@
                         </td>
 
                         <td>
-                            <span class="badge bg-primary-subtle text-primary">
-                                {{ ucfirst(str_replace('_',' ', $item->role)) }}
+                            <span class="badge
+                                {{ strtolower($item->role) === 'super admin' ? 'badge-super-admin' : 'badge-admin' }}">
+                                {{ $item->role }}
                             </span>
                         </td>
 
@@ -76,19 +76,23 @@
                             <div class="d-flex justify-content-center gap-2">
 
                                 <!-- EDIT -->
-                                <button class="btn btn-link text-secondary p-1"
-                                        title="Edit"
-                                        data-email="{{ $item->email }}">
+                                <button class="btn btn-link text-secondary p-1 btn-edit-admin"
+                                    data-email="{{ $item->email }}"
+                                    data-username="{{ $item->username }}"
+                                    data-role="{{ $item->role }}">
                                     <i class="bi bi-pencil"></i>
                                 </button>
 
                                 <!-- HAPUS -->
-                                <button class="btn btn-link text-danger p-1"
-                                        title="Hapus"
-                                        data-email="{{ $item->email }}">
-                                    <i class="bi bi-trash"></i>
-                                </button>
-
+                                <form action="{{ route('admin.pengaturan.destroy', $item->email) }}"
+                                    method="POST"
+                                    onsubmit="return confirmDeleteAdmin('{{ $item->email }}', this)">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-link text-danger p-1">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
                             </div>
                         </td>
                     </tr>
@@ -121,9 +125,8 @@
             </div>
 
             <div class="modal-body px-4">
-                <form method="POST">
-                    @csrf
-
+                <form action="{{ route('admin.pengaturan.store') }}" method="POST">
+                 @csrf
                     <div class="mb-3">
                         <label class="form-label">Email</label>
                         <input type="email" name="email"
@@ -151,9 +154,86 @@
                             <option value="super_admin">Super Admin</option>
                         </select>
                     </div>
-
-                    <button class="btn btn-dark w-100">
+                    <button type="submit" class="btn btn-dark w-100 btn-submit-tokoh">
                         Tambah Admin
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ================= MODAL EDIT ADMIN ================= -->
+<div class="modal fade" id="modalEditAdmin" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 rounded-4">
+
+            <div class="modal-header border-0">
+                <h5 class="modal-title fw-bold">Edit Admin</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body px-4">
+                <form id="formEditAdmin" method="POST">
+                    @csrf
+                    @method('PUT')
+
+                    <!-- EMAIL (PK, TIDAK BOLEH DIUBAH) -->
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email"
+                               name="email"
+                               id="editEmail"
+                               class="form-control"
+                               readonly>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Username</label>
+                        <input type="text"
+                               name="username"
+                               id="editUsername"
+                               class="form-control"
+                               required>
+                    </div>
+
+                    <!-- PASSWORD -->
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+
+                        <div class="input-group">
+                            <input type="password"
+                                   name="password"
+                                   id="editPassword"
+                                   class="form-control"
+                                   placeholder="Kosongkan jika tidak diubah">
+
+                            <button type="button"
+                                    class="btn btn-outline-secondary"
+                                    id="toggleEditPassword">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div>
+
+                        <small class="text-muted">
+                            Kosongkan jika tidak ingin mengubah password
+                        </small>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label">Role</label>
+                        <select name="role"
+                                id="editRole"
+                                class="form-select"
+                                required>
+                            <option value="admin">Admin</option>
+                            <option value="super_admin">Super Admin</option>
+                        </select>
+                    </div>
+
+                    <button type="submit"
+                            class="btn btn-dark w-100 btn-submit-tokoh">
+                        Simpan Perubahan
                     </button>
                 </form>
             </div>
@@ -161,4 +241,123 @@
         </div>
     </div>
 </div>
+
+<script>
+document.querySelectorAll('.btn-edit-admin').forEach(btn => {
+    btn.addEventListener('click', function () {
+
+        const email = this.dataset.email;
+
+        document.getElementById('editEmail').value = email;
+        document.getElementById('editUsername').value = this.dataset.username;
+        document.getElementById('editRole').value = this.dataset.role;
+        document.getElementById('editPassword').value = '';
+
+        // set action form (EMAIL sebagai PK)
+        document.getElementById('formEditAdmin').action =
+            `/admin/pengaturan/${encodeURIComponent(email)}`;
+
+        new bootstrap.Modal(
+            document.getElementById('modalEditAdmin')
+        ).show();
+    });
+});
+
+// toggle password (ikon mata)
+document.getElementById('toggleEditPassword').addEventListener('click', function () {
+    const input = document.getElementById('editPassword');
+    const icon = this.querySelector('i');
+
+    if (input.type === 'password') {
+        input.type = 'text';
+        icon.classList.replace('bi-eye', 'bi-eye-slash');
+    } else {
+        input.type = 'password';
+        icon.classList.replace('bi-eye-slash', 'bi-eye');
+    }
+});
+</script>
+
+<form id="formDeleteAdmin" method="POST" style="display:none;">
+    @csrf
+    @method('DELETE')
+</form>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    let deleteFormTarget = null;
+
+    window.confirmDeleteAdmin = function (email, formEl) {
+        event.preventDefault();
+        deleteFormTarget = formEl;
+
+        document.getElementById("deleteText").innerHTML =
+            "<span class='fw-light'>Apakah anda yakin ingin menghapus Admin </span>" +
+            "<span class='fw-bold'>" + email + "</span><span class='fw-light'>?</span>";
+
+        const modal = document.getElementById("deleteModal");
+        modal.style.display = "block";
+
+        setTimeout(() => modal.classList.add("show"), 60);
+        return false;
+    };
+
+    document.getElementById("btnYes").addEventListener("click", function () {
+        if (deleteFormTarget) deleteFormTarget.submit();
+    });
+
+    document.getElementById("btnNo").addEventListener("click", function () {
+        const modal = document.getElementById("deleteModal");
+        modal.classList.remove("show");
+
+        setTimeout(() => {
+            modal.style.display = "none";
+            deleteFormTarget = null;
+        }, 600);
+    });
+
+});
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    let notif = document.getElementById("notif-top");
+    if (notif) {
+        notif.classList.add("show");
+
+        setTimeout(() => {
+            notif.classList.add("fade-out");
+        }, 2500);
+
+        setTimeout(() => {
+            notif.remove();
+        }, 3000);
+    }
+});
+</script>
+
+{{-- NOTIFIKASI SLIDE-DOWN --}}
+@if(session('success') || session('error'))
+@php
+    $msg = strtolower(session('success') ?? session('error'));
+    $status = str_contains($msg, 'hapus') ? 'delete'
+            : (str_contains($msg, 'tambah') ? 'terbit' : 'draf');
+@endphp
+<div id="notif-top" class="notif-top notif-{{ $status }}">
+    {{ session('success') ?? session('error') }}
+</div>
+@endif
+
+{{-- MODAL KONFIRMASI DELETE --}}
+<div id="deleteModal" class="delete-modal">
+    <p id="deleteText"></p>
+    <div class="d-flex justify-content-center gap-3 mt-4">
+        <button id="btnYes" class="btn-yes">Ya</button>
+        <button id="btnNo" class="btn-no">Tidak</button>
+    </div>
+</div>
+
+
 @endsection

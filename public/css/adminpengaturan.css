@@ -28,3 +28,15 @@
     border-radius: 14px;
     overflow: hidden;             /* biar radius rapi */
 }
+
+/* ===== BADGE ROLE ADMIN ===== */
+.badge-admin {
+    background-color: #e0f2fe;
+    color: #0369a1;              /* biru tua */
+}
+
+.badge-super-admin {
+    background-color: #fee2e2;   /* merah muda */
+    color: #b91c1c;              /* merah tua */
+}
+
