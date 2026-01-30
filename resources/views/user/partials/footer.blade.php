@@ -12,13 +12,13 @@
                     Balai Bahasa Provinsi Riau berperan dalam pengembangan,
                     pembinaan, dan pelindungan bahasa serta sastra di Provinsi Riau.
                 </p>
-                <div class="footer-socials">
-                    <a href="#" class="social-icon facebook" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#" class="social-icon instagram" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" class="social-icon tiktok" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-                    <a href="#" class="social-icon youtube" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-                    <a href="#" class="social-icon whatsapp" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-                    <a href="mailto:balaibahasaprovriau@gmail.com" class="social-icon email" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+                <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px;">
+                    <a href="#" class="social-icon facebook" aria-label="Facebook" style="width: 40px; height: 40px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #94a3b8; text-decoration: none; font-size: 18px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon instagram" aria-label="Instagram" style="width: 40px; height: 40px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #94a3b8; text-decoration: none; font-size: 18px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="social-icon tiktok" aria-label="TikTok" style="width: 40px; height: 40px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #94a3b8; text-decoration: none; font-size: 18px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="#" class="social-icon youtube" aria-label="YouTube" style="width: 40px; height: 40px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #94a3b8; text-decoration: none; font-size: 18px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#" class="social-icon whatsapp" aria-label="WhatsApp" style="width: 40px; height: 40px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #94a3b8; text-decoration: none; font-size: 18px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="mailto:balaibahasaprovriau@gmail.com" class="social-icon email" aria-label="Email" style="width: 40px; height: 40px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #94a3b8; text-decoration: none; font-size: 18px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);"><i class="fa-solid fa-envelope"></i></a>
                 </div>
             </div>
 
