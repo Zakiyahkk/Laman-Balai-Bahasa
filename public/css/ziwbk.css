@@ -1,32 +1,158 @@
 /* ==================================================
-   ZI-WBK Styles
+   ZI-WBK (CLONE SEMBARI - SCOPED)
 ================================================== */
-.ziwbk-container {
-    max-width: 1400px;
+.ak-container {
+    max-width: 1200px;
     margin: auto;
-    padding: 60px 20px;
+    margin-top: -40px;
 }
 
-.ziwbk-header {
-    text-align: center;
-    margin-bottom: 48px;
+.ziwbk-ui {
+    padding: 18px 0 60px;
 }
 
-.ziwbk-header h1 {
-    font-size: 40px;
-    font-weight: 800;
-    color: #0f172a;
+/* ================= HEADER ================= */
+.ziwbk-ui .ak-sembari-pagehead {
+    background: #0b2a4a;
+    color: #fff;
+    border-radius: 14px;
+    padding: 22px 20px;
 }
 
-.ziwbk-header p {
-    font-size: 16px;
-    color: #64748b;
-    margin-top: 10px;
+.ziwbk-ui .ak-sembari-pagehead h1 {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 900;
 }
 
-/* GRID */
-.ziwbk-grid {
+.ziwbk-ui .ak-sembari-breadcrumb {
+    margin-top: 8px;
+    font-size: 13px;
+}
+
+.ziwbk-ui .ak-sembari-breadcrumb a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* ================= CARD ================= */
+.ziwbk-ui .ak-sembari-card {
+    background: #fff;
+    border: 1px solid #e6ecf5;
+    border-radius: 14px;
+    margin-top: 14px;
+    box-shadow: 0 10px 30px rgba(16, 24, 40, 0.08);
+}
+
+.ziwbk-ui .ak-sembari-card-section {
+    padding: 16px 20px;
+}
+
+.ziwbk-ui .ak-sembari-section-title {
+    font-size: 18px;
+    font-weight: 900;
+}
+
+.ziwbk-ui .ak-sembari-section-subtitle {
+    margin-top: 6px;
+    font-size: 14px;
+    color: #6b7a90;
+}
+
+/* ================= TOOLS ================= */
+.ziwbk-ui .ak-sembari-tools {
+    padding: 14px 20px;
+    border-bottom: 1px solid #e6ecf5;
+}
+
+.ziwbk-ui .ak-sembari-tools-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+/* Search */
+.ziwbk-ui .ak-sembari-search {
+    position: relative;
+    flex: 1;
+    max-width: 420px;
+}
+
+.ziwbk-ui .ak-sembari-search input {
+    width: 100%;
+    height: 42px;
+    padding: 0 14px;
+    border-radius: 12px;
+    border: 1px solid #e6ecf5;
+    font-size: 14px;
+}
+
+/* Select */
+.ziwbk-ui .ak-sembari-year {
+    height: 42px;
+    padding: 0 14px;
+    border-radius: 12px;
+    border: 1px solid #e6ecf5;
+    font-size: 14px;
+}
+
+/* Button */
+.ziwbk-ui .ak-sembari-btn-primary,
+.ziwbk-ui .ak-sembari-btn-ghost {
+    height: 42px;
+    padding: 0 18px;
+    border-radius: 12px;
+    font-size: 14px;
+    border: 0;
+    cursor: pointer;
+}
+
+/* ================= TABLE ================= */
+.ziwbk-ui .ak-sembari-table {
+    width: 100%;
+}
+
+.ziwbk-ui .ak-sembari-thead,
+.ziwbk-ui .ak-sembari-row {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 28px;
+    grid-template-columns:
+        1fr
+        100px
+        140px
+        90px
+        90px;
+    padding: 14px 20px;
+    align-items: center;
+}
+
+.ziwbk-ui .ak-sembari-thead {
+    font-size: 12px;
+    color: #6b7a90;
+}
+
+.ziwbk-ui .ak-sembari-row {
+    border-top: 1px solid #e6ecf5;
+}
+
+.ziwbk-ui .ak-sembari-docname {
+    font-size: 13px;
+}
+
+/* Center kolom kecil */
+.ziwbk-ui .c {
+    display: flex;
+    justify-content: center;
+}
+
+/* Mobile */
+@media (max-width: 820px) {
+    .ziwbk-ui .ak-sembari-thead {
+        display: none;
+    }
+
+    .ziwbk-ui .ak-sembari-row {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
 }

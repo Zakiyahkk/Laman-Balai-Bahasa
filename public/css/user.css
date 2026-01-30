@@ -2732,7 +2732,9 @@ body {
 }
 
 .kr-foto img {
-    max-width: 300%;
+    max-width: 100%;
+    width: 100%;
+    max-width: 420px; /* batas aman desktop */
     height: auto;
     border-radius: 24px;
     filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.15));
@@ -2758,8 +2760,11 @@ body {
         gap: 48px;
     }
 
+    .kr-foto {
+        justify-content: center;
+    }
     .kr-foto img {
-        max-width: 400px;
+        max-width: 38s0px;
     }
 
     .kr-text h2 {
@@ -2771,22 +2776,25 @@ body {
 ===================== */
 @media (max-width: 768px) {
     .kr-section {
-        padding: 64px 0;
+        padding: 56px 0;
     }
 
     .kr-wrap {
         grid-template-columns: 1fr;
-        gap: 40px;
+        gap: 32px;
         padding: 0 16px;
     }
 
     .kr-text {
-        max-width: 100%;
-        box-sizing: border-box;
+        order: 1;
+    }
+
+    .kr-foto {
+        order: 2;
     }
 
     .kr-text h2 {
-        font-size: 26px;
+        font-size: 24px;
         margin-bottom: 16px;
     }
 
@@ -2796,21 +2804,18 @@ body {
 
     .kr-text p {
         font-size: 14px;
-        line-height: 1.8;
+        line-height: 1.75;
+        text-align: left;
 
-        /* 🔑 CEGAH TEKS KELUAR LAYAR */
+        /* cegah overflow */
         overflow-wrap: break-word;
-        word-break: break-word;
-
-        /* justify aman di mobile */
-        text-align: justify;
+        word-break: normal;
         hyphens: auto;
-        word-spacing: 0;
     }
 
     .kr-nama {
         padding-left: 12px;
-        margin-top: 24px;
+        margin-top: 20px;
     }
 
     /* 🔑 FOTO JANGAN DORONG LAYOUT */
@@ -3313,15 +3318,17 @@ body.modal-open {
 
 .modal-panel {
     position: relative;
+    overflow: visible; /* tombol close aman */
+}
+
+.modal-inner {
+    display: flex;
     width: 650px;
     max-width: calc(100vw - 32px);
     background: #fff;
     border-radius: 20px;
-    display: flex;
-    overflow: hidden;
+    overflow: hidden; /* CLIP ke radius */
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-    transform: scale(0.9);
-    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     max-height: 80vh;
 }
 
@@ -4754,5 +4761,116 @@ body {
         right: 5%;
         bottom: 90px;
         height: 65vh;
+    }
+}
+
+/* ======================================
+   FASILITAS DETAIL
+====================================== */
+
+.fasilitas-detail {
+    padding: 60px 0;
+    background: #f8fafc;
+}
+
+.fasilitas-detail-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.fasilitas-detail-header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.fasilitas-detail-header p {
+    color: #64748b;
+    font-size: 15px;
+}
+
+/* GALERI GRID */
+.fasilitas-galeri {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.fasilitas-galeri-item {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.1);
+}
+
+.fasilitas-galeri-item img {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.25s ease;
+}
+
+.fasilitas-galeri-item img:hover {
+    transform: scale(1.05);
+}
+
+.fasilitas-galeri-empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #64748b;
+    padding: 40px 0;
+}
+
+/* TOMBOL KEMBALI */
+.fasilitas-detail-back {
+    text-align: center;
+    margin-top: 36px;
+}
+
+.btn-kembali {
+    display: inline-block;
+    padding: 10px 18px;
+    background: #0ea5e9;
+    color: #fff;
+    border-radius: 10px;
+    font-size: 14px;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+.btn-kembali:hover {
+    background: #0284c7;
+}
+
+/* =====================
+   RESPONSIVE
+===================== */
+
+/* TABLET */
+@media (max-width: 1024px) {
+    .fasilitas-detail-header h1 {
+        font-size: 24px;
+    }
+    .fasilitas-galeri {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+    .fasilitas-detail {
+        padding: 40px 0;
+    }
+
+    .fasilitas-detail-header h1 {
+        font-size: 22px;
+    }
+
+    .fasilitas-galeri-item img {
+        height: 160px;
+    }
+    .fasilitas-galeri {
+        grid-template-columns: 1fr;
     }
 }

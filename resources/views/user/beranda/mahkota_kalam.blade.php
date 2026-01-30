@@ -149,21 +149,26 @@
     <div class="modal-backdrop" onclick="closeTokohModal()"></div>
 
     <div class="modal-panel">
+
         <button class="close-btn" onclick="closeTokohModal()">
             <i class="fa-solid fa-xmark"></i>
         </button>
 
-        <div class="modal-left">
-            <img id="mFoto" src="" alt="Foto Tokoh">
-        </div>
+        <div class="modal-inner">
 
-        <div class="modal-right">
-            <div>
-                <span id="mKategori" class="modal-tag"></span>
-                <h3 id="mNama" class="modal-title"></h3>
-                <div class="modal-divider"></div>
-                <p id="mDesc" class="modal-desc"></p>
+            <div class="modal-left">
+                <img id="mFoto" src="" alt="Foto Tokoh">
             </div>
+
+            <div class="modal-right">
+                <div>
+                    <span id="mKategori" class="modal-tag"></span>
+                    <h3 id="mNama" class="modal-title"></h3>
+                    <div class="modal-divider"></div>
+                    <p id="mDesc" class="modal-desc"></p>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>

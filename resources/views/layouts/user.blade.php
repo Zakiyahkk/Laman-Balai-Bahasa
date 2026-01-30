@@ -19,6 +19,8 @@
     {{-- CSS USER --}}
     <link rel="stylesheet" href="{{ asset('css/user.css') }}?v={{ time() }}">
 
+    <link rel="stylesheet" href="{{ asset('css/ziwbk.css') }}">
+
     <!-- CSS Halaman Spesifik -->
     @yield('css')
 </head>
@@ -37,6 +39,8 @@
 
     {{-- JS USER --}}
     <script src="{{ asset('js/user.js') }}"></script>
+    {{-- JS HALAMAN (PREVIEW, DLL) --}}
+    @stack('scripts')
 
 </body>
 

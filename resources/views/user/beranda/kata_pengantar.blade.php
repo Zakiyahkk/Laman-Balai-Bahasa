@@ -1,5 +1,5 @@
 <section class="kr-section" style="padding-top: 20px; padding-bottom: 20px; margin-top: 0; background: #ffffff;">
-    <div class="kr-wrap" style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; align-items: center;">
+    <div class="kr-wrap">
 
         <div class="kr-text kr-reveal" style="padding-top: 0;">
             <h2 style="margin-top: 0; margin-bottom: 15px; font-size: 28px; color: #0f172a;">Kata Pengantar</h2>

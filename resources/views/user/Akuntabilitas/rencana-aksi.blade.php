@@ -57,6 +57,7 @@
                     <div>Judul Dokumen</div>
                     <div class="c">Tahun</div>
                     <div class="c">Bentuk Berkas</div>
+                    <div class="c">Pratinjau</div>
                     <div class="c">Unduh</div>
                 </div>
 
@@ -79,11 +80,25 @@
                             </div>
 
                             <div class="c">
-                                <a class="ak-download"
-                                    href="{{ isset($doc['file']) ? asset('storage/' . $doc['file']) : '#' }}"
-                                    target="_blank">
-                                    <i class="fa fa-download" style="font-size: 15px;"></i>
-                                </a>
+                                @if (!empty($doc['file']))
+                                    <button class="ak-icon-btn ak-preview-btn"
+                                        data-file="{{ asset('storage/' . $doc['file']) }}" title="Pratinjau">
+                                        <i class="fa-regular fa-eye"></i>
+                                    </button>
+                                @else
+                                    -
+                                @endif
+                            </div>
+
+                            <div class="c">
+                                @if (!empty($doc['file']))
+                                    <a class="ak-icon-btn ak-download" href="{{ asset('storage/' . $doc['file']) }}"
+                                        title="Unduh">
+                                        <i class="fa-solid fa-download"></i>
+                                    </a>
+                                @else
+                                    -
+                                @endif
                             </div>
                         </div>
                     @empty
@@ -93,7 +108,46 @@
             </div>
 
         </div>
-
     </div>
 
+    <div class="ak-preview-modal" id="akPreviewModal">
+        <div class="ak-preview-overlay"></div>
+
+        <div class="ak-preview-box">
+            <div class="ak-preview-header">
+                <span>Pratinjau Dokumen</span>
+                <button type="button" class="ak-preview-close">&times;</button>
+            </div>
+
+            <div class="ak-preview-body">
+                <iframe id="akPreviewFrame"></iframe>
+            </div>
+        </div>
+    </div>
 @endsection
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            document.body.addEventListener('click', function(e) {
+                const btn = e.target.closest('.ak-preview-btn');
+                if (!btn) return;
+
+                const file = btn.dataset.file;
+                if (!file) return;
+
+                document.getElementById('akPreviewFrame').src = file + '#toolbar=0&navpanes=0&scrollbar=1';
+                document.getElementById('akPreviewModal').classList.add('active');
+            });
+
+            document.querySelector('.ak-preview-close')?.addEventListener('click', closePreview);
+            document.querySelector('.ak-preview-overlay')?.addEventListener('click', closePreview);
+
+            function closePreview() {
+                document.getElementById('akPreviewFrame').src = '';
+                document.getElementById('akPreviewModal').classList.remove('active');
+            }
+
+        });
+    </script>
+@endpush

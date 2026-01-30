@@ -222,8 +222,13 @@
                     <li><a href="{{ url('#') }}" class="{{ request()->is('spak*') ? 'active' : '' }}"><i
                                 class="fa-regular fa-file-lines menu-icon"></i> Survei Persepsi Antikorupsi</a>
                     </li>
-                    <li><a href="{{ url('#') }}" class="{{ request()->is('spkp*') ? 'active' : '' }}"><i
-                                class="fa-regular fa-file-lines menu-icon"></i> Hasil Survei</a></li>
+                    <li>
+                        <a href="{{ url('/survei/hasil') }}"
+                            class="{{ request()->is('survei/hasil*') ? 'active' : '' }}">
+                            <i class="fa-regular fa-file-lines menu-icon"></i>
+                            Hasil Survei
+                        </a>
+                    </li>
                 </ul>
             </li>
 
@@ -238,195 +243,302 @@
             <li class="has-dropdown dropdown-reverse">
                 <a href="javascript:void(0)" onclick="toggleSub(this)"
                     class="{{ request()->is('ziwbk*') ? 'active' : '' }}">
-                    <i class="fa-regular fa-star menu-icon"></i> ZI-WBK <i
-                        class="fa-solid fa-chevron-down dropdown-arrow"></i>
+                    <i class="fa-regular fa-star menu-icon"></i>
+                    ZI-WBK
+                    <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
                 </a>
+
                 <ul class="dropdown">
+
+                    {{-- ===================== 2025 ===================== --}}
                     <li class="has-dropdown">
                         <a href="javascript:void(0)" onclick="toggleSub(this)">
                             2025 <i class="fa-solid fa-chevron-right dropdown-arrow"></i>
                         </a>
+
                         <ul class="dropdown">
+
+                            {{-- Manajemen Perubahan --}}
                             <li class="has-dropdown">
                                 <a href="javascript:void(0)" onclick="toggleSub(this)">
-                                    Manajemen Perubahan <i class="fa-solid fa-chevron-right dropdown-arrow"></i>
+                                    Manajemen Perubahan
+                                    <i class="fa-solid fa-chevron-right dropdown-arrow"></i>
                                 </a>
                                 <ul class="dropdown">
-                                    <li><a href="{{ url('/timkerja/detail/2022') }}">Tim Kerja</a></li>
-                                    <li><a href="{{ url('/rencanawbk/detail/2022') }}">Rencana Pembangunan WBK</a>
-                                    </li>
-                                    <li><a href="{{ url('/monevwbk/detail/2022') }}">Pemantauan & Evaluasi</a>
-                                    </li>
-                                    <li><a href="{{ url('/budayakerja/detail/2022') }}">Pola Pikir & Budaya
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2025, 'manajemen-perubahan', 'tim-kerja']) }}">Tim
                                             Kerja</a></li>
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2025, 'manajemen-perubahan', 'rencana-pembangunan-wbk']) }}">Rencana
+                                            Pembangunan WBK</a></li>
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2025, 'manajemen-perubahan', 'pemantauan-evaluasi']) }}">Pemantauan
+                                            & Evaluasi</a></li>
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2025, 'manajemen-perubahan', 'pola-pikir-budaya-kerja']) }}">Pola
+                                            Pikir & Budaya Kerja</a></li>
                                 </ul>
                             </li>
+
+                            {{-- Penguatan Tata Laksana --}}
                             <li class="has-dropdown">
                                 <a href="javascript:void(0)" onclick="toggleSub(this)">
-                                    Penguatan Tata Laksana <i class="fa-solid fa-chevron-right dropdown-arrow"></i>
+                                    Penguatan Tata Laksana
+                                    <i class="fa-solid fa-chevron-right dropdown-arrow"></i>
                                 </a>
                                 <ul class="dropdown">
-                                    <li><a href="{{ url('/pos/detail/2022') }}">POS</a></li>
-                                    <li><a href="{{ url('/sinde/detail/2022') }}">Sistem Elektronik</a></li>
-                                    <li><a href="{{ url('/keterbukaaninformasi/detail/2022') }}">Keterbukaan
-                                            Informasi</a></li>
-                                </ul>
-                            </li>
-                            <li class="has-dropdown">
-                                <a href="javascript:void(0)" onclick="toggleSub(this)">
-                                    Manajemen SDM <i class="fa-solid fa-chevron-right dropdown-arrow"></i>
-                                </a>
-                                <ul class="dropdown">
-                                    <li><a href="{{ url('/rencanakebutuhan/detail/2022') }}">Perencanaan
-                                            Kebutuhan</a></li>
-                                    <li><a href="{{ url('/mutasiinternal/detail/2022') }}">Pola Mutasi
-                                            Internal</a></li>
-                                    <li><a href="{{ url('/pbk/detail/2022') }}">Pengembangan Pegawai</a></li>
-                                    <li><a href="{{ url('/kinerjaindividu/detail/2022') }}">Penetapan Kinerja</a>
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2025, 'penguatan-tata-laksana', 'pos']) }}">POS</a>
                                     </li>
-                                    <li><a href="{{ url('/penegakandisiplin/detail/2022') }}">Penegakan
-                                            Disiplin</a></li>
-                                    <li><a href="{{ url('/Informasikepegawaian/detail/2022') }}">Sistem
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2025, 'penguatan-tata-laksana', 'sistem-elektronik']) }}">Sistem
+                                            Elektronik</a></li>
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2025, 'penguatan-tata-laksana', 'keterbukaan-informasi']) }}">Keterbukaan
                                             Informasi</a></li>
                                 </ul>
                             </li>
+
+                            {{-- Manajemen SDM --}}
                             <li class="has-dropdown">
                                 <a href="javascript:void(0)" onclick="toggleSub(this)">
-                                    Penguatan Akuntabilitas <i class="fa-solid fa-chevron-right dropdown-arrow"></i>
+                                    Manajemen SDM
+                                    <i class="fa-solid fa-chevron-right dropdown-arrow"></i>
                                 </a>
                                 <ul class="dropdown">
-                                    <li><a href="{{ url('/keterlibatanpimpinan/detail/2022') }}">Keterlibatan
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2025, 'manajemen-sdm', 'perencanaan-kebutuhan']) }}">Perencanaan
+                                            Kebutuhan</a></li>
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2025, 'manajemen-sdm', 'pola-mutasi-internal']) }}">Pola
+                                            Mutasi Internal</a></li>
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2025, 'manajemen-sdm', 'pengembangan-pegawai']) }}">Pengembangan
+                                            Pegawai</a></li>
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2025, 'manajemen-sdm', 'penetapan-kinerja']) }}">Penetapan
+                                            Kinerja</a></li>
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2025, 'manajemen-sdm', 'penegakan-disiplin']) }}">Penegakan
+                                            Disiplin</a></li>
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2025, 'manajemen-sdm', 'sistem-informasi']) }}">Sistem
+                                            Informasi</a></li>
+                                </ul>
+                            </li>
+
+                            {{-- Penguatan Akuntabilitas --}}
+                            <li class="has-dropdown">
+                                <a href="javascript:void(0)" onclick="toggleSub(this)">
+                                    Penguatan Akuntabilitas
+                                    <i class="fa-solid fa-chevron-right dropdown-arrow"></i>
+                                </a>
+                                <ul class="dropdown">
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2025, 'penguatan-akuntabilitas', 'keterlibatan-pimpinan']) }}">Keterlibatan
                                             Pimpinan</a></li>
-                                    <li><a href="{{ url('/akuntabilitaskinerja/detail/2022') }}">Akuntabilitas
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2025, 'penguatan-akuntabilitas', 'akuntabilitas-kinerja']) }}">Akuntabilitas
                                             Kinerja</a></li>
                                 </ul>
                             </li>
+
+                            {{-- Penguatan Pengawasan --}}
                             <li class="has-dropdown">
                                 <a href="javascript:void(0)" onclick="toggleSub(this)">
-                                    Penguatan Pengawasan <i class="fa-solid fa-chevron-right dropdown-arrow"></i>
+                                    Penguatan Pengawasan
+                                    <i class="fa-solid fa-chevron-right dropdown-arrow"></i>
                                 </a>
                                 <ul class="dropdown">
-                                    <li><a href="{{ url('/gratifikasi/detail/2022') }}">Gratifikasi</a></li>
-                                    <li><a href="{{ url('/SpiWbk/detail/2022') }}">SPI</a></li>
-                                    <li><a href="{{ url('/aduanmasyarakat/detail/2022') }}">Pengaduan
-                                            Masyarakat</a></li>
-                                    <li><a href="{{ url('/whistleblowing/detail/2022') }}">Whistle Blowing</a>
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2025, 'penguatan-pengawasan', 'gratifikasi']) }}">Gratifikasi</a>
                                     </li>
-                                    <li><a href="{{ url('/benturankepentingan/detail/2022') }}">Benturan
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2025, 'penguatan-pengawasan', 'spi']) }}">SPI</a>
+                                    </li>
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2025, 'penguatan-pengawasan', 'pengaduan-masyarakat']) }}">Pengaduan
+                                            Masyarakat</a></li>
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2025, 'penguatan-pengawasan', 'whistleblowing']) }}">Whistle
+                                            Blowing</a></li>
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2025, 'penguatan-pengawasan', 'benturan-kepentingan']) }}">Benturan
                                             Kepentingan</a></li>
                                 </ul>
                             </li>
+
+                            {{-- Layanan Publik --}}
                             <li class="has-dropdown">
                                 <a href="javascript:void(0)" onclick="toggleSub(this)">
-                                    Layanan Publik <i class="fa-solid fa-chevron-right dropdown-arrow"></i>
+                                    Layanan Publik
+                                    <i class="fa-solid fa-chevron-right dropdown-arrow"></i>
                                 </a>
                                 <ul class="dropdown">
-                                    <li><a href="{{ url('/standarpelayanan/detail/2022') }}">Standar Pelayanan</a>
-                                    </li>
-                                    <li><a href="{{ url('/pelayananprima/detail/2022') }}">Budaya Pelayanan
-                                            Prima</a></li>
-                                    <li><a href="{{ url('/pemanfaatantik/detail/2022') }}">Pemanfaatan TIK</a>
-                                    </li>
-                                    <li><a href="{{ url('/kepuasanmasyarakat/detail/2022') }}">Kepuasan
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2025, 'layanan-publik', 'standar-pelayanan']) }}">Standar
+                                            Pelayanan</a></li>
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2025, 'layanan-publik', 'budaya-pelayanan-prima']) }}">Budaya
+                                            Pelayanan Prima</a></li>
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2025, 'layanan-publik', 'pemanfaatan-tik']) }}">Pemanfaatan
+                                            TIK</a></li>
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2025, 'layanan-publik', 'kepuasan-masyarakat']) }}">Kepuasan
                                             Masyarakat</a></li>
                                 </ul>
                             </li>
+
                         </ul>
                     </li>
 
+                    {{-- ===================== 2026 ===================== --}}
                     <li class="has-dropdown">
                         <a href="javascript:void(0)" onclick="toggleSub(this)">
                             2026 <i class="fa-solid fa-chevron-right dropdown-arrow"></i>
                         </a>
+
                         <ul class="dropdown">
+
+                            {{-- Manajemen Perubahan --}}
                             <li class="has-dropdown">
                                 <a href="javascript:void(0)" onclick="toggleSub(this)">
-                                    Manajemen Perubahan <i class="fa-solid fa-chevron-right dropdown-arrow"></i>
+                                    Manajemen Perubahan
+                                    <i class="fa-solid fa-chevron-right dropdown-arrow"></i>
                                 </a>
                                 <ul class="dropdown">
-                                    <li><a href="{{ url('/timkerja/detail/2022') }}">Tim Kerja</a></li>
-                                    <li><a href="{{ url('/rencanawbk/detail/2022') }}">Rencana Pembangunan WBK</a>
-                                    </li>
-                                    <li><a href="{{ url('/monevwbk/detail/2022') }}">Pemantauan & Evaluasi</a>
-                                    </li>
-                                    <li><a href="{{ url('/budayakerja/detail/2022') }}">Pola Pikir & Budaya
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2026, 'manajemen-perubahan', 'tim-kerja']) }}">Tim
                                             Kerja</a></li>
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2026, 'manajemen-perubahan', 'rencana-pembangunan-wbk']) }}">Rencana
+                                            Pembangunan WBK</a></li>
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2026, 'manajemen-perubahan', 'pemantauan-evaluasi']) }}">Pemantauan
+                                            & Evaluasi</a></li>
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2026, 'manajemen-perubahan', 'pola-pikir-budaya-kerja']) }}">Pola
+                                            Pikir & Budaya Kerja</a></li>
                                 </ul>
                             </li>
+
+                            {{-- Penguatan Tata Laksana --}}
                             <li class="has-dropdown">
                                 <a href="javascript:void(0)" onclick="toggleSub(this)">
-                                    Penguatan Tata Laksana <i class="fa-solid fa-chevron-right dropdown-arrow"></i>
+                                    Penguatan Tata Laksana
+                                    <i class="fa-solid fa-chevron-right dropdown-arrow"></i>
                                 </a>
                                 <ul class="dropdown">
-                                    <li><a href="{{ url('/pos/detail/2022') }}">POS</a></li>
-                                    <li><a href="{{ url('/sinde/detail/2022') }}">Sistem Elektronik</a></li>
-                                    <li><a href="{{ url('/keterbukaaninformasi/detail/2022') }}">Keterbukaan
-                                            Informasi</a></li>
-                                </ul>
-                            </li>
-                            <li class="has-dropdown">
-                                <a href="javascript:void(0)" onclick="toggleSub(this)">
-                                    Manajemen SDM <i class="fa-solid fa-chevron-right dropdown-arrow"></i>
-                                </a>
-                                <ul class="dropdown">
-                                    <li><a href="{{ url('/rencanakebutuhan/detail/2022') }}">Perencanaan
-                                            Kebutuhan</a></li>
-                                    <li><a href="{{ url('/mutasiinternal/detail/2022') }}">Pola Mutasi
-                                            Internal</a></li>
-                                    <li><a href="{{ url('/pbk/detail/2022') }}">Pengembangan Pegawai</a></li>
-                                    <li><a href="{{ url('/kinerjaindividu/detail/2022') }}">Penetapan Kinerja</a>
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2026, 'penguatan-tata-laksana', 'pos']) }}">POS</a>
                                     </li>
-                                    <li><a href="{{ url('/penegakandisiplin/detail/2022') }}">Penegakan
-                                            Disiplin</a></li>
-                                    <li><a href="{{ url('/Informasikepegawaian/detail/2022') }}">Sistem
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2026, 'penguatan-tata-laksana', 'sistem-elektronik']) }}">Sistem
+                                            Elektronik</a></li>
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2026, 'penguatan-tata-laksana', 'keterbukaan-informasi']) }}">Keterbukaan
                                             Informasi</a></li>
                                 </ul>
                             </li>
+
+                            {{-- Manajemen SDM --}}
                             <li class="has-dropdown">
                                 <a href="javascript:void(0)" onclick="toggleSub(this)">
-                                    Penguatan Akuntabilitas <i class="fa-solid fa-chevron-right dropdown-arrow"></i>
+                                    Manajemen SDM
+                                    <i class="fa-solid fa-chevron-right dropdown-arrow"></i>
                                 </a>
                                 <ul class="dropdown">
-                                    <li><a href="{{ url('/keterlibatanpimpinan/detail/2022') }}">Keterlibatan
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2026, 'manajemen-sdm', 'perencanaan-kebutuhan']) }}">Perencanaan
+                                            Kebutuhan</a></li>
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2026, 'manajemen-sdm', 'pola-mutasi-internal']) }}">Pola
+                                            Mutasi Internal</a></li>
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2026, 'manajemen-sdm', 'pengembangan-pegawai']) }}">Pengembangan
+                                            Pegawai</a></li>
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2026, 'manajemen-sdm', 'penetapan-kinerja']) }}">Penetapan
+                                            Kinerja</a></li>
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2026, 'manajemen-sdm', 'penegakan-disiplin']) }}">Penegakan
+                                            Disiplin</a></li>
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2026, 'manajemen-sdm', 'sistem-informasi']) }}">Sistem
+                                            Informasi</a></li>
+                                </ul>
+                            </li>
+
+                            {{-- Penguatan Akuntabilitas --}}
+                            <li class="has-dropdown">
+                                <a href="javascript:void(0)" onclick="toggleSub(this)">
+                                    Penguatan Akuntabilitas
+                                    <i class="fa-solid fa-chevron-right dropdown-arrow"></i>
+                                </a>
+                                <ul class="dropdown">
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2026, 'penguatan-akuntabilitas', 'keterlibatan-pimpinan']) }}">Keterlibatan
                                             Pimpinan</a></li>
-                                    <li><a href="{{ url('/akuntabilitaskinerja/detail/2022') }}">Akuntabilitas
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2026, 'penguatan-akuntabilitas', 'akuntabilitas-kinerja']) }}">Akuntabilitas
                                             Kinerja</a></li>
                                 </ul>
                             </li>
+
+                            {{-- Penguatan Pengawasan --}}
                             <li class="has-dropdown">
                                 <a href="javascript:void(0)" onclick="toggleSub(this)">
-                                    Penguatan Pengawasan <i class="fa-solid fa-chevron-right dropdown-arrow"></i>
+                                    Penguatan Pengawasan
+                                    <i class="fa-solid fa-chevron-right dropdown-arrow"></i>
                                 </a>
                                 <ul class="dropdown">
-                                    <li><a href="{{ url('/gratifikasi/detail/2022') }}">Gratifikasi</a></li>
-                                    <li><a href="{{ url('/SpiWbk/detail/2022') }}">SPI</a></li>
-                                    <li><a href="{{ url('/aduanmasyarakat/detail/2022') }}">Pengaduan
-                                            Masyarakat</a></li>
-                                    <li><a href="{{ url('/whistleblowing/detail/2022') }}">Whistle Blowing</a>
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2026, 'penguatan-pengawasan', 'gratifikasi']) }}">Gratifikasi</a>
                                     </li>
-                                    <li><a href="{{ url('/benturankepentingan/detail/2022') }}">Benturan
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2026, 'penguatan-pengawasan', 'spi']) }}">SPI</a>
+                                    </li>
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2026, 'penguatan-pengawasan', 'pengaduan-masyarakat']) }}">Pengaduan
+                                            Masyarakat</a></li>
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2026, 'penguatan-pengawasan', 'whistleblowing']) }}">Whistle
+                                            Blowing</a></li>
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2026, 'penguatan-pengawasan', 'benturan-kepentingan']) }}">Benturan
                                             Kepentingan</a></li>
                                 </ul>
                             </li>
+
+                            {{-- Layanan Publik --}}
                             <li class="has-dropdown">
                                 <a href="javascript:void(0)" onclick="toggleSub(this)">
-                                    Layanan Publik <i class="fa-solid fa-chevron-right dropdown-arrow"></i>
+                                    Layanan Publik
+                                    <i class="fa-solid fa-chevron-right dropdown-arrow"></i>
                                 </a>
                                 <ul class="dropdown">
-                                    <li><a href="{{ url('/standarpelayanan/detail/2022') }}">Standar Pelayanan</a>
-                                    </li>
-                                    <li><a href="{{ url('/pelayananprima/detail/2022') }}">Budaya Pelayanan
-                                            Prima</a></li>
-                                    <li><a href="{{ url('/pemanfaatantik/detail/2022') }}">Pemanfaatan TIK</a>
-                                    </li>
-                                    <li><a href="{{ url('/kepuasanmasyarakat/detail/2022') }}">Kepuasan
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2026, 'layanan-publik', 'standar-pelayanan']) }}">Standar
+                                            Pelayanan</a></li>
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2026, 'layanan-publik', 'budaya-pelayanan-prima']) }}">Budaya
+                                            Pelayanan Prima</a></li>
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2026, 'layanan-publik', 'pemanfaatan-tik']) }}">Pemanfaatan
+                                            TIK</a></li>
+                                    <li><a
+                                            href="{{ route('user.ziwbk.dokumen', [2026, 'layanan-publik', 'kepuasan-masyarakat']) }}">Kepuasan
                                             Masyarakat</a></li>
                                 </ul>
                             </li>
+
                         </ul>
                     </li>
+
                 </ul>
             </li>
+
 
             <li class="mobile-extra-content">
                 <div class="mob-item">

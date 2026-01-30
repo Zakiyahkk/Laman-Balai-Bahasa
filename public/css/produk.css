@@ -248,6 +248,71 @@
    SEMBARI
 ================================================== */
 
+/* ===============================
+   PREVIEW MODAL (SMALL, RAPI)
+================================ */
+
+.ak-preview-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+}
+
+.ak-preview-modal.active {
+    display: flex; /* 🔥 PENTING */
+    align-items: center;
+    justify-content: center;
+}
+
+.ak-preview-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 1; /* 🔥 */
+}
+
+.ak-preview-box {
+    position: relative;
+    background: #fff;
+    width: 90%;
+    max-width: 900px; /* 🔥 KUNCI UKURAN */
+    height: 85vh;
+    margin: 5vh auto;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+    z-index: 2; /* 🔥 INI KUNCI */
+}
+
+.ak-preview-header {
+    height: 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 18px;
+    font-weight: 600;
+    border-bottom: 1px solid #e6ecf5;
+}
+
+.ak-preview-close {
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.ak-preview-body {
+    height: calc(100% - 56px); /* 🔥 KUNCI */
+}
+
+.ak-preview-body iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+
 .ak-sembari-ui {
     padding: 18px 0 60px;
 }
@@ -385,31 +450,34 @@
     width: 100%;
 }
 
-.ak-sembari-thead {
+.ak-sembari-thead,
+.ak-sembari-row {
     display: grid;
-    grid-template-columns: 1fr 100px 140px 80px;
+    grid-template-columns:
+        1fr
+        100px
+        140px
+        90px
+        90px;
     padding: 14px 20px;
-    font-size: 11px;
-    font-weight: 400;
-    color: #64748b;
-    letter-spacing: 0.2px;
+    align-items: center;
+}
+
+.ak-sembari-thead {
+    font-size: 12px;
+    color: #6b7a90;
 }
 
 .ak-sembari-row {
-    display: grid;
-    grid-template-columns: 1fr 100px 140px 80px;
-    padding: 14px 20px;
     border-top: 1px solid #e6ecf5;
-    align-items: center;
 }
 
 .ak-sembari-docname {
     font-size: 13px;
-    font-weight: 400;
     line-height: 1.35;
 }
 
-/* Center columns */
+/* Center kolom kecil */
 .ak-sembari-thead .c,
 .ak-sembari-row .c {
     display: flex;
@@ -419,7 +487,6 @@
 
 /* Badge */
 .ak-sembari-badge {
-    display: inline-flex;
     padding: 6px 10px;
     border-radius: 999px;
     background: #eaf2ff;
@@ -436,18 +503,29 @@
     border-radius: 999px;
     border: 1px solid #e6ecf5;
     font-size: 12px;
-    background: #fff;
 }
 
-/* Download */
-.ak-sembari-download {
-    width: 38px;
-    height: 38px;
-    display: grid;
-    place-items: center;
-    border-radius: 12px;
-    border: 1px solid #e6ecf5;
-    background: #fff;
+/* Icon button (preview & download) */
+.ak-sembari-ui .ak-icon-btn {
+    background: transparent;
+    border: none;
+    padding: 6px;
+    cursor: pointer;
+    color: #9ca3af;
+    font-size: 16px;
+    transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.ak-sembari-ui .ak-icon-btn:hover {
+    color: #4b5563;
+    transform: scale(1.05);
+}
+
+.ak-icon-btn.is-disabled {
+    color: #d1d5db; /* abu-abu pucat */
+    cursor: not-allowed;
+    pointer-events: none; /* benar-benar nonaktif */
+    transform: none;
 }
 
 /* ================= MOBILE ================= */

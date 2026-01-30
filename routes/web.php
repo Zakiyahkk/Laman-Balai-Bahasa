@@ -28,6 +28,10 @@ use App\Http\Controllers\Admin\APengaturanController;
 
 Route::get('/', [BerandaController::class, 'dashboard']);
 
+Route::get('/fasilitas/{slug}', function ($slug) {
+    return view('user.fasilitas.fasilitas-detail', compact('slug'));
+})->name('fasilitas.detail');
+
 Route::get('/berita', [BeritaController::class, 'index'])
     ->name('berita.index');
 
@@ -83,17 +87,15 @@ Route::prefix('ppid')->group(function () {
 });
 
 Route::prefix('survei')->group(function () {
-    Route::get('/survei', [SurveiController::class, 'survei']);
+    Route::get('/hasil', [SurveiController::class, 'survei']);
 });
 
 Route::prefix('wbs')->group(function () {
     Route::get('/wbs', [WbsController::class, 'wbs']);
 });
 
-Route::prefix('ziwbk')->group(function () {
-    Route::get('/ziwbk', [ZiwbkController::class, 'ziwbk']);
-});
-
+Route::get('/ziwbk/{tahun}/{area}/{sub}', [ZiwbkController::class, 'dokumen'])
+    ->name('user.ziwbk.dokumen');
 /*
 |--------------------------------------------------------------------------
 | AUTH ADMIN

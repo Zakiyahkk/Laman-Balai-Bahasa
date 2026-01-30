@@ -32,25 +32,25 @@ class ProdukController extends Controller
                 'judul' => 'Pedoman Penggunaan Aplikasi SEMBARI Tahun 2025',
                 'tahun' => 2025,
                 'tipe'  => 'pdf',
-                'file'  => 'sembari/sembari-pedoman-2025.pdf',
+                'file'  => 'null',
             ],
             [
                 'judul' => 'Laporan Implementasi SEMBARI Balai Bahasa Provinsi Riau Tahun 2024',
                 'tahun' => 2024,
                 'tipe'  => 'pdf',
-                'file'  => 'sembari/sembari-laporan-2024.pdf',
+                'file'  => 'null',
             ],
             [
                 'judul' => 'Dokumen Teknis Sistem Manajemen Berbasis Riset (SEMBARI)',
                 'tahun' => 2023,
                 'tipe'  => 'pdf',
-                'file'  => 'sembari/sembari-teknis-2023.pdf',
+                'file'  => 'null',
             ],
             [
                 'judul' => 'Panduan Admin SEMBARI',
                 'tahun' => 2022,
                 'tipe'  => 'pdf',
-                'file'  => 'sembari/sembari-panduan-admin-2022.pdf',
+                'file'  => 'null',
             ],
         ]);
     
