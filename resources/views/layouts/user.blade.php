@@ -41,6 +41,7 @@
     <script src="{{ asset('js/user.js') }}"></script>
     {{-- JS HALAMAN (PREVIEW, DLL) --}}
     @stack('scripts')
+    @yield('js')
 
 </body>
 
