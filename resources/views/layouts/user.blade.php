@@ -37,11 +37,14 @@
     {{-- FOOTER --}}
     @include('user.partials.footer')
 
+    {{-- CHATBOT FLOATING --}}
+    @include('user.beranda.chatbot')
+
     {{-- JS USER --}}
     <script src="{{ asset('js/user.js') }}"></script>
     {{-- JS HALAMAN (PREVIEW, DLL) --}}
     @stack('scripts')
-    @yield('js')
+    @yield('scripts')
 
 </body>
 
