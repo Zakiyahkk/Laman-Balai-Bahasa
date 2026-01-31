@@ -3,7 +3,356 @@
 @section('title', 'DIPA')
 
 @section('css')
-    <link rel="stylesheet" href="{{ asset('css/akuntabilitas.css') }}">
+<style>
+/* =========================================
+   CSS KHUSUS HALAMAN DIPA
+========================================= */
+
+/* Container Utama */
+.ak-dipa-ui {
+    padding: 18px 0 60px;
+}
+
+.ak-container {
+    max-width: 1200px;
+    margin: auto;
+    margin-top: -40px;
+}
+
+/* Header Halaman (Breadcrumb) */
+.ak-pagehead {
+    background: #0b2a4a;
+    color: #fff;
+    border-radius: 14px;
+    padding: 22px 20px;
+}
+
+.ak-pagehead h1 {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 900;
+}
+
+.ak-breadcrumb {
+    margin-top: 8px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.ak-breadcrumb a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.ak-breadcrumb span {
+    margin: 0 6px;
+    opacity: 0.9;
+}
+
+/* Card Style */
+.ak-card {
+    background: #fff;
+    border: 1px solid #e6ecf5;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(16, 24, 40, 0.08);
+}
+
+/* Matikan Hover Effect di Desktop */
+.ak-card:hover, .ak-card:focus {
+    transform: none !important;
+    background: #fff !important;
+}
+
+/* Card Judul Section */
+.ak-card-section {
+    margin-top: 14px;
+    padding: 16px 20px;
+}
+
+.ak-section-title {
+    font-size: 18px;
+    font-weight: 900;
+}
+
+.ak-section-subtitle {
+    margin-top: 6px;
+    font-size: 14px;
+    color: #6b7a90;
+}
+
+/* Tools (Search & Filter) */
+.ak-doc-card {
+    margin-top: 14px;
+    overflow: hidden; /* Agar border radius bottom terjaga */
+}
+
+.ak-tools {
+    padding: 14px 20px;
+    border-bottom: 1px solid #e6ecf5;
+}
+
+.ak-tools-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.ak-search {
+    position: relative;
+    width: min(420px, 100%);
+}
+
+.ak-search input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #e6ecf5;
+    border-radius: 12px;
+    outline: none;
+}
+
+.ak-year {
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid #e6ecf5;
+    background: #fff;
+    min-width: 120px;
+}
+
+/* Buttons */
+.ak-btn {
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: 0;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.ak-btn-primary {
+    background: #1d5aa6;
+    color: #fff;
+}
+
+.ak-btn-ghost {
+    background: transparent;
+    border: 1px solid #e6ecf5;
+    color: #1a2433;
+    text-decoration: none;
+    display: inline-block;
+}
+
+/* Table Style (Desktop) */
+.ak-table {
+    width: 100%;
+}
+
+.ak-thead {
+    display: grid;
+    grid-template-columns: 1fr 110px 150px 90px 90px;
+    gap: 12px;
+    padding: 12px 20px;
+    font-size: 12px;
+    font-weight: 400;
+    color: #6b7a90;
+    background: #fcfcfd;
+    border-bottom: 1px solid #e6ecf5;
+}
+
+.ak-tbody .ak-row {
+    display: grid;
+    grid-template-columns: 1fr 110px 150px 90px 90px;
+    gap: 12px;
+    padding: 14px 20px;
+    border-bottom: 1px solid #e6ecf5;
+    align-items: center;
+}
+
+.ak-tbody .ak-row:last-child {
+    border-bottom: none;
+}
+
+.ak-docname {
+    font-size: 13px;
+    color: #1a2433;
+    line-height: 1.4;
+}
+
+.c {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Badges & Pills */
+.ak-badge {
+    background: #eaf2ff;
+    color: #2d5aa6;
+    padding: 6px 10px;
+    border-radius: 99px;
+    font-size: 12px;
+}
+
+.ak-filepill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border-radius: 99px;
+    border: 1px solid #e6ecf5;
+    font-size: 12px;
+    background: #fff;
+}
+
+.ak-file-ico {
+    opacity: 0.8;
+}
+
+/* Action Buttons */
+.ak-icon-btn {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border: 1px solid #e6ecf5;
+    background: #fff;
+    color: #6b7a90;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+}
+
+.ak-icon-btn:hover {
+    border-color: #1d5aa6;
+    color: #1d5aa6;
+    background: #f0f7ff;
+}
+
+.ak-empty {
+    padding: 30px;
+    text-align: center;
+    color: #6b7a90;
+}
+
+/* =========================================
+   MOBILE RESPONSIVE (DIPA)
+   Layout: Card List (Label Kiri - Konten Kanan)
+========================================= */
+@media (max-width: 820px) {
+    .ak-thead {
+        display: none;
+    }
+
+    .ak-tbody .ak-row {
+        display: block; /* Stack layout */
+        grid-template-columns: unset;
+        background: #fff;
+        border: 1px solid #e6ecf5;
+        border-radius: 12px;
+        margin-bottom: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        padding: 16px;
+    }
+
+    /* Judul Dokumen Mobile */
+    .ak-docname {
+        font-weight: 700;
+        font-size: 14px;
+        margin-bottom: 12px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #f0f0f0;
+        display: block;
+    }
+
+    /* Row Item Mobile */
+    .ak-tbody .ak-row > .c {
+        display: flex;
+        justify-content: space-between !important;
+        width: 100%;
+        margin-bottom: 8px;
+    }
+
+    /* Label Mobile (dari data-label) */
+    .ak-tbody .ak-row > .c::before {
+        content: attr(data-label);
+        font-size: 13px;
+        color: #64748b;
+        font-weight: 500;
+    }
+    
+    .ak-tbody .ak-row > .c:last-child {
+        margin-bottom: 0;
+    }
+}
+
+/* =========================================
+   PREVIEW MODAL
+========================================= */
+.ak-preview-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.ak-preview-modal.active {
+    display: flex;
+}
+
+.ak-preview-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(2px);
+}
+
+.ak-preview-box {
+    position: relative;
+    background: #fff;
+    width: 90%;
+    max-width: 900px;
+    height: 85vh;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+}
+
+.ak-preview-header {
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    border-bottom: 1px solid #e6ecf5;
+    background: #fff;
+    font-weight: 600;
+}
+
+.ak-preview-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #64748b;
+}
+
+.ak-preview-body {
+    flex: 1;
+    background: #f1f5f9;
+}
+
+.ak-preview-body iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+</style>
 @endsection
 
 @section('content')
@@ -64,23 +413,23 @@
                 <div class="ak-tbody">
                     @forelse(($docs ?? []) as $doc)
                         <div class="ak-row">
-                            <div class="ak-docname">{{ $doc['judul'] ?? '-' }}</div>
+                            <div class="ak-docname">{{ data_get($doc, 'nama_dokumen') ?? '-' }}</div>
 
-                            <div class="c">
-                                <span class="ak-badge">{{ $doc['tahun'] ?? '-' }}</span>
+                            <div class="c" data-label="Tahun">
+                                <span class="ak-badge">{{ data_get($doc, 'tanggal') ? \Carbon\Carbon::parse(data_get($doc, 'tanggal'))->format('Y') : '-' }}</span>
                             </div>
 
-                            <div class="c">
+                            <div class="c" data-label="Bentuk Berkas">
                                 <span class="ak-filepill">
                                     <span class="ak-file-ico">📄</span>
-                                    {{ strtoupper($doc['tipe'] ?? 'PDF') }}
+                                    PDF
                                 </span>
                             </div>
 
-                            <div class="c">
-                                @if (!empty($doc['file']))
+                            <div class="c" data-label="Pratinjau">
+                                @if (!empty(data_get($doc, 'file_path')))
                                     <button class="ak-icon-btn ak-preview-btn"
-                                        data-file="{{ asset('storage/' . $doc['file']) }}" title="Pratinjau">
+                                        data-file="{{ url('storage/' . str_replace('uploads/', 'akuntabilitas/', data_get($doc, 'file_path'))) }}" title="Pratinjau">
                                         <i class="fa-regular fa-eye"></i>
                                     </button>
                                 @else
@@ -88,11 +437,11 @@
                                 @endif
                             </div>
 
-                            <div class="c">
-                                <a class="ak-icon-btn ak-download" href="{{ asset('storage/' . $doc['file']) }}"
+                            <div class="c" data-label="Unduh">
+                                <a class="ak-icon-btn ak-download" href="{{ url('storage/' . str_replace('uploads/', 'akuntabilitas/', data_get($doc, 'file_path'))) }}"
                                     title="Unduh">
                                     <i class="fa-solid fa-download"></i>
-                                </a>
+                                    </a>
                             </div>
                         </div>
                     @empty
