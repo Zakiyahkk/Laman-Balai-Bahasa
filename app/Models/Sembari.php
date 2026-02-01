@@ -13,7 +13,6 @@ class Sembari extends Model
 
     protected $fillable = [
         'nama_dokumen',
-        'deskripsi',  // Tetap kita biarkan nullable jika ingin dikosongkan
         'file_path',
         'status',
         'tanggal',

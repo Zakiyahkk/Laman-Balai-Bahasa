@@ -2,18 +2,7 @@
 
 @section('content')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<style>
-    .upload-box {
-        border: 2px dashed #e2e8f0;
-        border-radius: 15px;
-        cursor: pointer;
-        transition: all 0.3s;
-        position: relative;
-        overflow: hidden;
-    }
-    .upload-box:hover { border-color: #2563eb; background-color: #f8faff; }
-    .upload-box.file-uploaded { border-style: solid; border-color: #10b981; background-color: #f0fdf4; }
-</style>
+
 
 <div class="content-wrapper" style="background: #f8faff; padding: 2.5rem;">
     <div class="header-box d-flex align-items-center gap-3 mb-4">
@@ -76,24 +65,21 @@
                         </select>
                     </div>
 
-                    {{-- Deskripsi --}}
-                    <div class="col-12">
-                        <label class="form-label fw-bold">Deskripsi</label>
-                        <textarea name="deskripsi" class="form-control" rows="4" style="border-radius: 10px;">{{ $sembari->deskripsi }}</textarea>
-                    </div>
 
                     {{-- Upload --}}
                     <div class="col-12 mt-4">
                         <label class="form-label fw-bold">Update File (Opsional)</label>
-                        <div class="p-3 mb-2 bg-light rounded border">
-                            <small class="text-muted"><i class="fa-solid fa-file"></i> File saat ini: 
-                                {{ $sembari->file_path ? basename($sembari->file_path) : 'Tidak ada file' }}
-                            </small>
-                        </div>
-                        <div class="upload-box text-center p-5" id="dropZone">
-                            <i class="fa-solid fa-cloud-arrow-up fa-2x mb-2 text-muted"></i>
-                            <p class="mb-1" id="fileName">Klik untuk ganti file baru</p>
-                            <input type="file" name="file_dokumen" class="d-none" id="fileInput">
+                        
+                        @if($sembari->file_path)
+                            <div class="mb-2 p-2 px-3 bg-light rounded border d-inline-flex align-items-center gap-2">
+                                <i class="fa-solid fa-file-pdf text-danger"></i>
+                                <span class="text-muted small">File saat ini: <strong>{{ basename($sembari->file_path) }}</strong></span>
+                            </div>
+                        @endif
+
+                        <input type="file" name="file_dokumen" class="form-control mt-2" style="padding: 10px; border-radius: 10px;">
+                        <div class="form-text text-muted mt-2">
+                            <i class="fa-solid fa-circle-info me-1"></i> Biarkan kosong jika tidak ingin mengganti file. Max 10MB.
                         </div>
                     </div>
                 </div>
@@ -106,19 +92,4 @@
         </div>
     </div>
 </div>
-
-<script>
-    const fileInput = document.getElementById('fileInput');
-    const uploadBox = document.getElementById('dropZone');
-    const fileNameText = document.getElementById('fileName');
-
-    uploadBox.addEventListener('click', () => fileInput.click());
-
-    fileInput.addEventListener('change', function() {
-        if (this.files && this.files.length > 0) {
-            fileNameText.innerText = "File baru dipilih: " + this.files[0].name;
-            uploadBox.classList.add('file-uploaded'); 
-        }
-    });
-</script>
 @endsection

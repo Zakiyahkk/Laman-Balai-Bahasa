@@ -2,26 +2,7 @@
 
 @section('content')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<style>
-    .upload-box {
-        border: 2px dashed #e2e8f0;
-        border-radius: 15px;
-        cursor: pointer;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        position: relative;
-        overflow: hidden;
-    }
-    .upload-box:hover {
-        border-color: #2563eb;
-        background-color: #f8faff;
-        transform: translateY(-2px);
-    }
-    .upload-box.file-uploaded {
-        border-style: solid;
-        border-color: #10b981;
-        background-color: #f0fdf4;
-    }
-</style>
+
 
 <div class="content-wrapper" style="background: #f8faff; padding: 2.5rem;">
     <div class="header-box d-flex align-items-center gap-3 mb-4">
@@ -96,20 +77,13 @@
                         </select>
                     </div>
 
-                    {{-- Deskripsi --}}
-                    <div class="col-12">
-                        <label class="form-label fw-bold">Deskripsi / Keterangan (Opsional)</label>
-                        <textarea name="deskripsi" class="form-control" rows="3" placeholder="Tambahkan deskripsi singkat jika ada..." style="border-radius: 10px;"></textarea>
-                    </div>
 
                     {{-- Upload --}}
                     <div class="col-12 mt-4">
                         <label class="form-label fw-bold">Upload File (PDF/DOCX) <span class="text-danger">*</span></label>
-                        <div class="upload-box text-center p-5" id="dropZone">
-                            <i class="fa-solid fa-cloud-arrow-up fa-2x mb-2 text-muted"></i>
-                            <p class="mb-1" id="fileName">Klik untuk pilih file</p>
-                            <span class="text-muted small">Max 10MB (Digunakan untuk Pratinjau & Unduh)</span>
-                            <input type="file" name="file_dokumen" class="d-none" id="fileInput" required>
+                        <input type="file" name="file_dokumen" class="form-control" style="padding: 10px; border-radius: 10px;" required>
+                        <div class="form-text text-muted mt-2">
+                            <i class="fa-solid fa-circle-info me-1"></i> Maksimal ukuran file 10MB. Format yang didukung: .pdf, .docx
                         </div>
                     </div>
                 </div>
@@ -122,19 +96,4 @@
         </div>
     </div>
 </div>
-
-<script>
-    const fileInput = document.getElementById('fileInput');
-    const uploadBox = document.getElementById('dropZone');
-    const fileNameText = document.getElementById('fileName');
-
-    uploadBox.addEventListener('click', () => fileInput.click());
-
-    fileInput.addEventListener('change', function() {
-        if (this.files && this.files.length > 0) {
-            fileNameText.innerText = "File dipilih: " + this.files[0].name;
-            uploadBox.classList.add('file-uploaded'); 
-        }
-    });
-</script>
 @endsection

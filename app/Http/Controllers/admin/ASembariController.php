@@ -36,8 +36,6 @@ class ASembariController extends Controller
         $request->validate([
             'nama_dokumen' => 'required|string|max:255',
             'tanggal'      => 'required|date',
-            // Deskripsi opsional saja, jika tidak wajib diisi admin
-            'deskripsi'    => 'nullable|string', 
             
             // Validasi Daerah & Jenjang
             'daerah'       => 'required|string',
@@ -63,7 +61,6 @@ class ASembariController extends Controller
             'tanggal'      => $request->tanggal,
             'daerah'       => $request->daerah,
             'jenjang'      => $request->jenjang,
-            'deskripsi'    => $request->deskripsi,
             'status'       => $request->status,
             'file_path'    => $filePath,
         ]);
@@ -101,7 +98,6 @@ class ASembariController extends Controller
         $sembari->tanggal      = $request->tanggal;
         $sembari->daerah       = $request->daerah;
         $sembari->jenjang      = $request->jenjang;
-        $sembari->deskripsi    = $request->deskripsi;
         $sembari->status       = $request->status;
 
         // Cek Upload File Baru
