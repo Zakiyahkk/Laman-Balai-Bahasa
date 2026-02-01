@@ -10,18 +10,10 @@
 
     <div class="ak-container ak-sembari-ui">
 
-        {{-- Header --}}
-        <div class="ak-sembari-pagehead">
-            <h1>Dokumen</h1>
-            <div class="ak-sembari-breadcrumb">
-                <a href="{{ url('/') }}">Beranda</a>
-                <span>/</span>
-                <span>SEMBARI</span>
-            </div>
-        </div>
+        {{-- (Header Dihapus Sesuai Request) --}}
 
         {{-- Card Judul --}}
-        <div class="ak-sembari-card ak-sembari-card-section">
+        <div class="ak-sembari-card ak-sembari-card-section" style="margin-top: 40px;">
             <div class="ak-sembari-section-title">SEMBARI</div>
             <div class="ak-sembari-section-subtitle">
                 Sistem Manajemen Berbasis Riset
@@ -32,15 +24,12 @@
         <div class="ak-sembari-card">
 
             <form class="ak-sembari-tools" method="GET" action="{{ url('/produk/sembari') }}">
-                <div class="ak-sembari-tools-row">
-
-                    <div class="ak-sembari-search">
-                        <input type="text" name="q" value="{{ $q ?? '' }}"
-                            placeholder="Masukkan Judul Dokumen">
-                    </div>
+                <div class="ak-sembari-tools-row" style="justify-content: flex-end;"> 
+                    
+                    {{-- Input Pencarian Judul DIHAPUS --}}
 
                     <select class="ak-sembari-year" name="year">
-                        <option value="">Pilih Tahun</option>
+                        <option value="">Semua Tahun</option>
                         @foreach ($years ?? [] as $y)
                             <option value="{{ $y }}" @selected((string) ($selectedYear ?? '') === (string) $y)>
                                 {{ $y }}
@@ -49,7 +38,7 @@
                     </select>
 
                     <button class="ak-sembari-btn ak-sembari-btn-primary" type="submit">
-                        Cari
+                        Filter
                     </button>
 
                     @if (!empty($q) || !empty($selectedYear))
@@ -62,17 +51,19 @@
             </form>
 
             <div class="ak-sembari-table">
-                <div class="ak-sembari-thead">
+                {{-- Header Tabel --}}
+                <div class="ak-sembari-thead" style="grid-template-columns: 2fr 0.8fr 1.2fr 0.8fr 0.8fr 0.8fr;"> 
                     <div>Judul Dokumen</div>
                     <div class="c">Tahun</div>
-                    <div class="c">Bentuk Berkas</div>
+                    <div class="c">Daerah</div>   {{-- Ganti Bentuk Berkas --}}
+                    <div class="c">Jenjang</div>  {{-- Kolom Baru --}}
                     <div class="c">Pratinjau</div>
                     <div class="c">Unduh</div>
                 </div>
 
                 <div class="ak-sembari-tbody">
                     @forelse ($docs ?? [] as $doc)
-                        <div class="ak-sembari-row">
+                        <div class="ak-sembari-row" style="grid-template-columns: 2fr 0.8fr 1.2fr 0.8fr 0.8fr 0.8fr;">
 
                             <div class="ak-sembari-docname">
                                 {{ \Illuminate\Support\Str::title(strtolower($doc['judul'] ?? '-')) }}
@@ -82,9 +73,17 @@
                                 <span class="ak-sembari-badge">{{ $doc['tahun'] ?? '-' }}</span>
                             </div>
 
+                            {{-- Kolom DAERAH --}}
                             <div class="c">
-                                <span class="ak-sembari-filepill">
-                                    📄 {{ strtoupper($doc['tipe'] ?? 'PDF') }}
+                                <span style="font-size: 0.9rem; color: #475569;">
+                                    {{ $doc['daerah'] }}
+                                </span>
+                            </div>
+
+                            {{-- Kolom JENJANG --}}
+                            <div class="c">
+                                <span class="ak-sembari-badge" style="background: #e0f2fe; color: #0284c7;">
+                                    {{ $doc['jenjang'] }}
                                 </span>
                             </div>
 
@@ -105,7 +104,8 @@
                             {{-- Unduh --}}
                             <div class="c">
                                 @if (!empty($doc['file']))
-                                    <a class="ak-icon-btn" href="{{ asset('storage/' . $doc['file']) }}" title="Unduh">
+                                    <a class="ak-icon-btn" href="{{ url('/produk/sembari/download/' . basename($doc['file'])) }}" title="Unduh" target="_blank">
+                                        {{-- Note: Direct asset link might force preview in browser, better use a download route if strictly need download --}}
                                         <i class="fa-solid fa-download"></i>
                                     </a>
                                 @else

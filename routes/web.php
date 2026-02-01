@@ -204,6 +204,12 @@ Route::prefix('admin')
             Route::delete('/tokoh/{id}', [ATokohController::class, 'destroy'])
                 ->name('admin.tokoh.destroy');
 
+            // ===== SEMBARI (SERIAL TERJEMAHAN) =====
+            Route::resource('sembari', \App\Http\Controllers\Admin\ASembariController::class)
+                ->names('admin.sembari');
+            Route::get('/sembari/download/{id}', [\App\Http\Controllers\Admin\ASembariController::class, 'download'])
+                ->name('admin.sembari.download');
+
         Route::get('/halamanweb', fn () => view('admin.halamanweb'))->name('admin.halamanweb');
 
         Route::get('/pengaturan', [APengaturanController::class, 'index'])->name('admin.pengaturan');

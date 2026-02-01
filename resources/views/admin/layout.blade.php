@@ -178,6 +178,14 @@
                 </a>
              </li>
 
+            <!-- SEMBARI -->
+            <li class="nav-item">
+                <a class="nav-link {{ request()->routeIs('admin.sembari*') ? 'active' : '' }}"
+                   href="{{ route('admin.sembari.index') }}">
+                    <i class="bi bi-book me-2"></i>Sembari
+                </a>
+            </li>
+
             <!-- PENGATURAN -->
             @if(strtolower(session('admin_role')) === 'super admin')
             <li class="nav-item">

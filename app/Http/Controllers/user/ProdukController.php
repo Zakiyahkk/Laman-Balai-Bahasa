@@ -25,62 +25,46 @@ class ProdukController extends Controller
     public function sembari(Request $request)
     {
         // ===============================
-        // DOKUMEN CONTOH (DUMMY)
+        // AMBIL DATA DARI DATABASE
         // ===============================
-        $docs = collect([
-            [
-                'judul' => 'Pedoman Penggunaan Aplikasi SEMBARI Tahun 2025',
-                'tahun' => 2025,
-                'tipe'  => 'pdf',
-                'file'  => 'null',
-            ],
-            [
-                'judul' => 'Laporan Implementasi SEMBARI Balai Bahasa Provinsi Riau Tahun 2024',
-                'tahun' => 2024,
-                'tipe'  => 'pdf',
-                'file'  => 'null',
-            ],
-            [
-                'judul' => 'Dokumen Teknis Sistem Manajemen Berbasis Riset (SEMBARI)',
-                'tahun' => 2023,
-                'tipe'  => 'pdf',
-                'file'  => 'null',
-            ],
-            [
-                'judul' => 'Panduan Admin SEMBARI',
-                'tahun' => 2022,
-                'tipe'  => 'pdf',
-                'file'  => 'null',
-            ],
-        ]);
-    
-        // ===============================
-        // FILTER
-        // ===============================
-        $q = trim((string) $request->query('q', ''));
-        $year = $request->query('year');
-    
-        $filtered = $docs
-            ->when($q !== '', fn ($c) =>
-                $c->filter(fn ($d) =>
-                    str_contains(
-                        strtolower($d['judul']),
-                        strtolower($q)
-                    )
-                )
-            )
-            ->when($year, fn ($c) =>
-                $c->where('tahun', (int) $year)
-            )
-            ->values();
-    
-        $years = $docs->pluck('tahun')->unique()->sortDesc()->values();
-    
+        $query = \App\Models\Sembari::where('status', 'published');
+
+        // Filter Pencarian Judul
+        if ($request->has('q') && $request->q != '') {
+            $query->where('nama_dokumen', 'like', '%' . $request->q . '%');
+        }
+
+        // Filter Tahun
+        if ($request->has('year') && $request->year != '') {
+            $query->whereYear('tanggal', $request->year);
+        }
+
+        // Ambil Data & Urutkan Terbaru
+        $data = $query->orderBy('tanggal', 'desc')->get();
+
+        // Mapping ke format yang View harapkan
+        $docs = $data->map(function ($item) {
+            return [
+                'judul'   => $item->nama_dokumen,
+                'tahun'   => $item->tanggal ? $item->tanggal->format('Y') : '-',
+                'daerah'  => $item->daerah ?? '-',
+                'jenjang' => $item->jenjang ?? '-',
+                'file'    => $item->file_path, // Pastikan view pakai asset('storage/' . $file)
+            ];
+        });
+
+        // Ambil List Tahun Unik untuk Dropdown
+        // Kita query terpisah agar dropdown tahun tetap lengkap meski sedang difilter
+        $years = \App\Models\Sembari::selectRaw('YEAR(tanggal) as year')
+            ->distinct()
+            ->orderBy('year', 'desc')
+            ->pluck('year');
+
         return view('user.produk.sembari', [
-            'docs' => $filtered,
+            'docs' => $docs,
             'years' => $years,
-            'q' => $q,
-            'selectedYear' => $year,
+            'q' => $request->q,
+            'selectedYear' => $request->year,
         ]);
     }
     
