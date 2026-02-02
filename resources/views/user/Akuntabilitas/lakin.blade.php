@@ -210,28 +210,38 @@
 
                             <div class="c" data-label="Bentuk Berkas">
                                 <span class="ak-filepill">
-                                    <span class="ak-file-ico">📄</span>
+                                    <span class="ak-file-ico">ðŸ“„</span>
                                     PDF
                                 </span>
                             </div>
 
                             <div class="c" data-label="Pratinjau">
-                                @if (!empty(data_get($doc, 'file_path')))
-                                    <button class="ak-icon-btn ak-preview-btn"
-                                        data-file="{{ url('storage/' . str_replace('uploads/', 'akuntabilitas/', data_get($doc, 'file_path'))) }}" title="Pratinjau">
-                                        <i class="fa-regular fa-eye"></i>
-                                    </button>
-                                @else
-                                    -
-                                @endif
-                            </div>
+                     @if (!empty($doc->file_path))
+                            <button
+                             type="button"
+                             class="ak-icon-btn ak-preview-btn"
+                             data-file="{{ asset('storage/' . $doc->file_path) }}"
+                            title="Pratinjau">
+                        <i class="fa-regular fa-eye"></i>
+                        </button>
+                           @else
+                             -
+                          @endif
+                        </div>
+
 
                             <div class="c" data-label="Unduh">
-                                <a class="ak-icon-btn ak-download" href="{{ url('storage/' . str_replace('uploads/', 'akuntabilitas/', data_get($doc, 'file_path'))) }}"
-                                    title="Unduh">
-                                    <i class="fa-solid fa-download"></i>
-                                </a>
-                            </div>
+                         @if (!empty($doc->file_path))
+                        <a class="ak-icon-btn ak-download"
+                            href="{{ asset('storage/' . $doc->file_path) }}"
+                            target="_blank"
+                            title="Unduh">
+                        <i class="fa-solid fa-download"></i>
+                        </a>
+                        @else
+                          -
+                        @endif
+                    </div>
                         </div>
                     @empty
                         <div class="ak-empty">Dokumen tidak ditemukan.</div>

@@ -8,7 +8,7 @@
     .content-wrapper {
         font-family: 'Inter', sans-serif;
         background-color: #f8faff;
-        padding: 2.5rem;
+        padding: 2rem;
         min-height: 100vh;
     }
 
@@ -30,59 +30,61 @@
         background: white;
         border-radius: 16px;
         border: 1px solid #eef2f7;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-        padding: 30px;
-        max-width: 800px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        padding: 35px;
+        width: 100%;
     }
 
     .form-label {
         font-weight: 600;
         color: #334155;
         font-size: 14px;
-        margin-bottom: 8px;
+        margin-bottom: 10px;
         display: block;
     }
 
     .form-control-custom {
         width: 100%;
-        padding: 12px 16px;
-        border-radius: 10px;
+        padding: 14px 18px;
+        border-radius: 12px;
         border: 1px solid #e2e8f0;
         font-size: 14px;
-        transition: all 0.2s;
-        outline: none;
         background: #fcfdfe;
+        transition: all 0.2s;
     }
 
     .form-control-custom:focus {
         border-color: #2563eb;
         background: white;
         box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+        outline: none;
     }
 
     /* File Upload Area */
     .file-upload-box {
-        border: 2px dashed #e2e8f0;
-        border-radius: 12px;
-        padding: 20px;
+        border: 2px dashed #cbd5e1;
+        border-radius: 15px;
+        padding: 30px;
         text-align: center;
         background: #f8faff;
         cursor: pointer;
         transition: all 0.2s;
     }
     .file-upload-box:hover { border-color: #3b82f6; background: #eff6ff; }
-    .file-info { font-size: 13px; color: #64748b; margin-top: 8px; }
 
     /* Footer Buttons */
     .form-footer {
-        display: flex; justify-content: flex-end;
-        gap: 12px; margin-top: 30px;
-        padding-top: 20px; border-top: 1px solid #f1f5f9;
+        display: flex; 
+        justify-content: flex-end;
+        gap: 15px; 
+        margin-top: 40px;
+        padding-top: 25px; 
+        border-top: 1px solid #f1f5f9;
     }
 
     .btn-save {
         background-color: #2563eb; color: white;
-        padding: 12px 24px; border-radius: 10px;
+        padding: 12px 30px; border-radius: 10px;
         font-weight: 600; border: none;
         cursor: pointer; transition: all 0.2s;
     }
@@ -90,53 +92,48 @@
 
     .btn-cancel {
         background-color: white; color: #64748b;
-        padding: 12px 24px; border-radius: 10px;
+        padding: 12px 30px; border-radius: 10px;
         font-weight: 600; border: 1px solid #e2e8f0;
-        text-decoration: none; transition: all 0.2s;
+        text-decoration: none;
     }
-    .btn-cancel:hover { background: #f8fafc; color: #1e293b; }
 </style>
 
 <div class="content-wrapper">
     <div class="header-box">
-        <a href="{{ route('admin.akuntabilitas.lakin') }}" class="btn-back">
+        {{-- PERBAIKAN: Link kembali dinamis ke index tipe tersebut --}}
+        <a href="{{ route('admin.akuntabilitas.index', $tipe) }}" class="btn-back">
             <i class="fa-solid fa-arrow-left"></i>
         </a>
         <div>
-            <h3 class="m-0" style="font-weight: 700; color: #1e293b;">Edit Dokumen LAKIN</h3>
+            <h3 class="m-0 text-uppercase" style="font-weight: 700; color: #1e293b;">Edit {{ str_replace('-', ' ', $tipe) }}</h3>
             <p class="text-muted m-0 small">Perbarui informasi dokumen akuntabilitas instansi</p>
         </div>
     </div>
 
     <div class="form-card">
-        <form action="{{ route('admin.akuntabilitas.update', $akuntabilitas->id) }}" method="POST" enctype="multipart/form-data">
+        {{-- PERBAIKAN: Route update butuh tipe dan id --}}
+        <form action="{{ route('admin.akuntabilitas.update', [$tipe, $akuntabilitas->id]) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
-                <div>
+            <div class="row g-4 mb-4">
+                <div class="col-md-6">
                     <label class="form-label">Nama Dokumen</label>
                     <input type="text" name="nama_dokumen" 
                         class="form-control-custom @error('nama_dokumen') is-invalid @enderror" 
                         value="{{ old('nama_dokumen', $akuntabilitas->nama_dokumen) }}" required>
-                    @error('nama_dokumen')
-                        <div style="color: #dc3545; font-size: 12px; margin-top: 5px;">{{ $message }}</div>
-                    @enderror
                 </div>
 
-                <div>
+                <div class="col-md-6">
                     <label class="form-label">Tanggal Dokumen</label>
                     <input type="date" name="tanggal" 
                         class="form-control-custom @error('tanggal') is-invalid @enderror" 
                         value="{{ old('tanggal', $akuntabilitas->tanggal) }}" required>
-                    @error('tanggal')
-                        <div style="color: #dc3545; font-size: 12px; margin-top: 5px;">{{ $message }}</div>
-                    @enderror
                 </div>
             </div>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
-                <div>
+            <div class="row mb-4">
+                <div class="col-md-12">
                     <label class="form-label">Status Publikasi</label>
                     <select name="status" class="form-control-custom">
                         <option value="published" {{ $akuntabilitas->status == 'published' ? 'selected' : '' }}>Published</option>
@@ -145,24 +142,26 @@
                 </div>
             </div>
 
-            <div style="margin-bottom: 20px;">
+            <div class="mb-4">
                 <label class="form-label">Deskripsi / Tulisan</label>
-                <textarea name="deskripsi" class="form-control-custom" rows="4" placeholder="Masukkan ringkasan isi dokumen...">{{ old('deskripsi', $akuntabilitas->deskripsi) }}</textarea>
+                <textarea name="deskripsi" class="form-control-custom" rows="5" placeholder="Masukkan ringkasan isi dokumen...">{{ old('deskripsi', $akuntabilitas->deskripsi) }}</textarea>
             </div>
 
-            <div style="margin-bottom: 10px;">
+            <div class="mb-2">
                 <label class="form-label">File Dokumen (PDF/DOCX)</label>
                 <div class="file-upload-box" onclick="document.getElementById('fileInput').click()">
-                    <i class="fa-solid fa-cloud-arrow-up" style="font-size: 24px; color: #3b82f6;"></i>
-                    <div style="font-weight: 600; margin-top: 10px; color: #1e293b;">Klik untuk ganti file</div>
-                    <div class="file-info" id="fileInfo">File saat ini: <span class="text-primary">{{ basename($akuntabilitas->file_path) }}</span></div>
-                    <input type="file" id="fileInput" name="file_dokumen" style="display: none;">
+                    <i class="fa-solid fa-cloud-arrow-up" style="font-size: 32px; color: #3b82f6; opacity: 0.8;"></i>
+                    <div style="font-weight: 600; margin-top: 15px; color: #1e293b;">Klik untuk ganti file baru</div>
+                    <div id="fileInfo" style="font-size: 13px; color: #64748b; margin-top: 8px;">
+                        File saat ini: <span class="fw-bold text-primary">{{ basename($akuntabilitas->file_path) }}</span>
+                    </div>
+                    <input type="file" id="fileInput" name="file_dokumen" style="display: none;" accept=".pdf,.docx">
                 </div>
-                <p class="text-muted small mt-2">*Kosongkan jika tidak ingin mengubah file.</p>
+                <p class="text-muted small mt-2"><i class="fa-solid fa-circle-info me-1"></i> Kosongkan jika tidak ingin mengganti berkas yang sudah ada.</p>
             </div>
 
             <div class="form-footer">
-                <a href="{{ route('admin.akuntabilitas.lakin') }}" class="btn-cancel">Batal</a>
+                <a href="{{ route('admin.akuntabilitas.index', $tipe) }}" class="btn-cancel">Batal</a>
                 <button type="submit" class="btn-save shadow-sm">Simpan Perubahan</button>
             </div>
         </form>
@@ -170,12 +169,11 @@
 </div>
 
 <script>
-    // Preview nama file saat dipilih
     document.getElementById('fileInput').addEventListener('change', function(e) {
         if (this.files && this.files.length > 0) {
             const fileName = this.files[0].name;
             const fileInfo = document.getElementById('fileInfo');
-            fileInfo.innerHTML = `File terpilih: <span style="color: #2563eb; font-weight: 600;">${fileName}</span>`;
+            fileInfo.innerHTML = `File terpilih: <span style="color: #2563eb; font-weight: 700;">${fileName}</span>`;
         }
     });
 </script>
