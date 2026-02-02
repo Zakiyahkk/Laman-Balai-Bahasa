@@ -104,8 +104,7 @@
                             {{-- Unduh --}}
                             <div class="c">
                                 @if (!empty($doc['file']))
-                                    <a class="ak-icon-btn" href="{{ url('/produk/sembari/download/' . basename($doc['file'])) }}" title="Unduh" target="_blank">
-                                        {{-- Note: Direct asset link might force preview in browser, better use a download route if strictly need download --}}
+                                    <a class="ak-icon-btn" href="{{ asset('storage/' . $doc['file']) }}" title="Unduh" target="_blank" download>
                                         <i class="fa-solid fa-download"></i>
                                     </a>
                                 @else

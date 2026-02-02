@@ -52,7 +52,7 @@ class ASembariController extends Controller
             $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
             $cleanName = time() . '_' . Str::slug($originalName) . '.' . $file->getClientOriginalExtension();
             
-            $filePath = $file->storeAs('produk/sembari', $cleanName, 'public');
+            $filePath = $file->storeAs('uploads/sembari', $cleanName, 'public');
         }
 
         // Simpan DB
@@ -112,7 +112,7 @@ class ASembariController extends Controller
             $originalName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
             $cleanName = time() . '_' . Str::slug($originalName) . '.' . $file->getClientOriginalExtension();
 
-            $sembari->file_path = $file->storeAs('produk/sembari', $cleanName, 'public');
+            $sembari->file_path = $file->storeAs('uploads/sembari', $cleanName, 'public');
         }
 
         $sembari->save();
