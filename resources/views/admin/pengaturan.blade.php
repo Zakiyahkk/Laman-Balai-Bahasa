@@ -11,7 +11,7 @@
     </div>
 
     <div class="header-logo">
-        <img src="/img/logobbpr4.png"
+        <img src="https://ppidbbpriau.kemendikdasmen.go.id/bbpr/img/logobbpr4.png"
              alt="Logo Balai Bahasa Provinsi Riau"
              class="img-fluid header-logo">
     </div>
@@ -84,11 +84,11 @@
                                 </button>
 
                                 <!-- HAPUS -->
-                                <form action="{{ route('admin.pengaturan.destroy', $item->email) }}"
-                                    method="POST"
-                                    onsubmit="return confirmDeleteAdmin('{{ $item->email }}', this)">
+                                <form action="{{ route('admin.pengaturan.destroy') }}"
+                                      method="POST"
+                                      onsubmit="return confirmDeleteAdmin('{{ $item->email }}', this)">
                                     @csrf
-                                    @method('DELETE')
+                                    <input type="hidden" name="email" value="{{ $item->email }}">
                                     <button class="btn btn-link text-danger p-1">
                                         <i class="bi bi-trash"></i>
                                     </button>
@@ -142,8 +142,20 @@
 
                     <div class="mb-3">
                         <label class="form-label">Password</label>
-                        <input type="password" name="password"
-                               class="form-control" required>
+                    
+                        <div class="input-group">
+                            <input type="password"
+                                   name="password"
+                                   id="addPassword"
+                                   class="form-control"
+                                   required>
+                    
+                            <button type="button"
+                                    class="btn btn-outline-secondary"
+                                    id="toggleAddPassword">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div>
                     </div>
 
                     <div class="mb-4">
@@ -174,9 +186,9 @@
             </div>
 
             <div class="modal-body px-4">
-                <form id="formEditAdmin" method="POST">
+             <form id="formEditAdmin" method="POST" action="{{ route('admin.pengaturan.update') }}">
                     @csrf
-                    @method('PUT')
+                    <input type="hidden" name="email" id="editEmailHidden">
 
                     <!-- EMAIL (PK, TIDAK BOLEH DIUBAH) -->
                     <div class="mb-3">
@@ -254,8 +266,7 @@ document.querySelectorAll('.btn-edit-admin').forEach(btn => {
         document.getElementById('editPassword').value = '';
 
         // set action form (EMAIL sebagai PK)
-        document.getElementById('formEditAdmin').action =
-            `/admin/pengaturan/${encodeURIComponent(email)}`;
+        document.getElementById('editEmailHidden').value = email;
 
         new bootstrap.Modal(
             document.getElementById('modalEditAdmin')
@@ -280,7 +291,6 @@ document.getElementById('toggleEditPassword').addEventListener('click', function
 
 <form id="formDeleteAdmin" method="POST" style="display:none;">
     @csrf
-    @method('DELETE')
 </form>
 
 <script>
@@ -337,6 +347,22 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 </script>
+
+<script>
+document.getElementById('toggleAddPassword').addEventListener('click', function () {
+    const input = document.getElementById('addPassword');
+    const icon = this.querySelector('i');
+
+    if (input.type === 'password') {
+        input.type = 'text';
+        icon.classList.replace('bi-eye', 'bi-eye-slash');
+    } else {
+        input.type = 'password';
+        icon.classList.replace('bi-eye-slash', 'bi-eye');
+    }
+});
+</script>
+
 
 {{-- NOTIFIKASI SLIDE-DOWN --}}
 @if(session('success') || session('error'))

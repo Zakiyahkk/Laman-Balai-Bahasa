@@ -7,7 +7,7 @@
         <h3 class="mb-1 text-white">Tokoh</h3>
         <p class="mb-0 text-white">Penginputan Tokoh-Tokoh Bahasa</p>
     </div>
-    <img src="/img/logobbpr4.png" class="img-fluid header-logo">
+    <img src="https://ppidbbpriau.kemendikdasmen.go.id/bbpr/img/logobbpr4.png" class="img-fluid header-logo">
 </div>
 
 <!-- ================= SEARCH + FILTER + ADD TOKOH ================= -->
