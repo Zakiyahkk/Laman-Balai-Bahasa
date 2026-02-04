@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Closure;
 
 class APengaturanController extends Controller
 {
@@ -47,40 +45,47 @@ class APengaturanController extends Controller
     }
 
 
-    public function update(Request $request, $email)
-    {
-            $request->validate([
-                'username' => 'required|unique:admin,username,' . $email . ',email',
-                'role' => 'required|in:admin,super_admin',
-                'password' => 'nullable|min:6',
-            ]);
+    public function update(Request $request)
+{
+    $request->validate([
+        'email' => 'required|email|exists:admin,email',
+        'username' => 'required|unique:admin,username,' . $request->email . ',email',
+        'role' => 'required|in:admin,super_admin',
+        'password' => 'nullable|min:6',
+    ]);
 
-            $data = [
-                'username' => $request->username,
-                'role' => $request->role,
-            ];
+    $data = [
+        'username' => $request->username,
+        'role' => $request->role,
+    ];
 
-            if ($request->filled('password')) {
-                $data['password'] = Hash::make($request->password);
-            }
-
-            DB::table('admin')
-                ->where('email', $email)
-                ->update($data);
-
-            return redirect()
-                ->route('admin.pengaturan')
-                ->with('success', 'Data admin berhasil diperbarui');
-        }
-
-    public function destroy($email)
-    {
-        DB::table('admin')
-            ->where('email', $email)
-            ->delete();
-
-        return redirect()
-            ->route('admin.pengaturan')
-            ->with('success', 'Admin berhasil dihapus');
+    if ($request->filled('password')) {
+        $data['password'] = Hash::make($request->password);
     }
+
+    DB::table('admin')
+        ->where('email', $request->email)
+        ->update($data);
+
+    return redirect()
+        ->route('admin.pengaturan')
+        ->with('success', 'Data admin berhasil diperbarui');
+}
+
+
+    public function destroy(Request $request)
+{
+    $request->validate([
+        'email' => 'required|email|exists:admin,email',
+    ]);
+
+    DB::table('admin')
+        ->where('email', $request->email)
+        ->delete();
+
+    return redirect()
+        ->route('admin.pengaturan')
+        ->with('success', 'Admin berhasil dihapus');
+}
+
 }

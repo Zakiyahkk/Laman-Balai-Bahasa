@@ -42,83 +42,121 @@ class ATokohController extends Controller
 }
 
 
-        public function store(Request $request)
-    {
-        $request->validate([
-            'nama' => 'required',
-            'kategori' => 'required',
-            'deskripsi' => 'nullable',
-            'foto_tokoh' => 'nullable|image|mimes:jpg,jpeg,png|max:10240',
-        ]);
+ public function store(Request $request)
+{
+    $request->validate([
+        'nama' => 'required',
+        'kategori' => 'required',
+        'deskripsi' => 'nullable',
+        'foto_tokoh' => 'nullable|image|mimes:jpg,jpeg,png|max:50480',
+    ]);
 
-        $path = null;
+    $path = null;
 
-        if ($request->hasFile('foto_tokoh')) {
-            $file = $request->file('foto_tokoh');
-
-            $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
-
-            // simpan ke public/img/tokoh
-            $file->move(public_path('img/tokoh'), $filename);
-
-            // path relatif untuk DB
-            $path = 'img/tokoh/' . $filename;
-        }
-
-        DB::table('tokoh')->insert([
-            'nama' => $request->nama,
-            'kategori' => $request->kategori,
-            'deskripsi' => $request->deskripsi,
-            'foto_tokoh' => $path, // contoh: img/tokoh/abc.jpg
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-
-        return back()->with('success', 'Tokoh berhasil ditambahkan');
+    if ($request->hasFile('foto_tokoh')) {
+        $path = $this->uploadFotoTokoh($request->file('foto_tokoh'));
     }
 
-        public function update(Request $request, $id)
-    {
-        $tokoh = DB::table('tokoh')->where('tokoh_id', $id)->first();
+    DB::table('tokoh')->insert([
+        'nama' => $request->nama,
+        'kategori' => $request->kategori,
+        'deskripsi' => $request->deskripsi,
+        'foto_tokoh' => $path,
+        'created_at' => now(),
+        'updated_at' => now(),
+    ]);
 
-        $path = $tokoh->foto_tokoh;
+    return back()->with('success', 'Tokoh berhasil ditambahkan');
+}
 
-        if ($request->hasFile('foto_tokoh')) {
-            if ($path && file_exists(public_path($path))) {
-                unlink(public_path($path));
-            }
 
-            $file = $request->file('foto_tokoh');
-            $filename = Str::uuid().'.'.$file->getClientOriginalExtension();
-            $file->move(public_path('img/tokoh'), $filename);
-            $path = 'img/tokoh/'.$filename;
-        }
-
-        DB::table('tokoh')->where('tokoh_id', $id)->update([
-            'nama' => $request->nama,
-            'kategori' => $request->kategori,
-            'deskripsi' => $request->deskripsi,
-            'foto_tokoh' => $path,
-            'updated_at' => now(),
-        ]);
-
-        return back()->with('success', 'Tokoh berhasil diperbarui');
+public function update(Request $request, $id)
+{
+    $tokoh = DB::table('tokoh')->where('tokoh_id', $id)->first();
+    if (!$tokoh) {
+        return back()->with('error', 'Data tidak ditemukan');
     }
 
-    public function destroy($id)
-    {
-        $tokoh = DB::table('tokoh')->where('tokoh_id', $id)->first();
+    $data = [
+        'nama' => $request->nama,
+        'kategori' => $request->kategori,
+        'deskripsi' => $request->deskripsi,
+        'updated_at' => now(),
+    ];
 
-        if ($tokoh && $tokoh->foto_tokoh) {
-            $filePath = public_path($tokoh->foto_tokoh);
-            if (file_exists($filePath)) {
-                unlink($filePath);
+    if ($request->hasFile('foto_tokoh')) {
+
+        // hapus foto lama di public_html
+        if ($tokoh->foto_tokoh) {
+            $old = '/home/aajxwzdj/public_html/bbpr/' . $tokoh->foto_tokoh;
+            if (file_exists($old)) {
+                unlink($old);
             }
         }
 
-        DB::table('tokoh')->where('tokoh_id', $id)->delete();
-
-        return back()->with('success', 'Tokoh Berhasil dihapus');
+        $data['foto_tokoh'] = $this->uploadFotoTokoh($request->file('foto_tokoh'));
     }
+
+    DB::table('tokoh')
+        ->where('tokoh_id', $id)
+        ->update($data);
+
+    return back()->with('success', 'Tokoh berhasil diperbarui');
+}
+
+public function destroy($id)
+{
+    $tokoh = DB::table('tokoh')->where('tokoh_id', $id)->first();
+
+    if ($tokoh && $tokoh->foto_tokoh) {
+        $file = '/home/aajxwzdj/public_html/bbpr/' . $tokoh->foto_tokoh;
+        if (file_exists($file)) {
+            unlink($file);
+        }
+    }
+
+    DB::table('tokoh')->where('tokoh_id', $id)->delete();
+
+    return back()->with('success', 'Tokoh berhasil dihapus');
+}
+
+    
+private function uploadFotoTokoh($file)
+{
+    // 1️⃣ simpan dulu ke public Laravel
+    $laravelPath = public_path('img/tokoh');
+
+    if (!is_dir($laravelPath)) {
+        mkdir($laravelPath, 0755, true);
+    }
+
+    if (!is_writable($laravelPath)) {
+        abort(500, 'Folder Laravel img/tokoh tidak bisa ditulis');
+    }
+
+    $name = Str::uuid() . '.' . $file->getClientOriginalExtension();
+    $file->move($laravelPath, $name);
+
+    // 2️⃣ copy ke public_html (WEB ROOT)
+    $targetPath = '/home/aajxwzdj/public_html/bbpr/img/tokoh';
+
+    if (!is_dir($targetPath)) {
+        mkdir($targetPath, 0755, true);
+    }
+
+    if (!is_writable($targetPath)) {
+        abort(500, 'Folder public_html img/tokoh tidak bisa ditulis');
+    }
+
+    copy(
+        $laravelPath . '/' . $name,
+        $targetPath . '/' . $name
+    );
+
+    // simpan path relatif
+    return 'img/tokoh/' . $name;
+}
+
+
 
 }

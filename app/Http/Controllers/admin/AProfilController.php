@@ -4,160 +4,120 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
+
 
 class AProfilController extends Controller
 {
     public function visiMisi()
     {
-        $response = Http::withHeaders([
-            'apikey'        => env('SUPABASE_SERVICE_ROLE_KEY'),
-            'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
-            'Accept'        => 'application/json',
-        ])->get(
-            rtrim(env('SUPABASE_URL'), '/') . '/rest/v1/profil?profil_id=eq.1&select=visi,misi'
-        );
-
-        $data = $response->json()[0] ?? null;
-
+        $profil = DB::table('profil')->where('profil_id', 1)->first();
+    
         return view('admin.profil.visimisi', [
-            'visi' => $data['visi'] ?? '',
-            'misi' => isset($data['misi'])
-                ? preg_split("/\r\n|\n|\r/", $data['misi'])
+            'visi' => $profil->visi ?? '',
+            'misi' => isset($profil->misi)
+                ? preg_split("/\r\n|\n|\r/", $profil->misi)
                 : [],
         ]);
     }
 
     public function updateVisiMisi(Request $request)
-    {
-        $data = $request->json()->all();
+{
+    $validated = $request->validate([
+        'visi' => 'required|string',
+        'misi' => 'required|string',
+    ]);
 
-        $validated = validator($data, [
-            'visi' => 'required|string',
-            'misi' => 'required|string',
-        ])->validate();
+    $misiBersih = collect(
+        preg_split("/\r\n|\n|\r/", $validated['misi'])
+    )
+    ->map(function ($item) {
+        // hapus "1. ", "2. ", dst
+        return preg_replace('/^\s*\d+\.\s*/', '', trim($item));
+    })
+    ->filter()
+    ->implode("\n");
 
-        $response = Http::withHeaders([
-            'apikey'        => env('SUPABASE_SERVICE_ROLE_KEY'),
-            'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
-            'Content-Type'  => 'application/json',
-            'Accept'        => 'application/json',
-            'Prefer'        => 'return=representation',
-        ])->patch(
-            rtrim(env('SUPABASE_URL'), '/') . '/rest/v1/profil?profil_id=eq.1',
-            [
-                'visi'       => $validated['visi'],
-                'misi'       => $validated['misi'],
-                'updated_at' => now()->toISOString(),
-            ]
-        );
+    DB::table('profil')
+        ->where('profil_id', 1)
+        ->update([
+            'visi'       => $validated['visi'],
+            'misi'       => $misiBersih,
+            'updated_at' => now(),
+        ]);
 
-        if ($response->failed()) {
-            return response()->json([
-                'message' => 'Gagal menyimpan ke Supabase',
-                'status'  => $response->status(),
-                'error'   => $response->body(),
-            ], 500);
-        }
-
-                return response()->json([
-                    'message' => 'Berhasil menyimpan',
-                    'data' => $response->json()
-                ]);
-            }
+    return response()->json([
+        'message' => 'Visi & Misi berhasil disimpan',
+    ]);
+}
 
     public function tugasFungsi()
     {
-        $response = Http::withHeaders([
-            'apikey'        => env('SUPABASE_SERVICE_ROLE_KEY'),
-            'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
-            'Accept'        => 'application/json',
-        ])->get(
-            rtrim(env('SUPABASE_URL'), '/') . '/rest/v1/profil?profil_id=eq.1&select=tugas,fungsi'
-        );
-
-        $data = $response->json()[0] ?? null;
-
+        $profil = DB::table('profil')
+            ->where('profil_id', 1)
+            ->first();
+    
         return view('admin.profil.tugasfungsi', [
-            'tugas' => $data['tugas'] ?? '',
-            'fungsi' => isset($data['fungsi'])
-                ? preg_split("/\r\n|\n|\r/", $data['fungsi'])
+            'tugas' => $profil->tugas ?? '',
+            'fungsi' => isset($profil->fungsi)
+                ? preg_split("/\r\n|\n|\r/", $profil->fungsi)
                 : [],
         ]);
     }
 
     public function updateTugasFungsi(Request $request)
-    {
-        $data = $request->json()->all();
+{
+    $validated = $request->validate([
+        'tugas'  => 'required|string',
+        'fungsi' => 'required|string',
+    ]);
 
-        $validated = validator($data, [
-            'tugas'  => 'required|string',
-            'fungsi' => 'required|string',
-        ])->validate();
+    $fungsiBersih = collect(
+        preg_split("/\r\n|\n|\r/", $validated['fungsi'])
+    )
+    ->map(function ($item) {
+        // hapus "1. ", "2. ", "3. " dst
+        return preg_replace('/^\s*\d+\.\s*/', '', trim($item));
+    })
+    ->filter()
+    ->implode("\n");
 
-        $response = Http::withHeaders([
-            'apikey'        => env('SUPABASE_SERVICE_ROLE_KEY'),
-            'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
-            'Content-Type'  => 'application/json',
-            'Prefer'        => 'return=minimal',
-        ])->patch(
-            rtrim(env('SUPABASE_URL'), '/') . '/rest/v1/profil?profil_id=eq.1',
-            [
-                'tugas'      => $validated['tugas'],
-                'fungsi'     => $validated['fungsi'],
-                'updated_at' => now()->toISOString(),
-            ]
-        );
-
-        if ($response->failed()) {
-            return response()->json([
-                'message' => 'Gagal menyimpan Tugas & Fungsi',
-            ], 500);
-        }
-
-        return response()->json([
-            'message' => 'Tugas & Fungsi berhasil disimpan',
+    DB::table('profil')
+        ->where('profil_id', 1)
+        ->update([
+            'tugas'      => $validated['tugas'],
+            'fungsi'     => $fungsiBersih,
+            'updated_at' => now(),
         ]);
-    }
+
+    return response()->json([
+        'message' => 'Tugas & Fungsi berhasil disimpan',
+    ]);
+}
+
 
     public function pegawai(Request $request)
     {
         $search = $request->query('search');
-
-        $headers = [
-            'apikey'        => env('SUPABASE_SERVICE_ROLE_KEY'),
-            'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
-            'Accept'        => 'application/json',
-        ];
-
-        /* ================= WAJIB: INISIALISASI ================= */
-        $kepalaBalai  = null;
-        $kasubbagUmum = null;
-
-        /* ================= AMBIL JABATAN STRATEGIS ================= */
-        $kepalaBalai = Http::withHeaders($headers)->get(
-            rtrim(env('SUPABASE_URL'), '/') .
-            '/rest/v1/pegawai?select=pegawai_id,nama,jabatan,foto&jabatan=eq.Kepala Balai&limit=1'
-        )->json()[0] ?? null;
-
-        $kasubbagUmum = Http::withHeaders($headers)->get(
-            rtrim(env('SUPABASE_URL'), '/') .
-            '/rest/v1/pegawai?select=pegawai_id,nama,jabatan,foto&jabatan=eq.Kasubbag Umum&limit=1'
-        )->json()[0] ?? null;
-
-        /* ================= LIST PEGAWAI (TANPA STRATEGIS) ================= */
-        $url = rtrim(env('SUPABASE_URL'), '/') .
-            '/rest/v1/pegawai?select=pegawai_id,nama,jabatan,foto&order=created_at.desc' .
-            '&jabatan=not.in.(Kepala Balai,Kasubbag Umum)';
-
-        if (!empty($search)) {
-            $search = urlencode($search);
-            $url .= "&or=(nama.ilike.*{$search}*,jabatan.ilike.*{$search}*)";
-        }
-
-        $pegawai = Http::withHeaders($headers)->get($url)->json() ?? [];
-
+    
+        $kepalaBalai = DB::table('pegawai')
+            ->where('jabatan', 'Kepala Balai')
+            ->first();
+    
+        $kasubbagUmum = DB::table('pegawai')
+            ->where('jabatan', 'Kasubbag Umum')
+            ->first();
+    
+        $pegawai = DB::table('pegawai')
+            ->when($search, function ($q) use ($search) {
+                $q->where('nama', 'like', "%{$search}%")
+                  ->orWhere('jabatan', 'like', "%{$search}%");
+            })
+            ->whereNotIn('jabatan', ['Kepala Balai', 'Kasubbag Umum'])
+            ->orderBy('created_at', 'desc')
+            ->get();
+    
         return view('admin.profil.pegawai', compact(
             'pegawai',
             'kepalaBalai',
@@ -166,319 +126,252 @@ class AProfilController extends Controller
     }
 
     public function storePegawai(Request $request)
-    {
-        $request->validate([
-            'nama'    => 'required|string',
-            'jabatan' => 'required|string',
-            'foto'    => 'required|image|max:2048',
-        ]);
+{
+    $request->validate([
+        'nama'    => 'required|string',
+        'jabatan' => 'required|string',
+        'foto'    => 'required|image|max:2048',
+    ]);
 
-        /* ================= SIMPAN FOTO KE LARAVEL ================= */
-        $file = $request->file('foto');
-        $namaFile = Str::uuid() . '.' . $file->getClientOriginalExtension();
+    $fotoPath = $this->uploadFotoPegawai($request->file('foto'));
 
-        $file->move(public_path('img/pegawai'), $namaFile);
+    DB::table('pegawai')->insert([
+        'nama'       => $request->nama,
+        'jabatan'    => $request->jabatan,
+        'foto'       => $fotoPath,
+        'created_at' => now(),
+        'updated_at' => now(),
+    ]);
 
-        $fotoPath = 'img/pegawai/' . $namaFile;
+    return redirect()
+        ->route('admin.profil.pegawai')
+        ->with('success', 'Pegawai berhasil ditambahkan');
+}
 
-        /* ================= SIMPAN KE SUPABASE (DB SAJA) ================= */
-        $insert = Http::withHeaders([
-            'apikey'        => env('SUPABASE_SERVICE_ROLE_KEY'),
-            'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
-            'Content-Type'  => 'application/json',
-        ])->post(
-            rtrim(env('SUPABASE_URL'), '/') . '/rest/v1/pegawai',
-            [
-                'nama'    => $request->nama,
-                'jabatan' => $request->jabatan,
-                'foto'    => $fotoPath,
-            ]
-        );
+public function updatePegawai(Request $request, $id)
+{
+    $request->validate([
+        'nama'    => 'required|string',
+        'jabatan' => 'required|string',
+        'foto'    => 'nullable|image|max:2048',
+    ]);
 
-        if ($insert->failed()) {
-            return back()->with('error', 'Gagal menyimpan data pegawai');
-        }
-
-        return redirect()
-            ->route('admin.profil.pegawai')
-            ->with('success', 'Pegawai berhasil ditambahkan');
+    $pegawai = DB::table('pegawai')->where('pegawai_id', $id)->first();
+    if (!$pegawai) {
+        return back()->with('error', 'Data pegawai tidak ditemukan');
     }
 
-    public function updatePegawai(Request $request, $id)
-    {
-        $request->validate([
-            'nama'    => 'required|string',
-            'jabatan' => 'required|string',
-            'foto'    => 'nullable|image|max:2048',
-        ]);
+    $data = [
+        'nama'       => $request->nama,
+        'jabatan'    => $request->jabatan,
+        'updated_at' => now(),
+    ];
 
-        $headers = [
-            'apikey'        => env('SUPABASE_SERVICE_ROLE_KEY'),
-            'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
-            'Accept'        => 'application/json',
-        ];
+    if ($request->hasFile('foto')) {
 
-        /* ================= DATA LAMA ================= */
-        $pegawaiLama = Http::withHeaders($headers)->get(
-            rtrim(env('SUPABASE_URL'), '/') .
-            "/rest/v1/pegawai?pegawai_id=eq.{$id}&select=foto,jabatan"
-        )->json()[0] ?? null;
-
-        $dataUpdate = [
-            'nama'    => $request->nama,
-            'jabatan' => $request->jabatan,
-        ];
-
-        /* ================= JIKA GANTI FOTO ================= */
-        if ($request->hasFile('foto')) {
-
-            // hapus foto lama lokal
-            if (!empty($pegawaiLama['foto'])) {
-                $oldPath = public_path($pegawaiLama['foto']);
-                if (file_exists($oldPath)) {
-                    unlink($oldPath);
-                }
-            }
-
-            // simpan foto baru
-            $file = $request->file('foto');
-            $namaFile = Str::uuid() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('img/pegawai'), $namaFile);
-
-            $dataUpdate['foto'] = 'img/pegawai/' . $namaFile;
-        }
-
-        /* ================= UPDATE DB SUPABASE ================= */
-        Http::withHeaders([
-            'apikey'        => env('SUPABASE_SERVICE_ROLE_KEY'),
-            'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
-            'Content-Type'  => 'application/json',
-        ])->patch(
-            rtrim(env('SUPABASE_URL'), '/') .
-            "/rest/v1/pegawai?pegawai_id=eq.{$id}",
-            $dataUpdate
-        );
-
-        return redirect()
-            ->route('admin.profil.pegawai')
-            ->with('success', 'Data pegawai berhasil diperbarui');
-    }
-
-    public function destroyPegawai($id)
-    {
-        $headers = [
-            'apikey'        => env('SUPABASE_SERVICE_ROLE_KEY'),
-            'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
-            'Accept'        => 'application/json',
-        ];
-
-        $pegawai = Http::withHeaders($headers)->get(
-            rtrim(env('SUPABASE_URL'), '/') .
-            "/rest/v1/pegawai?pegawai_id=eq.{$id}&select=foto"
-        )->json()[0] ?? null;
-
-        if (!$pegawai) {
-            return back()->with('error', 'Data pegawai tidak ditemukan');
-        }
-
-        /* ================= HAPUS FOTO LOKAL ================= */
-        if (!empty($pegawai['foto'])) {
-            $path = public_path($pegawai['foto']);
-            if (file_exists($path)) {
-                unlink($path);
+        // HAPUS FOTO LAMA
+        if (!empty($pegawai->foto)) {
+            $oldFile = base_path('../public_html/bbpr/' . $pegawai->foto);
+            if (file_exists($oldFile)) {
+                unlink($oldFile);
             }
         }
 
-        /* ================= HAPUS DATA DB ================= */
-        Http::withHeaders($headers)->delete(
-            rtrim(env('SUPABASE_URL'), '/') .
-            "/rest/v1/pegawai?pegawai_id=eq.{$id}"
-        );
-
-        return redirect()
-            ->route('admin.profil.pegawai')
-            ->with('success', 'Pegawai berhasil dihapus');
+        // SIMPAN FOTO BARU
+        $data['foto'] = $this->uploadFotoPegawai($request->file('foto'));
     }
 
-        public function strukturorganisasi(Request $request)
-    {
-        $headers = [
-            'apikey'        => env('SUPABASE_SERVICE_ROLE_KEY'),
-            'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
-            'Accept'        => 'application/json',
-        ];
+    DB::table('pegawai')->where('pegawai_id', $id)->update($data);
 
-        /* ================= AMBIL RIWAYAT STRUKTUR ================= */
-        $riwayat = Http::withHeaders($headers)->get(
-            rtrim(env('SUPABASE_URL'), '/') .
-            '/rest/v1/struktur_organisasi?order=created_at.desc'
-        )->json() ?? [];
+    return redirect()
+        ->route('admin.profil.pegawai')
+        ->with('success', 'Data pegawai berhasil diperbarui');
+}
 
-        /* ================= TENTUKAN STRUKTUR YANG DITAMPILKAN ================= */
-        $strukturAktif = null;
-
-        // JIKA KLIK RIWAYAT (?struktur=ID)
-        if ($request->struktur) {
-            $strukturAktif = Http::withHeaders($headers)->get(
-                rtrim(env('SUPABASE_URL'), '/') .
-                "/rest/v1/struktur_organisasi?struktur_id=eq.{$request->struktur}"
-            )->json()[0] ?? null;
-        }
-        if (!$strukturAktif) {
-            $strukturAktif = collect($riwayat)->firstWhere('status', true);
-        }
-        if ($strukturAktif) {
-            // DARI SNAPSHOT STRUKTUR
-            $kepalaBalai  = $strukturAktif['kepala_balai'];
-            $kasubbagUmum = $strukturAktif['kasubbag_umum'];
-        } else {
-            // FALLBACK DARI PEGAWAI (JIKA RIWAYAT KOSONG)
-            $kepalaBalai = Http::withHeaders($headers)->get(
-                rtrim(env('SUPABASE_URL'), '/') .
-                '/rest/v1/pegawai?jabatan=eq.Kepala Balai&limit=1'
-            )->json()[0] ?? null;
-
-            $kasubbagUmum = Http::withHeaders($headers)->get(
-                rtrim(env('SUPABASE_URL'), '/') .
-                '/rest/v1/pegawai?jabatan=eq.Kasubbag Umum&limit=1'
-            )->json()[0] ?? null;
-        }
-
-        return view('admin.profil.strukturorganisasi', compact(
-            'kepalaBalai',
-            'kasubbagUmum',
-            'riwayat',
-            'strukturAktif'
-        ));
+public function destroyPegawai($id)
+{
+    $pegawai = DB::table('pegawai')->where('pegawai_id', $id)->first();
+    if (!$pegawai) {
+        return back()->with('error', 'Data pegawai tidak ditemukan');
     }
 
-    private function simpanSnapshotStruktur()
-    {
-        $headers = [
-            'apikey'        => env('SUPABASE_SERVICE_ROLE_KEY'),
-            'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
-            'Content-Type'  => 'application/json',
-        ];
+    // ❗ JANGAN HAPUS FILE FOTO
+    // Foto dipakai oleh riwayat struktur organisasi
 
-        $kepala = Http::withHeaders($headers)->get(
-            rtrim(env('SUPABASE_URL'), '/') .
-            '/rest/v1/pegawai?jabatan=eq.Kepala Balai&limit=1'
-        )->json()[0] ?? null;
+    DB::table('pegawai')->where('pegawai_id', $id)->delete();
 
-        $kasubbag = Http::withHeaders($headers)->get(
-            rtrim(env('SUPABASE_URL'), '/') .
-            '/rest/v1/pegawai?jabatan=eq.Kasubbag Umum&limit=1'
-        )->json()[0] ?? null;
+    return redirect()
+        ->route('admin.profil.pegawai')
+        ->with('success', 'Pegawai berhasil dihapus (foto disimpan untuk arsip)');
+}
 
-        if (!$kepala && !$kasubbag) return;
 
-        Http::withHeaders($headers)->patch(
-            rtrim(env('SUPABASE_URL'), '/') .
-            '/rest/v1/struktur_organisasi?status=eq.true',
-            ['status' => false]
-        );
+    public function strukturorganisasi(Request $request)
+{
+    // ambil semua riwayat
+    $riwayat = DB::table('struktur_organisasi')
+        ->orderByDesc('created_at')
+        ->get();
 
-        Http::withHeaders($headers)->post(
-            rtrim(env('SUPABASE_URL'), '/') .
-            '/rest/v1/struktur_organisasi',
-            [
-                'versi'          => now()->year,
-                'kepala_balai'   => $kepala,
-                'kasubbag_umum'  => $kasubbag,
-                'status'         => true,
-            ]
-        );
+    // struktur aktif (default)
+    $strukturAktif = DB::table('struktur_organisasi')
+        ->where('status', 1)
+        ->first();
+
+    // kalau klik riwayat
+    if ($request->filled('struktur')) {
+        $strukturAktif = DB::table('struktur_organisasi')
+            ->where('struktur_id', $request->struktur)
+            ->first();
     }
+
+    // default null (INI PENTING)
+    $kepalaBalai = null;
+    $kasubbagUmum = null;
+
+    if ($strukturAktif) {
+        $kepalaBalai = $strukturAktif->kepala_balai
+            ? json_decode($strukturAktif->kepala_balai)
+            : null;
+
+        $kasubbagUmum = $strukturAktif->kasubbag_umum
+            ? json_decode($strukturAktif->kasubbag_umum)
+            : null;
+    }
+
+    return view('admin.profil.strukturorganisasi', compact(
+        'strukturAktif',
+        'kepalaBalai',
+        'kasubbagUmum',
+        'riwayat'
+    ));
+}
+
+
+ private function buatSnapshotStruktur()
+{
+    $kepala = DB::table('pegawai')
+        ->where('jabatan', 'Kepala Balai')
+        ->first();
+
+    $kasubbag = DB::table('pegawai')
+        ->where('jabatan', 'Kasubbag Umum')
+        ->first();
+
+    if (!$kepala && !$kasubbag) {
+        return;
+    }
+
+    // nonaktifkan struktur lama
+    DB::table('struktur_organisasi')
+        ->where('status', 1)
+        ->update(['status' => 0]);
+
+    DB::table('struktur_organisasi')->insert([
+        'versi' => now()->year,
+        'kepala_balai' => $kepala ? json_encode([
+            'pegawai_id' => $kepala->pegawai_id,
+            'nama'       => $kepala->nama,
+            'jabatan'    => $kepala->jabatan,
+            'foto'       => $kepala->foto,
+        ]) : null,
+
+        'kasubbag_umum' => $kasubbag ? json_encode([
+            'pegawai_id' => $kasubbag->pegawai_id,
+            'nama'       => $kasubbag->nama,
+            'jabatan'    => $kasubbag->jabatan,
+            'foto'       => $kasubbag->foto,
+        ]) : null,
+
+        'status'     => 1,
+        'created_at'=> now(),
+        'updated_at'=> now(),
+    ]);
+}
+
+
 
     public function updateStrategis(Request $request)
-    {
-        $headers = [
-            'apikey'        => env('SUPABASE_SERVICE_ROLE_KEY'),
-            'Authorization' => 'Bearer ' . env('SUPABASE_SERVICE_ROLE_KEY'),
-            'Content-Type'  => 'application/json',
+{
+    $updated = false;
+
+    if ($request->kepala_id) {
+
+        $data = [
+            'nama'       => $request->kepala_nama,
+            'jabatan'    => 'Kepala Balai',
+            'updated_at' => now(),
         ];
 
-        /* ================= KEPALA BALAI ================= */
-        if ($request->kepala_id) {
-
-            $old = Http::withHeaders($headers)->get(
-                rtrim(env('SUPABASE_URL'), '/') .
-                "/rest/v1/pegawai?pegawai_id=eq.{$request->kepala_id}&select=foto"
-            )->json()[0] ?? null;
-
-            $data = [
-                'nama'    => $request->kepala_nama,
-                'jabatan' => 'Kepala Balai',
-            ];
-
-            if ($request->hasFile('kepala_foto')) {
-                $data['foto'] = $this->uploadFoto(
-                    $request->file('kepala_foto')
-                );
-            }
-
-            Http::withHeaders($headers)->patch(
-                rtrim(env('SUPABASE_URL'), '/') .
-                "/rest/v1/pegawai?pegawai_id=eq.{$request->kepala_id}",
-                $data
-            );
+        if ($request->hasFile('kepala_foto')) {
+            $data['foto'] = $this->uploadFotoPegawai($request->file('kepala_foto'));
         }
 
-        /* ================= KASUBBAG UMUM ================= */
-        if ($request->kasubbag_id) {
+        DB::table('pegawai')
+            ->where('pegawai_id', $request->kepala_id)
+            ->update($data);
 
-            $old = Http::withHeaders($headers)->get(
-                rtrim(env('SUPABASE_URL'), '/') .
-                "/rest/v1/pegawai?pegawai_id=eq.{$request->kasubbag_id}&select=foto"
-            )->json()[0] ?? null;
+        $updated = true;
+    }
 
-            $data = [
-                'nama'    => $request->kasubbag_nama,
-                'jabatan' => 'Kasubbag Umum',
-            ];
+    if ($request->kasubbag_id) {
 
-            if ($request->hasFile('kasubbag_foto')) {
+        $data = [
+            'nama'       => $request->kasubbag_nama,
+            'jabatan'    => 'Kasubbag Umum',
+            'updated_at' => now(),
+        ];
 
-                // HAPUS FOTO LAMA DI LARAVEL
-                if (!empty($old['foto'])) {
-                    $oldPath = public_path($old['foto']);
-                    if (file_exists($oldPath)) {
-                        unlink($oldPath);
-                    }
-                }
-
-                // SIMPAN FOTO BARU KE LARAVEL
-                $data['foto'] = $this->uploadFoto(
-                    $request->file('kasubbag_foto')
-                );
-            }
-            Http::withHeaders($headers)->patch(
-                rtrim(env('SUPABASE_URL'), '/') .
-                "/rest/v1/pegawai?pegawai_id=eq.{$request->kasubbag_id}",
-                $data
-            );
+        if ($request->hasFile('kasubbag_foto')) {
+            $data['foto'] = $this->uploadFotoPegawai($request->file('kasubbag_foto'));
         }
 
-        /* ================= SNAPSHOT STRUKTUR BARU ================= */
-        $this->simpanSnapshotStruktur();
+        DB::table('pegawai')
+            ->where('pegawai_id', $request->kasubbag_id)
+            ->update($data);
+
+        $updated = true;
+    }
+
+    // 🔥 INI KUNCI UTAMANYA
+    if ($updated) {
+        $this->buatSnapshotStruktur();
+    }
+
+    return redirect()
+        ->route('admin.profil.pegawai')
+        ->with('success', 'Jabatan strategis berhasil diperbarui');
+}
 
 
-            return redirect()
-                ->route('admin.profil.pegawai')
-                ->with('success', 'Jabatan strategis berhasil diperbarui');
-        }
+        
+private function uploadFotoPegawai($file)
+{
+    // Path Laravel
+    $laravelPath = public_path('img/pegawai');
 
-        private function uploadFoto($file)
-        {
-            $path = public_path('img/pegawai');
+    if (!is_dir($laravelPath) || !is_writable($laravelPath)) {
+        abort(500, 'Folder Laravel img/pegawai tidak bisa ditulis');
+    }
 
-            if (!file_exists($path)) {
-                mkdir($path, 0755, true);
-            }
+    $name = Str::uuid() . '.' . $file->getClientOriginalExtension();
+    $file->move($laravelPath, $name);
 
-            $name = Str::uuid() . '.' . $file->getClientOriginalExtension();
-            $file->move($path, $name);
+    // Path public_html (PASTIKAN USERNAME BENAR)
+    $targetPath = '/home/aajxwzdj/public_html/bbpr/img/pegawai';
 
-            return 'img/pegawai/' . $name;
-        }
+    if (!is_dir($targetPath) || !is_writable($targetPath)) {
+        abort(500, 'Folder public_html img/pegawai tidak bisa ditulis');
+    }
+
+    copy(
+        $laravelPath . '/' . $name,
+        $targetPath . '/' . $name
+    );
+
+    return 'img/pegawai/' . $name;
+}
+
+
+
 }
