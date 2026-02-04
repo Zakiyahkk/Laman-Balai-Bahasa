@@ -42,11 +42,12 @@
                 {{-- LINK --}}
                 <div class="layanan-link">
                     <span>Ajukan permohonan layanan Ahli Bahasa</span>
-                    <a href="https://balaibahasariau.kemendikdasmen.go.id/layananbalai/layanan.php?page=ahli_bahasa"
+                    <a href="https://ppidbbpriau.kemendikdasmen.go.id/form/permohonan"
                         target="_blank" rel="noopener noreferrer">
                         di sini
                     </a>
                 </div>
+
             </div>
 
         </div>

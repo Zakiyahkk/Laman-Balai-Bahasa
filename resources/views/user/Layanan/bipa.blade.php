@@ -40,7 +40,7 @@
                 {{-- LINK --}}
                 <div class="layanan-link">
                     <span>Ajukan permohonan layanan BIPA</span>
-                    <a href="https://balaibahasariau.kemendikdasmen.go.id/layananbalai/layanan.php?page=bipa"
+                    <a href="https://ppidbbpriau.kemendikdasmen.go.id/form/permohonan"
                         target="_blank" rel="noopener noreferrer">
                         di sini
                     </a>

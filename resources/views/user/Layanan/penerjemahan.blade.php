@@ -40,7 +40,7 @@
                 {{-- LINK --}}
                 <div class="layanan-link">
                     <span>Ajukan permohonan layanan Penerjemahan</span>
-                    <a href="https://balaibahasariau.kemendikdasmen.go.id/layananbalai/layanan.php?page=penerjemah"
+                    <a href="https://ppidbbpriau.kemendikdasmen.go.id/form/permohonan"
                         target="_blank" rel="noopener noreferrer">
                         di sini
                     </a>

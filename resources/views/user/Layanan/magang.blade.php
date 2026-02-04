@@ -41,13 +41,16 @@
                 {{-- LINK --}}
                 <div class="layanan-link">
                     <span>Informasi dan pendaftaran magang</span>
-                    <a href="https://balaibahasariau.kemendikdasmen.go.id/layananbalai/layanan.php?page=magang"
+                    <a href="https://ppidbbpriau.kemendikdasmen.go.id/form/permohonan"
                         target="_blank" rel="noopener noreferrer">
                         di sini
                     </a>
                 </div>
 
+
             </div>
+
+        </div>
 
     </section>
 @endsection

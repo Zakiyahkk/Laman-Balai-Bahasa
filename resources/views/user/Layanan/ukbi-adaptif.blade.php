@@ -38,9 +38,9 @@
                 </div>
 
                 {{-- LINK --}}
-                <div class="layanan-link">
+               <div class="layanan-link">
                     <span>Ajukan permohonan layanan UKBI</span>
-                    <a href="https://balaibahasariau.kemendikdasmen.go.id/layanan/layanan.php?page=ukbi" target="_blank"
+                    <a href="https://ppidbbpriau.kemendikdasmen.go.id/form/permohonan" target="_blank"
                         rel="noopener noreferrer">
                         di sini
                     </a>

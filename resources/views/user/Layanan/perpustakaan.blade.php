@@ -38,10 +38,9 @@
                 </div>
 
                 {{-- LINK --}}
-
                 <div class="layanan-link">
                     <span>Informasi dan layanan Perpustakaan</span>
-                    <a href="https://balaibahasariau.kemendikdasmen.go.id/layananbalai/layanan.php?page=perpustakaan"
+                    <a href="https://ppidbbpriau.kemendikdasmen.go.id/form/permohonan"
                         target="_blank" rel="noopener noreferrer">
                         di sini
                     </a>
