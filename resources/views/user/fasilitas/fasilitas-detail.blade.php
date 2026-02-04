@@ -5,81 +5,128 @@
 @section('content')
 
     @php
-        $galeriFasilitas = [
-            'aula' => ['aula/aula-1.jpg', 'aula/aula-2.jpg', 'aula/aula-3.jpg', 'aula/aula-4.jpg'],
-
-            'perpustakaan' => [
-                'perpustakaan/perpustakaan.png',
-                'perpustakaan/perpus-2.jpg',
-                'perpustakaan/perpus-3.jpg',
-                'perpustakaan/perpus-4.jpg',
-                'perpustakaan/perpus-1.jpg',
-                'perpustakaan/perpus-2.jpg',
-                'perpustakaan/perpus-3.jpg',
-                'perpustakaan/perpus-4.jpg',
-            ],
-
-            'serambi' => [
-                'serambi/serambi-1.png',
-                'serambi/serambi-2.jpg',
-                'serambi/serambi-3.jpg',
-                'serambi/serambi-4.jpg',
-                'serambi/serambi-1.png',
-                'serambi/serambi-2.jpg',
-                'serambi/serambi-3.jpg',
-                'serambi/serambi-4.jpg',
-            ],
-
-            'toilet' => [
-                'toilet/toilet-1.png',
-                'toilet/toilet-2.jpg',
-                'toilet/toilet-3.jpg',
-                'toilet/toilet-4.jpg',
-                'toilet/toilet-1.jpg',
-                'toilet/toilet-2.jpg',
-                'toilet/toilet-3.jpg',
-                'toilet/toilet-4.jpg',
-            ],
-
-            'mushola' => [
-                'mushola/musla-1.jpg',
-                'mushola/musala-2.jpg',
-                'mushola/musala-3.jpg',
-                'mushola/musala-4.jpg',
-            ],
-
-            'Disabilitas' => [
-                'disabilitas/disabilitas-1.png',
-                'disabilitas/disabilitas-2.jpg',
-                'disabilitas/disabilitas-3.jpg',
-                'disabilitas/disabilitas-4.jpg',
-                'disabilitas/disabilitas-1.jpg',
-                'disabilitas/disabilitas-2.jpg',
-                'disabilitas/disabilitas-3.jpg',
-                'disabilitas/disabilitas-4.jpg',
-            ],
-
-            'parkir' => ['parkir/parkir-1.jpg', 'parkir/parkir-2.jpg', 'parkir/parkir-3.jpg', 'parkir/parkir-4.jpg'],
-
-            'ult' => ['ult/ult-1.jpg', 'ult/ult-2.jpg', 'ult/ult-3.jpg', 'ult/ult-4.jpg'],
-
-            'ppid' => ['ppid/ppid-1.jpg', 'ppid/ppid-2.jpg', 'ppid/ppid-3.jpg', 'ppid/ppid-4.jpg'],
-        ];
-
-        $judulFasilitas = [
-            'aula' => 'Aula',
-            'perpustakaan' => 'Perpustakaan',
-            'serambi' => 'Serambi Bahasa',
-            'ult' => 'Unit Layanan Terpadu',
-            'toilet' => 'Toilet',
-            'mushola' => 'Mushola',
-            'Disabilitas' => 'Fasilitas Disabilitas',
-            'parkir' => 'Tempat Parkir',
-            'ppid' => 'PPID',
-        ];
-
-        $galeri = $galeriFasilitas[$slug] ?? [];
-        $judul = $judulFasilitas[$slug] ?? 'Fasilitas';
+    $galeriFasilitas = [
+    
+        'lobi' => [
+            'Lobi/lobi.png',
+            'Lobi/lobi1.png',
+        ],
+    
+        'ult' => [
+            'Unit Layanan Terpadu (ULT)/ult.jpg',
+            'Unit Layanan Terpadu (ULT)/ult2.png',
+            'Unit Layanan Terpadu (ULT)/ult3.png',
+            'Unit Layanan Terpadu (ULT)/ult4.png',
+        ],
+    
+        'ppid' => [
+            'PPID/ppid.png',
+            'PPID/ppid1.png',
+        ],
+    
+        'disabilitas' => [
+            'Fasilitas Disabilitas/disabilitas.png',
+            'Fasilitas Disabilitas/disabilitas1.png',
+        ],
+    
+        'aula-fisabilillah' => [
+            'Aula R. H. Fisabilillah/ARHF.png',
+            'Aula R. H. Fisabilillah/ARHF1.png',
+        ],
+    
+        'aula-raja-ali-haji' => [
+            'Aula Raja Ali Haji/ARAH.jpg',
+            'Aula Raja Ali Haji/ARAH1.jpg',
+            'Aula Raja Ali Haji/ARAH2.jpg',
+            'Aula Raja Ali Haji/ARAH3.png',
+            'Aula Raja Ali Haji/ARAH4.png',
+            'Aula Raja Ali Haji/ARAH5.jpg',
+        ],
+    
+        'serambi-kreatif' => [
+            'Serambi Kreatif/serambi.png',
+        ],
+    
+        'mushola' => [
+            'Musala Hikmah/musala.jpg',
+            'Musala Hikmah/musala1.jpg',
+            'Musala Hikmah/musala2.jpg',
+        ],
+    
+        'perpustakaan' => [
+            'Perpustakaan/perpus.jpg',
+            'Perpustakaan/perpus1.jpg',
+            'Perpustakaan/perpus2.jpg',
+            'Perpustakaan/perpus3.jpg',
+            'Perpustakaan/perpus4.jpg',
+            'Perpustakaan/perpus5.jpg',
+            'Perpustakaan/perpus6.jpg',
+            'Perpustakaan/perpus7.jpg',
+            'Perpustakaan/perpus8.jpg',
+        ],
+    
+        'olahraga' => [
+            'Fasilitas Olahraga/olahraga.jpg',
+            'Fasilitas Olahraga/olahraga1.jpg',
+            'Fasilitas Olahraga/olahraga2.jpg',
+            'Fasilitas Olahraga/olahraga3.jpg',
+            'Fasilitas Olahraga/olahraga4.jpg',
+            'Fasilitas Olahraga/olahraga5.jpg',
+            'Fasilitas Olahraga/olahraga6.jpg',
+            'Fasilitas Olahraga/olahraga7.jpg',
+            'Fasilitas Olahraga/olahraga8.jpg',
+        ],
+    
+        'resam-bastra' => [
+            'Resam Bastra/resbas.jpg',
+            'Resam Bastra/resbas1.jpg',
+            'Resam Bastra/resbas2.jpg',
+            'Resam Bastra/resbas3.jpg',
+            'Resam Bastra/resbas4.jpg',
+        ],
+    
+        'parkir' => [
+            'Area Parkir/parkir.png',
+            'Area Parkir/parkir1.jpg',
+            'Area Parkir/parkir2.jpg',
+        ],
+    
+        'laktasi' => [
+            'Ruang Laktasi/laktasi.jpg',
+            'Ruang Laktasi/laktasi1.jpg',
+            'Ruang Laktasi/laktasi2.jpg',
+            'Ruang Laktasi/laktasi3.jpg',
+            'Ruang Laktasi/laktasi4.jpg',
+            'Ruang Laktasi/laktasi5.jpg',
+            'Ruang Laktasi/laktasi6.jpg',
+        ],
+    
+        'toilet' => [
+            'Toilet/toilet.png',
+            'Toilet/toilet1.jpg',
+            'Toilet/toilet2.jpg',
+        ],
+    ];
+    
+    $judulFasilitas = [
+        'lobi' => 'Lobi',
+        'ult' => 'Unit Layanan Terpadu',
+        'ppid' => 'PPID',
+        'disabilitas' => 'Fasilitas Disabilitas',
+        'aula-fisabilillah' => 'Aula R. H. Fisabilillah',
+        'aula-raja-ali-haji' => 'Aula Raja Ali Haji',
+        'serambi-kreatif' => 'Serambi Kreatif',
+        'mushola' => 'Musala Hikmah',
+        'perpustakaan' => 'Perpustakaan',
+        'olahraga' => 'Fasilitas Olahraga',
+        'resam-bastra' => 'Resam Bastra',
+        'parkir' => 'Area Parkir',
+        'laktasi' => 'Ruang Laktasi',
+        'toilet' => 'Toilet',
+    ];
+    
+    $galeri = $galeriFasilitas[$slug] ?? [];
+    $judul = $judulFasilitas[$slug] ?? 'Fasilitas';
     @endphp
 
     <section class="fasilitas-detail">
@@ -88,7 +135,6 @@
             {{-- HEADER --}}
             <div class="fasilitas-detail-header">
                 <h1>{{ $judul }}</h1>
-                <p>Dokumentasi fasilitas {{ strtolower($judul) }} dari berbagai sudut.</p>
             </div>
 
             {{-- GALERI --}}
