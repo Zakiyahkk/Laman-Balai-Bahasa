@@ -429,7 +429,7 @@
                             <div class="c" data-label="Pratinjau">
                                 @if (!empty(data_get($doc, 'file_path')))
                                     <button class="ak-icon-btn ak-preview-btn"
-                                        data-file="{{ url('storage/' . str_replace('uploads/', 'akuntabilitas/', data_get($doc, 'file_path'))) }}" title="Pratinjau">
+                                        data-file="{{ asset('storage/' . $doc->file_path) }}" title="Pratinjau">
                                         <i class="fa-regular fa-eye"></i>
                                     </button>
                                 @else
@@ -438,7 +438,7 @@
                             </div>
 
                             <div class="c" data-label="Unduh">
-                                <a class="ak-icon-btn ak-download" href="{{ url('storage/' . str_replace('uploads/', 'akuntabilitas/', data_get($doc, 'file_path'))) }}"
+                                <a class="ak-icon-btn ak-download" href="{{ asset('storage/' . $doc->file_path) }}"
                                     title="Unduh">
                                     <i class="fa-solid fa-download"></i>
                                     </a>

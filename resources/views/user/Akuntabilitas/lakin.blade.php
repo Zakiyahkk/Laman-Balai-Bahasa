@@ -210,7 +210,7 @@
 
                             <div class="c" data-label="Bentuk Berkas">
                                 <span class="ak-filepill">
-                                    <span class="ak-file-ico">ðŸ“„</span>
+                                    <span class="ak-file-ico">📄</span>
                                     PDF
                                 </span>
                             </div>
