@@ -12,28 +12,28 @@
 
                 {{-- JUDUL --}}
                 <h1 class="berita-detail-title">
-                    {{ $berita['judul'] }}
+                    {{ $berita->judul }}
                 </h1>
 
                 {{-- META --}}
                 <div class="berita-detail-meta">
                     <span class="meta-item">
                         <i class="fa-regular fa-calendar"></i>
-                        {{ \Carbon\Carbon::parse($berita['tanggal'])->translatedFormat('d F Y') }}
+                        {{ \Carbon\Carbon::parse($berita->tanggal)->translatedFormat('d F Y') }}
                     </span>
 
                     <span class="meta-dot">•</span>
 
                     <span class="meta-item">
                         <i class="fa-regular fa-user"></i>
-                        {{ $berita['penulis'] ?? 'Admin' }}
+                        {{ $berita->penulis ?? 'Admin' }}
                     </span>
 
                     <span class="meta-dot">•</span>
 
                     <span class="meta-item meta-views">
                         <i class="fa-regular fa-eye"></i>
-                        {{ $berita['pembaca'] ?? 0 }}
+                        {{ $berita->pembaca ?? 0 }}
                     </span>
                 </div>
 
@@ -41,16 +41,17 @@
                 <div class="berita-detail-card">
 
                     {{-- GAMBAR --}}
-                    @if (!empty($berita['gambar_url']))
+                    @if (!empty($berita->gambar_url))
                         <div class="berita-detail-image">
-                            <img src="{{ $berita['gambar_url'] }}" alt="{{ $berita['judul'] }}">
+                            <img src="{{ $berita->gambar_url }}" alt="{{ $berita->judul }}">
                         </div>
                     @endif
 
                     {{-- ISI --}}
                     <div class="berita-detail-content">
-                        {!! $berita['isi'] ?? '' !!}
+                        {!! $berita->isi !!}
                     </div>
+
                 </div>
 
                 {{-- TOMBOL KEMBALI --}}
