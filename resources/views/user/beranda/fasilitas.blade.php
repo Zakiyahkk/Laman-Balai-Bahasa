@@ -13,69 +13,81 @@
 <body>
 
     @php
-        $fasilitas = [
-            [
-                'nama' => 'Unit Layanan Terpadu',
-                'slug' => 'ult',
-                'gambar' => 'ult.png',
-                'deskripsi' => 'Pusat pelayanan informasi dan administrasi kebahasaan satu pintu.',
-            ],
-            [
-                'nama' => 'PPID',
-                'slug' => 'ppid',
-                'gambar' => 'ppid.jpeg',
-                'deskripsi' => 'Pejabat Pengelola Informasi dan Dokumentasi Balai Bahasa.',
-            ],
-            [
-                'nama' => 'Perpustakaan',
-                'slug' => 'perpustakaan',
-                'gambar' => 'perpustakaan.png',
-                'deskripsi' => 'Koleksi buku bahasa dan sastra dengan ruang baca nyaman.',
-            ],
-            [
-                'nama' => 'Serambi Bahasa',
-                'slug' => 'serambi',
-                'gambar' => 'serambi.jpeg',
-                'deskripsi' => 'Ruang tunggu dan diskusi santai.',
-            ],
-            [
-                'nama' => 'Mushola',
-                'slug' => 'mushola',
-                'gambar' => 'musala.png',
-                'deskripsi' => 'Tempat ibadah yang bersih dan nyaman.',
-            ],
-            [
-                'nama' => 'Tempat Parkir',
-                'slug' => 'parkir',
-                'gambar' => 'parkir.jpeg',
-                'deskripsi' => 'Area parkir luas dan tertata.',
-            ],
-            [
-                'nama' => 'Fasilitas Disabilitas',
-                'slug' => 'Disabilitas',
-                'gambar' => 'disabilitas.png',
-                'deskripsi' => 'Area parkir luas dan tertata.',
-            ],
-            [
-                'nama' => 'Ruang Laktasi',
-                'slug' => 'laktasi',
-                'gambar' => 'laktasi.png',
-                'deskripsi' => 'Ruang khusus ibu menyusui.',
-            ],
-            [
-                'nama' => 'Aula',
-                'slug' => 'aula',
-                'gambar' => 'aula.jpeg',
-                'deskripsi' => 'Ruang pertemuan dan kegiatan besar.',
-            ],
-            [
-                'nama' => 'Toilet',
-                'slug' => 'toilet',
-                'gambar' => 'toilet.jpeg',
-                'deskripsi' => 'Toilet bersih dan higienis.',
-            ],
-        ];
+    $fasilitas = [
+        [
+            'nama' => 'Lobi',
+            'slug' => 'lobi',
+            'gambar' => 'Lobi/lobi.png',
+        ],
+        [
+            'nama' => 'Unit Layanan Terpadu (ULT)',
+            'slug' => 'ult',
+            'gambar' => 'Unit Layanan Terpadu (ULT)/ult.jpg',
+        ],
+        [
+            'nama' => 'PPID',
+            'slug' => 'ppid',
+            'gambar' => 'PPID/ppid.png',
+        ],
+        [
+            'nama' => 'Fasilitas Disabilitas',
+            'slug' => 'disabilitas',
+            'gambar' => 'Fasilitas Disabilitas/disabilitas.png',
+        ],
+        [
+            'nama' => 'Aula R. H. Fisabilillah',
+            'slug' => 'aula-fisabilillah',
+            'gambar' => 'Aula R. H. Fisabilillah/ARHF.png',
+        ],
+        [
+            'nama' => 'Aula Raja Ali Haji',
+            'slug' => 'aula-raja-ali-haji',
+            'gambar' => 'Aula Raja Ali Haji/ARAH.jpg',
+        ],
+        [
+            'nama' => 'Serambi Kreatif',
+            'slug' => 'serambi-kreatif',
+            'gambar' => 'Serambi Kreatif/serambi.png',
+        ],
+        [
+            'nama' => 'Musala Hikmah',
+            'slug' => 'mushola',
+            'gambar' => 'Musala Hikmah/musala.jpg',
+        ],
+        [
+            'nama' => 'Perpustakaan',
+            'slug' => 'perpustakaan',
+            'gambar' => 'Perpustakaan/perpus.jpg',
+        ],
+        [
+            'nama' => 'Fasilitas Olahraga',
+            'slug' => 'olahraga',
+            'gambar' => 'Fasilitas Olahraga/olahraga.jpg',
+        ],
+        [
+            'nama' => 'Resam Bastra',
+            'slug' => 'resam-bastra',
+            'gambar' => 'Resam Bastra/resbas.jpg',
+        ],
+        [
+            'nama' => 'Area Parkir',
+            'slug' => 'parkir',
+            'gambar' => 'Area Parkir/parkir.png',
+        ],
+        [
+            'nama' => 'Ruang Laktasi',
+            'slug' => 'laktasi',
+            'gambar' => 'Ruang Laktasi/laktasi.jpg',
+        ],
+        [
+            'nama' => 'Toilet',
+            'slug' => 'toilet',
+            'gambar' => 'Toilet/toilet.png',
+        ],
+    ];
     @endphp
+
+
 
     <section class="fasilitas-section">
         <div class="container">
@@ -107,8 +119,6 @@
 
                                 <div class="fasilitas-card-content">
                                     <h4>{{ $item['nama'] }}</h4>
-                                    <p>{{ $item['deskripsi'] }}</p>
-
                                     <a href="{{ route('fasilitas.detail', $item['slug']) }}" class="btn-fasilitas">
                                         Lihat Detail
                                     </a>

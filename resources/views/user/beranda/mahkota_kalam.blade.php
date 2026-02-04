@@ -9,8 +9,8 @@
             <div class="mahkota-title-group">
                 <h2 class="mahkota-main-title">Mahkota Kalam Melayu Riau</h2>
             </div>
-            <p class="mahkota-sub-text">
-                Tokoh dan Komunitas Penggerak Bahasa dan Sastra Melayu
+            <p class="mahkota-sub-text" style="text-align: justify; text-justify: inter-word; line-height: 1.8;">
+                Mahkota Kalam Melayu Riau adalah sebuah penganugerahan yang diberikan oleh Balai Bahasa Provinsi Riau kepada tokoh sastra lisan, komunitas sastra, dan komunitas literasi yang telah secara konsisten dan berdampak menjalankan perannya dalam membangun budaya baca dan berkarya di Riau.
             </p>
         </div>
 
@@ -43,18 +43,17 @@
                             <div class="swiper-slide">
                                 <div class="mk-card-box"
                                     onclick="openTokohModal(
-                                            '{{ e($item['nama']) }}',
-                                            '{{ $item['foto_url'] }}',
-                                            '{{ e($item['deskripsi']) }}',
-                                            '{{ e($item['kategori']) }}'
+                                            '{{ e($item->nama) }}',
+                                            '{{ $item->foto_url }}',
+                                            '{{ e($item->deskripsi) }}',
+                                            '{{ e($item->kategori) }}'
                                         )">
 
                                     <div class="mk-img-frame">
-                                        <img src="{{ $item['foto_url'] }}" alt="{{ $item['nama'] }}">
+                                        <img src="{{ $item->foto_url }}" alt="{{ $item->nama }}">
                                     </div>
 
-                                    <h4 class="mk-name">{{ $item['nama'] }}</h4>
-                                    <p class="mk-info">{{ $item['deskripsi'] }}</p>
+                                    <h4 class="mk-name">{{ $item->nama }}</h4>
                                 </div>
                             </div>
                         @empty
@@ -80,18 +79,18 @@
                             <div class="swiper-slide">
                                 <div class="mk-card-box"
                                     onclick="openTokohModal(
-                                        '{{ e($item['nama']) }}',
-                                        '{{ $item['foto_url'] }}',
-                                        '{{ e($item['deskripsi']) }}',
-                                        '{{ e($item['kategori']) }}'
+                                        '{{ e($item->nama) }}',
+                                        '{{ $item->foto_url }}',
+                                        '{{ e($item->deskripsi) }}',
+                                        '{{ e($item->kategori) }}'
                                     )">
 
                                     <div class="mk-img-frame">
-                                        <img src="{{ $item['foto_url'] }}" alt="{{ $item['nama'] }}">
+                                        <img src="{{ $item->foto_url }}" alt="{{ $item->nama }}">
                                     </div>
 
-                                    <h4 class="mk-name">{{ $item['nama'] }}</h4>
-                                    <p class="mk-info">{{ $item['deskripsi'] }}</p>
+                                    <h4 class="mk-name">{{ $item->nama }}</h4>
+                                    <p class="mk-info">{{ $item->deskripsi }}</p>
                                 </div>
                             </div>
                         @empty
@@ -116,18 +115,18 @@
                             <div class="swiper-slide">
                                 <div class="mk-card-box"
                                     onclick="openTokohModal(
-                                        '{{ e($item['nama']) }}',
-                                        '{{ $item['foto_url'] }}',
-                                        '{{ e($item['deskripsi']) }}',
-                                        '{{ e($item['kategori']) }}'
+                                        '{{ e($item->nama) }}',
+                                        '{{ $item->foto_url }}',
+                                        '{{ e($item->deskripsi) }}',
+                                        '{{ e($item->kategori) }}'
                                     )">
 
                                     <div class="mk-img-frame">
-                                        <img src="{{ $item['foto_url'] }}" alt="{{ $item['nama'] }}">
+                                        <img src="{{ $item->foto_url }}" alt="{{ $item->nama }}">
                                     </div>
 
-                                    <h4 class="mk-name">{{ $item['nama'] }}</h4>
-                                    <p class="mk-info">{{ $item['deskripsi'] }}</p>
+                                    <h4 class="mk-name">{{ $item->nama }}</h4>
+                                    <p class="mk-info">{{ $item->deskripsi }}</p>
                                 </div>
                             </div>
                         @empty
@@ -175,90 +174,85 @@
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        if (typeof Swiper === "undefined") return;
+document.addEventListener("DOMContentLoaded", function () {
+    if (typeof Swiper === "undefined") return;
 
-        const swipers = {
-            tokoh: new Swiper(".tokoh-swiper", {
-                slidesPerView: 1,
-                spaceBetween: 15,
-                loop: true,
-                navigation: {
-                    nextEl: ".tokoh-next",
-                    prevEl: ".tokoh-prev",
-                },
-                breakpoints: {
-                    768: {
-                        slidesPerView: 3
-                    },
-                    1024: {
-                        slidesPerView: 4
-                    },
-                },
-            }),
+    // ==========================
+    // TOKOH SASTRA
+    // ==========================
+    const tokohWrapper = document.querySelector("#mk-tokoh");
+    const tokohSwiper = new Swiper(tokohWrapper.querySelector(".tokoh-swiper"), {
+        slidesPerView: 1,
+        spaceBetween: 15,
+        loop: true,
+        navigation: {
+            nextEl: tokohWrapper.querySelector(".tokoh-next"),
+            prevEl: tokohWrapper.querySelector(".tokoh-prev"),
+        },
+        breakpoints: {
+            768: { slidesPerView: 3 },
+            1024: { slidesPerView: 4 },
+        },
+    });
 
-            literasi: new Swiper(".literasi-swiper", {
-                slidesPerView: 1,
-                spaceBetween: 15,
-                loop: true,
-                navigation: {
-                    nextEl: ".literasi-next",
-                    prevEl: ".literasi-prev",
-                },
-                breakpoints: {
-                    768: {
-                        slidesPerView: 3
-                    },
-                    1024: {
-                        slidesPerView: 4
-                    },
-                },
-            }),
+    // ==========================
+    // KOMUNITAS LITERASI
+    // ==========================
+    const literasiWrapper = document.querySelector("#mk-literasi");
+    const literasiSwiper = new Swiper(literasiWrapper.querySelector(".literasi-swiper"), {
+        slidesPerView: 1,
+        spaceBetween: 15,
+        loop: true,
+        navigation: {
+            nextEl: literasiWrapper.querySelector(".literasi-next"),
+            prevEl: literasiWrapper.querySelector(".literasi-prev"),
+        },
+        breakpoints: {
+            768: { slidesPerView: 3 },
+            1024: { slidesPerView: 4 },
+        },
+    });
 
-            sastra: new Swiper(".sastra-swiper", {
-                slidesPerView: 1,
-                spaceBetween: 15,
-                loop: true,
-                navigation: {
-                    nextEl: ".sastra-next",
-                    prevEl: ".sastra-prev",
-                },
-                breakpoints: {
-                    768: {
-                        slidesPerView: 3
-                    },
-                    1024: {
-                        slidesPerView: 4
-                    },
-                },
-            }),
-        };
+    // ==========================
+    // KOMUNITAS SASTRA
+    // ==========================
+    const sastraWrapper = document.querySelector("#mk-komunitas");
+    const sastraSwiper = new Swiper(sastraWrapper.querySelector(".sastra-swiper"), {
+        slidesPerView: 1,
+        spaceBetween: 15,
+        loop: true,
+        navigation: {
+            nextEl: sastraWrapper.querySelector(".sastra-next"),
+            prevEl: sastraWrapper.querySelector(".sastra-prev"),
+        },
+        breakpoints: {
+            768: { slidesPerView: 3 },
+            1024: { slidesPerView: 4 },
+        },
+    });
 
-        // ==========================
-        // TAB SWITCH LOGIC
-        // ==========================
-        document.querySelectorAll(".mk-tab-btn").forEach((tab) => {
-            tab.addEventListener("click", function() {
-                document
-                    .querySelectorAll(".mk-tab-btn")
-                    .forEach((t) => t.classList.remove("active"));
-                this.classList.add("active");
+    // ==========================
+    // TAB SWITCH
+    // ==========================
+    document.querySelectorAll(".mk-tab-btn").forEach((tab) => {
+        tab.addEventListener("click", function () {
+            document.querySelectorAll(".mk-tab-btn")
+                .forEach(t => t.classList.remove("active"));
+            this.classList.add("active");
 
-                const target = this.dataset.tab;
+            const target = this.dataset.tab;
+            document.querySelectorAll(".mahkota-pane")
+                .forEach(p => p.classList.remove("active"));
 
-                document
-                    .querySelectorAll(".mahkota-pane")
-                    .forEach((p) => p.classList.remove("active"));
+            const pane = document.getElementById(target);
+            if (pane) pane.classList.add("active");
 
-                const pane = document.getElementById(target);
-                if (pane) pane.classList.add("active");
-
-                setTimeout(() => {
-                    if (target === "mk-tokoh") swipers.tokoh.update();
-                    if (target === "mk-literasi") swipers.literasi.update();
-                    if (target === "mk-komunitas") swipers.sastra.update();
-                }, 80);
-            });
+            setTimeout(() => {
+                tokohSwiper.update();
+                literasiSwiper.update();
+                sastraSwiper.update();
+            }, 100);
         });
     });
+});
 </script>

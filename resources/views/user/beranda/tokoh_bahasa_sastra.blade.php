@@ -21,27 +21,24 @@
                     @foreach ($tokoh as $item)
                         <div class="swiper-slide">
                             <div class="tokoh-card"
-                                onclick="openTokohModal(
-                                    '{{ e($item['nama']) }}',
-                                    '{{ $item['foto_url'] }}',
-                                    '{{ e($item['deskripsi']) }}',
-                                    '{{ e($item['kategori']) }}'
-                                )">
+                                onclick='openTokohModal(
+                                        @json($item->nama),
+                                        @json($item->foto_url),
+                                        @json($item->deskripsi),
+                                        @json($item->kategori)
+                                )'>
                                 <div class="card-img-wrapper">
-                                    <img src="{{ $item['foto_url'] }}" alt="{{ $item['nama'] }}">
+                                    <img src="{{ $item->foto_url }}" alt="{{ $item->nama }}">
                                 </div>
                                 <div class="tokoh-info">
-                                    <h3>{{ $item['nama'] }}</h3>
-                                    <p>{{ $item['deskripsi'] }}</p>
+                                    <h3>{{ $item->nama }}</h3>
                                 </div>
                             </div>
                         </div>
                     @endforeach
-
                 </div>
             </div>
         </div>
-
     </div>
 </section>
 
@@ -73,7 +70,8 @@
 
         </div>
     </div>
-
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+

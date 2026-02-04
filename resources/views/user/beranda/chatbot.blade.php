@@ -11,7 +11,7 @@
             <div class="header-info">
                 <i class="fa-solid fa-robot header-icon"></i>
                 <div>
-                    <h4>SIBALAI</h4>
+                    <h4>Serindit</h4>
                     <span class="status-container">
                         <span class="status-dot"></span> Online
                     </span>

@@ -3,7 +3,7 @@
 
         <div class="yelyel-header" style="margin-top: -50px;">
             <h2>Galeri Multimedia</h2>
-            <p>Dokumentasi Yel-Yel & Podcast RESAMBASRA</p>
+            <p>Dokumentasi Yel-Yel dan Siniar Resam Bastra</p>
         </div>
 
         <div class="yelyel-wrap" style="margin-top: -80px; margin-bottom: -50px;">

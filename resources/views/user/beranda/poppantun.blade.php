@@ -3,7 +3,12 @@
         <button class="close-btn" onclick="closeWelcomePopup()" aria-label="Tutup Popup">
             <i class="fa-solid fa-xmark"></i>
         </button>
-        <img src="{{ asset('img/pantun2.png') }}" alt="Pantun Hari Ini" class="popup-img">
+
+        <img id="dailyPantunImg" src="" alt="Pantun Hari Ini" class="popup-img">
+
+        <div class="auto-close-timer">
+            Menutup otomatis dalam <span id="countdownTimer">20</span> detik
+        </div>
     </div>
 </div>
 
@@ -17,12 +22,10 @@
         background: rgba(0, 0, 0, 0.85);
         backdrop-filter: blur(5px);
         z-index: 10000;
-        /* Pastikan di atas semua elemen */
         display: flex;
         justify-content: center;
         align-items: center;
         padding: 20px;
-        /* Status Sembunyi untuk Animasi */
         opacity: 0;
         visibility: hidden;
         transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
@@ -39,6 +42,8 @@
         max-width: 100%;
         max-height: 100%;
         display: flex;
+        flex-direction: column;
+        align-items: center;
         transform: scale(0.5);
         transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
@@ -52,11 +57,12 @@
         width: auto;
         height: auto;
         max-width: 90vw;
-        max-height: 80vh;
+        max-height: 75vh;
         border-radius: 15px;
         box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
         border: 4px solid rgba(255, 255, 255, 0.2);
         object-fit: contain;
+        background-color: #f0f0f0;
     }
 
     .close-btn {
@@ -84,6 +90,23 @@
         transform: rotate(90deg) scale(1.1);
     }
 
+    /* Style teks timer */
+    .auto-close-timer {
+        margin-top: 15px;
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 13px;
+        font-family: 'Montserrat', sans-serif;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 5px 15px;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .auto-close-timer span {
+        font-weight: 800;
+        color: #facc15;
+    }
+
     @media (max-width: 480px) {
         .close-btn {
             width: 35px;
@@ -96,20 +119,59 @@
 </style>
 
 <script>
-    // Gunakan fungsi load agar tidak bentrok dengan DOMContentLoaded lainnya
     window.addEventListener("load", function() {
         const popupPantun = document.getElementById("welcomePopup");
+        const imgElement = document.getElementById("dailyPantunImg");
+        const timerElement = document.getElementById("countdownTimer");
+
+        // ============================================================
+        // UPDATE: Path sudah disesuaikan ke folder 'img/pantun/'
+        // ============================================================
+        const pantunCollection = [
+            "{{ asset('img/pantun/pantunminggu.png') }}", // 0 = Minggu
+            "{{ asset('img/pantun/pantunsenin.png') }}",  // 1 = Senin
+            "{{ asset('img/pantun/pantunselasa.png') }}", // 2 = Selasa
+            "{{ asset('img/pantun/pantunrabu.png') }}",   // 3 = Rabu
+            "{{ asset('img/pantun/pantunkamis.png') }}",  // 4 = Kamis
+            "{{ asset('img/pantun/pantunjumat.png') }}",  // 5 = Jumat
+            "{{ asset('img/pantun/pantunsabtu.png') }}"   // 6 = Sabtu
+        ];
+
+        // 2. Set gambar sesuai hari saat ini
+        const today = new Date().getDay(); // Mengambil angka hari (0-6)
+        if (imgElement) {
+            imgElement.src = pantunCollection[today];
+        }
 
         if (popupPantun) {
+            let countdownInterval;
+            let timeLeft = 20; // Waktu hitung mundur (detik)
+
+            // Fungsi Tutup & Bersihkan Timer
+            window.closeWelcomePopup = function() {
+                popupPantun.classList.remove("show");
+                clearInterval(countdownInterval); // Stop hitungan
+            };
+
             // Munculkan popup setelah 1 detik
             setTimeout(() => {
                 popupPantun.classList.add("show");
-            }, 1000);
 
-            // Fungsi Global Tutup
-            window.closeWelcomePopup = function() {
-                popupPantun.classList.remove("show");
-            };
+                // LOGIKA HITUNG MUNDUR (COUNTDOWN)
+                countdownInterval = setInterval(() => {
+                    timeLeft--; // Kurangi 1 detik
+
+                    if (timerElement) {
+                        timerElement.innerText = timeLeft; // Update angka di layar
+                    }
+
+                    // Jika waktu habis (0), tutup popup
+                    if (timeLeft <= 0) {
+                        closeWelcomePopup();
+                    }
+                }, 1000); // Jalan setiap 1000ms (1 detik)
+
+            }, 1000);
 
             // Tutup klik area luar
             popupPantun.addEventListener("click", function(e) {

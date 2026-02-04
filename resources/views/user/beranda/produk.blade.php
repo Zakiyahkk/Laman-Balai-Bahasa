@@ -10,134 +10,185 @@
 
     <section class="quick-access-section">
         <div class="container">
-
             <div class="quick-access-card">
-                <div class="access-grid">
 
-                    <a href="https://kbbi.kemdikbud.go.id" target="_blank" class="access-item">
-                        <div class="icon-wrap color-blue">
-                            <i class="fa-solid fa-book"></i>
-                        </div>
-                        <div class="text-wrap">
-                            <span class="app-title">KBBI Daring</span>
-                            <span class="app-sub">Kamus Besar</span>
-                        </div>
-                    </a>
+                <!-- WRAPPER INI YANG MENGAKTIFKAN KIRI–KANAN -->
+                <div class="qa-split">
 
-                    <a href="https://ukbi.kemdikbud.go.id" target="_blank" class="access-item">
-                        <div class="icon-wrap color-cyan">
-                            <i class="fa-solid fa-graduation-cap"></i>
-                        </div>
-                        <div class="text-wrap">
-                            <span class="app-title">UKBI Adaptif</span>
-                            <span class="app-sub">Uji Kemahiran</span>
-                        </div>
-                    </a>
+                    <!-- ===== KIRI : LAYANAN ===== -->
+                    <div class="qa-col">
+                        <h4 class="group-title">Layanan</h4>
 
-                    <a href="https://ejaan.kemdikbud.go.id" target="_blank" class="access-item">
-                        <div class="icon-wrap color-indigo">
-                            <i class="fa-solid fa-spell-check"></i>
-                        </div>
-                        <div class="text-wrap">
-                            <span class="app-title">IPUSNAS</span>
-                            <span class="app-sub">Ejaan Bahasa</span>
-                        </div>
-                    </a>
+                        <div class="grid-layanan">
+                            <a class="access-item" href="https://ppidbbpriau.kemendikdasmen.go.id/form/permohonan" target="_blank" rel="noopener noreferrer">
+                                <div class="icon-wrap color-blue-dark">
+                                    <i class="fa-solid fa-user-tie"></i>
+                                </div>
+                                <div class="text-wrap">
+                                    <span class="app-title">Ahli Bahasa</span>
+                                </div>
+                            </a>
 
-                    <a href="https://www.lapor.go.id" target="_blank" class="access-item">
-                        <div class="icon-wrap color-red">
-                            <i class="fa-solid fa-bullhorn"></i>
-                        </div>
-                        <div class="text-wrap">
-                            <span class="app-title">SP4N Lapor</span>
-                            <span class="app-sub">Layanan Aspirasi</span>
-                        </div>
-                    </a>
+                            <a class="access-item" href="https://ppidbbpriau.kemendikdasmen.go.id/form/permohonan" target="_blank" rel="noopener noreferrer">
+                                <div class="icon-wrap color-indigo">
+                                    <i class="fa-solid fa-language"></i>
+                                </div>
+                                <div class="text-wrap">
+                                    <span class="app-title">Penerjemahan</span>
+                                </div>
+                            </a>
 
-                    <a href="#" target="_blank" class="access-item">
-                        <div class="icon-wrap color-rose">
-                            <i class="fa-solid fa-users-gear"></i>
-                        </div>
-                        <div class="text-wrap">
-                            <span class="app-title">SIBI</span>
-                            <span class="app-sub">Info Pelayanan</span>
-                        </div>
-                    </a>
+                            <a class="access-item" href="https://ppidbbpriau.kemendikdasmen.go.id/form/permohonan" target="_blank" rel="noopener noreferrer">
+                                <div class="icon-wrap color-cyan">
+                                    <i class="fa-solid fa-graduation-cap"></i>
+                                </div>
+                                <div class="text-wrap">
+                                    <span class="app-title">UKBI</span>
+                                </div>
+                            </a>
 
-                    <a href="#" class="access-item">
-                        <div class="icon-wrap color-orange">
-                            <i class="fa-solid fa-newspaper"></i>
-                        </div>
-                        <div class="text-wrap">
-                            <span class="app-title">Jurnal Madah</span>
-                            <span class="app-sub">Publikasi Ilmiah</span>
-                        </div>
-                    </a>
+                            <a class="access-item" href="https://ppidbbpriau.kemendikdasmen.go.id/form/permohonan" target="_blank" rel="noopener noreferrer">
+                                <div class="icon-wrap color-teal">
+                                    <i class="fa-solid fa-globe"></i>
+                                </div>
+                                <div class="text-wrap">
+                                    <span class="app-title">BIPA</span>
+                                </div>
+                            </a>
 
-                    <a href="#" class="access-item">
-                        <div class="icon-wrap color-purple">
-                            <i class="fa-solid fa-book-open"></i>
-                        </div>
-                        <div class="text-wrap">
-                            <span class="app-title">Majalah Serindit</span>
-                            <span class="app-sub">Majalah Digital</span>
-                        </div>
-                    </a>
+                            <a class="access-item" href="https://ppidbbpriau.kemendikdasmen.go.id/form/permohonan" target="_blank" rel="noopener noreferrer">
+                                <div class="icon-wrap color-blue">
+                                    <i class="fa-solid fa-book"></i>
+                                </div>
+                                <div class="text-wrap">
+                                    <span class="app-title">Perpustakaan</span>
+                                </div>
+                            </a>
 
-                    <a href="#" class="access-item">
-                        <div class="icon-wrap color-green">
-                            <i class="fa-solid fa-language"></i>
+                            <a class="access-item" href="https://ppidbbpriau.kemendikdasmen.go.id/form/permohonan" target="_blank" rel="noopener noreferrer">
+                                <div class="icon-wrap color-orange">
+                                    <i class="fa-solid fa-briefcase"></i>
+                                </div>
+                                <div class="text-wrap">
+                                    <span class="app-title">Magang</span>
+                                </div>
+                            </a>
                         </div>
-                        <div class="text-wrap">
-                            <span class="app-title">KEMALA</span>
-                            <span class="app-sub">Kamus Melayu</span>
-                        </div>
-                    </a>
+                    </div>
 
-                    <a href="#" class="access-item">
-                        <div class="icon-wrap color-teal">
-                            <i class="fa-solid fa-globe"></i>
-                        </div>
-                        <div class="text-wrap">
-                            <span class="app-title">BIPA Daring</span>
-                            <span class="app-sub">Penutur Asing</span>
-                        </div>
-                    </a>
+                    <!-- ===== KANAN : SUPERAPLIKASI ===== -->
+                    <div class="qa-col">
+                        <h4 class="group-title">SUAI (Super Aplikasi dan Informasi)</h4>
 
-                    <a href="#" class="access-item">
-                        <div class="icon-wrap color-blue-dark">
-                            <i class="fa-solid fa-user-tie"></i>
-                        </div>
-                        <div class="text-wrap">
-                            <span class="app-title">Ahli Bahasa</span>
-                            <span class="app-sub">Penerjemahan</span>
-                        </div>
-                    </a>
+                        <div class="grid-super">
+                            <a class="access-item" href="https://ppidbbpriau.kemendikdasmen.go.id/portal/tamu"
+                                target="_blank" rel="noopener noreferrer">
+                                <div class="icon-wrap color-slate">
+                                    <img src="{{ asset('img/logo/sapa.jpeg') }}" alt="SAPA">
+                                </div>
+                                <div class="text-wrap">
+                                    <span class="app-title">SAPA</span>
+                                    <span class="app-desc">Sistem Aspirasi&Pelayanan</span>
+                                </div>
+                            </a>
 
-                    <a href="#" class="access-item">
-                        <div class="icon-wrap color-slate">
-                            <i class="fa-solid fa-list-check"></i>
-                        </div>
-                        <div class="text-wrap">
-                            <span class="app-title">BUDI</span>
-                            <span class="app-sub">Padanan Istilah</span>
-                        </div>
-                    </a>
+                            <a class="access-item" href="https://madah.kemendikdasmen.go.id/index.php/madah"
+                                target="_blank" rel="noopener noreferrer">
+                                <div class="icon-wrap color-slate">
+                                    <i class="fa-solid fa-newspaper"></i>
+                                </div>
+                                <div class="text-wrap">
+                                    <span class="app-title">Jurnal Madah</span>
+                                    <span class="app-desc">Publikasi Ilmiah</span>
+                                </div>
+                            </a>
 
-                    <a href="#" class="access-item">
-                        <div class="icon-wrap color-pink">
-                            <i class="fa-solid fa-headset"></i>
+                            <a class="access-item" href="https://majalahserindit.kemendikdasmen.go.id/" target="_blank"
+                                rel="noopener noreferrer">
+                                <div class="icon-wrap color-slate">
+                                    <img src="{{ asset('img/logo/serindit.png') }}" alt="Majalah Serindit">
+                                </div>
+                                <div class="text-wrap">
+                                    <span class="app-title">Majalah Serindit</span>
+                                    <span class="app-desc">Majalah Digital</span>
+                                </div>
+                            </a>
+
+                            <a class="access-item" href="#" target="_blank" rel="noopener noreferrer">
+                                <div class="icon-wrap color-slate">
+                                    <img src="{{ asset('img/logo/sembari.png') }}" alt="SEMBARI">
+                                </div>
+                                <div class="text-wrap">
+                                    <span class="app-title">SEMBARI</span>
+                                    <span class="app-desc">Serial Terjemahan</span>
+                                </div>
+                            </a>
+
+                            <a class="access-item"
+                                href="https://sites.google.com/view/petapembinaanbahasabalaibahasa?usp=sharing" target="_blank"
+                                rel="noopener noreferrer">
+                                <div class="icon-wrap color-slate">
+                                    <img src="{{ asset('img/logo/peta-bahasa.jpeg') }}" alt="Peta Bahasa">
+                                </div>
+                                <div class="text-wrap">
+                                    <span class="app-title">Peta Bahasa</span>
+                                    <span class="app-desc">Informasi Bahasa</span>
+                                </div>
+                            </a>
+
+                            <a class="access-item" href="https://sites.google.com/view/peta-pembinaan-sastra-balai-ba?usp=sharing" target="_blank" rel="noopener noreferrer">
+                                <div class="icon-wrap color-slate">
+                                    <i class="fa-solid fa-map-location-dot"></i>
+                                </div>
+                                <div class="text-wrap">
+                                    <span class="app-title">Peta Sastra</span>
+                                    <span class="app-desc">Data Sastra</span>
+                                </div>
+                            </a>
+
+                            <a class="access-item" href="#" target="_blank" rel="noopener noreferrer">
+                                <div class="icon-wrap color-slate">
+                                    <i class="fa-solid fa-list-check"></i>
+                                </div>
+                                <div class="text-wrap">
+                                    <span class="app-title">SILERA</span>
+                                    <span class="app-desc">Komunitas Literasi</span>
+                                </div>
+                            </a>
+
+                            <a class="access-item" href="https://kamusbahasariau.kemendikdasmen.go.id/"
+                                target="_blank" rel="noopener noreferrer">
+                                <div class="icon-wrap color-slate">
+                                    <img src="{{ asset('img/logo/kemala.png') }}" alt="KEMALA">
+                                </div>
+                                <div class="text-wrap">
+                                    <span class="app-title">KEMALA</span>
+                                    <span class="app-desc">Kamus Melayu</span>
+                                </div>
+                            </a>
+
+                            <a class="access-item" href="#" target="_blank" rel="noopener noreferrer">
+                                <div class="icon-wrap color-slate">
+                                    <i class="fa-solid fa-comments"></i>
+                                </div>
+                                <div class="text-wrap">
+                                    <span class="app-title">SAPA BIPA</span>
+                                    <span class="app-desc">Pembelajaran Interaktif</span>
+                                </div>
+                            </a>
                         </div>
-                        <div class="text-wrap">
-                            <span class="app-title">Halo Bahasa</span>
-                            <span class="app-sub">Konsultasi</span>
-                        </div>
-                    </a>
+                    </div>
 
                 </div>
+                <!-- END qa-split -->
+
             </div>
         </div>
     </section>
+
+
+
+
 
 </body>
 

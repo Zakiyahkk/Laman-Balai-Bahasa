@@ -11,35 +11,35 @@
                 <div class="berita-card">
 
                     <div class="berita-img">
-                        <span class="badge badge-{{ $item['kategori'] }}">
-                            {{ strtoupper($item['kategori']) }}
+                        <span class="badge badge-{{ $item->kategori }}">
+                            {{ strtoupper($item->kategori) }}
                         </span>
 
-                        <a href="{{ route('artikel.show', $item['publikasi_id']) }}">
-                            <img src="{{ $item['gambar_url'] }}" alt="{{ $item['judul'] }}" loading="lazy"
+                        <a href="{{ route('artikel.show', $item->slug) }}">
+                            <img src="{{ $item->gambar_url }}" alt="{{ $item->judul }}" loading="lazy"
                                 onerror="this.onerror=null;this.src='{{ asset('img/default.jpg') }}';">
                         </a>
                     </div>
 
                     <div class="berita-body">
-                        <a href="{{ route('artikel.show', $item['publikasi_id']) }}">
-                            <h4>{{ $item['judul'] }}</h4>
+                        <a href="{{ route('artikel.show', $item->slug) }}">
+                            <h4>{{ $item->judul }}</h4>
                         </a>
 
                         <p>
-                            {{ \Illuminate\Support\Str::limit(strip_tags($item['isi']), 120) }}
+                            {{ \Illuminate\Support\Str::limit(strip_tags($item->isi), 120) }}
                         </p>
 
                         <div class="berita-meta">
                             <span>
-                                {{ \Carbon\Carbon::parse($item['tanggal'])->translatedFormat('d F Y') }}
+                                {{ \Carbon\Carbon::parse($item->tanggal)->translatedFormat('d F Y') }}
                             </span>
 
                             <div class="meta-right">
-                                <span>{{ $item['penulis'] ?? 'Admin' }}</span>
+                                <span>{{ $item->penulis ?? 'Admin' }}</span>
                                 <span class="views">
                                     <i class="fa-regular fa-eye"></i>
-                                    {{ $item['pembaca'] ?? 0 }}
+                                    {{ $item->pembaca ?? 0 }}
                                 </span>
                             </div>
                         </div>

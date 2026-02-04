@@ -2,7 +2,7 @@
     <div class="kr-wrap">
 
         <div class="kr-text kr-reveal" style="padding-top: 0;">
-            <h2 style="margin-top: 0; margin-bottom: 15px; font-size: 28px; color: #0f172a;">Kata Pengantar</h2>
+            <h2 style="margin-top: 0; margin-bottom: 15px; font-size: 28px; color: #0f172a;">Sekapur Sirih</h2>
 
             <p class="kr-lead"
                 style="margin-top: 0; margin-bottom: 12px; font-weight: 600; color: #334155; line-height: 1.6;">
@@ -29,7 +29,7 @@
         </div>
 
         <div class="kr-foto kr-reveal" style="display: flex; justify-content: center;">
-            <img src="/img/foto_Bu_Umi.png" alt="Kepala Balai Bahasa Provinsi Riau"
+            <img src="https://ppidbbpriau.kemendikdasmen.go.id/bbpr/img/fotobuumi.png" alt="Kepala Balai Bahasa Provinsi Riau"
                 style="max-width: 100%; height: auto; border-radius: 20px; transform: none; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.1));">
         </div>
 

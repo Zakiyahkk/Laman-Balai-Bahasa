@@ -10,11 +10,11 @@
 
             @forelse ($items as $item)
                 @php
-                    $tanggal = \Carbon\Carbon::parse($item['tanggal']);
-                    $docUrl = !empty($item['file_url']) ? $item['file_url'] : $item['gambar_url'];
+                    $tanggal = \Carbon\Carbon::parse($item->tanggal);
+                    $docUrl = !empty($item->file_url) ? $item->file_url : $item->gambar_url;
                 @endphp
 
-                <div class="pengumuman-item trigger-modal" data-doc="{{ $docUrl }}" data-type="{{ $item['type'] }}">
+                <div class="pengumuman-item trigger-modal" data-doc="{{ $docUrl }}" data-type="{{ $item->type }}">
 
                     <div class="date-badge">
                         <span class="day">{{ $tanggal->format('d') }}</span>
@@ -22,15 +22,15 @@
                         <span class="year">{{ $tanggal->format('Y') }}</span>
                     </div>
 
-                    <div class="doc-icon {{ $item['type'] === 'image' ? 'image-type' : '' }}">
-                        <i class="fa-solid {{ $item['type'] === 'pdf' ? 'fa-file-pdf' : 'fa-image' }}"></i>
+                    <div class="doc-icon {{ $item->type === 'image' ? 'image-type' : '' }}">
+                        <i class="fa-solid {{ $item->type === 'pdf' ? 'fa-file-pdf' : 'fa-image' }}"></i>
                     </div>
 
                     <div class="item-content">
-                        <span class="doc-title">{{ $item['judul'] }}</span>
+                        <span class="doc-title">{{ $item->judul }}</span>
                         <div class="doc-meta">
                             <i class="fa-solid fa-eye"></i>
-                            {{ $item['type'] === 'pdf' ? 'Klik untuk melihat dokumen' : 'Klik untuk melihat poster' }}
+                            {{ $item->type === 'pdf' ? 'Klik untuk melihat dokumen' : 'Klik untuk melihat poster' }}
                         </div>
                     </div>
 

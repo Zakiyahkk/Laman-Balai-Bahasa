@@ -11,36 +11,34 @@
                 <div class="berita-card">
 
                     <div class="berita-img">
-                        <span class="badge">BERITA</span>
-
-                        <a href="{{ route('berita.show', $item['publikasi_id']) }}">
-                            <img src="{{ $item['gambar_url'] }}" alt="{{ $item['judul'] ?? 'Berita' }}" loading="lazy"
+                            <a href="{{ route('berita.show', $item->slug) }}">
+                            <img src="{{ $item->gambar_url }}" alt="{{ $item->judul ?? 'Berita' }}" loading="lazy"
                                 onerror="this.onerror=null;this.src='{{ asset('img/default.jpg') }}';">
                         </a>
                     </div>
 
                     <div class="berita-body">
-                        <a href="{{ route('berita.show', $item['publikasi_id']) }}">
-                            <h4>{{ $item['judul'] ?? '-' }}</h4>
+                        <a href="{{ route('berita.show', $item->slug) }}">
+                            <h4>{{ $item->judul ?? '-' }}</h4>
                         </a>
 
                         <p>
-                            {{ \Illuminate\Support\Str::limit(strip_tags($item['isi'] ?? ''), 120) }}
+                            {{ \Illuminate\Support\Str::limit(strip_tags($item->isi ?? ''), 120) }}
                         </p>
 
                         <div class="berita-meta">
                             <span>
-                                @if (!empty($item['tanggal']))
-                                    {{ \Carbon\Carbon::parse($item['tanggal'])->translatedFormat('d F Y') }}
+                                @if (!empty($item->tanggal))
+                                    {{ \Carbon\Carbon::parse($item->tanggal)->translatedFormat('d F Y') }}
                                 @else
                                     -
                                 @endif
                             </span>
 
                             <div class="meta-right">
-                                <span>{{ $item['penulis'] ?? 'Admin' }}</span>
+                                <span>{{ $item->penulis ?? 'Admin' }}</span>
                                 <span class="views">
-                                    <i class="fa-regular fa-eye"></i> {{ $item['pembaca'] ?? 0 }}
+                                    <i class="fa-regular fa-eye"></i> {{ $item->pembaca ?? 0 }}
                                 </span>
                             </div>
                         </div>

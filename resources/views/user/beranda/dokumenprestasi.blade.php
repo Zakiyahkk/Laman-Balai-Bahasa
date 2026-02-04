@@ -30,102 +30,217 @@
                 <p>Klik pada kartu untuk melihat sertifikat secara penuh.</p>
             </div>
 
-            <div class="dokpres-grid">
+             <!-- WRAPPER SLIDER -->
+            <div class="dokpres-wrapper">
 
+                <!-- PANAH PREV -->
+                <button class="dokpres-nav prev" id="piagamPrev">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+
+                <!-- GRID -->
+                <div class="dokpres-grid horizontal" id="piagamTrack">
+                
                 <div class="piagam-card fade-up delay-1" onclick="openModal(this)">
                     <div class="piagam-thumb">
-                        <img src="img/sertifikat.jpg" alt="Sertifikat Full" class="card-img">
+                        <img src="/bbpr/img/piagam/2024/CCF_001473 (1).png" alt="Sertifikat Full" class="card-img">
                         <div class="thumb-overlay"><i class="fa-solid fa-eye"></i></div>
                     </div>
                     <div class="piagam-content">
-                        <div class="piagam-year-badge">2023</div>
-                        <h4>Zona Integritas WBK</h4>
+                        <div class="piagam-year-badge">2024</div>
+                        <h4>Sempena Peringatan Hari Laut Dunia 2024 kepada Lembaga yang telah berjasa dalam Peningkatan SDM dan Pelestarian Ekologi SDA Kelautan Perikanan</h4>
                         <i class="fa-solid fa-award watermark"></i>
                     </div>
                 </div>
 
                 <div class="piagam-card fade-up delay-2" onclick="openModal(this)">
                     <div class="piagam-thumb">
-                        <img src="img/sertifikat.jpg" alt="Sertifikat Full" class="card-img">
+                        <img src="/bbpr/img/piagam/2024/CCI_000016.jpg" alt="Sertifikat Full" class="card-img">
                         <div class="thumb-overlay"><i class="fa-solid fa-eye"></i></div>
                     </div>
                     <div class="piagam-content">
-                        <div class="piagam-year-badge">2022</div>
-                        <h4>Pelayanan Publik Terbaik</h4>
-                        <p>Peringkat pertama kategori pelayanan publik inklusif tingkat provinsi atas inovasi layanan
-                            disabilitas.</p>
+                        <div class="piagam-year-badge">2024</div>
+                        <h4>Mitra Kolaborasi dalam Program Penggiat Literasi Indonesia (PELITA)</h4>
                         <i class="fa-solid fa-thumbs-up watermark"></i>
                     </div>
                 </div>
 
                 <div class="piagam-card fade-up delay-3" onclick="openModal(this)">
                     <div class="piagam-thumb">
-                        <img src="img/sertifikat.jpg" alt="Sertifikat Full" class="card-img">
+                        <img src="/bbpr/img/piagam/2024/CCI_000024.jpg" alt="Sertifikat Full" class="card-img">
                         <div class="thumb-overlay"><i class="fa-solid fa-eye"></i></div>
                     </div>
                     <div class="piagam-content">
-                        <div class="piagam-year-badge">2021</div>
-                        <h4>Inovasi Program Bahasa</h4>
-                        <p>Penghargaan inovasi terbaik dalam pelestarian bahasa daerah berbasis digital dan komunitas.
-                        </p>
+                        <div class="piagam-year-badge">2024</div>
+                        <h4>Satuan Kerja dengan Kinerja Penyampaian Gaji Induk Terbaik pada Kegiatan Treasury Awards & Evaluasi Pelaksanaan Anggaran Semester I TA 2024</h4>
                         <i class="fa-solid fa-lightbulb watermark"></i>
                     </div>
                 </div>
 
                 <div class="piagam-card fade-up delay-1" onclick="openModal(this)">
                     <div class="piagam-thumb">
-                        <img src="img/sertifikat.jpg" alt="Sertifikat Full" class="card-img">
+                        <img src="/bbpr/img/piagam/2024/CCI_000026.jpg" alt="Sertifikat Full" class="card-img">
                         <div class="thumb-overlay"><i class="fa-solid fa-eye"></i></div>
                     </div>
                     <div class="piagam-content">
-                        <div class="piagam-year-badge">2020</div>
-                        <h4>Satker Berkinerja Terbaik</h4>
-                        <p>Apresiasi sebagai Satuan Kerja dengan kinerja pelaksanaan anggaran terbaik dari KPPN.</p>
+                        <div class="piagam-year-badge">2024</div>
+                        <h4>Lembaga Vertikal yang Informatif dalam Memberikan Informasi</h4>
                         <i class="fa-solid fa-star watermark"></i>
                     </div>
                 </div>
 
                 <div class="piagam-card fade-up delay-2" onclick="openModal(this)">
                     <div class="piagam-thumb">
-                        <img src="img/sertifikat.jpg" alt="Sertifikat Full" class="card-img">
+                        <img src="/bbpr/img/piagam/2024/WhatsApp Image 2025-12-12 at 15.14.52.jpg" alt="Sertifikat Full" class="card-img">
                         <div class="thumb-overlay"><i class="fa-solid fa-eye"></i></div>
                     </div>
                     <div class="piagam-content">
-                        <div class="piagam-year-badge">2019</div>
-                        <h4>Pegiat Literasi</h4>
-                        <p>Penghargaan khusus atas kontribusi aktif dalam menggerakkan literasi di daerah tertinggal.
-                        </p>
+                        <div class="piagam-year-badge">2024</div>
+                        <h4>Satuan Kerja Terbaik II dalam Pengelolaan Realisasi Anggaran di Lingkungan Badan Pengembangan dan Pembinaan Bahasa Tahun 2023</h4>
                         <i class="fa-solid fa-book-open watermark"></i>
                     </div>
                 </div>
 
                 <div class="piagam-card fade-up delay-3" onclick="openModal(this)">
                     <div class="piagam-thumb">
-                        <img src="img/sertifikat.jpg" alt="Sertifikat Full" class="card-img">
+                        <img src="/bbpr/img/piagam/2025/20251030.png" alt="Sertifikat Full" class="card-img">
                         <div class="thumb-overlay"><i class="fa-solid fa-eye"></i></div>
                     </div>
                     <div class="piagam-content">
-                        <div class="piagam-year-badge">2018</div>
-                        <h4>Akreditasi A Perpustakaan</h4>
-                        <p>Perpustakaan Balai Bahasa meraih akreditasi unggul dengan koleksi dan layanan standar
-                            nasional.</p>
+                        <div class="piagam-year-badge">2025</div>
+                        <h4>SponsorKegiatan Bulan Bahasa 2025 se-Indonesia</h4>
+                        <i class="fa-solid fa-certificate watermark"></i>
+                    </div>
+                </div>
+                
+                <div class="piagam-card fade-up delay-3" onclick="openModal(this)">
+                    <div class="piagam-thumb">
+                        <img src="/bbpr/img/piagam/2025/20251229.png" alt="Sertifikat Full" class="card-img">
+                        <div class="thumb-overlay"><i class="fa-solid fa-eye"></i></div>
+                    </div>
+                    <div class="piagam-content">
+                        <div class="piagam-year-badge">2025</div>
+                        <h4>Sertifika Kerjasama dan Kontribusi dalam program Penggalangan Donasi Kemanusiaan Bencana Alam di Sumatera Tahun 2025</h4>
+                        <i class="fa-solid fa-certificate watermark"></i>
+                    </div>
+                </div>
+                
+                   <div class="piagam-card fade-up delay-3" onclick="openModal(this)">
+                    <div class="piagam-thumb">
+                        <img src="/bbpr/img/piagam/2025/CCI_000017.jpg" alt="Sertifikat Full" class="card-img">
+                        <div class="thumb-overlay"><i class="fa-solid fa-eye"></i></div>
+                    </div>
+                    <div class="piagam-content">
+                        <div class="piagam-year-badge">2025</div>
+                        <h4>Satuan Kerja dengan Kinerja Penyampaian Gaji Induk Terbaik pada Kegiatan Treasury Awards Semester II 2024 & Evaluasi Pelaksanaan Anggaran s.d. Bulan Juni 2025</h4>
+                        <i class="fa-solid fa-certificate watermark"></i>
+                    </div>
+                </div>
+                
+                <div class="piagam-card fade-up delay-3" onclick="openModal(this)">
+                    <div class="piagam-thumb">
+                        <img src="/bbpr/img/piagam/2025/CCI_000022.jpg" alt="Sertifikat Full" class="card-img">
+                        <div class="thumb-overlay"><i class="fa-solid fa-eye"></i></div>
+                    </div>
+                    <div class="piagam-content">
+                        <div class="piagam-year-badge">2025</div>
+                        <h4>Ucapan Terima Kasih Bedah Novel Arini Bias Rindu karya Naya R Balai Bahasa Provinsi Riau, Pekanbaru 30 November 2025</h4>
+                        <i class="fa-solid fa-certificate watermark"></i>
+                    </div>
+                </div>
+                
+                <div class="piagam-card fade-up delay-3" onclick="openModal(this)">
+                    <div class="piagam-thumb">
+                        <img src="/bbpr/img/piagam/2025/CCI_000023.jpg" alt="Sertifikat Full" class="card-img">
+                        <div class="thumb-overlay"><i class="fa-solid fa-eye"></i></div>
+                    </div>
+                    <div class="piagam-content">
+                        <div class="piagam-year-badge">2025</div>
+                        <h4>Satuan Kerja Terbaik III dengan Realisasi Anggaran 99,91%</h4>
+                        <i class="fa-solid fa-certificate watermark"></i>
+                    </div>
+                </div>
+                
+                 <div class="piagam-card fade-up delay-3" onclick="openModal(this)">
+                    <div class="piagam-thumb">
+                        <img src="/bbpr/img/piagam/2025/CCI_000025.jpg" alt="Sertifikat Full" class="card-img">
+                        <div class="thumb-overlay"><i class="fa-solid fa-eye"></i></div>
+                    </div>
+                    <div class="piagam-content">
+                        <div class="piagam-year-badge">2025</div>
+                        <h4>Kunjungan Dinas Pendidikan_BEM FKIP Universitas Riau ke Balai Bahasa Provinsi Riau</h4>
+                        <i class="fa-solid fa-certificate watermark"></i>
+                    </div>
+                </div>
+                
+                <div class="piagam-card fade-up delay-3" onclick="openModal(this)">
+                    <div class="piagam-thumb">
+                        <img src="/bbpr/img/piagam/2025/CCI_000027.jpg" alt="Sertifikat Full" class="card-img">
+                        <div class="thumb-overlay"><i class="fa-solid fa-eye"></i></div>
+                    </div>
+                    <div class="piagam-content">
+                        <div class="piagam-year-badge">2025</div>
+                        <h4>Sertifikat Apresiasi Sekolah Alam Indonesia Pekanbaru</h4>
+                        <i class="fa-solid fa-certificate watermark"></i>
+                    </div>
+                </div>
+                
+                <div class="piagam-card fade-up delay-3" onclick="openModal(this)">
+                    <div class="piagam-thumb">
+                        <img src="/bbpr/img/piagam/2025/Sertifikat Kepemimpinan Ramah dan Santun.jpg" alt="Sertifikat Full" class="card-img">
+                        <div class="thumb-overlay"><i class="fa-solid fa-eye"></i></div>
+                    </div>
+                    <div class="piagam-content">
+                        <div class="piagam-year-badge">2025</div>
+                        <h4>Sertifikat Kepemimpinan Ramah dan Santun</h4>
+                        <i class="fa-solid fa-certificate watermark"></i>
+                    </div>
+                </div>
+                
+                 <div class="piagam-card fade-up delay-3"
+                     data-src="/bbpr/img/piagam/2025/Sertifikat_PKN_Ibu_Umi.pdf"
+                     onclick="openModal(this)">
+                
+                    <div class="piagam-thumb">
+                        <img src="/bbpr/img/piagam/2025/Sertifikat_PKN_Ibu_Umi_thumb.png"
+                            alt="Sertifikat PKN Ibu Umi"
+                            class="card-img">
+                        <div class="thumb-overlay">
+                            <i class="fa-solid fa-file-pdf"></i>
+                        </div>
+                    </div>
+                
+                    <div class="piagam-content">
+                        <div class="piagam-year-badge">2025</div>
+                        <h4>Sertifikat PKN Ibu Umi</h4>
                         <i class="fa-solid fa-certificate watermark"></i>
                     </div>
                 </div>
 
             </div>
+            <!-- PANAH NEXT -->
+                <button class="dokpres-nav next" id="piagamNext">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
         </div>
     </section>
 
     <div id="piagamModal" class="modal-overlay" onclick="closeModal(event)">
-        <div class="modal-content-simple">
-            <button class="modal-close-simple" onclick="closeModalBtn()">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
+    <div class="modal-content-simple" onclick="event.stopPropagation()">
+        <button class="modal-close-simple" onclick="closeModal()">
+    <i class="fa-solid fa-xmark"></i>
+</button>
 
-            <img id="modalImg" src="" alt="Sertifikat Full">
-        </div>
+        <!-- GAMBAR (tetap seperti sekarang) -->
+        <img id="modalImg" alt="Sertifikat Full" style="display:none;">
+
+        <!-- PDF (baru) -->
+        <iframe id="modalPdf"
+                style="display:none;"
+                frameborder="0">
+        </iframe>
     </div>
+</div>
 
 </body>
 
