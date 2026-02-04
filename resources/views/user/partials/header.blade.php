@@ -16,7 +16,7 @@
                         <span class="jam-row">
                             <span class="hari">Jumat</span>
                             <span class="colon">:</span>
-                            <span class="waktu">08.00–16.30 WIB</span>
+                            <span class="waktu">08.00––16.30 WIB</span>
                         </span>
                     </div>
                 </div>
@@ -36,16 +36,16 @@
                     <i class="fa-regular fa-comment-dots top-icon-big"></i>
                     <div class="top-text-stack">
                         <span class="label-top">Pengaduan ULT</span>
-                        <a href="{{ url('#') }}" class="btn-ult-big">Klik di sini
+                        <a href="{{ url('https://forms.gle/ijKvz9Q8WGPCerxw5') }}" class="btn-ult-big">Klik di sini
                             untuk melakukan pengaduan</a>
                     </div>
                 </div>
             </div>
             <div class="bbp-social-top">
-                <a href="https://www.facebook.com/balaibahasa.provinsiriau"><i class="fa-brands fa-facebook-f"></i></a>
-                <a href="https://www.tiktok.com/@balai.bahasa.riau"><i class="fa-brands fa-tiktok"></i></a>
-                <a href="https://www.instagram.com/balaibahasaprovinsiriau/"><i class="fa-brands fa-instagram"></i></a>
-                <a href="https://www.youtube.com/@balaibahasariau"><i class="fa-brands fa-youtube"></i></a>
+                <a href="https://www.facebook.com/balaibahasa.provinsiriau" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://www.tiktok.com/@balai.bahasa.riau" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="https://www.instagram.com/balaibahasaprovinsiriau/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.youtube.com/@balaibahasariau" target="_blank"><i class="fa-brands fa-youtube"></i></a>
             </div>
         </div>
     </div>
@@ -73,8 +73,11 @@
                     <img src="{{ asset('img/logobalai.png') }}" alt="Logo Mobile">
                 </li>
 
-                <li><a href="/" class="{{ request()->is('/') ? 'active' : '' }}"><i
-                            class="fa-regular fa-home menu-icon"></i> Beranda</a></li>
+                <li>
+                    <a href="{{ url('/') }}" class="{{ request()->is('/') ? 'active' : '' }}">
+                        <i class="fa-regular fa-home menu-icon"></i> Beranda
+                    </a>
+                </li>
                 <li>
                     <a href="https://ppidbbpriau.kemendikdasmen.go.id/portal/tamu" target="_blank"
                         rel="noopener noreferrer" class="{{ request()->is('sapa*') ? 'active' : '' }}">
@@ -122,16 +125,16 @@
                     </a>
                 </li>
                 <li><a href="{{ url('/produk/sembari') }}"><i class="fa-solid fa-gem"></i>
-                        Sembari ( Serial Terjemahan BBPR)</a>
+                        SEMBARI ( Serial Terjemahan BBPR)</a>
 
                 <li>
-                    <a href="https://sites.google.com/view/petapembinaanbahasa/halaman-muka" target="_blank"
+                    <a href="https://sites.google.com/view/petapembinaanbahasabalaibahasa?usp=sharing" target="_blank"
                         rel="noopener noreferrer">
                         <i class="fa-solid fa-map"></i> Peta Pembinaan Bahasa
                     </a>
                 </li>
                 <li>
-                    <a href="{{ url('/produk/peta-pembinaan-sastra') }}" target="_blank" rel="noopener noreferrer">
+                    <a href="https://sites.google.com/view/peta-pembinaan-sastra-balai-ba?usp=sharing" target="_blank" rel="noopener noreferrer">
                         <i class="fa-solid fa-map"></i> Peta Pembinaan Sastra
                     </a>
                 </li>
@@ -539,7 +542,6 @@
                 </ul>
             </li>
 
-
             <li class="mobile-extra-content">
                 <div class="mob-item">
                     <i class="fa-regular fa-envelope"></i>
@@ -551,10 +553,10 @@
                 </a>
 
                 <div class="mob-social">
-                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://www.facebook.com/balaibahasa.provinsiriau"><i class="fa-brands fa-facebook-f"></i></a>
                     <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="https://www.instagram.com/balaibahasaprovinsiriau"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.youtube.com/@balaibahasariau"><i class="fa-brands fa-youtube"></i></a>
                 </div>
             </li>
             </ul>
