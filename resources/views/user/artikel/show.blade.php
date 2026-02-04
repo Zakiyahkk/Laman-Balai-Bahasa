@@ -12,15 +12,15 @@
 
                 {{-- JUDUL --}}
                 <h1 class="berita-detail-title">
-                    {{ $item['judul'] ?? '-' }}
+                    {{ $item->judul ?? '-' }}
                 </h1>
 
                 {{-- META --}}
                 <div class="berita-detail-meta">
                     <span class="meta-item">
                         <i class="fa-regular fa-calendar"></i>
-                        @if (!empty($item['tanggal']))
-                            {{ \Carbon\Carbon::parse($item['tanggal'])->translatedFormat('d F Y') }}
+                        @if (!empty($item->tanggal))
+                            {{ \Carbon\Carbon::parse($item->tanggal)->translatedFormat('d F Y') }}
                         @else
                             -
                         @endif
@@ -30,14 +30,14 @@
 
                     <span class="meta-item">
                         <i class="fa-regular fa-user"></i>
-                        {{ $item['penulis'] ?? 'Admin' }}
+                        {{ $item->penulis ?? 'Admin' }}
                     </span>
 
                     <span class="meta-dot">•</span>
 
                     <span class="meta-item meta-views">
                         <i class="fa-regular fa-eye"></i>
-                        {{ $item['pembaca'] ?? 0 }}
+                        {{ $item->pembaca ?? 0 }}
                     </span>
                 </div>
 
@@ -45,16 +45,17 @@
                 <div class="berita-detail-card">
 
                     {{-- GAMBAR --}}
-                    @if (!empty($item['gambar_url']))
+                    @if (!empty($item->gambar_url))
                         <div class="berita-detail-image">
-                            <img src="{{ $item['gambar_url'] }}" alt="{{ $item['judul'] ?? 'Konten' }}">
+                            <img src="{{ $item->gambar_url }}" alt="{{ $item->judul ?? 'Konten' }}">
                         </div>
                     @endif
 
                     {{-- ISI --}}
                     <div class="berita-detail-content">
-                        {!! $item['isi'] ?? '' !!}
+                        {!! $item->isi !!}
                     </div>
+
                 </div>
 
                 {{-- TOMBOL KEMBALI --}}
