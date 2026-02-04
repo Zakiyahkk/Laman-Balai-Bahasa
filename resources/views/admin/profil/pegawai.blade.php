@@ -8,7 +8,7 @@
         <h3 class="mb-1" style="color:#ffffff;">Data Pegawai</h3>
         <p class="mb-0" style="color:#ffffff;">Kelola data pegawai BBP Riau</p>
     </div>
-    <img src="/img/logobbpr4.png" class="header-logo">
+    <img src="https://ppidbbpriau.kemendikdasmen.go.id/bbpr/img/logobbpr4.png" class="header-logo">
 </div>
 
 {{-- ================= SEARCH + TAMBAH ================= --}}
@@ -50,28 +50,8 @@
             <div class="col-md-6">
                 <div class="card pegawai-card p-3 text-center h-100">
                     <div class="avatar-wrapper mx-auto mb-2">
-                @if($kepalaBalai ?? null)
-                    <img src="{{ asset($kepalaBalai['foto']) }}" class="avatar-img">
-                @else
-                    <div class="avatar-img d-flex align-items-center justify-content-center bg-light">
-                        <i class="bi bi-person fs-1 text-muted"></i>
-                    </div>
-                @endif
-            </div>
-                <div class="fw-semibold">
-                    {{ $kepalaBalai['nama'] ?? 'Belum ada Kepala Balai' }}
-                </div>
-                    <div class="text-muted small">Kepala Balai</div>
-                </div>
-            </div>
-
-            {{-- KASUBBAG UMUM --}}
-            <div class="col-md-6">
-                <div class="card pegawai-card p-3 text-center h-100">
-
-                    <div class="avatar-wrapper mx-auto mb-2">
-                        @if($kasubbagUmum)
-                            <img src="{{ asset($kasubbagUmum['foto']) }}" class="avatar-img">
+                        @if($kepalaBalai && $kepalaBalai->foto)
+                            <img src="{{ asset($kepalaBalai->foto) }}" class="avatar-img">
                         @else
                             <div class="avatar-img d-flex align-items-center justify-content-center bg-light">
                                 <i class="bi bi-person fs-1 text-muted"></i>
@@ -80,12 +60,32 @@
                     </div>
 
                     <div class="fw-semibold">
-                        {{ $kasubbagUmum['nama'] ?? 'Belum ada Kasubbag Umum' }}
+                        {{ $kepalaBalai->nama ?? 'Belum ada Kepala Balai' }}
+                    </div>
+                    <div class="text-muted small">Kepala Balai</div>
+                </div>
+            </div>
+
+            {{-- KASUBBAG UMUM --}}
+            <div class="col-md-6">
+                <div class="card pegawai-card p-3 text-center h-100">
+                    <div class="avatar-wrapper mx-auto mb-2">
+                        @if($kasubbagUmum && $kasubbagUmum->foto)
+                            <img src="{{ asset($kasubbagUmum->foto) }}" class="avatar-img">
+                        @else
+                            <div class="avatar-img d-flex align-items-center justify-content-center bg-light">
+                                <i class="bi bi-person fs-1 text-muted"></i>
+                            </div>
+                        @endif
                     </div>
 
+                    <div class="fw-semibold">
+                        {{ $kasubbagUmum->nama ?? 'Belum ada Kasubbag Umum' }}
+                    </div>
                     <div class="text-muted small">Kasubbag Umum</div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
@@ -97,30 +97,34 @@
     <div class="card pegawai-card p-3 text-center">
         <div>
             <div class="avatar-wrapper mx-auto mb-2">
-                <img src="{{ asset($item['foto']) }}" class="avatar-img">
+                <img src="{{ asset($item->foto ?? 'img/default-user.png') }}" class="avatar-img">
             </div>
-            <div class="fw-semibold text-limit-2">{{ $item['nama'] }}</div>
-            <div class="text-muted small text-limit-2">{{ $item['jabatan'] }}</div>
+            <div class="fw-semibold">{{ $item->nama }}</div>
+            <div class="text-muted small">{{ $item->jabatan }}</div>
         </div>
         <div class="d-flex justify-content-center gap-2 mt-auto">
+
             <!-- HAPUS -->
             <form method="POST"
-                action="{{ route('admin.profil.pegawai.destroy', $item['pegawai_id']) }}"
-                class="form-delete-pegawai"
-                data-nama="{{ $item['nama'] }}">
-                @csrf @method('DELETE')
+                  action="{{ route('admin.profil.pegawai.destroy', $item->pegawai_id) }}"
+                  class="form-delete-pegawai"
+                  data-nama="{{ $item->nama }}">
+                @csrf
+                @method('DELETE')
                 <button class="btn btn-outline-danger btn-sm btn-action-fixed">
                     <i class="bi bi-trash"></i> Hapus
                 </button>
             </form>
+
             <!-- EDIT -->
             <button class="btn btn-outline-dark btn-sm btn-action-fixed btn-edit-pegawai"
-                    data-id="{{ $item['pegawai_id'] }}"
-                    data-nama="{{ $item['nama'] }}"
-                    data-jabatan="{{ $item['jabatan'] }}"
-                    data-foto="{{ $item['foto'] }}">
+                    data-id="{{ $item->pegawai_id }}"
+                    data-nama="{{ $item->nama }}"
+                    data-jabatan="{{ $item->jabatan }}"
+                    data-foto="{{ $item->foto }}">
                 <i class="bi bi-pencil"></i> Edit
             </button>
+
         </div>
     </div>
 </div>
@@ -176,14 +180,12 @@ if (str_contains($msg,'hapus')) {
 {{-- ================= KEPALA BALAI ================= --}}
 <div class="col-md-6">
     <h6 class="fw-semibold mb-3" style="color:#067ac1">Kepala Balai</h6>
-    <input type="hidden"
-           name="kepala_id"
-           value="{{ $kepalaBalai['pegawai_id'] ?? '' }}">
+    <input type="hidden" name="kepala_id" value="{{ $kepalaBalai->pegawai_id ?? '' }}">
     <div class="mb-3">
         <label class="fw-semibold">Nama</label>
         <input name="kepala_nama"
                class="form-control"
-               value="{{ $kepalaBalai['nama'] ?? '' }}">
+               value="{{ $kepalaBalai->nama ?? '' }}">
     </div>
     <div class="mb-3">
         <label class="fw-semibold">Foto (opsional)</label>
@@ -193,8 +195,8 @@ if (str_contains($msg,'hapus')) {
                onchange="previewImage(this, 'previewKepala')">
     </div>
      <div class="mb-2 text-center">
-        @if(!empty($kepalaBalai['foto']))
-            <img id="previewKepala" src="{{ asset($kepalaBalai['foto']) }}"
+        @if(!empty($kepalaBalai->foto))
+            <img id="previewKepala" src="{{ asset($kepalaBalai->foto) }}"
                  style="width:96px;height:96px;border-radius:50%;object-fit:cover">
         @else
             <i id="previewKepala"
@@ -208,13 +210,13 @@ if (str_contains($msg,'hapus')) {
     <h6 class="fw-semibold mb-3" style="color:#067ac1">Kasubbag Umum</h6>
     <input type="hidden"
            name="kasubbag_id"
-           value="{{ $kasubbagUmum['pegawai_id'] ?? '' }}">
+           value="{{ $kasubbagUmum->pegawai_id ?? '' }}">
 
     <div class="mb-3">
         <label class="fw-semibold">Nama</label>
         <input name="kasubbag_nama"
                class="form-control"
-               value="{{ $kasubbagUmum['nama'] ?? '' }}">
+               value="{{ $kasubbagUmum->nama ?? '' }}">
     </div>
     <div class="mb-3">
         <label class="fw-semibold">Foto (opsional)</label>
@@ -224,8 +226,8 @@ if (str_contains($msg,'hapus')) {
                onchange="previewImage(this, 'previewKasubbag')">
     </div>
     <div class="mb-2 text-center">
-        @if(!empty($kasubbagUmum['foto']))
-            <img id="previewKasubbag" src="{{ asset($kasubbagUmum['foto']) }}"
+        @if(!empty($kasubbagUmum->foto))
+            <img id="previewKasubbag" src="{{ asset($kasubbagUmum->foto) }}"
                  style="width:96px;height:96px;border-radius:50%;object-fit:cover">
         @else
             <i id="previewKasubbag"
@@ -313,6 +315,12 @@ if (str_contains($msg,'hapus')) {
 </div>
 </div>
 
+<div id="pegawaiData"
+     data-kepala-foto="{{ $kepalaBalai->foto ?? '' }}"
+     data-kasubbag-foto="{{ $kasubbagUmum->foto ?? '' }}">
+</div>
+
+
 {{-- ================= SCRIPT ================= --}}
 <script>
 let deleteFormTarget = null;
@@ -353,21 +361,33 @@ document.getElementById("btnNo").addEventListener("click", function () {
 </script>
 
 <script>
-/* ================= EDIT PEGAWAI ================= */
 document.querySelectorAll('.btn-edit-pegawai').forEach(btn => {
-    btn.addEventListener('click', function (e) {
-        e.stopPropagation();
+    btn.addEventListener('click', function () {
+
         document.getElementById('editNama').value    = this.dataset.nama;
         document.getElementById('editJabatan').value = this.dataset.jabatan;
-        document.getElementById('previewFoto').src = '/' + this.dataset.foto;
+
+        const foto = this.dataset.foto;
+        const preview = document.getElementById('previewFoto');
+
+        if (foto) {
+            preview.src = "{{ asset('') }}" + foto;
+            preview.style.display = 'inline-block';
+        } else {
+            preview.removeAttribute('src');
+            preview.style.display = 'none';
+        }
+
         document.getElementById('formEditPegawai').action =
             `/admin/profil/pegawai/${this.dataset.id}`;
+
         bootstrap.Modal
             .getOrCreateInstance(document.getElementById('modalEditPegawai'))
             .show();
     });
 });
 </script>
+
 
 <script>
 document.getElementById('btnEditStrategis')
@@ -446,4 +466,5 @@ resetModal('modalEditStrategis', {
     previewKasubbag: pegawaiData.dataset.kasubbagFoto
 });
 </script>
+
 @endsection

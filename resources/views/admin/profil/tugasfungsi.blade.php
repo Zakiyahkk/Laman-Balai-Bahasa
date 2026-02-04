@@ -44,7 +44,7 @@
         <h3 class="mb-1" style="color:#ffffff;">Tugas & Fungsi</h3>
         <p class="mb-0" style="color:#ffffff;">Kelola tugas dan fungsi BPP Riau</p>
     </div>
-    <img src="/img/logobbpr4.png" class="header-logo">
+    <img src="https://ppidbbpriau.kemendikdasmen.go.id/bbpr/img/logobbpr4.png" class="header-logo">
 </div>
 
 <div class="row">

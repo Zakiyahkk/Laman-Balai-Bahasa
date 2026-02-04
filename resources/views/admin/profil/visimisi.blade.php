@@ -42,7 +42,7 @@
         <h3 class="mb-1" style="color:#ffffff;">Visi & Misi</h3>
         <p class="mb-0" style="color:#ffffff;">Kelola visi dan misi BPP Riau</p>
     </div>
-    <img src="/img/logobbpr4.png" class="header-logo">
+    <img src="https://ppidbbpriau.kemendikdasmen.go.id/bbpr/img/logobbpr4.png" class="header-logo">
 </div>
 
 <div class="row">

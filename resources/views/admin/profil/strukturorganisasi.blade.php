@@ -9,7 +9,7 @@
     </div>
 
     <div class="header-logo">
-        <img src="/img/logobbpr4.png" class="img-fluid header-logo">
+        <img src="https://ppidbbpriau.kemendikdasmen.go.id/bbpr/img/logobbpr4.png" class="img-fluid header-logo">
     </div>
 </div>
 
@@ -28,7 +28,7 @@
                     @if($strukturAktif)
                     <small class="text-muted">
                         Terakhir diupdate:
-                            {{ \Carbon\Carbon::parse($strukturAktif['created_at'], 'UTC')
+                            {{ \Carbon\Carbon::parse($strukturAktif->created_at, 'UTC')
                                 ->setTimezone('Asia/Jakarta')
                                 ->translatedFormat('d F Y, H:i') }}
                     </small>
@@ -44,10 +44,10 @@
                         @if($kepalaBalai)
                             <div class="card pegawai-card p-3 text-center">
                                 <div class="avatar-wrapper mx-auto mb-2">
-                                    <img src="{{ asset($kepalaBalai['foto']) }}" class="avatar-img">
+                                    <img src="{{ asset($kepalaBalai->foto) }}" class="avatar-img">
                                 </div>
-                                <div class="fw-semibold">{{ $kepalaBalai['nama'] }}</div>
-                                <div class="text-muted small">{{ $kepalaBalai['jabatan'] }}</div>
+                                <div class="fw-semibold">{{ $kepalaBalai->nama }}</div>
+                                <div class="text-muted small">{{ $kepalaBalai->jabatan }}</div>
                             </div>
                         @endif
                     </div>
@@ -57,10 +57,10 @@
                         @if($kasubbagUmum)
                             <div class="card pegawai-card p-3 text-center">
                                 <div class="avatar-wrapper mx-auto mb-2">
-                                    <img src="{{ asset($kasubbagUmum['foto']) }}" class="avatar-img">
+                                    <img src="{{ asset($kasubbagUmum->foto) }}" class="avatar-img">
                                 </div>
-                                <div class="fw-semibold">{{ $kasubbagUmum['nama'] }}</div>
-                                <div class="text-muted small">{{ $kasubbagUmum['jabatan'] }}</div>
+                                <div class="fw-semibold">{{ $kasubbagUmum->nama }}</div>
+                                <div class="text-muted small">{{ $kasubbagUmum->jabatan }}</div>
                             </div>
                         @endif
                     </div>
@@ -98,23 +98,22 @@
                 <div class="riwayat-list">
                 @foreach($riwayat as $item)
                     <div class="riwayat-card
-                        {{ isset($strukturAktif) && $strukturAktif['struktur_id'] == $item['struktur_id'] ? 'selected' : '' }}"
-                        data-id="{{ $item['struktur_id'] }}"
+                        {{ isset($strukturAktif) && $strukturAktif->struktur_id == $item->struktur_id ? 'selected' : '' }}"
+                        data-id="{{ $item->struktur_id }}"
                         onclick="location.href='?struktur=' + this.dataset.id">
                         <div class="d-flex justify-content-between align-items-start">
                             <div>
                                 <div class="fw-semibold">
-                                    Struktur Organisasi {{ $item['versi'] ?? '-' }}
+                                    Struktur Organisasi {{ $item->versi ?? '-' }}
                                 </div>
                             <div class="small text-muted">
                                     <i class="bi bi-calendar3"></i>
-                                {{ \Carbon\Carbon::parse($item['created_at'], 'UTC')
-                                        ->setTimezone('Asia/Jakarta')
-                                        ->translatedFormat('d F Y, H:i') }}
+                                {{ \Carbon\Carbon::create($item->created_at)
+                                    ->translatedFormat('d F Y, H:i') }}
                                 </div>
                             </div>
 
-                            @if($item['status'])
+                            @if($item->status)
                                 <i class="bi bi-check-circle-fill fs-5"></i>
                             @endif
                         </div>
