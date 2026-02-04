@@ -4,6 +4,8 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class BerandaController extends Controller
 {
@@ -23,29 +25,31 @@ class BerandaController extends Controller
             'Authorization' => 'Bearer ' . $key,
             'Accept'        => 'application/json',
         ]);
-    }/**
- * Normalisasi file publikasi (AMAN TANPA UBAH DB)
- */
-private function publikasiUrl(?string $value): ?string
-{
-    if (!$value) {
-        return null;
     }
 
-    // kalau sudah URL penuh
-    if (preg_match('/^https?:\/\//i', $value)) {
-        return $value;
+    /**
+     * Normalisasi file publikasi (AMAN TANPA UBAH DB)
+     */
+    private function publikasiUrl(?string $value): ?string
+    {
+        if (!$value) {
+            return null;
+        }
+
+        // kalau sudah URL penuh
+        if (preg_match('/^https?:\/\//i', $value)) {
+            return $value;
+        }
+
+        // ðŸ”¥ BUANG SEMUA PREFIX PATH
+        $value = preg_replace(
+            '#^(public/|/public/|img/publikasi/|/img/publikasi/|publikasi/|/publikasi/)#',
+            '',
+            $value
+        );
+
+        return asset('img/publikasi/' . $value);
     }
-
-    // 🔥 BUANG SEMUA PREFIX PATH
-    $value = preg_replace(
-        '#^(public/|/public/|img/publikasi/|/img/publikasi/|publikasi/|/publikasi/)#',
-        '',
-        $value
-    );
-
-    return asset('img/publikasi/' . $value);
-}
 
     private function publicLocalImage(?string $gambar): string
     {
@@ -59,8 +63,9 @@ private function publikasiUrl(?string $value): ?string
     
         return asset(ltrim($gambar, '/'));
     }
+
     /**
-     * 🔥 KHUSUS BERITA
+     * ðŸ”¥ KHUSUS BERITA
      * Ambil gambar dari public Laravel (public/img/...)
      */
     private function beritaImageUrl(?string $gambar): string
@@ -107,152 +112,232 @@ private function publikasiUrl(?string $value): ?string
     }
 
     /**
-     * BERANDA
+     * BERANDA DASHBOARD
      */
     public function dashboard()
     {
-        $basePublikasi = rtrim(env('SUPABASE_URL'), '/') . '/rest/v1/publikasi';
+        // ===============================
+        // CATAT PENGUNJUNG (WAJIB ADA)
+        // ===============================
+        // Bagian ini tetap di sini untuk MEREKAM data saat user membuka beranda.
+        // Tapi untuk MENAMPILKAN data, sudah dihandle AppServiceProvider.
+        $ip = request()->ip();
+        $today = Carbon::today()->toDateString();
+        
+        DB::table('visitor_stats')->updateOrInsert(
+            [
+                'ip_address' => $ip,
+                'visit_date' => $today,
+            ],
+            [
+                'created_at' => now()
+            ]
+        );
 
         // ==================================================
-        // 1) BERITA TERBARU (GAMBAR DARI PUBLIC LARAVEL)
+        // 1) BERITA TERBARU (MYSQL)
         // ==================================================
-        $berita = $this->supabase()->get($basePublikasi, [
-            'select'   => 'publikasi_id,judul,tanggal,penulis,gambar,isi,pembaca,status,kategori,created_at',
-            'kategori' => 'eq.berita',
-            'status'   => 'eq.terbit',
-            'order'    => 'tanggal.desc,created_at.desc,publikasi_id.desc',
-            'limit'    => 4,
-        ])->throw()->json();
+        $berita = DB::table('publikasi')
+            ->select(
+                'publikasi_id',
+                'judul',
+                'tanggal',
+                'penulis',
+                'gambar',
+                'isi',
+                'pembaca',
+                'slug'
+            )
+            ->where('kategori', 'berita')
+            ->where('status', 'terbit')
+            ->orderByDesc('tanggal')
+            ->orderByDesc('publikasi_id')
+            ->limit(4)
+            ->get()
+            ->map(function ($row) {
+                return (object) [
+                    'publikasi_id' => $row->publikasi_id,
+                    'slug'         => $row->slug, 
+                    'judul'        => $row->judul,
+                    'tanggal'      => $row->tanggal,
+                    'penulis'      => $row->penulis,
+                    'isi'          => $row->isi,
+                    'pembaca'      => $row->pembaca ?? 0,
+                    'gambar_url'   => $this->beritaImageUrl($row->gambar),
+                ];
+            });
 
-        $berita = array_map(function ($row) {
-            $row['gambar_url'] = $this->beritaImageUrl($row['gambar'] ?? null);
-            return $row;
-        }, $berita);
 
         // ==================================================
-        // 2) ARTIKEL + (SUPABASE STORAGE)
+        // 2) ARTIKEL TERBARU (MYSQL)
         // ==================================================
-        $kontenTerbaru = $this->supabase()->get($basePublikasi, [
-            'select'   => 'publikasi_id,judul,tanggal,penulis,gambar,isi,pembaca,status,kategori,created_at',
-            'kategori' => 'in.(artikel,alinea,ragam,lensa)',
-            'status'   => 'eq.terbit',
-            'order'    => 'tanggal.desc,created_at.desc,publikasi_id.desc',
-            'limit'    => 12,
-        ])->throw()->json();
-        
-        $kontenTerbaru = array_map(function ($row) {
-            $row['gambar_url'] = $this->publicLocalImage($row['gambar'] ?? null);
-            return $row;
-        }, $kontenTerbaru);
+        $kontenTerbaru = DB::table('publikasi')
+            ->select(
+                'publikasi_id',
+                'judul',
+                'tanggal',
+                'penulis',
+                'gambar',
+                'isi',
+                'pembaca',
+                'kategori',
+                'slug'
+            )
+            ->whereIn('kategori', ['artikel', 'alinea', 'ragam', 'lensa'])
+            ->where('status', 'terbit')
+            ->orderByDesc('tanggal')
+            ->orderByDesc('publikasi_id')
+            ->limit(12)
+            ->get()
+            ->map(function ($row) {
+                return (object) [
+                    'publikasi_id' => $row->publikasi_id,
+                    'slug'         => $row->slug, 
+                    'judul'        => $row->judul,
+                    'tanggal'      => $row->tanggal,
+                    'penulis'      => $row->penulis,
+                    'isi'          => $row->isi,
+                    'kategori'     => $row->kategori,
+                    'pembaca'      => $row->pembaca ?? 0,
+                    'gambar_url'   => $this->publicLocalImage($row->gambar),
+                ];
+            });
+
+
         // ==================================================
-        // 3) PENGUMUMAN TERBARU
+        // 3) PENGUMUMAN TERBARU (MYSQL)
         // ==================================================
-        $pengumumanRaw = $this->supabase()->get($basePublikasi, [
-            'select'   => 'publikasi_id,judul,tanggal,file,gambar,status,kategori,created_at',
-            'kategori' => 'eq.pengumuman',
-            'status'   => 'eq.terbit',
-            'order'    => 'tanggal.desc,created_at.desc,publikasi_id.desc',
-            'limit'    => 3,
-        ])->throw()->json();
+        $items = DB::table('publikasi')
+            ->select('publikasi_id', 'judul', 'tanggal', 'file', 'gambar', 'slug')
+            ->where('kategori', 'pengumuman')
+            ->where('status', 'terbit')
+            ->orderByDesc('tanggal')
+            ->orderByDesc('publikasi_id')
+            ->limit(3)
+            ->get()
+            ->map(function ($row) {
         
-        $items = array_map(function ($row) {
+                $type = !empty($row->file) ? 'pdf' : 'image';
         
-            // tentukan tipe dokumen
-            $type = !empty($row['file']) ? 'pdf' : 'image';
+                return (object) [
+                    'publikasi_id' => $row->publikasi_id,
+                    'slug'         => $row->slug, 
+                    'judul'        => $row->judul,
+                    'tanggal'      => $row->tanggal,
+                    'type'         => $type,
+                    'file_url'     => $this->publikasiUrl($row->file),
+                    'gambar_url'   => $this->publikasiUrl($row->gambar),
+                ];
+            });
+
+        // ==================================================
+        // 4) TOKOH BAHASA & SASTRA (MYSQL)
+        // ==================================================
+        $tokoh = DB::table('tokoh')
+            ->select(
+                'tokoh_id',
+                'nama',
+                'foto_tokoh',
+                'deskripsi',
+                'kategori'
+            )
+            ->where('kategori', 'Tokoh Bahasa dan Sastra')
+            ->orderByDesc('tokoh_id')
+            ->limit(8)
+            ->get()
+            ->map(function ($row) {
+                return (object) [
+                    'tokoh_id'  => $row->tokoh_id,
+                    'nama'      => $row->nama,
+                    'deskripsi' => $row->deskripsi,
+                    'kategori'  => $row->kategori,
+                    'foto_url'  => $row->foto_tokoh
+                        ? asset(ltrim($row->foto_tokoh, '/'))
+                        : asset('img/default-user.png'),
+                ];
+            });
+
+
+        // ==================================================
+        // 5) TOKOH SASTRA LISAN (MYSQL)
+        // ==================================================
+        $tokohSastra = DB::table('tokoh')
+            ->select(
+                'tokoh_id',
+                'nama',
+                'foto_tokoh',
+                'deskripsi',
+                'kategori'
+            )
+            ->where('kategori', 'LIKE', '%Sastra Lisan%')
+            ->orderByDesc('tokoh_id')
+            ->limit(8)
+            ->get()
+            ->map(function ($row) {
+                return (object) [
+                    'nama'      => $row->nama,
+                    'deskripsi' => $row->deskripsi,
+                    'kategori'  => $row->kategori,
+                    'foto_url'  => $row->foto_tokoh
+                        ? asset(ltrim($row->foto_tokoh, '/'))
+                        : asset('img/default-user.png'),
+                ];
+            });
+
+
+        // ==================================================
+        // 6) KOMUNITAS LITERASI (MYSQL)
+        // ==================================================
+        $komunitasLiterasi = DB::table('tokoh')
+            ->select(
+                'tokoh_id',
+                'nama',
+                'foto_tokoh',
+                'deskripsi',
+                'kategori'
+            )
+            ->where('kategori', 'Komunitas Literasi')
+            ->orderByDesc('tokoh_id')
+            ->limit(8)
+            ->get()
+            ->map(function ($row) {
+                return (object) [
+                    'nama'      => $row->nama,
+                    'deskripsi' => $row->deskripsi,
+                    'kategori'  => $row->kategori,
+                    'foto_url'  => $row->foto_tokoh
+                        ? asset(ltrim($row->foto_tokoh, '/'))
+                        : asset('img/default-user.png'),
+                ];
+            });
+
         
-            return [
-                'publikasi_id' => $row['publikasi_id'],
-                'judul'        => $row['judul'],
-                'tanggal'      => $row['tanggal'],
-                'type'         => $type,
-        
-                // 🔥 PATH BENAR (SESUIAI STRUKTUR FOLDER)
-                'file_url'   => $this->publikasiUrl($row['file'] ?? null),
-                'gambar_url' => $this->publikasiUrl($row['gambar'] ?? null),
-            ];
-        }, $pengumumanRaw);
-        
-       // ==================================================
-// 4) TOKOH BAHASA & SASTRA
-// ==================================================
-$baseTokoh = rtrim(env('SUPABASE_URL'), '/') . '/rest/v1/tokoh';
-
-$tokoh = $this->supabase()->get($baseTokoh, [
-    'select'   => 'tokoh_id,nama,foto_tokoh,deskripsi,kategori,created_at',
-    'kategori' => 'eq.Tokoh Bahasa dan Sastra',
-    'order'    => 'created_at.desc',
-    'limit'    => 8,
-])->throw()->json();
-
-$tokoh = array_map(function ($row) {
-    $row['foto_url'] = $row['foto_tokoh']
-        ? asset(ltrim($row['foto_tokoh'], '/'))
-        : asset('img/default-user.png');
-    return $row;
-}, $tokoh);
-
-
-// ==================================================
-// 5) TOKOH SASTRA LISAN (MAHKOTA KALAM) - FIX FINAL
-// ==================================================
-$tokohSastra = $this->supabase()->get($baseTokoh, [
-    'select'   => 'tokoh_id,nama,foto_tokoh,deskripsi,kategori,created_at',
-    'kategori' => 'ilike.*Sastra Lisan*',
-    'order'    => 'created_at.desc',
-])->throw()->json();
-
-$tokohSastra = array_map(function ($row) {
-    return [
-        'nama'      => $row['nama'],
-        'deskripsi' => $row['deskripsi'],
-        'kategori'  => $row['kategori'],
-        'foto_url'  => $row['foto_tokoh']
-            ? asset(ltrim($row['foto_tokoh'], '/'))
-            : asset('img/default-user.png'),
-    ];
-}, $tokohSastra);
-
-// ==================================================
-// KOMUNITAS LITERASI
-// ==================================================
-$komunitasLiterasi = $this->supabase()->get($baseTokoh, [
-    'select'   => 'tokoh_id,nama,foto_tokoh,deskripsi,kategori,created_at',
-    'kategori' => 'eq.Komunitas Literasi',
-    'order'    => 'created_at.desc',
-])->throw()->json();
-
-$komunitasLiterasi = array_map(function ($row) {
-    return [
-        'nama'      => $row['nama'],
-        'deskripsi' => $row['deskripsi'],
-        'kategori'  => $row['kategori'],
-        'foto_url'  => $row['foto_tokoh']
-            ? asset(ltrim($row['foto_tokoh'], '/'))
-            : asset('img/default-user.png'),
-    ];
-}, $komunitasLiterasi);
-
-// ==================================================
-// KOMUNITAS SASTRA
-// ==================================================
-$komunitasSastra = $this->supabase()->get($baseTokoh, [
-    'select'   => 'tokoh_id,nama,foto_tokoh,deskripsi,kategori,created_at',
-    'kategori' => 'eq.Komunitas Sastra',
-    'order'    => 'created_at.desc',
-])->throw()->json();
-
-$komunitasSastra = array_map(function ($row) {
-    return [
-        'nama'      => $row['nama'],
-        'deskripsi' => $row['deskripsi'],
-        'kategori'  => $row['kategori'],
-        'foto_url'  => $row['foto_tokoh']
-            ? asset(ltrim($row['foto_tokoh'], '/'))
-            : asset('img/default-user.png'),
-    ];
-}, $komunitasSastra);
+        // ==================================================
+        // 7) KOMUNITAS SASTRA (MYSQL)
+        // ==================================================
+        $komunitasSastra = DB::table('tokoh')
+            ->select(
+                'tokoh_id',
+                'nama',
+                'foto_tokoh',
+                'deskripsi',
+                'kategori'
+            )
+            ->where('kategori', 'Komunitas Sastra')
+            ->orderByDesc('tokoh_id')
+            ->limit(8)
+            ->get()
+            ->map(function ($row) {
+                return (object) [
+                    'nama'      => $row->nama,
+                    'deskripsi' => $row->deskripsi,
+                    'kategori'  => $row->kategori,
+                    'foto_url'  => $row->foto_tokoh
+                        ? asset(ltrim($row->foto_tokoh, '/'))
+                        : asset('img/default-user.png'),
+                ];
+            });
     
-        
         // ==================================================
         // RETURN VIEW
         // ==================================================

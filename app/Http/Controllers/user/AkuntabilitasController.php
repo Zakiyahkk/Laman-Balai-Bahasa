@@ -4,221 +4,113 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Akuntabilitas; 
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str; // Tambahan untuk download name
 
 class AkuntabilitasController extends Controller
 {
-    public function perjanjianKinerja(Request $request)
-{
-    // DATA DUMMY PERJANJIAN KINERJA
-    $docs = collect([
-        [
-            'judul' => 'Perjanjian Kinerja Balai Bahasa Provinsi Tahun 2025',
-            'tahun' => 2025,
-            'tipe'  => 'pdf',
-            'file'  => 'perjanjian-kinerja/pk-2025.pdf',
-        ],
-        [
-            'judul' => 'Perjanjian Kinerja Balai Bahasa Provinsi Tahun 2024',
-            'tahun' => 2024,
-            'tipe'  => 'pdf',
-            'file'  => 'perjanjian-kinerja/pk-2024.pdf',
-        ],
-        [
-            'judul' => 'Perjanjian Kinerja Balai Bahasa Provinsi Tahun 2023',
-            'tahun' => 2023,
-            'tipe'  => 'pdf',
-            'file'  => 'perjanjian-kinerja/pk-2023.pdf',
-        ],
-    ]);
-
-    $q = trim((string) $request->query('q', ''));
-    $year = $request->query('year');
-
-    $filtered = $docs
-        ->when($q !== '', fn ($c) =>
-            $c->filter(fn ($d) =>
-                str_contains(strtolower($d['judul']), strtolower($q))
-            )
-        )
-        ->when($year, fn ($c) =>
-            $c->where('tahun', (int) $year)
-        )
-        ->values();
-
-    $years = $docs->pluck('tahun')->unique()->sortDesc()->values();
-
-    return view('user.akuntabilitas.perjanjian-kinerja', [
-        'docs' => $filtered,
-        'years' => $years,
-        'q' => $q,
-        'selectedYear' => $year,
-    ]);
-}
-
-    public function renstra(Request $request)
+    /**
+     * Fungsi Helper untuk mengambil data dari Database berdasarkan tipe
+     */
+    private function getDokumen($tipe, Request $request)
     {
-        $docs = collect([
-            ['judul' => 'Rencana Strategis Unit Kerja Tahun 2025–2029', 'tahun' => 2025, 'tipe' => 'pdf', 'file' => 'renstra/dokumentesting1.pdf'],
-            ['judul' => 'Renstra Badan Bahasa: Arah Kebijakan dan Program 2025–2029', 'tahun' => 2025, 'tipe' => 'pdf', 'file' => 'renstra/dokumentesting2.pdf'],
-            ['judul' => 'Dokumen Renstra dan Indikator Kinerja 2020–2024', 'tahun' => 2024, 'tipe' => 'pdf', 'file' => 'renstra/dokumentesting3.pdf'],
-            ['judul' => 'Renstra: Sasaran Strategis dan Target Tahunan 2023', 'tahun' => 2023, 'tipe' => 'pdf', 'file' => 'renstra/dokumentesting4.pdf'],
-        ]);
         $q = trim((string) $request->query('q', ''));
         $year = $request->query('year');
-    
-        $filtered = $docs
-            ->when($q !== '', fn($c) => $c->filter(fn($d) => str_contains(strtolower($d['judul']), strtolower($q))))
-            ->when($year, fn($c) => $c->where('tahun', (int)$year))
-            ->values();
-    
-        $years = $docs->pluck('tahun')->unique()->sortDesc()->values();
-    
-        return view('user.akuntabilitas.renstra', [
-            'docs' => $filtered,
-            'years' => $years,
-            'q' => $q,
-            'selectedYear' => $year,
-        ]);
-    }
-    
-    public function lakin(Request $request)
-{
-    // DATA DUMMY LAKIN
-    $docs = collect([
-        [
-            'judul' => 'Laporan Akuntabilitas Kinerja Instansi Pemerintah Tahun 2025',
-            'tahun' => 2025,
-            'tipe'  => 'pdf',
-            'file'  => 'lakin/lakin-2025.pdf',
-        ],
-        [
-            'judul' => 'Laporan Akuntabilitas Kinerja Instansi Pemerintah Tahun 2024',
-            'tahun' => 2024,
-            'tipe'  => 'pdf',
-            'file'  => 'lakin/lakin-2024.pdf',
-        ],
-        [
-            'judul' => 'Laporan Akuntabilitas Kinerja Instansi Pemerintah Tahun 2023',
-            'tahun' => 2023,
-            'tipe'  => 'pdf',
-            'file'  => 'lakin/lakin-2023.pdf',
-        ],
-    ]);
 
-    // Ambil query
-    $q = trim((string) $request->query('q', ''));
-    $year = $request->query('year');
+        // 1. Mulai Query
+        $query = Akuntabilitas::where('tipe', $tipe);
 
-    // FILTER (SAMA PERSIS RENSTRA & DIPA)
-    $filtered = $docs
-        ->when($q !== '', fn ($c) =>
-            $c->filter(fn ($d) =>
-                str_contains(strtolower($d['judul']), strtolower($q))
-            )
-        )
-        ->when($year, fn ($c) =>
-            $c->where('tahun', (int) $year)
-        )
-        ->values();
+        // 2. Cek Status (Flexible: published/Published)
+        $query->where(function($query) {
+            $query->where('status', 'published')
+                ->orWhere('status', 'Published');
+        });
 
-    // LIST TAHUN
-    $years = $docs->pluck('tahun')->unique()->sortDesc()->values();
-
-    return view('user.akuntabilitas.lakin', [
-        'docs' => $filtered,
-        'years' => $years,
-        'q' => $q,
-        'selectedYear' => $year,
-    ]);
-}
-
-
-        /* ================= DIPA ================= */
-        public function dipa(Request $request)
-        {
-            // DATA DUMMY DIPA
-            $docs = collect([
-                ['judul' => 'DIPA Balai Bahasa Provinsi Tahun Anggaran 2025', 'tahun' => 2025, 'tipe' => 'pdf', 'file' => 'dipa/dipa-2025.pdf'],
-                ['judul' => 'DIPA Revisi I Tahun Anggaran 2025', 'tahun' => 2025, 'tipe' => 'pdf', 'file' => 'dipa/dipa-revisi-2025.pdf'],
-                ['judul' => 'DIPA Balai Bahasa Provinsi Tahun Anggaran 2024', 'tahun' => 2024, 'tipe' => 'pdf', 'file' => 'dipa/dipa-2024.pdf'],
-                ['judul' => 'DIPA dan Rincian Anggaran Tahun 2023', 'tahun' => 2023, 'tipe' => 'pdf', 'file' => 'dipa/dipa-2023.pdf'],
-            ]);
-    
-            $q = trim((string) $request->query('q', ''));
-            $year = $request->query('year');
-    
-            // FILTER (SAMA DENGAN RENSTRA)
-            $filtered = $docs
-                ->when($q !== '', fn ($c) =>
-                    $c->filter(fn ($d) =>
-                        str_contains(strtolower($d['judul']), strtolower($q))
-                    )
-                )
-                ->when($year, fn ($c) =>
-                    $c->where('tahun', (int) $year)
-                )
-                ->values();
-    
-            $years = $docs->pluck('tahun')->unique()->sortDesc()->values();
-    
-            return view('user.akuntabilitas.dipa', [
-                'docs' => $filtered,
-                'years' => $years,
-                'q' => $q,
-                'selectedYear' => $year,
-            ]);
+        // 3. Filter Pencarian Nama
+        if ($q !== '') {
+            $query->where('nama_dokumen', 'like', "%{$q}%");
         }
 
-    public function sakai()
-    {
+        // 4. Filter Tahun
+        if ($year) {
+            $query->whereYear('tanggal', $year);
+        }
+
+        // 5. Eksekusi Ambil Data Dokumen
+        $docs = $query->orderBy('tanggal', 'desc')->get();
+
+        // 6. Ambil daftar tahun untuk Dropdown
+        $years = Akuntabilitas::where('tipe', $tipe)
+            ->whereNotNull('tanggal')
+            ->selectRaw('YEAR(tanggal) as tahun')
+            ->distinct()
+            ->orderByDesc('tahun')
+            ->pluck('tahun');
+
+        // 7. Kembalikan data
+        return [
+            'docs'         => $docs,
+            'years'        => $years,
+            'q'            => $q,
+            'selectedYear' => $year,
+        ];
+    }
+
+    public function perjanjianKinerja(Request $request) {
+        return view('user.akuntabilitas.perjanjian-kinerja', $this->getDokumen('pk', $request)); // Sesuaikan tipe DB 'pk' atau 'perjanjian-kinerja'
+    }
+
+    public function renstra(Request $request) {
+        return view('user.akuntabilitas.renstra', $this->getDokumen('renstra', $request));
+    }
+
+    public function lakin(Request $request) {
+        return view('user.akuntabilitas.lakin', $this->getDokumen('lakin', $request));
+    }
+
+    public function dipa(Request $request) {
+        return view('user.akuntabilitas.dipa', $this->getDokumen('dipa', $request));
+    }
+
+    public function rencanaAksi(Request $request) {
+        $data = $this->getDokumen('ra', $request); // Sesuaikan tipe DB 'ra' atau 'rencana-aksi'
+        if (!isset($data['docs'])) { $data['docs'] = []; }
+        return view('user.akuntabilitas.rencana-aksi', $data); 
+    }
+
+    public function sakai() {
         return view('user.akuntabilitas.sakai');
     }
 
-    public function rencanaAksi(Request $request)
-{
-    $docs = collect([
-        [
-            'judul' => 'Rencana Aksi Kinerja Tahun 2025',
-            'tahun' => 2025,
-            'tipe'  => 'pdf',
-            'file'  => 'rencana-aksi/ra-2025.pdf',
-        ],
-        [
-            'judul' => 'Rencana Aksi Kinerja Tahun 2024',
-            'tahun' => 2024,
-            'tipe'  => 'pdf',
-            'file'  => 'rencana-aksi/ra-2024.pdf',
-        ],
-        [
-            'judul' => 'Rencana Aksi Kinerja Tahun 2023',
-            'tahun' => 2023,
-            'tipe'  => 'pdf',
-            'file'  => 'rencana-aksi/ra-2023.pdf',
-        ],
-    ]);
+    // METHOD PREVIEW (Inline Browser)
+    public function file($id)
+    {
+        $doc = Akuntabilitas::findOrFail($id);
+        $path = $doc->file_path;
 
-    $q = trim((string) $request->query('q', ''));
-    $year = $request->query('year');
+        if (!$path || !Storage::disk('public')->exists($path)) {
+            abort(404, 'File tidak ditemukan');
+        }
 
-    $filtered = $docs
-        ->when($q !== '', fn ($c) =>
-            $c->filter(fn ($d) =>
-                str_contains(strtolower($d['judul']), strtolower($q))
-            )
-        )
-        ->when($year, fn ($c) =>
-            $c->where('tahun', (int) $year)
-        )
-        ->values();
+        return response()->file(Storage::disk('public')->path($path));
+    }
 
-    $years = $docs->pluck('tahun')->unique()->sortDesc()->values();
+    // METHOD DOWNLOAD (Force Download)
+    public function download($id)
+    {
+        $item = Akuntabilitas::findOrFail($id); // Gunakan $item agar konsisten
 
-    return view('user.akuntabilitas.rencana-aksi', [
-        'docs' => $filtered,
-        'years' => $years,
-        'q' => $q,
-        'selectedYear' => $year,
-    ]);
-}
+        if (!$item->file_path || !Storage::disk('public')->exists($item->file_path)) {
+            return back()->with('error', 'File tidak ditemukan.');
+        }
 
+        $filePath = Storage::disk('public')->path($item->file_path);
+        
+        $ext = pathinfo($filePath, PATHINFO_EXTENSION);
+        $downloadName = Str::slug($item->nama_dokumen) . '.' . $ext;
+
+        return response()->download($filePath, $downloadName);
+    }
 }

@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\DB;
+
 
 class ProfileController extends Controller
 {
@@ -30,19 +31,25 @@ class ProfileController extends Controller
     // =========================
     public function visiMisi()
     {
-        $baseUrl = rtrim(env('SUPABASE_URL'), '/') . '/rest/v1/profil';
-
-        $profil = $this->supabase()->get($baseUrl, [
-            'select' => 'visi,misi',
-            'limit'  => 1,
-        ])->throw()->json();
-
-        $profil = $profil[0] ?? [
-            'visi' => '',
-            'misi' => '',
-        ];
-
-        return view('user.profil.visi-misi', compact('profil'));
+        $profil = DB::table('profil')
+            ->select('visi', 'misi')
+            ->first();
+    
+        // fallback aman
+        $visi = $profil->visi ?? '';
+    
+        // misi disimpan sebagai text (baris-baris)
+        $misi = [];
+        if (!empty($profil->misi)) {
+            $misi = array_filter(
+                array_map(
+                    'trim',
+                    preg_split("/\r\n|\n|\r/", $profil->misi)
+                )
+            );
+        }
+    
+        return view('user.profil.visi-misi', compact('visi', 'misi'));
     }
 
     // =========================
@@ -58,59 +65,65 @@ class ProfileController extends Controller
     // =========================
     public function tugasdanfungsi()
     {
-        $baseUrl = rtrim(env('SUPABASE_URL'), '/') . '/rest/v1/profil';
-
-        $profil = $this->supabase()->get($baseUrl, [
-            'select' => 'tugas,fungsi',
-            'limit'  => 1,
-        ])->throw()->json();
-
-        $profil = $profil[0] ?? [
-            'tugas'  => '',
-            'fungsi' => '',
-        ];
-
-        return view('user.profil.tugas-dan-fungsi', compact('profil'));
+        $profil = DB::table('profil')
+            ->select('tugas', 'fungsi')
+            ->first();
+    
+        // fallback aman
+        $tugas = $profil->tugas ?? '';
+    
+        // fungsi disimpan per baris
+        $fungsi = [];
+        if (!empty($profil->fungsi)) {
+            $fungsi = array_filter(
+                array_map(
+                    'trim',
+                    preg_split("/\r\n|\n|\r/", $profil->fungsi)
+                )
+            );
+        }
+    
+        return view('user.profil.tugas-dan-fungsi', compact(
+            'tugas',
+            'fungsi'
+        ));
     }
+
 
     // =========================
     // STRUKTUR ORGANISASI
     // =========================
     public function strukturOrganisasi()
     {
-        $baseUrl = rtrim(env('SUPABASE_URL'), '/') . '/rest/v1/struktur_organisasi';
+        $pegawai = DB::table('pegawai')->get();
     
-        $response = Http::withHeaders([
-            'apikey'        => env('SUPABASE_ANON_KEY'),
-            'Authorization' => 'Bearer ' . env('SUPABASE_ANON_KEY'),
-            'Accept'        => 'application/json',
-        ])->get($baseUrl, [
-            'select' => '*',
-            'status' => 'eq.true',
-            'limit'  => 1,
-        ])->throw()->json();
+        // Kepala Balai
+        $kepalaRow = $pegawai->first(function ($item) {
+            return str_contains(strtolower($item->jabatan), 'kepala');
+        });
     
-        abort_if(empty($response), 404);
+        // Kasubbag Umum
+        $kasubbagRow = $pegawai->first(function ($item) {
+            return str_contains(strtolower($item->jabatan), 'kasubbag');
+        });
     
-        $struktur = $response[0];
-    
-        // helper url foto
-        $fotoUrl = function ($path) {
+        // Helper foto
+        $foto = function ($path) {
             return $path
-                ? asset($path)
+                ? asset(ltrim($path, '/'))
                 : asset('img/default-user.png');
         };
     
         $kepala = [
-            'nama'    => $struktur['kepala_balai']['nama'] ?? '',
-            'jabatan' => $struktur['kepala_balai']['jabatan'] ?? '',
-            'foto'    => $fotoUrl($struktur['kepala_balai']['foto'] ?? null),
+            'nama'    => $kepalaRow->nama ?? '',
+            'jabatan' => $kepalaRow->jabatan ?? '',
+            'foto'    => $kepalaRow ? $foto($kepalaRow->foto) : asset('img/default-user.png'),
         ];
     
         $kasubbag = [
-            'nama'    => $struktur['kasubbag_umum']['nama'] ?? '',
-            'jabatan' => $struktur['kasubbag_umum']['jabatan'] ?? '',
-            'foto'    => $fotoUrl($struktur['kasubbag_umum']['foto'] ?? null),
+            'nama'    => $kasubbagRow->nama ?? '',
+            'jabatan' => $kasubbagRow->jabatan ?? '',
+            'foto'    => $kasubbagRow ? $foto($kasubbagRow->foto) : asset('img/default-user.png'),
         ];
     
         return view('user.profil.struktur-organisasi', compact(
@@ -123,48 +136,44 @@ class ProfileController extends Controller
     // PEGAWAI
     // =========================
     public function pegawai()
-{
-    $baseUrl = rtrim(env('SUPABASE_URL'), '/') . '/rest/v1/pegawai';
-
-    $data = Http::withHeaders([
-        'apikey' => env('SUPABASE_ANON_KEY'),
-        'Authorization' => 'Bearer ' . env('SUPABASE_ANON_KEY'),
-        'Accept' => 'application/json',
-    ])->get($baseUrl, [
-        'select' => '*',
-        'order' => 'created_at.asc',
-    ])->throw()->json();
-
-    // Kepala Balai
-    $kepala = collect($data)->first(function ($item) {
-        return str_contains(strtolower($item['jabatan']), 'kepala');
-    });
-
-    // Kasubbag
-    $kasubbag = collect($data)->first(function ($item) {
-        return str_contains(strtolower($item['jabatan']), 'kasubbag');
-    });
-
-    // Pegawai lain
-    $anggota = collect($data)->filter(function ($item) {
-        return !str_contains(strtolower($item['jabatan']), 'kepala')
-            && !str_contains(strtolower($item['jabatan']), 'kasubbag');
-    })->values();
-
-    // URL foto
-    $mapFoto = function ($item) {
-        $item['foto_url'] = $item['foto']
-            ? asset($item['foto'])
-            : asset('img/default-user.png');
-        return $item;
-    };
-
-    return view('user.profil.pegawai', [
-        'kepala'   => $kepala ? $mapFoto($kepala) : null,
-        'kasubbag' => $kasubbag ? $mapFoto($kasubbag) : null,
-        'anggota'  => $anggota->map($mapFoto),
-    ]);
-}
+    {
+        $pegawai = DB::table('pegawai')
+            ->orderBy('created_at', 'asc')
+            ->get();
+    
+        // Kepala Balai
+        $kepala = $pegawai->first(function ($item) {
+            return str_contains(strtolower($item->jabatan), 'kepala');
+        });
+    
+        // Kasubbag
+        $kasubbag = $pegawai->first(function ($item) {
+            return str_contains(strtolower($item->jabatan), 'kasubbag');
+        });
+    
+        // Pegawai lain
+        $anggota = $pegawai->filter(function ($item) {
+            return !str_contains(strtolower($item->jabatan), 'kepala')
+                && !str_contains(strtolower($item->jabatan), 'kasubbag');
+        })->values();
+    
+        // Helper foto
+        $mapFoto = function ($item) {
+            return [
+                'nama'     => $item->nama,
+                'jabatan'  => $item->jabatan,
+                'foto_url' => $item->foto
+                    ? asset(ltrim($item->foto, '/'))
+                    : asset('img/default-user.png'),
+            ];
+        };
+    
+        return view('user.profil.pegawai', [
+            'kepala'   => $kepala ? $mapFoto($kepala) : null,
+            'kasubbag' => $kasubbag ? $mapFoto($kasubbag) : null,
+            'anggota'  => $anggota->map($mapFoto),
+        ]);
+    }
 
     // =========================
     // LOGO BBP RIAU
@@ -173,4 +182,8 @@ class ProfileController extends Controller
     {
         return view('user.profil.logo-bpp-riau');
     }
+    
+    
 }
+
+

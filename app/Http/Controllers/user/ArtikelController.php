@@ -4,28 +4,12 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\DB;
 
 class ArtikelController extends Controller
 {
-    private function supabase()
-    {
-        $key = env('SUPABASE_ANON_KEY');
-
-        if (!$key) {
-            abort(500, 'SUPABASE_ANON_KEY tidak ditemukan di .env');
-        }
-
-        return Http::withHeaders([
-            'apikey'        => $key,
-            'Authorization' => 'Bearer ' . $key,
-            'Accept'        => 'application/json',
-        ]);
-    }
-
     /**
-     * 🔥 GAMBAR ARTIKEL / RAGAM / LENSA
-     * public Laravel
+     * Gambar artikel / alinea / ragam / lensa
      */
     private function artikelImageUrl(?string $gambar): string
     {
@@ -43,33 +27,25 @@ class ArtikelController extends Controller
     /**
      * =========================
      * LIST ARTIKEL
-     * (artikel, ragam, lensa)
      * =========================
      */
     public function index(Request $request)
     {
         $q = trim((string) $request->get('q', ''));
 
-        $params = [
-            'select'   => 'publikasi_id,judul,tanggal,penulis,gambar,isi,pembaca,status,kategori,created_at',
-            'kategori' => 'in.(artikel,alinea,ragam,lensa)',
-            'status'   => 'eq.terbit',
-            'order'    => 'tanggal.desc,created_at.desc,publikasi_id.desc',
-        ];
-
-        if ($q !== '') {
-            $params['judul'] = 'ilike.*' . $q . '*';
-        }
-
-        $items = $this->supabase()->get(
-            rtrim(env('SUPABASE_URL'), '/') . '/rest/v1/publikasi',
-            $params
-        )->throw()->json();
-
-        $items = array_map(function ($row) {
-            $row['gambar_url'] = $this->artikelImageUrl($row['gambar'] ?? null);
-            return $row;
-        }, $items);
+        $items = DB::table('publikasi')
+            ->whereIn('kategori', ['artikel', 'alinea', 'ragam', 'lensa'])
+            ->where('status', 'terbit')
+            ->when($q !== '', function ($query) use ($q) {
+                $query->where('judul', 'like', '%' . $q . '%');
+            })
+            ->orderByDesc('tanggal')
+            ->orderByDesc('publikasi_id')
+            ->get()
+            ->map(function ($item) {
+                $item->gambar_url = $this->artikelImageUrl($item->gambar ?? null);
+                return $item;
+            });
 
         return view('user.artikel.index', [
             'items' => $items,
@@ -82,24 +58,30 @@ class ArtikelController extends Controller
      * DETAIL ARTIKEL
      * =========================
      */
-    public function show($id)
-    {
-        $data = $this->supabase()->get(
-            rtrim(env('SUPABASE_URL'), '/') . '/rest/v1/publikasi',
-            [
-                'select'       => '*',
-                'publikasi_id' => 'eq.' . $id,
-                'kategori'     => 'in.(artikel,alinea,ragam,lensa)',
-                'status'       => 'eq.terbit',
-                'limit'        => 1,
-            ]
-        )->throw()->json();
+    public function show($slug)
+{
+    $sessionKey = 'artikel_read_' . $slug;
 
-        abort_if(empty($data), 404);
+    // ðŸ”¥ tambah pembaca (1x per session)
+    if (!session()->has($sessionKey)) {
+        DB::table('publikasi')
+            ->where('slug', $slug)
+            ->increment('pembaca');
 
-        $item = $data[0];
-        $item['gambar_url'] = $this->artikelImageUrl($item['gambar'] ?? null);
-
-        return view('user.artikel.show', compact('item'));
+        session()->put($sessionKey, true);
     }
+
+    $item = DB::table('publikasi')
+        ->where('slug', $slug)
+        ->whereIn('kategori', ['artikel', 'alinea', 'ragam', 'lensa'])
+        ->where('status', 'terbit')
+        ->first();
+
+    abort_if(!$item, 404);
+
+    $item->gambar_url = $this->artikelImageUrl($item->gambar ?? null);
+
+    return view('user.artikel.show', compact('item'));
+}
+
 }

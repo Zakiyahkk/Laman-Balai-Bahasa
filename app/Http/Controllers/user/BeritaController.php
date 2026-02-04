@@ -3,90 +3,57 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\DB;
 
 class BeritaController extends Controller
 {
-    /**
-     * Client Supabase
-     */
-    private function supabase()
-    {
-        $key = env('SUPABASE_ANON_KEY');
-
-        if (!$key) {
-            abort(500, 'SUPABASE_ANON_KEY tidak ditemukan di .env');
-        }
-
-        return Http::withHeaders([
-            'apikey' => $key,
-            'Authorization' => 'Bearer ' . $key,
-            'Accept' => 'application/json',
-        ]);
-    }
-
-    /**
-     * 🔥 FIX UTAMA:
-     * SEMUA gambar berita diambil dari public/img/publikasi
-     */
-    private function publicImageUrl(?string $gambar): ?string
+    private function publicImageUrl(?string $gambar): string
     {
         if (!$gambar) {
-            return asset('img/default.jpg'); // opsional fallback
+            return asset('img/default.jpg');
         }
 
-        // kalau sudah URL (jarang, tapi aman)
         if (preg_match('/^https?:\/\//i', $gambar)) {
             return $gambar;
         }
 
-        // AMBIL DARI PUBLIC
-        // pastikan tidak dobel slash
-    return asset(ltrim($gambar, '/'));
-}
+        return asset(ltrim($gambar, '/'));
+    }
 
     public function index()
     {
-        $response = $this->supabase()->get(
-            rtrim(env('SUPABASE_URL'), '/') . '/rest/v1/publikasi',
-            [
-                'select' => 'publikasi_id,judul,tanggal,penulis,gambar,isi,pembaca,status,kategori',
-                'kategori' => 'eq.berita',
-                'status' => 'eq.terbit',
-                'order' => 'tanggal.desc,created_at.desc,publikasi_id.desc',
-            ]
-        )->throw();
-
-        $berita = $response->json();
-
-        $berita = array_map(function ($item) {
-            $item['gambar_url'] = $this->publicImageUrl($item['gambar'] ?? null);
-            return $item;
-        }, $berita);
+        $berita = DB::table('publikasi')
+            ->where('kategori', 'berita')
+            ->where('status', 'terbit')
+            ->orderByDesc('tanggal')
+            ->get()
+            ->map(function ($item) {
+                $item->gambar_url = $this->publicImageUrl($item->gambar ?? null);
+                return $item;
+            });
 
         return view('user.berita.index', compact('berita'));
     }
 
-    // /berita/{slug}
     public function show($slug)
     {
-        $response = $this->supabase()->get(
-            rtrim(env('SUPABASE_URL'), '/') . '/rest/v1/publikasi',
-            [
-                'select' => '*',
-                'publikasi_id' => 'eq.' . $slug,
-                'kategori' => 'eq.berita',
-                'status' => 'eq.terbit',
-                'limit' => 1,
-            ]
-        )->throw();
-
-        $data = $response->json();
-        abort_if(empty($data), 404);
-
-        $berita = $data[0];
-        $berita['gambar_url'] = $this->publicImageUrl($berita['gambar'] ?? null);
-
+        $berita = DB::table('publikasi')
+            ->where('slug', $slug)
+            ->where('status', 'terbit')
+            ->first();
+    
+        abort_if(!$berita, 404);
+    
+        $berita->gambar_url = $this->publicImageUrl($berita->gambar ?? null);
+    
+        DB::table('publikasi')
+            ->where('slug', $slug)
+            ->increment('pembaca');
+    
+        $berita->pembaca++;
+    
         return view('user.berita.show', compact('berita'));
     }
+
+
 }
