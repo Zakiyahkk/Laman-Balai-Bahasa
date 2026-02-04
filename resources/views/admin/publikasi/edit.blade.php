@@ -38,10 +38,10 @@ document.addEventListener("DOMContentLoaded",()=>{
 {{-- ================= HEADER ================= --}}
 <div class="page-header d-flex justify-content-between align-items-center mb-4">
     <div>
-        <h3 class="mb-1">Ubah Data Publikasi</h3>
-        <p class="text-muted mb-0">Perbarui data publikasi yang akan ditampilkan di laman</p>
+        <h3 class="mb-1" style="color:#ffffff;">Ubah Data Publikasi</h3>
+        <p class="mb-0" style="color:#ffffff;">Perbarui data publikasi yang akan ditampilkan di laman</p>
     </div>
-    <img src="/img/logobbpr.png" class="img-fluid header-logo">
+    <img src="https://ppidbbpriau.kemendikdasmen.go.id/bbpr/img/logobbpr4.png" class="img-fluid header-logo">
 </div>
 
 {{-- ================= FORM ================= --}}
@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 
     <div class="position-relative d-inline-block mt-3">
         <img id="preview"
-            src="{{ $data->gambar ? asset($data->gambar) : asset('img/logobbpr.png') }}"
+            src="{{ $data->gambar ? asset($data->gambar) : asset('img/logobbpr4.png') }}"
             class="img-fluid rounded"
             style="max-height:220px">
         <button type="button"
@@ -144,7 +144,13 @@ document.addEventListener("DOMContentLoaded",()=>{
 {{-- ISI --}}
 <div class="mb-4">
     <label class="form-label fw-semibold">Isi Artikel</label>
-    <textarea class="form-control" name="isi" rows="12">{{ $data->isi }}</textarea>
+    <textarea
+    class="form-control"
+    name="isi"
+    id="editor"
+    rows="12"
+>{!! old('isi', $data->isi) !!}</textarea>
+
 </div>
 
 {{-- ACTION --}}
@@ -169,7 +175,7 @@ function previewImage(e){
 }
 function removeImage(){
     document.getElementById('gambarInput').value="";
-    document.getElementById('preview').src="{{ asset('img/logobbpr.png') }}";
+    document.getElementById('preview').src="{{ asset('img/logobbpr4.png') }}";
     document.getElementById('removeImageBtn').style.display='none';
 }
 
@@ -198,5 +204,65 @@ function removeFile(){
     document.getElementById('removeFileFlag').value="1";
 }
 </script>
+
+<!-- TinyMCE -->
+<script src="https://cdn.tiny.cloud/1/qvtaoqnvzwlss2vktrbblijv08xil8jzyeqaxhzikgn95i5r/tinymce/6/tinymce.min.js"
+        referrerpolicy="origin"></script>
+    
+<script>
+tinymce.init({
+    selector: '#editor',
+    height: 400,
+    menubar: false,
+    statusbar: false,
+
+    plugins: 'lists link paste code table',
+    toolbar: `
+        undo redo |
+        bold italic underline |
+        alignleft aligncenter alignright alignjustify |
+        bullist numlist |
+        link table |
+        removeformat code
+    `,
+
+    /* 🔐 BATASI HTML (Relaxed for Alignment) */
+    valid_elements: '*[*]',
+    extended_valid_elements: 'span[style],div[style],p[style]',
+    
+    forced_root_block: 'p',
+    entity_encoding: 'raw',
+
+    paste_as_text: false,
+    paste_remove_styles: true,
+    paste_remove_spans: true,
+
+    link_default_target: '_blank',
+
+    /* 🔥 FORMATS AGAR ALIGNMENT MENGGUNAKAN CLASS (Bukan Style) */
+    formats: {
+        alignleft: { selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes: 'text-start' },
+        aligncenter: { selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes: 'text-center' },
+        alignright: { selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes: 'text-end' },
+        alignjustify: { selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes: 'text-justify' }
+    },
+
+    content_style: `
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.7;
+            text-align: justify;
+        }
+        /* Style simulasi bootstrap di dalam editor */
+        .text-start { text-align: left; }
+        .text-center { text-align: center; }
+        .text-end { text-align: right; }
+        .text-justify { text-align: justify; }
+    `
+});
+</script>
+
+
 
 @endsection

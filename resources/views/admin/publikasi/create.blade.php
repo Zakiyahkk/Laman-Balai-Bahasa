@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
     </div>
 
     <div class="header-logo">
-        <img src="/img/logobbpr4.png" class="img-fluid header-logo">
+        <img src="https://ppidbbpriau.kemendikdasmen.go.id/bbpr/img/logobbpr4.png" class="img-fluid header-logo">
     </div>
 </div>
 
@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
                        accept="image/*" onchange="previewImage(event)">
 
                 <div class="position-relative d-inline-block mt-3">
-                    <img id="preview" src="{{ asset('img/logobbpr.png') }}"
+                    <img id="preview" src="{{ asset('img/logobbpr4.png') }}"
                          class="img-fluid rounded"
                          style="max-height:220px;">
 
@@ -142,7 +142,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 <label class="form-label fw-semibold">
                     Isi Artikel
                 </label>
-                <textarea class="form-control" name="isi" rows="12" placeholder="Isi artikel"></textarea>
+                <textarea
+                    class="form-control"
+                    name="isi"
+                    id="editor"
+                    rows="12"
+                    placeholder="Isi artikel">
+                </textarea>
             </div>
 
             <!-- ACTION -->
@@ -168,7 +174,7 @@ function previewImage(event) {
 
 function removeImage() {
     document.getElementById('gambarInput').value = "";
-    document.getElementById('preview').src = "{{ asset('img/logobbpr.png') }}";
+    document.getElementById('preview').src = "{{ asset('img/logobbpr4.png') }}";
     document.getElementById('removeImageBtn').style.display = 'none';
 }
 
@@ -211,5 +217,62 @@ function removeFile() {
 }
 
 </script>
+
+<!-- TinyMCE Editor -->
+<script src="https://cdn.tiny.cloud/1/qvtaoqnvzwlss2vktrbblijv08xil8jzyeqaxhzikgn95i5r/tinymce/6/tinymce.min.js"
+        referrerpolicy="origin"></script>
+
+<script>
+tinymce.init({
+    selector: '#editor',
+    height: 400,
+    menubar: false,
+    statusbar: false,
+
+    plugins: 'lists link table code',
+    toolbar: `
+        undo redo |
+        bold italic underline |
+        alignleft aligncenter alignright alignjustify |
+        bullist numlist |
+        link table |
+        removeformat code
+    `,
+
+    paste_as_text: false,
+
+    /* ✅ AMAN UNTUK CPANEL */
+    valid_elements:
+        'p,strong/b,em/i,u,' +
+        'ul,ol,li,' +
+        'a[href|target],' +
+        'table,thead,tbody,tr,td,th,' +
+        'br',
+
+    invalid_elements: 'script,iframe,form,input,button,style',
+
+    forced_root_block: 'p',
+    entity_encoding: 'raw',
+
+    link_default_target: '_blank',
+
+    content_style: `
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+    `,
+
+    setup: function(editor) {
+        editor.on('change', function() {
+            editor.save();
+        });
+    }
+});
+</script>
+
+
+
 
 @endsection

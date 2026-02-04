@@ -17,7 +17,7 @@
 
 
     <div class="header-logo">
-        <img src="/img/logobbpr4.png"
+        <img src="https://ppidbbpriau.kemendikdasmen.go.id/bbpr/img/logobbpr4.png"
              alt="Logo Balai Bahasa Provinsi Riau"
              class="img-fluid header-logo">
     </div>
@@ -105,7 +105,13 @@
             <span><i class="bi bi-eye me-1"></i> {{ $item->pembaca ?? 0 }} Pembaca</span>
         </div>
 
-        <p class="mb-0 text-muted">{{ \Illuminate\Support\Str::limit($item->isi, 150) }}</p>
+        <p class="mb-0 text-muted">
+    {!! \Illuminate\Support\Str::limit(
+        strip_tags(htmlspecialchars_decode($item->isi)),
+        150
+    ) !!}
+</p>
+
     </div>
 
     <div class="publication-action">
@@ -169,7 +175,7 @@
             <span><i class="bi bi-eye me-1"></i> {{ $item->pembaca ?? 0 }} Pembaca</span>
         </div>
 
-        <p class="mb-0 text-muted">{{ \Illuminate\Support\Str::limit($item->isi, 150) }}</p>
+        <p class="mb-0 text-muted">{{ \Illuminate\Support\Str::limit(strip_tags(html_entity_decode($item->isi)), 150) }}</p>
     </div>
 
     <div class="publication-action">

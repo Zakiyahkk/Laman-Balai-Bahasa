@@ -137,7 +137,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <!-- Jika tidak ada file & tidak ada gambar → gambar default -->
                 <div class="row mx-n4 mb-4">
                     <div class="col-12 px-20">
-                        <img src="{{ asset('img/logobbpr.png') }}" class="publication-image-wide">
+                        <img src="{{ asset('img/logobbpr4.png') }}" class="publication-image-wide">
                     </div>
                 </div>
             @endif
@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         <!-- ISI PUBLIKASI -->
         <div class="content-publication">
-            {!! nl2br(e($data->isi)) !!}
+            {!! htmlspecialchars_decode($data->isi) !!}
         </div>
 
         <!-- ACTION BUTTON -->
