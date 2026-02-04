@@ -236,17 +236,17 @@
 
                 {{-- KOLOM KANAN (25%): FOTO ILUSTRASI (VERTICAL STACK) --}}
                 <div class="sejarah-illustration">
-                    <div class="upload-box">
-                        <img src="{{ asset('img/fotobalai.png') }}" alt="Dokumentasi 1">
+                     <div class="upload-box">
+                        <img src="{{ asset('img/fasilitas/IMG_1489.PNG') }}" alt="Dokumentasi 1">
                     </div>
                     <div class="upload-box">
-                        <img src="{{ asset('img/fotobalai.png') }}" alt="Dokumentasi 2">
+                        <img src="{{ asset('img/fasilitas/IMG_1488.JPG') }}" alt="Dokumentasi 2">
                     </div>
                     <div class="upload-box">
-                        <img src="{{ asset('img/fotobalai.png') }}" alt="Dokumentasi 3">
+                        <img src="{{ asset('img/fasilitas/IMG_0779.jpg') }}" alt="Dokumentasi 3">
                     </div>
                     <div class="upload-box">
-                        <img src="{{ asset('img/fotobalai.png') }}" alt="Dokumentasi 4">
+                        <img src="{{ asset('img/fasilitas/IMG_0780.jpg') }}" alt="Dokumentasi 4">
                     </div>
                 </div>
 

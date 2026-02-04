@@ -27,7 +27,7 @@
             <div class="profil-card">
                 <h3>Tugas</h3>
                 <p>
-                    {{ $profil['tugas'] }}
+                    {{ $tugas }}
                 </p>
             </div>
 
@@ -35,10 +35,8 @@
             <div class="profil-card">
                 <h3>Fungsi</h3>
                 <ol>
-                    @foreach (preg_split('/\r\n|\r|\n/', $profil['fungsi']) as $fungsi)
-                        @if (trim($fungsi) !== '')
-                            <li>{{ $fungsi }}</li>
-                        @endif
+                    @foreach ($fungsi as $item)
+                        <li>{{ $item }}</li>
                     @endforeach
                 </ol>
             </div>

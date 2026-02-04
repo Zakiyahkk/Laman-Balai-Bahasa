@@ -21,17 +21,15 @@
             <div class="profil-card">
                 <h3>Visi</h3>
                 <p>
-                    {{ $profil['visi'] }}
+                    {{ $visi }}
                 </p>
             </div>
 
             <div class="profil-card">
                 <h3>Misi</h3>
                 <ol>
-                    @foreach (preg_split('/\r\n|\r|\n/', $profil['misi']) as $misi)
-                        @if (trim($misi) !== '')
-                            <li>{{ $misi }}</li>
-                        @endif
+                    @foreach ($misi as $item)
+                        <li>{{ $item }}</li>
                     @endforeach
                 </ol>
             </div>
