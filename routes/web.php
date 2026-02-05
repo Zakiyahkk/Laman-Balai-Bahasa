@@ -19,7 +19,7 @@ use App\Http\Controllers\Admin\AAkuntabilitasController;
 use App\Http\Controllers\Admin\ATokohController;
 use App\Http\Controllers\User\ArtikelController;
 use App\Http\Controllers\Admin\APengaturanController;
-use App\Http\Controllers\User\ASembariController;
+use App\Http\Controllers\User\SembariController;
 
 Route::get('/link-storage', function () {
     Artisan::call('storage:link');
@@ -83,7 +83,12 @@ Route::prefix('produk')->group(function () {
     Route::get('/terbitan-bbpr', [ProdukController::class, 'terbitanbbpr']);
     Route::get('/jurnal', [ProdukController::class, 'jurnal']);
     Route::get('/majalah', [ProdukController::class, 'majalah']);
-    Route::get('/sembari', [ProdukController::class, 'Sembari']);
+    
+    // ===== SEMBARI (SERIAL TERJEMAHAN) - USER ROUTES =====
+    Route::get('/sembari', [SembariController::class, 'index'])->name('user.sembari.index');
+    Route::get('/sembari/file/{id}', [SembariController::class, 'file'])->name('user.sembari.file');
+    Route::get('/sembari/download/{id}', [SembariController::class, 'download'])->name('user.sembari.download');
+    
     Route::get('/peta-pembinaan-bahasa', [ProdukController::class, 'petaPembinaanBahasa']);
     Route::get('/peta-pembinaan-sastra', [ProdukController::class, 'petaPembinaanSastra']);
     Route::get('/bipa', [ProdukController::class, 'bipa']);
