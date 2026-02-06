@@ -15,11 +15,21 @@ class AHasilsurveiController extends Controller
      * INDEX
      * ===============================
      */
-    public function index()
+    public function index(Request $request)
     {
-        $hasilsurvei = HasilSurvei::orderByDesc('id')->get();
+        $hasilsurvei = HasilSurvei::when($request->search, function ($query) use ($request) {
+            $query->where(function ($q) use ($request) {
+                $q->where('judul_survei', 'like', '%' . $request->search . '%')
+                  ->orWhere('tipe_file', 'like', '%' . $request->search . '%')
+                  ->orWhere('status', 'like', '%' . $request->search . '%');
+            });
+        })
+        ->orderByDesc('id')
+        ->get();
+    
         return view('admin.hasilsurvei.index', compact('hasilsurvei'));
     }
+
 
     /**
      * ===============================

@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\PublikasiController;
 use App\Http\Controllers\Admin\AProfilController;
 use App\Http\Controllers\Admin\AAkuntabilitasController;
 use App\Http\Controllers\Admin\ATokohController;
+use App\Http\Controllers\Admin\AHasilsurveiController;
 use App\Http\Controllers\User\ArtikelController;
 use App\Http\Controllers\Admin\APengaturanController;
 use App\Http\Controllers\User\SembariController;
@@ -101,6 +102,7 @@ Route::prefix('ppid')->group(function () {
 
 Route::prefix('survei')->group(function () {
     Route::get('/hasil', [SurveiController::class, 'survei']);
+    Route::get('/download/{id}', [SurveiController::class, 'download'])->name('survei.download');
 });
 
 Route::prefix('wbs')->group(function () {
@@ -262,6 +264,22 @@ Route::prefix('admin')
             Route::delete('/tokoh/{id}', [ATokohController::class, 'destroy'])
                 ->name('admin.tokoh.destroy');
                 
+            // ===== HASIL SURVEI =====
+            Route::get('/hasilsurvei', [AHasilsurveiController::class, 'index'])
+                ->name('admin.hasilsurvei.index');
+            Route::get('/hasilsurvei/create', [AHasilsurveiController::class, 'create'])
+                ->name('admin.hasilsurvei.create');
+            Route::post('/hasilsurvei/store', [AHasilsurveiController::class, 'store'])
+                ->name('admin.hasilsurvei.store');
+            Route::get('/hasilsurvei/{id}/edit', [AHasilsurveiController::class, 'edit'])
+                ->name('admin.hasilsurvei.edit');
+            Route::put('/hasilsurvei/{id}', [AHasilsurveiController::class, 'update'])
+                ->name('admin.hasilsurvei.update');
+            Route::delete('/hasilsurvei/{id}', [AHasilsurveiController::class, 'destroy'])
+                ->name('admin.hasilsurvei.destroy');
+            Route::get('/hasilsurvei/download/{id}', [AHasilsurveiController::class, 'download'])
+                ->name('admin.hasilsurvei.download');
+                
             // ===== SEMBARI (SERIAL TERJEMAHAN) =====
             Route::resource('sembari', \App\Http\Controllers\Admin\ASembariController::class)
                 ->names('admin.sembari');
@@ -290,6 +308,34 @@ Route::get('/clear', function() {
     Artisan::call('view:clear'); 
     Artisan::call('cache:clear'); 
     return 'Cache Tampilan sudah dibersihkan! Silakan refresh halaman utama.';
+});
+
+// ===== DIAGNOSTIC ROUTES =====
+Route::get('/test-db', function () {
+    try {
+        $publikasi = DB::table('publikasi')->count();
+        $tokoh = DB::table('tokoh')->count();
+        $visitor = DB::connection()->getDatabaseName();
+        
+        return "✅ Database Connection OK!<br><br>" .
+               "Database: $visitor<br>" .
+               "Total Publikasi: $publikasi<br>" .
+               "Total Tokoh: $tokoh";
+    } catch (\Exception $e) {
+        return "❌ Database ERROR:<br><br>" . $e->getMessage();
+    }
+});
+
+Route::get('/test-homepage', function () {
+    try {
+        $controller = new \App\Http\Controllers\User\BerandaController();
+        return $controller->dashboard();
+    } catch (\Exception $e) {
+        return "❌ HOMEPAGE ERROR:<br><br>" . 
+               "<strong>Message:</strong> " . $e->getMessage() . "<br><br>" .
+               "<strong>File:</strong> " . $e->getFile() . " (Line " . $e->getLine() . ")<br><br>" .
+               "<strong>Trace:</strong><br><pre>" . $e->getTraceAsString() . "</pre>";
+    }
 });
 
 

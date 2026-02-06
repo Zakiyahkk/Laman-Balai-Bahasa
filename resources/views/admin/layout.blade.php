@@ -187,11 +187,11 @@
              
              <!-- HASIL SURVEI -->
             <li class="nav-item">
-                <a class="nav-link {{ request()->routeIs('admin.tokoh*') ? 'active' : '' }}"
-                    href="{{ route('admin.tokoh') }}">
+                <a class="nav-link {{ request()->routeIs('admin.hasilsurvei.*') ? 'active' : '' }}"
+                   href="{{ route('admin.hasilsurvei.index') }}">
                     <i class="bi bi-bar-chart me-2"></i>Hasil Survei
                 </a>
-             </li>
+            </li>
              
              <!-- ZI - WBK -->
                 <li class="nav-item">

@@ -114,7 +114,7 @@
 
     </div>
 
-    <div class="publication-action">
+    <div class="publication-action d-flex gap-2">
         <a href="{{ route('admin.publikasi.edit', $item->publikasi_id) }}"
            class="btn btn-outline-secondary btn-sm"
            onclick="event.stopPropagation()">
@@ -123,9 +123,10 @@
         <form action="{{ route('admin.publikasi.delete', $item->publikasi_id) }}"
             method="POST"
             class="d-inline"
-            onsubmit="return confirmDelete('{{ $item->judul }}', this)">
+            onsubmit="return confirmDelete('{{ $item->judul }}', this)"
+            onclick="event.stopPropagation()">
             @csrf @method('DELETE')
-            <button class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></button>
+            <button type="submit" class="btn btn-outline-danger btn-sm"><i class="bi bi-trash"></i></button>
         </form>
     </div>
 </div>
@@ -178,7 +179,7 @@
         <p class="mb-0 text-muted">{{ \Illuminate\Support\Str::limit(strip_tags(html_entity_decode($item->isi)), 150) }}</p>
     </div>
 
-    <div class="publication-action">
+    <div class="publication-action d-flex gap-2">
         <a href="{{ route('admin.publikasi.edit', $item->publikasi_id) }}"
            class="btn btn-outline-secondary btn-sm"
            onclick="event.stopPropagation()">
@@ -188,9 +189,10 @@
         <form action="{{ route('admin.publikasi.delete', $item->publikasi_id) }}"
             method="POST"
             class="d-inline"
-            onsubmit="return confirmDelete('{{ $item->judul }}', this)">
+            onsubmit="return confirmDelete('{{ $item->judul }}', this)"
+            onclick="event.stopPropagation()">
             @csrf @method('DELETE')
-            <button class="btn btn-outline-danger btn-sm">
+            <button type="submit" class="btn btn-outline-danger btn-sm">
                 <i class="bi bi-trash"></i>
             </button>
         </form>
