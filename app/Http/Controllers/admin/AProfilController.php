@@ -171,7 +171,7 @@ public function updatePegawai(Request $request, $id)
 
         // HAPUS FOTO LAMA
         if (!empty($pegawai->foto)) {
-            $oldFile = base_path('../public_html/bbpr/' . $pegawai->foto);
+            $oldFile = base_path('../public_html/' . $pegawai->foto);
             if (file_exists($oldFile)) {
                 unlink($oldFile);
             }
@@ -358,7 +358,7 @@ private function uploadFotoPegawai($file)
     $file->move($laravelPath, $name);
 
     // Path public_html (PASTIKAN USERNAME BENAR)
-    $targetPath = '/home/aajxwzdj/public_html/bbpr/img/pegawai';
+    $targetPath = '/home/balaibahasariau/public_html/img/pegawai';
 
     if (!is_dir($targetPath) || !is_writable($targetPath)) {
         abort(500, 'Folder public_html img/pegawai tidak bisa ditulis');

@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Log;
 
 class AHasilsurveiController extends Controller
 {
+    // lokasi public_html
+    private $publicHtml = '/home/balaibahasariau/public_html/';
+
     /**
      * ===============================
      * INDEX
@@ -29,7 +32,6 @@ class AHasilsurveiController extends Controller
     
         return view('admin.hasilsurvei.index', compact('hasilsurvei'));
     }
-
 
     /**
      * ===============================
@@ -52,7 +54,7 @@ class AHasilsurveiController extends Controller
             'judul_survei' => 'required|string|max:255',
             'tanggal'      => 'required|date',
             'status'       => 'required|in:terbit,draf',
-            'file'         => 'required|file|mimes:png,jpg,jpeg,pdf|max:51200', // 50MB
+            'file'         => 'required|file|mimes:png,jpg,jpeg,pdf|max:51200',
         ]);
 
         $filePath = null;
@@ -67,60 +69,42 @@ class AHasilsurveiController extends Controller
                     . '.' . $ext;
 
             // ===============================
-            // 1️⃣ SIMPAN KE PUBLIC LARAVEL
+            // SIMPAN KE PUBLIC LARAVEL
             // ===============================
-            $laravelPath = public_path('img/survei');
-            if (!is_dir($laravelPath)) {
-                mkdir($laravelPath, 0755, true);
+            $laravelFolder = public_path('img/survei');
+            if (!is_dir($laravelFolder)) {
+                mkdir($laravelFolder, 0755, true);
             }
 
-            if (!is_writable($laravelPath)) {
-                abort(500, 'Folder img/survei tidak bisa ditulis');
-            }
-
-            $file->move($laravelPath, $name);
+            $file->move($laravelFolder, $name);
 
             // ===============================
-            // 2️⃣ COPY KE PUBLIC_HTML
+            // COPY KE PUBLIC_HTML
             // ===============================
-            $targetPath = '/home/aajxwzdj/public_html/bbpr/img/survei';
-            if (!is_dir($targetPath)) {
-                mkdir($targetPath, 0755, true);
-            }
-
-            if (!is_writable($targetPath)) {
-                abort(500, 'Folder public_html/img/survei tidak bisa ditulis');
+            $targetFolder = $this->publicHtml . 'img/survei';
+            if (!is_dir($targetFolder)) {
+                mkdir($targetFolder, 0755, true);
             }
 
             copy(
-                $laravelPath . '/' . $name,
-                $targetPath . '/' . $name
+                $laravelFolder . '/' . $name,
+                $targetFolder . '/' . $name
             );
 
-            // ===============================
-            // 3️⃣ SIMPAN PATH RELATIF
-            // ===============================
             $filePath = 'img/survei/' . $name;
             $tipeFile = $ext;
         }
 
-        try {
-            HasilSurvei::create([
-                'judul_survei' => $request->judul_survei,
-                'tanggal'      => $request->tanggal,
-                'status'       => $request->status,
-                'file_path'    => $filePath,
-                'tipe_file'    => $tipeFile,
-            ]);
+        HasilSurvei::create([
+            'judul_survei' => $request->judul_survei,
+            'tanggal'      => $request->tanggal,
+            'status'       => $request->status,
+            'file_path'    => $filePath,
+            'tipe_file'    => $tipeFile,
+        ]);
 
-            return redirect()->route('admin.hasilsurvei.index')
-                ->with('success', 'Hasil survei berhasil disimpan');
-
-        } catch (\Exception $e) {
-            Log::error('Gagal simpan hasil survei: ' . $e->getMessage());
-            return back()->withInput()
-                ->with('error', 'Gagal menyimpan data');
-        }
+        return redirect()->route('admin.hasilsurvei.index')
+            ->with('success', 'Hasil survei berhasil disimpan');
     }
 
     /**
@@ -142,28 +126,35 @@ class AHasilsurveiController extends Controller
     public function update(Request $request, $id)
     {
         $data = HasilSurvei::findOrFail($id);
-
+    
         $request->validate([
             'judul_survei' => 'required|string|max:255',
             'tanggal'      => 'required|date',
             'status'       => 'required|in:terbit,draf',
             'file'         => 'nullable|file|mimes:png,jpg,jpeg,pdf|max:51200',
         ]);
-
+    
         $data->judul_survei = $request->judul_survei;
         $data->tanggal      = $request->tanggal;
         $data->status       = $request->status;
-
-        // ===============================
-        // GANTI FILE JIKA ADA
-        // ===============================
+    
         if ($request->hasFile('file')) {
 
-            // hapus file lama
+            // ===============================
+            // HAPUS FILE LAMA DI DUA LOKASI
+            // ===============================
             if ($data->file_path) {
-                $old = '/home/aajxwzdj/public_html/bbpr/' . $data->file_path;
-                if (file_exists($old)) {
-                    unlink($old);
+
+                // public_html
+                $oldPublicHtml = $this->publicHtml . $data->file_path;
+                if (file_exists($oldPublicHtml)) {
+                    unlink($oldPublicHtml);
+                }
+
+                // public laravel
+                $oldLaravel = public_path($data->file_path);
+                if (file_exists($oldLaravel)) {
+                    unlink($oldLaravel);
                 }
             }
 
@@ -173,24 +164,31 @@ class AHasilsurveiController extends Controller
                     Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME))
                     . '.' . $ext;
 
-            $laravelPath = public_path('img/survei');
-            if (!is_dir($laravelPath)) {
-                mkdir($laravelPath, 0755, true);
+            // simpan ke public laravel
+            $laravelFolder = public_path('img/survei');
+            if (!is_dir($laravelFolder)) {
+                mkdir($laravelFolder, 0755, true);
             }
 
-            $file->move($laravelPath, $name);
+            $file->move($laravelFolder, $name);
+
+            // copy ke public_html
+            $targetFolder = $this->publicHtml . 'img/survei';
+            if (!is_dir($targetFolder)) {
+                mkdir($targetFolder, 0755, true);
+            }
 
             copy(
-                $laravelPath . '/' . $name,
-                '/home/aajxwzdj/public_html/bbpr/img/survei/' . $name
+                $laravelFolder . '/' . $name,
+                $targetFolder . '/' . $name
             );
 
             $data->file_path = 'img/survei/' . $name;
             $data->tipe_file = $ext;
         }
-
+    
         $data->save();
-
+    
         return redirect()->route('admin.hasilsurvei.index')
             ->with('success', 'Hasil survei berhasil diperbarui');
     }
@@ -204,11 +202,18 @@ class AHasilsurveiController extends Controller
     {
         $data = HasilSurvei::findOrFail($id);
     
-        // hapus file fisik
         if ($data->file_path) {
-            $file = '/home/aajxwzdj/public_html/bbpr/' . $data->file_path;
-            if (file_exists($file)) {
-                unlink($file);
+
+            // hapus di public_html
+            $filePublicHtml = $this->publicHtml . $data->file_path;
+            if (file_exists($filePublicHtml)) {
+                unlink($filePublicHtml);
+            }
+
+            // hapus di public laravel
+            $fileLaravel = public_path($data->file_path);
+            if (file_exists($fileLaravel)) {
+                unlink($fileLaravel);
             }
         }
     
@@ -232,7 +237,7 @@ class AHasilsurveiController extends Controller
             abort(404);
         }
 
-        $file = '/home/aajxwzdj/public_html/bbpr/' . $data->file_path;
+        $file = $this->publicHtml . $data->file_path;
 
         if (!file_exists($file)) {
             abort(404);
