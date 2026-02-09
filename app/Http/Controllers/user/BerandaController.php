@@ -41,7 +41,7 @@ class BerandaController extends Controller
             return $value;
         }
 
-        // ðŸ”¥ BUANG SEMUA PREFIX PATH
+        // 🔥 BUANG SEMUA PREFIX PATH
         $value = preg_replace(
             '#^(public/|/public/|img/publikasi/|/img/publikasi/|publikasi/|/publikasi/)#',
             '',
@@ -65,7 +65,7 @@ class BerandaController extends Controller
     }
 
     /**
-     * ðŸ”¥ KHUSUS BERITA
+     * 🔥 KHUSUS BERITA
      * Ambil gambar dari public Laravel (public/img/...)
      */
     private function beritaImageUrl(?string $gambar): string

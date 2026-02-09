@@ -62,7 +62,7 @@ class ArtikelController extends Controller
 {
     $sessionKey = 'artikel_read_' . $slug;
 
-    // ðŸ”¥ tambah pembaca (1x per session)
+    // 🔥 tambah pembaca (1x per session)
     if (!session()->has($sessionKey)) {
         DB::table('publikasi')
             ->where('slug', $slug)

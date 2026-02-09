@@ -39,7 +39,7 @@ private function publikasiUrl(?string $value): ?string
         return $value;
     }
 
-    // ðŸ”¥ BUANG SEMUA PREFIX PATH
+    // 🔥 BUANG SEMUA PREFIX PATH
     $value = preg_replace(
         '#^(public/|/public/|img/publikasi/|/img/publikasi/|publikasi/|/publikasi/)#',
         '',
