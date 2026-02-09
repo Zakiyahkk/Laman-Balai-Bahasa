@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 
 class AProfilController extends Controller
@@ -126,84 +127,83 @@ class AProfilController extends Controller
     }
 
     public function storePegawai(Request $request)
-{
-    $request->validate([
-        'nama'    => 'required|string',
-        'jabatan' => 'required|string',
-        'foto'    => 'required|image|max:2048',
-    ]);
+    {
+        $request->validate([
+            'nama'    => 'required|string',
+            'jabatan' => 'required|string',
+            'foto'    => 'required|image|max:2048',
+        ]);
 
-    $fotoPath = $this->uploadFotoPegawai($request->file('foto'));
+        $fotoPath = $request->file('foto')->store('pegawai', 'public');
 
-    DB::table('pegawai')->insert([
-        'nama'       => $request->nama,
-        'jabatan'    => $request->jabatan,
-        'foto'       => $fotoPath,
-        'created_at' => now(),
-        'updated_at' => now(),
-    ]);
+        DB::table('pegawai')->insert([
+            'nama'       => $request->nama,
+            'jabatan'    => $request->jabatan,
+            'foto'       => $fotoPath,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
 
-    return redirect()
-        ->route('admin.profil.pegawai')
-        ->with('success', 'Pegawai berhasil ditambahkan');
-}
-
-public function updatePegawai(Request $request, $id)
-{
-    $request->validate([
-        'nama'    => 'required|string',
-        'jabatan' => 'required|string',
-        'foto'    => 'nullable|image|max:2048',
-    ]);
-
-    $pegawai = DB::table('pegawai')->where('pegawai_id', $id)->first();
-    if (!$pegawai) {
-        return back()->with('error', 'Data pegawai tidak ditemukan');
+        return redirect()
+            ->route('admin.profil.pegawai')
+            ->with('success', 'Pegawai berhasil ditambahkan');
     }
 
-    $data = [
-        'nama'       => $request->nama,
-        'jabatan'    => $request->jabatan,
-        'updated_at' => now(),
-    ];
+    public function updatePegawai(Request $request, $id)
+    {
+        $request->validate([
+            'nama'    => 'required|string',
+            'jabatan' => 'required|string',
+            'foto'    => 'nullable|image|max:2048',
+        ]);
 
-    if ($request->hasFile('foto')) {
-
-        // HAPUS FOTO LAMA
-        if (!empty($pegawai->foto)) {
-            $oldFile = base_path('../public_html/' . $pegawai->foto);
-            if (file_exists($oldFile)) {
-                unlink($oldFile);
-            }
+        $pegawai = DB::table('pegawai')->where('pegawai_id', $id)->first();
+        if (!$pegawai) {
+            return back()->with('error', 'Data pegawai tidak ditemukan');
         }
 
-        // SIMPAN FOTO BARU
-        $data['foto'] = $this->uploadFotoPegawai($request->file('foto'));
+        $data = [
+            'nama'       => $request->nama,
+            'jabatan'    => $request->jabatan,
+            'updated_at' => now(),
+        ];
+
+        if ($request->hasFile('foto')) {
+            // Hapus foto lama jika ada
+            if (!empty($pegawai->foto)) {
+                Storage::disk('public')->delete($pegawai->foto);
+            }
+
+            // Simpan foto baru
+            $data['foto'] = $request->file('foto')->store('pegawai', 'public');
+        }
+
+        DB::table('pegawai')->where('pegawai_id', $id)->update($data);
+
+        return redirect()
+            ->route('admin.profil.pegawai')
+            ->with('success', 'Data pegawai berhasil diperbarui');
     }
 
-    DB::table('pegawai')->where('pegawai_id', $id)->update($data);
+    public function destroyPegawai($id)
+    {
+        $pegawai = DB::table('pegawai')->where('pegawai_id', $id)->first();
+        if (!$pegawai) {
+            return back()->with('error', 'Data pegawai tidak ditemukan');
+        }
 
-    return redirect()
-        ->route('admin.profil.pegawai')
-        ->with('success', 'Data pegawai berhasil diperbarui');
-}
+        // ❗ CATATAN: Foto TIDAK dihapus karena mungkin dipakai oleh riwayat struktur organisasi
+        // Jika ingin menghapus foto juga, uncomment code berikut:
+        // if (!empty($pegawai->foto)) {
+        //     Storage::disk('public')->delete($pegawai->foto);
+        // }
 
-public function destroyPegawai($id)
-{
-    $pegawai = DB::table('pegawai')->where('pegawai_id', $id)->first();
-    if (!$pegawai) {
-        return back()->with('error', 'Data pegawai tidak ditemukan');
+        DB::table('pegawai')->where('pegawai_id', $id)->delete();
+
+        return redirect()
+            ->route('admin.profil.pegawai')
+            ->with('success', 'Pegawai berhasil dihapus (foto disimpan untuk arsip)');
     }
-
-    // ❗ JANGAN HAPUS FILE FOTO
-    // Foto dipakai oleh riwayat struktur organisasi
-
-    DB::table('pegawai')->where('pegawai_id', $id)->delete();
-
-    return redirect()
-        ->route('admin.profil.pegawai')
-        ->with('success', 'Pegawai berhasil dihapus (foto disimpan untuk arsip)');
-}
 
 
     public function strukturorganisasi(Request $request)
@@ -304,7 +304,7 @@ public function destroyPegawai($id)
         ];
 
         if ($request->hasFile('kepala_foto')) {
-            $data['foto'] = $this->uploadFotoPegawai($request->file('kepala_foto'));
+            $data['foto'] = $request->file('kepala_foto')->store('pegawai', 'public');
         }
 
         DB::table('pegawai')
@@ -323,7 +323,7 @@ public function destroyPegawai($id)
         ];
 
         if ($request->hasFile('kasubbag_foto')) {
-            $data['foto'] = $this->uploadFotoPegawai($request->file('kasubbag_foto'));
+            $data['foto'] = $request->file('kasubbag_foto')->store('pegawai', 'public');
         }
 
         DB::table('pegawai')
@@ -341,35 +341,6 @@ public function destroyPegawai($id)
     return redirect()
         ->route('admin.profil.pegawai')
         ->with('success', 'Jabatan strategis berhasil diperbarui');
-}
-
-
-        
-private function uploadFotoPegawai($file)
-{
-    // Path Laravel
-    $laravelPath = public_path('img/pegawai');
-
-    if (!is_dir($laravelPath) || !is_writable($laravelPath)) {
-        abort(500, 'Folder Laravel img/pegawai tidak bisa ditulis');
-    }
-
-    $name = Str::uuid() . '.' . $file->getClientOriginalExtension();
-    $file->move($laravelPath, $name);
-
-    // Path public_html (PASTIKAN USERNAME BENAR)
-    $targetPath = '/home/balaibahasariau/public_html/img/pegawai';
-
-    if (!is_dir($targetPath) || !is_writable($targetPath)) {
-        abort(500, 'Folder public_html img/pegawai tidak bisa ditulis');
-    }
-
-    copy(
-        $laravelPath . '/' . $name,
-        $targetPath . '/' . $name
-    );
-
-    return 'img/pegawai/' . $name;
 }
 
 

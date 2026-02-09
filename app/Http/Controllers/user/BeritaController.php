@@ -17,7 +17,9 @@ class BeritaController extends Controller
             return $gambar;
         }
 
-        return asset(ltrim($gambar, '/'));
+        // Strip prefix dan gunakan storage/publikasi/
+        $gambar = preg_replace('#^(storage/|/storage/|img/publikasi/|/img/publikasi/|publikasi/|/publikasi/)#', '', $gambar);
+        return asset('storage/publikasi/' . ltrim($gambar, '/'));
     }
 
     public function index()

@@ -5,11 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ATokohController extends Controller
 {
-    private $publicHtml = '/home/balaibahasariau/public_html/';
 
     public function index(Request $request)
     {
@@ -52,7 +52,7 @@ class ATokohController extends Controller
         $path = null;
 
         if ($request->hasFile('foto_tokoh')) {
-            $path = $this->uploadFotoTokoh($request->file('foto_tokoh'));
+            $path = $request->file('foto_tokoh')->store('tokoh', 'public');
         }
 
         DB::table('tokoh')->insert([
@@ -82,26 +82,12 @@ class ATokohController extends Controller
         ];
 
         if ($request->hasFile('foto_tokoh')) {
-
-            // ===============================
-            // HAPUS FOTO LAMA DI DUA LOKASI
-            // ===============================
+            // Hapus foto lama jika ada
             if ($tokoh->foto_tokoh) {
-
-                // public_html
-                $oldPublicHtml = $this->publicHtml . $tokoh->foto_tokoh;
-                if (file_exists($oldPublicHtml)) {
-                    unlink($oldPublicHtml);
-                }
-
-                // public laravel
-                $oldLaravel = public_path($tokoh->foto_tokoh);
-                if (file_exists($oldLaravel)) {
-                    unlink($oldLaravel);
-                }
+                Storage::disk('public')->delete($tokoh->foto_tokoh);
             }
 
-            $data['foto_tokoh'] = $this->uploadFotoTokoh($request->file('foto_tokoh'));
+            $data['foto_tokoh'] = $request->file('foto_tokoh')->store('tokoh', 'public');
         }
 
         DB::table('tokoh')
@@ -116,49 +102,11 @@ class ATokohController extends Controller
         $tokoh = DB::table('tokoh')->where('tokoh_id', $id)->first();
 
         if ($tokoh && $tokoh->foto_tokoh) {
-
-            // hapus di public_html
-            $filePublicHtml = $this->publicHtml . $tokoh->foto_tokoh;
-            if (file_exists($filePublicHtml)) {
-                unlink($filePublicHtml);
-            }
-
-            // hapus di public laravel
-            $fileLaravel = public_path($tokoh->foto_tokoh);
-            if (file_exists($fileLaravel)) {
-                unlink($fileLaravel);
-            }
+            Storage::disk('public')->delete($tokoh->foto_tokoh);
         }
 
         DB::table('tokoh')->where('tokoh_id', $id)->delete();
 
         return back()->with('success', 'Tokoh berhasil dihapus');
-    }
-
-    private function uploadFotoTokoh($file)
-    {
-        // simpan ke public Laravel
-        $laravelPath = public_path('img/tokoh');
-
-        if (!is_dir($laravelPath)) {
-            mkdir($laravelPath, 0755, true);
-        }
-
-        $name = Str::uuid() . '.' . $file->getClientOriginalExtension();
-        $file->move($laravelPath, $name);
-
-        // copy ke public_html
-        $targetPath = $this->publicHtml . 'img/tokoh';
-
-        if (!is_dir($targetPath)) {
-            mkdir($targetPath, 0755, true);
-        }
-
-        copy(
-            $laravelPath . '/' . $name,
-            $targetPath . '/' . $name
-        );
-
-        return 'img/tokoh/' . $name;
     }
 }

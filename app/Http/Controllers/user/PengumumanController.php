@@ -26,7 +26,7 @@ class PengumumanController extends Controller
     }
 
 /**
- * Normalisasi file publikasi (AMAN TANPA UBAH DB)
+ * Normalisasi file publikasi (LARAVEL STORAGE)
  */
 private function publikasiUrl(?string $value): ?string
 {
@@ -41,12 +41,12 @@ private function publikasiUrl(?string $value): ?string
 
     // 🔥 BUANG SEMUA PREFIX PATH
     $value = preg_replace(
-        '#^(public/|/public/|img/publikasi/|/img/publikasi/|publikasi/|/publikasi/)#',
+        '#^(storage/|/storage/|public/|/public/|img/publikasi/|/img/publikasi/|publikasi/|/publikasi/)#',
         '',
         $value
     );
 
-    return asset('img/publikasi/' . $value);
+    return asset('storage/publikasi/' . $value);
 }
     /**
      * HALAMAN DAFTAR PENGUMUMAN

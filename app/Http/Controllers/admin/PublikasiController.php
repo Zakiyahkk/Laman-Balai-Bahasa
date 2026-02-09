@@ -7,11 +7,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class PublikasiController extends Controller
 {
-    private $publicHtml = '/home/balaibahasariau/public_html/';
 
     public function index(Request $request)
     {
@@ -61,35 +61,13 @@ class PublikasiController extends Controller
 
         // ===== UPLOAD GAMBAR =====
         if ($request->hasFile('gambar')) {
-            $gambarPath = $this->uploadGambarPublikasi(
-                $request->file('gambar')
-            );
+            $gambarPath = $request->file('gambar')->store('publikasi', 'public');
         }
 
         // ===== UPLOAD FILE =====
         if ($request->hasFile('file')) {
             $file = $request->file('file');
-            $namaFile = time().'_'.uniqid().'.'.$file->getClientOriginalExtension();
-
-            $laravelFolder = public_path('img/publikasi');
-            if (!is_dir($laravelFolder)) {
-                mkdir($laravelFolder, 0755, true);
-            }
-
-            $file->move($laravelFolder, $namaFile);
-
-            // copy ke public_html
-            $targetFolder = $this->publicHtml . 'img/publikasi';
-            if (!is_dir($targetFolder)) {
-                mkdir($targetFolder, 0755, true);
-            }
-
-            copy(
-                $laravelFolder . '/' . $namaFile,
-                $targetFolder . '/' . $namaFile
-            );
-
-            $filePath = 'img/publikasi/' . $namaFile;
+            $filePath = $file->store('publikasi', 'public');
             $fileType = $file->getClientOriginalExtension();
         }
 
@@ -153,93 +131,36 @@ class PublikasiController extends Controller
 
         // ===== HAPUS GAMBAR =====
         if ($request->remove_image == 1 && $data->gambar) {
-
-            $oldPublicHtml = $this->publicHtml . $data->gambar;
-            if (file_exists($oldPublicHtml)) {
-                unlink($oldPublicHtml);
-            }
-
-            $oldLaravel = public_path($data->gambar);
-            if (file_exists($oldLaravel)) {
-                unlink($oldLaravel);
-            }
-
+            Storage::disk('public')->delete($data->gambar);
             $gambarPath = null;
         }
 
         // ===== GANTI GAMBAR =====
         if ($request->hasFile('gambar')) {
-
+            // Hapus gambar lama jika ada
             if ($data->gambar) {
-                $oldPublicHtml = $this->publicHtml . $data->gambar;
-                if (file_exists($oldPublicHtml)) {
-                    unlink($oldPublicHtml);
-                }
-
-                $oldLaravel = public_path($data->gambar);
-                if (file_exists($oldLaravel)) {
-                    unlink($oldLaravel);
-                }
+                Storage::disk('public')->delete($data->gambar);
             }
-
-            $gambarPath = $this->uploadGambarPublikasi(
-                $request->file('gambar')
-            );
+            
+            $gambarPath = $request->file('gambar')->store('publikasi', 'public');
         }
 
         // ===== HAPUS FILE =====
         if ($request->remove_file == 1 && $data->file) {
-
-            $oldPublicHtml = $this->publicHtml . $data->file;
-            if (file_exists($oldPublicHtml)) {
-                unlink($oldPublicHtml);
-            }
-
-            $oldLaravel = public_path($data->file);
-            if (file_exists($oldLaravel)) {
-                unlink($oldLaravel);
-            }
-
+            Storage::disk('public')->delete($data->file);
             $filePath = null;
             $fileType = null;
         }
 
         // ===== GANTI FILE =====
         if ($request->hasFile('file')) {
-
+            // Hapus file lama jika ada
             if ($data->file) {
-                $oldPublicHtml = $this->publicHtml . $data->file;
-                if (file_exists($oldPublicHtml)) {
-                    unlink($oldPublicHtml);
-                }
-
-                $oldLaravel = public_path($data->file);
-                if (file_exists($oldLaravel)) {
-                    unlink($oldLaravel);
-                }
+                Storage::disk('public')->delete($data->file);
             }
-
+            
             $file = $request->file('file');
-            $namaFile = time().'_'.uniqid().'.'.$file->getClientOriginalExtension();
-
-            $laravelFolder = public_path('img/publikasi');
-            if (!is_dir($laravelFolder)) {
-                mkdir($laravelFolder, 0755, true);
-            }
-
-            $file->move($laravelFolder, $namaFile);
-
-            $targetFolder = $this->publicHtml . 'img/publikasi';
-            if (!is_dir($targetFolder)) {
-                mkdir($targetFolder, 0755, true);
-            }
-
-            copy(
-                $laravelFolder . '/' . $namaFile,
-                $targetFolder . '/' . $namaFile
-            );
-
-            $filePath = 'img/publikasi/' . $namaFile;
+            $filePath = $file->store('publikasi', 'public');
             $fileType = $file->getClientOriginalExtension();
         }
 
@@ -265,28 +186,14 @@ class PublikasiController extends Controller
         $data = DB::table('publikasi')->where('publikasi_id', $id)->first();
         if (!$data) abort(404);
 
+        // Hapus file gambar jika ada
         if ($data->gambar) {
-            $filePublicHtml = $this->publicHtml . $data->gambar;
-            if (file_exists($filePublicHtml)) {
-                unlink($filePublicHtml);
-            }
-
-            $fileLaravel = public_path($data->gambar);
-            if (file_exists($fileLaravel)) {
-                unlink($fileLaravel);
-            }
+            Storage::disk('public')->delete($data->gambar);
         }
 
+        // Hapus file dokumen jika ada
         if ($data->file) {
-            $filePublicHtml = $this->publicHtml . $data->file;
-            if (file_exists($filePublicHtml)) {
-                unlink($filePublicHtml);
-            }
-
-            $fileLaravel = public_path($data->file);
-            if (file_exists($fileLaravel)) {
-                unlink($fileLaravel);
-            }
+            Storage::disk('public')->delete($data->file);
         }
 
         DB::table('publikasi')->where('publikasi_id', $id)->delete();
@@ -299,11 +206,11 @@ class PublikasiController extends Controller
         $data = DB::table('publikasi')->where('publikasi_id', $id)->first();
         if (!$data || !$data->file) abort(404);
 
-        $file = $this->publicHtml . $data->file;
+        $filePath = storage_path('app/public/' . $data->file);
 
-        if (!file_exists($file)) abort(404);
+        if (!file_exists($filePath)) abort(404);
 
-        return response()->download($file);
+        return response()->download($filePath);
     }
 
     public function updateStatus(Request $request, $id)
@@ -319,27 +226,5 @@ class PublikasiController extends Controller
         return back()->with('success', 'Status publikasi berhasil diperbarui');
     }
 
-    private function uploadGambarPublikasi($file)
-    {
-        $laravelPath = public_path('img/publikasi');
 
-        if (!is_dir($laravelPath)) {
-            mkdir($laravelPath, 0755, true);
-        }
-
-        $name = Str::uuid() . '.' . $file->getClientOriginalExtension();
-        $file->move($laravelPath, $name);
-
-        $targetPath = $this->publicHtml . 'img/publikasi';
-        if (!is_dir($targetPath)) {
-            mkdir($targetPath, 0755, true);
-        }
-
-        copy(
-            $laravelPath . '/' . $name,
-            $targetPath . '/' . $name
-        );
-
-        return 'img/publikasi/' . $name;
-    }
 }

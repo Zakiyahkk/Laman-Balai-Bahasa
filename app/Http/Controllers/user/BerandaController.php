@@ -28,7 +28,7 @@ class BerandaController extends Controller
     }
 
     /**
-     * Normalisasi file publikasi (AMAN TANPA UBAH DB)
+     * Normalisasi file publikasi (LARAVEL STORAGE)
      */
     private function publikasiUrl(?string $value): ?string
     {
@@ -43,12 +43,12 @@ class BerandaController extends Controller
 
         // 🔥 BUANG SEMUA PREFIX PATH
         $value = preg_replace(
-            '#^(public/|/public/|img/publikasi/|/img/publikasi/|publikasi/|/publikasi/)#',
+            '#^(storage/|/storage/|public/|/public/|img/publikasi/|/img/publikasi/|publikasi/|/publikasi/)#',
             '',
             $value
         );
 
-        return asset('img/publikasi/' . $value);
+        return asset('storage/publikasi/' . $value);
     }
 
     private function publicLocalImage(?string $gambar): string
@@ -61,12 +61,14 @@ class BerandaController extends Controller
             return $gambar;
         }
     
-        return asset(ltrim($gambar, '/'));
+        // Strip prefix dan tambahkan storage/
+        $gambar = preg_replace('#^(storage/|/storage/|img/publikasi/|/img/publikasi/|publikasi/|/publikasi/)#', '', $gambar);
+        return asset('storage/publikasi/' . ltrim($gambar, '/'));
     }
 
     /**
-     * 🔥 KHUSUS BERITA
-     * Ambil gambar dari public Laravel (public/img/...)
+     * 🔥 KHUSUS BERITA (LARAVEL STORAGE)
+     * Ambil gambar dari storage/publikasi/
      */
     private function beritaImageUrl(?string $gambar): string
     {
@@ -79,8 +81,9 @@ class BerandaController extends Controller
             return $gambar;
         }
 
-        // path relatif ke folder public
-        return asset(ltrim($gambar, '/'));
+        // Strip prefix dan gunakan storage/publikasi/
+        $gambar = preg_replace('#^(storage/|/storage/|img/publikasi/|/img/publikasi/|publikasi/|/publikasi/)#', '', $gambar);
+        return asset('storage/publikasi/' . ltrim($gambar, '/'));
     }
 
     /**
@@ -252,7 +255,7 @@ class BerandaController extends Controller
                     'deskripsi' => $row->deskripsi,
                     'kategori'  => $row->kategori,
                     'foto_url'  => $row->foto_tokoh
-                        ? asset(ltrim($row->foto_tokoh, '/'))
+                        ? asset('storage/' . preg_replace('#^(storage/|/storage/|img/tokoh/|/img/tokoh/|tokoh/|/tokoh/)#', 'tokoh/', ltrim($row->foto_tokoh, '/')))
                         : asset('img/default-user.png'),
                 ];
             });
@@ -279,7 +282,7 @@ class BerandaController extends Controller
                     'deskripsi' => $row->deskripsi,
                     'kategori'  => $row->kategori,
                     'foto_url'  => $row->foto_tokoh
-                        ? asset(ltrim($row->foto_tokoh, '/'))
+                        ? asset('storage/' . preg_replace('#^(storage/|/storage/|img/tokoh/|/img/tokoh/|tokoh/|/tokoh/)#', 'tokoh/', ltrim($row->foto_tokoh, '/')))
                         : asset('img/default-user.png'),
                 ];
             });
@@ -306,7 +309,7 @@ class BerandaController extends Controller
                     'deskripsi' => $row->deskripsi,
                     'kategori'  => $row->kategori,
                     'foto_url'  => $row->foto_tokoh
-                        ? asset(ltrim($row->foto_tokoh, '/'))
+                        ? asset('storage/' . preg_replace('#^(storage/|/storage/|img/tokoh/|/img/tokoh/|tokoh/|/tokoh/)#', 'tokoh/', ltrim($row->foto_tokoh, '/')))
                         : asset('img/default-user.png'),
                 ];
             });
@@ -333,7 +336,7 @@ class BerandaController extends Controller
                     'deskripsi' => $row->deskripsi,
                     'kategori'  => $row->kategori,
                     'foto_url'  => $row->foto_tokoh
-                        ? asset(ltrim($row->foto_tokoh, '/'))
+                        ? asset('storage/' . preg_replace('#^(storage/|/storage/|img/tokoh/|/img/tokoh/|tokoh/|/tokoh/)#', 'tokoh/', ltrim($row->foto_tokoh, '/')))
                         : asset('img/default-user.png'),
                 ];
             });
