@@ -99,8 +99,8 @@
             <div class="avatar-wrapper mx-auto mb-2">
                 <img src="{{ asset($item->foto ?? 'img/default-user.png') }}" class="avatar-img">
             </div>
-            <div class="fw-semibold">{{ $item->nama }}</div>
-            <div class="text-muted small">{{ $item->jabatan }}</div>
+            <div class="fw-semibold small">{{ $item->nama }}</div>
+            <div class="text-muted" style="font-size:12px;">{{ $item->jabatan }}</div>
         </div>
         <div class="d-flex justify-content-center gap-2 mt-auto">
 
