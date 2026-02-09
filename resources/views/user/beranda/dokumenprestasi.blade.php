@@ -43,7 +43,7 @@
                 
                 <div class="piagam-card fade-up delay-1" onclick="openModal(this)">
                     <div class="piagam-thumb">
-                        <img src="/bbpr/img/piagam/2024/CCF_001473 (1).png" alt="Sertifikat Full" class="card-img">
+                        <img src="/img/piagam/2024/CCF_001473 (1).png" alt="Sertifikat Full" class="card-img">
                         <div class="thumb-overlay"><i class="fa-solid fa-eye"></i></div>
                     </div>
                     <div class="piagam-content">
@@ -55,7 +55,7 @@
 
                 <div class="piagam-card fade-up delay-2" onclick="openModal(this)">
                     <div class="piagam-thumb">
-                        <img src="/bbpr/img/piagam/2024/CCI_000016.jpg" alt="Sertifikat Full" class="card-img">
+                        <img src="/img/piagam/2024/CCI_000016.jpg" alt="Sertifikat Full" class="card-img">
                         <div class="thumb-overlay"><i class="fa-solid fa-eye"></i></div>
                     </div>
                     <div class="piagam-content">
@@ -67,7 +67,7 @@
 
                 <div class="piagam-card fade-up delay-3" onclick="openModal(this)">
                     <div class="piagam-thumb">
-                        <img src="/bbpr/img/piagam/2024/CCI_000024.jpg" alt="Sertifikat Full" class="card-img">
+                        <img src="/img/piagam/2024/CCI_000024.jpg" alt="Sertifikat Full" class="card-img">
                         <div class="thumb-overlay"><i class="fa-solid fa-eye"></i></div>
                     </div>
                     <div class="piagam-content">
@@ -79,7 +79,7 @@
 
                 <div class="piagam-card fade-up delay-1" onclick="openModal(this)">
                     <div class="piagam-thumb">
-                        <img src="/bbpr/img/piagam/2024/CCI_000026.jpg" alt="Sertifikat Full" class="card-img">
+                        <img src="/img/piagam/2024/CCI_000026.jpg" alt="Sertifikat Full" class="card-img">
                         <div class="thumb-overlay"><i class="fa-solid fa-eye"></i></div>
                     </div>
                     <div class="piagam-content">
@@ -91,7 +91,7 @@
 
                 <div class="piagam-card fade-up delay-2" onclick="openModal(this)">
                     <div class="piagam-thumb">
-                        <img src="/bbpr/img/piagam/2024/WhatsApp Image 2025-12-12 at 15.14.52.jpg" alt="Sertifikat Full" class="card-img">
+                        <img src="/img/piagam/2024/WhatsApp Image 2025-12-12 at 15.14.52.jpg" alt="Sertifikat Full" class="card-img">
                         <div class="thumb-overlay"><i class="fa-solid fa-eye"></i></div>
                     </div>
                     <div class="piagam-content">
@@ -103,7 +103,7 @@
 
                 <div class="piagam-card fade-up delay-3" onclick="openModal(this)">
                     <div class="piagam-thumb">
-                        <img src="/bbpr/img/piagam/2025/20251030.png" alt="Sertifikat Full" class="card-img">
+                        <img src="/img/piagam/2025/20251030.png" alt="Sertifikat Full" class="card-img">
                         <div class="thumb-overlay"><i class="fa-solid fa-eye"></i></div>
                     </div>
                     <div class="piagam-content">
@@ -115,7 +115,7 @@
                 
                 <div class="piagam-card fade-up delay-3" onclick="openModal(this)">
                     <div class="piagam-thumb">
-                        <img src="/bbpr/img/piagam/2025/20251229.png" alt="Sertifikat Full" class="card-img">
+                        <img src="/img/piagam/2025/20251229.png" alt="Sertifikat Full" class="card-img">
                         <div class="thumb-overlay"><i class="fa-solid fa-eye"></i></div>
                     </div>
                     <div class="piagam-content">
@@ -127,7 +127,7 @@
                 
                    <div class="piagam-card fade-up delay-3" onclick="openModal(this)">
                     <div class="piagam-thumb">
-                        <img src="/bbpr/img/piagam/2025/CCI_000017.jpg" alt="Sertifikat Full" class="card-img">
+                        <img src="/img/piagam/2025/CCI_000017.jpg" alt="Sertifikat Full" class="card-img">
                         <div class="thumb-overlay"><i class="fa-solid fa-eye"></i></div>
                     </div>
                     <div class="piagam-content">
@@ -139,7 +139,7 @@
                 
                 <div class="piagam-card fade-up delay-3" onclick="openModal(this)">
                     <div class="piagam-thumb">
-                        <img src="/bbpr/img/piagam/2025/CCI_000022.jpg" alt="Sertifikat Full" class="card-img">
+                        <img src="/img/piagam/2025/CCI_000022.jpg" alt="Sertifikat Full" class="card-img">
                         <div class="thumb-overlay"><i class="fa-solid fa-eye"></i></div>
                     </div>
                     <div class="piagam-content">
@@ -151,7 +151,7 @@
                 
                 <div class="piagam-card fade-up delay-3" onclick="openModal(this)">
                     <div class="piagam-thumb">
-                        <img src="/bbpr/img/piagam/2025/CCI_000023.jpg" alt="Sertifikat Full" class="card-img">
+                        <img src="/img/piagam/2025/CCI_000023.jpg" alt="Sertifikat Full" class="card-img">
                         <div class="thumb-overlay"><i class="fa-solid fa-eye"></i></div>
                     </div>
                     <div class="piagam-content">
@@ -163,7 +163,7 @@
                 
                  <div class="piagam-card fade-up delay-3" onclick="openModal(this)">
                     <div class="piagam-thumb">
-                        <img src="/bbpr/img/piagam/2025/CCI_000025.jpg" alt="Sertifikat Full" class="card-img">
+                        <img src="/img/piagam/2025/CCI_000025.jpg" alt="Sertifikat Full" class="card-img">
                         <div class="thumb-overlay"><i class="fa-solid fa-eye"></i></div>
                     </div>
                     <div class="piagam-content">
@@ -175,7 +175,7 @@
                 
                 <div class="piagam-card fade-up delay-3" onclick="openModal(this)">
                     <div class="piagam-thumb">
-                        <img src="/bbpr/img/piagam/2025/CCI_000027.jpg" alt="Sertifikat Full" class="card-img">
+                        <img src="/img/piagam/2025/CCI_000027.jpg" alt="Sertifikat Full" class="card-img">
                         <div class="thumb-overlay"><i class="fa-solid fa-eye"></i></div>
                     </div>
                     <div class="piagam-content">
@@ -187,7 +187,7 @@
                 
                 <div class="piagam-card fade-up delay-3" onclick="openModal(this)">
                     <div class="piagam-thumb">
-                        <img src="/bbpr/img/piagam/2025/Sertifikat Kepemimpinan Ramah dan Santun.jpg" alt="Sertifikat Full" class="card-img">
+                        <img src="/img/piagam/2025/Sertifikat Kepemimpinan Ramah dan Santun.jpg" alt="Sertifikat Full" class="card-img">
                         <div class="thumb-overlay"><i class="fa-solid fa-eye"></i></div>
                     </div>
                     <div class="piagam-content">
@@ -198,11 +198,11 @@
                 </div>
                 
                  <div class="piagam-card fade-up delay-3"
-                     data-src="/bbpr/img/piagam/2025/Sertifikat_PKN_Ibu_Umi.pdf"
+                     data-src="/img/piagam/2025/Sertifikat_PKN_Ibu_Umi.pdf"
                      onclick="openModal(this)">
                 
                     <div class="piagam-thumb">
-                        <img src="/bbpr/img/piagam/2025/Sertifikat_PKN_Ibu_Umi_thumb.png"
+                        <img src="/img/piagam/2025/Sertifikat_PKN_Ibu_Umi_thumb.png"
                             alt="Sertifikat PKN Ibu Umi"
                             class="card-img">
                         <div class="thumb-overlay">
@@ -225,7 +225,7 @@
         </div>
     </section>
 
-    <div id="piagamModal" class="modal-overlay" onclick="closeModal(event)">
+    <div id="piagamModal" class="modal-overlay" onclick="closeModal()">
     <div class="modal-content-simple" onclick="event.stopPropagation()">
         <button class="modal-close-simple" onclick="closeModal()">
     <i class="fa-solid fa-xmark"></i>

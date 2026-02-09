@@ -7,7 +7,7 @@
 
         <div class="berita-grid" style="margin-top: 0; gap: 20px;">
 
-            @forelse ($kontenTerbaru ?? [] as $item)
+            @forelse (($kontenTerbaru ?? collect())->take(4) as $item)
                 <div class="berita-card">
 
                     <div class="berita-img">

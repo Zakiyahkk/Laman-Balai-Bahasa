@@ -7,7 +7,7 @@
         <img id="dailyPantunImg" src="" alt="Pantun Hari Ini" class="popup-img">
 
         <div class="auto-close-timer">
-            Menutup otomatis dalam <span id="countdownTimer">20</span> detik
+            Menutup otomatis dalam <span id="countdownTimer">10</span> detik
         </div>
     </div>
 </div>
@@ -145,7 +145,7 @@
 
         if (popupPantun) {
             let countdownInterval;
-            let timeLeft = 20; // Waktu hitung mundur (detik)
+            let timeLeft = 10; // Waktu hitung mundur (detik)
 
             // Fungsi Tutup & Bersihkan Timer
             window.closeWelcomePopup = function() {

@@ -28,25 +28,7 @@
                                     <span class="app-title">Ahli Bahasa</span>
                                 </div>
                             </a>
-
-                            <a class="access-item" href="https://ppidbbpriau.kemendikdasmen.go.id/form/permohonan" target="_blank" rel="noopener noreferrer">
-                                <div class="icon-wrap color-indigo">
-                                    <i class="fa-solid fa-language"></i>
-                                </div>
-                                <div class="text-wrap">
-                                    <span class="app-title">Penerjemahan</span>
-                                </div>
-                            </a>
-
-                            <a class="access-item" href="https://ppidbbpriau.kemendikdasmen.go.id/form/permohonan" target="_blank" rel="noopener noreferrer">
-                                <div class="icon-wrap color-cyan">
-                                    <i class="fa-solid fa-graduation-cap"></i>
-                                </div>
-                                <div class="text-wrap">
-                                    <span class="app-title">UKBI</span>
-                                </div>
-                            </a>
-
+                            
                             <a class="access-item" href="https://ppidbbpriau.kemendikdasmen.go.id/form/permohonan" target="_blank" rel="noopener noreferrer">
                                 <div class="icon-wrap color-teal">
                                     <i class="fa-solid fa-globe"></i>
@@ -55,13 +37,31 @@
                                     <span class="app-title">BIPA</span>
                                 </div>
                             </a>
-
+                            
                             <a class="access-item" href="https://ppidbbpriau.kemendikdasmen.go.id/form/permohonan" target="_blank" rel="noopener noreferrer">
+                                <div class="icon-wrap color-cyan">
+                                    <i class="fa-solid fa-graduation-cap"></i>
+                                </div>
+                                <div class="text-wrap">
+                                    <span class="app-title">UKBI</span>
+                                </div>
+                            </a>
+                            
+                             <a class="access-item" href="https://ppidbbpriau.kemendikdasmen.go.id/form/permohonan" target="_blank" rel="noopener noreferrer">
                                 <div class="icon-wrap color-blue">
                                     <i class="fa-solid fa-book"></i>
                                 </div>
                                 <div class="text-wrap">
                                     <span class="app-title">Perpustakaan</span>
+                                </div>
+                            </a>
+                            
+                            <a class="access-item" href="https://ppidbbpriau.kemendikdasmen.go.id/form/permohonan" target="_blank" rel="noopener noreferrer">
+                                <div class="icon-wrap color-indigo">
+                                    <i class="fa-solid fa-language"></i>
+                                </div>
+                                <div class="text-wrap">
+                                    <span class="app-title">Penerjemahan</span>
                                 </div>
                             </a>
 
@@ -91,6 +91,17 @@
                                     <span class="app-desc">Sistem Aspirasi&Pelayanan</span>
                                 </div>
                             </a>
+                            
+                             <a class="access-item" href="https://kamusbahasariau.kemendikdasmen.go.id/"
+                                target="_blank" rel="noopener noreferrer">
+                                <div class="icon-wrap color-slate">
+                                    <img src="{{ asset('img/logo/kemala.png') }}" alt="KEMALA">
+                                </div>
+                                <div class="text-wrap">
+                                    <span class="app-title">KEMALA</span>
+                                    <span class="app-desc">Kamus Melayu</span>
+                                </div>
+                            </a>
 
                             <a class="access-item" href="https://madah.kemendikdasmen.go.id/index.php/madah"
                                 target="_blank" rel="noopener noreferrer">
@@ -103,6 +114,28 @@
                                 </div>
                             </a>
 
+                            <a class="access-item" href="#" target="_blank" rel="noopener noreferrer">
+                                <div class="icon-wrap color-slate">
+                                    <img src="{{ asset('img/logo/sembari.png') }}" alt="SEMBARI">
+                                </div>
+                                <div class="text-wrap">
+                                    <span class="app-title">SEMBARI</span>
+                                    <span class="app-desc">Serial Terjemahan</span>
+                                </div>
+                            </a>
+                            
+                            <a class="access-item"
+                                href="https://sites.google.com/view/petapembinaanbahasabalaibahasa?usp=sharing" target="_blank"
+                                rel="noopener noreferrer">
+                                <div class="icon-wrap color-slate">
+                                    <img src="{{ asset('img/logo/peta-bahasa.jpeg') }}" alt="Peta Bahasa">
+                                </div>
+                                <div class="text-wrap">
+                                    <span class="app-title">Peta Bahasa</span>
+                                    <span class="app-desc">Informasi Bahasa</span>
+                                </div>
+                            </a>
+                            
                             <a class="access-item" href="https://majalahserindit.kemendikdasmen.go.id/" target="_blank"
                                 rel="noopener noreferrer">
                                 <div class="icon-wrap color-slate">
@@ -116,38 +149,6 @@
 
                             <a class="access-item" href="#" target="_blank" rel="noopener noreferrer">
                                 <div class="icon-wrap color-slate">
-                                    <img src="{{ asset('img/logo/sembari.png') }}" alt="SEMBARI">
-                                </div>
-                                <div class="text-wrap">
-                                    <span class="app-title">SEMBARI</span>
-                                    <span class="app-desc">Serial Terjemahan</span>
-                                </div>
-                            </a>
-
-                            <a class="access-item"
-                                href="https://sites.google.com/view/petapembinaanbahasabalaibahasa?usp=sharing" target="_blank"
-                                rel="noopener noreferrer">
-                                <div class="icon-wrap color-slate">
-                                    <img src="{{ asset('img/logo/peta-bahasa.jpeg') }}" alt="Peta Bahasa">
-                                </div>
-                                <div class="text-wrap">
-                                    <span class="app-title">Peta Bahasa</span>
-                                    <span class="app-desc">Informasi Bahasa</span>
-                                </div>
-                            </a>
-
-                            <a class="access-item" href="https://sites.google.com/view/peta-pembinaan-sastra-balai-ba?usp=sharing" target="_blank" rel="noopener noreferrer">
-                                <div class="icon-wrap color-slate">
-                                    <i class="fa-solid fa-map-location-dot"></i>
-                                </div>
-                                <div class="text-wrap">
-                                    <span class="app-title">Peta Sastra</span>
-                                    <span class="app-desc">Data Sastra</span>
-                                </div>
-                            </a>
-
-                            <a class="access-item" href="#" target="_blank" rel="noopener noreferrer">
-                                <div class="icon-wrap color-slate">
                                     <i class="fa-solid fa-list-check"></i>
                                 </div>
                                 <div class="text-wrap">
@@ -155,15 +156,14 @@
                                     <span class="app-desc">Komunitas Literasi</span>
                                 </div>
                             </a>
-
-                            <a class="access-item" href="https://kamusbahasariau.kemendikdasmen.go.id/"
-                                target="_blank" rel="noopener noreferrer">
+                            
+                            <a class="access-item" href="https://sites.google.com/view/peta-pembinaan-sastra-balai-ba?usp=sharing" target="_blank" rel="noopener noreferrer">
                                 <div class="icon-wrap color-slate">
-                                    <img src="{{ asset('img/logo/kemala.png') }}" alt="KEMALA">
+                                    <i class="fa-solid fa-map-location-dot"></i>
                                 </div>
                                 <div class="text-wrap">
-                                    <span class="app-title">KEMALA</span>
-                                    <span class="app-desc">Kamus Melayu</span>
+                                    <span class="app-title">Peta Sastra</span>
+                                    <span class="app-desc">Data Sastra</span>
                                 </div>
                             </a>
 
