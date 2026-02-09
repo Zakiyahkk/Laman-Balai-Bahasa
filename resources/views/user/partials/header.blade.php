@@ -246,7 +246,6 @@
             <li class="has-dropdown dropdown-reverse">
                 <a href="javascript:void(0)" onclick="toggleSub(this)"
                     class="{{ request()->is('ziwbk*') ? 'active' : '' }}">
-                    <i class="fa-regular fa-star menu-icon"></i>
                     ZI-WBK
                     <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
                 </a>

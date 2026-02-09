@@ -84,6 +84,56 @@
     .ak-icon-btn { width: 36px; height: 36px; display: flex; justify-content: center; align-items: center; border-radius: 10px; border: 1px solid #e6ecf5; background: #fff; color: #6b7a90; cursor: pointer; transition: all 0.2s; text-decoration: none; }
     .ak-icon-btn:hover { border-color: #1d5aa6; color: #1d5aa6; background: #f0f7ff; }
     .ak-empty { padding: 30px; text-align: center; color: #6b7a90; }
+    
+    /* ===============================
+   IMAGE PREVIEW FIX (PORTRAIT & LANDSCAPE)
+   =============================== */
+
+.ak-image-canvas {
+    flex: 1;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: #f1f5f9;
+    padding: 20px;
+}
+
+.ak-image-canvas img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;   /* 🔥 INI KUNCI BIAR TIDAK KE POTONG */
+    border-radius: 8px;
+    background: #fff;
+}
+
+/* ===== PORTRAIT MODE ===== */
+.ak-preview-box.portrait {
+    height: auto;              /* ⬅️ jangan dikunci 85vh */
+    max-height: 90vh;
+    max-width: 520px;        /* ramping seperti dokumen */
+}
+
+.ak-preview-box.portrait .ak-preview-body {
+    overflow-y: auto;          /* ⬅️ scroll vertical */
+}
+
+.ak-preview-box.portrait .ak-image-canvas {
+    align-items: flex-start;   /* ⬅️ mulai dari atas */
+}
+.ak-preview-box.portrait .ak-image-canvas img {
+    max-height: none;          /* ⬅️ jangan dibatasi */
+    width: 100%;
+    height: auto;       /* tinggi aman */
+}
+
+/* ===== LANDSCAPE MODE ===== */
+.ak-preview-box.landscape {
+    max-width: 900px;
+}
+
+.ak-preview-box.landscape .ak-image-canvas img {
+    max-height: 70vh;
+}
 
     /* Mobile Responsive */
     @media (max-width: 820px) {
@@ -208,14 +258,15 @@
 
                                 <div class="c" data-label="Jenis">
                                     <span class="ak-filepill">
-                                        📄 {{ strtoupper($s['tipe'] ?? 'PDF') }}
+                                        <i class="fa-solid fa-file ak-file-ico"></i>
+                                        {{ strtoupper($s['tipe'] ?? 'PDF') }}
                                     </span>
                                 </div>
 
                                 <div class="c" data-label="Pratinjau">
                                     @if (!empty($s['file']))
                                         <button class="ak-icon-btn ak-preview-btn"
-                                            data-file="{{ asset('storage/' . $s['file']) }}">
+                                            data-file="{{ asset($s['file']) }}">
                                             <i class="fa-regular fa-eye"></i>
                                         </button>
                                     @else
@@ -225,7 +276,8 @@
 
                                 <div class="c" data-label="Unduh">
                                     @if (!empty($s['file']))
-                                        <a class="ak-icon-btn ak-download" href="{{ asset('storage/' . $s['file']) }}">
+                                        <a class="ak-icon-btn ak-download"
+                                           href="{{ route('survei.download', $s['id']) }}">
                                             <i class="fa-solid fa-download"></i>
                                         </a>
                                     @else
@@ -251,6 +303,10 @@
                 </div>
                 <div class="ak-preview-body">
                     <iframe id="akPreviewFrame"></iframe>
+                
+                    <div class="ak-image-canvas">
+                        <img id="akPreviewImage" />
+                    </div>
                 </div>
             </div>
         </div>
@@ -258,27 +314,79 @@
     @endsection
 
     @push('scripts')
-        <script>
-            document.addEventListener('click', function(e) {
-                const btn = e.target.closest('.ak-preview-btn');
-                if (!btn) return;
+<script>
+document.addEventListener('click', function (e) {
+    const btn = e.target.closest('.ak-preview-btn');
+    if (!btn) return;
 
-                const file = btn.dataset.file;
-                if (!file) return;
+    const file = btn.dataset.file;
+    if (!file) return;
 
-                document.getElementById('akPreviewFrame').src =
-                    file + '#toolbar=0&navpanes=0&scrollbar=1';
+    const modalBox = document.querySelector('.ak-preview-box');
+    const modal    = document.getElementById('akPreviewModal');
+    const iframe   = document.getElementById('akPreviewFrame');
+    const canvas   = document.querySelector('.ak-image-canvas');
+    const img      = document.getElementById('akPreviewImage');
 
-                document.getElementById('akPreviewModal')
-                    .classList.add('active');
-            });
+    // ===== RESET =====
+    iframe.style.display = 'none';
+    iframe.src = '';
 
-            document.querySelector('.ak-preview-close')?.addEventListener('click', closePreview);
-            document.querySelector('.ak-preview-overlay')?.addEventListener('click', closePreview);
+    canvas.style.display = 'none';
+    img.style.display = 'none';
+    img.src = '';
 
-            function closePreview() {
-                document.getElementById('akPreviewFrame').src = '';
-                document.getElementById('akPreviewModal').classList.remove('active');
-            }
-        </script>
+    modalBox.classList.remove('portrait', 'landscape');
+
+    const ext = file.split('.').pop().toLowerCase();
+
+    // ===== IMAGE =====
+    if (['jpg','jpeg','png','webp'].includes(ext)) {
+        canvas.style.display = 'flex';
+
+        img.onload = function () {
+            const isPortrait = img.naturalHeight > img.naturalWidth;
+
+            // ðŸ”¥ INI KUNCI UTAMA
+            modalBox.classList.add(isPortrait ? 'portrait' : 'landscape');
+
+            img.style.display = 'block';
+        };
+
+        img.src = file;
+    } 
+    // ===== PDF =====
+    else {
+        modalBox.classList.add('landscape'); // PDF selalu landscape
+        iframe.src = file + '#toolbar=0&navpanes=0&scrollbar=1';
+        iframe.style.display = 'block';
+    }
+
+    modal.classList.add('active');
+});
+
+// ===== CLOSE =====
+function closePreview() {
+    const modalBox = document.querySelector('.ak-preview-box');
+    const modal    = document.getElementById('akPreviewModal');
+    const iframe   = document.getElementById('akPreviewFrame');
+    const img      = document.getElementById('akPreviewImage');
+    const canvas   = document.querySelector('.ak-image-canvas');
+
+    iframe.src = '';
+    iframe.style.display = 'none';
+
+    img.src = '';
+    img.style.display = 'none';
+    canvas.style.display = 'none';
+
+    modalBox.classList.remove('portrait', 'landscape');
+    modal.classList.remove('active');
+}
+
+document.querySelector('.ak-preview-close')?.addEventListener('click', closePreview);
+document.querySelector('.ak-preview-overlay')?.addEventListener('click', closePreview);
+</script>
+
+
     @endpush
