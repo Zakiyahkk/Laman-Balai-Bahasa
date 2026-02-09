@@ -65,6 +65,14 @@
                     <i class="bi bi-journal-text me-2"></i>Publikasi
                 </a>
             </li>
+            
+            <!-- TOKOH -->
+            <li class="nav-item">
+                <a class="nav-link {{ request()->routeIs('admin.tokoh*') ? 'active' : '' }}"
+                    href="{{ route('admin.tokoh') }}">
+                    <i class="bi bi-person-badge me-2"></i>Tokoh
+                </a>
+             </li>
 
             <!-- GALERI -->
             <li class="nav-item">
@@ -116,67 +124,90 @@
 
             <!-- AKUNTABILITAS -->
             <li class="nav-item">
-                <a class="nav-link d-flex justify-content-between align-items-center" href="#" onclick="toggleSubMenu(this)">
-        <div>
-            <i class="bi bi-clipboard-check me-2"></i>Akuntabilitas
-        </div>
-        <i class="bi submenu-arrow {{ $akuntabilitasOpen ? 'bi-caret-down-fill' : 'bi-caret-right-fill' }}"></i>
-    </a>
-    <ul class="nav flex-column ms-3 submenu-list" 
-        style="display: {{ $akuntabilitasOpen ? 'block' : 'none' }}">
+                    <a class="nav-link d-flex justify-content-between align-items-center" href="#" onclick="toggleSubMenu(this)">
+                        <div>
+                            <i class="bi bi-clipboard-check me-2"></i>Akuntabilitas
+                        </div>
+                        <i class="bi submenu-arrow {{ $akuntabilitasOpen ? 'bi-caret-down-fill' : 'bi-caret-right-fill' }}"></i>
+                    </a>
+                    <ul class="nav flex-column ms-3 submenu-list" 
+                        style="display: {{ $akuntabilitasOpen ? 'block' : 'none' }}">
+                        
+                        <li>
+                            <a class="nav-link {{ request()->is('admin/akuntabilitas/renstra*') ? 'active' : '' }}"
+                               href="{{ route('admin.akuntabilitas.index', 'renstra') }}">
+                                <i class="fas fa-arrow-right me-2"></i>Renstra
+                            </a>
+                        </li>
+                
+                        <li>
+                            <a class="nav-link {{ request()->is('admin/akuntabilitas/dipa*') ? 'active' : '' }}"
+                               href="{{ route('admin.akuntabilitas.index', 'dipa') }}">
+                                <i class="fas fa-dollar-sign me-2"></i>DIPA
+                            </a>
+                        </li>
+                
+                        <li>
+                            <a class="nav-link {{ request()->is('admin/akuntabilitas/perjanjian-kinerja*') ? 'active' : '' }}"
+                               href="{{ route('admin.akuntabilitas.index', 'perjanjian-kinerja') }}">
+                                <i class="fas fa-file-signature me-2"></i>Perjanjian Kinerja
+                            </a>
+                        </li>
+                
+                        <li>
+                            <a class="nav-link {{ request()->is('admin/akuntabilitas/rencana-aksi*') ? 'active' : '' }}"
+                               href="{{ route('admin.akuntabilitas.index', 'rencana-aksi') }}">
+                                <i class="fas fa-list-check me-2"></i>Rencana Aksi
+                            </a>
+                        </li>
+                
+                        <li>
+                            <a class="nav-link {{ request()->is('admin/akuntabilitas/lakin*') ? 'active' : '' }}"
+                               href="{{ route('admin.akuntabilitas.index', 'lakin') }}">
+                                <i class="fas fa-list-check me-2"></i>Lakin
+                            </a>
+                        </li>
+                
+                        <li>
+                            <a class="nav-link {{ request()->is('admin/akuntabilitas/sakai*') ? 'active' : '' }}"
+                               href="{{ route('admin.akuntabilitas.index', 'sakai') }}">
+                                <i class="fas fa-list-check me-2"></i>SAKAI
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                 
+                 <!-- ZI - WBK -->
+                    <li class="nav-item">
+                        <a class="nav-link d-flex justify-content-between align-items-center"
+                           href="#"
+                           onclick="toggleSubMenu(this)">
+                            <div>
+                                <i class="bi bi-shield-check me-2"></i>ZI - WBK
+                            </div>
+                            <i class="bi submenu-arrow {{ $ziwbkOpen ? 'bi-caret-down-fill' : 'bi-caret-right-fill' }}"></i>
+                        </a>
+    
+                    <ul class="nav flex-column ms-3 submenu-list"
+                        style="display: {{ $ziwbkOpen ? 'block' : 'none' }}">
+                
+                        <li>
+                            <a class="nav-link {{ request()->routeIs('admin.ziwbk.index') ? 'active' : '' }}"
+                               href="{{ route('admin.ziwbk.index') }}">
+                                <i class="bi bi-folder2-open me-2"></i>Daftar Dokumen
+                            </a>
+                        </li>
+    
+                    <li>
+                        <a class="nav-link {{ request()->routeIs('admin.ziwbk.create') ? 'active' : '' }}"
+                           href="{{ route('admin.ziwbk.create') }}">
+                            <i class="bi bi-upload me-2"></i>Upload Dokumen
+                        </a>
+                    </li>
+            
+                </ul>
+            </li>
         
-        <li>
-            <a class="nav-link {{ request()->is('admin/akuntabilitas/renstra*') ? 'active' : '' }}"
-               href="{{ route('admin.akuntabilitas.index', 'renstra') }}">
-                <i class="fas fa-arrow-right me-2"></i>Renstra
-            </a>
-        </li>
-
-        <li>
-            <a class="nav-link {{ request()->is('admin/akuntabilitas/dipa*') ? 'active' : '' }}"
-               href="{{ route('admin.akuntabilitas.index', 'dipa') }}">
-                <i class="fas fa-dollar-sign me-2"></i>DIPA
-            </a>
-        </li>
-
-        <li>
-            <a class="nav-link {{ request()->is('admin/akuntabilitas/perjanjian-kinerja*') ? 'active' : '' }}"
-               href="{{ route('admin.akuntabilitas.index', 'perjanjian-kinerja') }}">
-                <i class="fas fa-file-signature me-2"></i>Perjanjian Kinerja
-            </a>
-        </li>
-
-        <li>
-            <a class="nav-link {{ request()->is('admin/akuntabilitas/rencana-aksi*') ? 'active' : '' }}"
-               href="{{ route('admin.akuntabilitas.index', 'rencana-aksi') }}">
-                <i class="fas fa-list-check me-2"></i>Rencana Aksi
-            </a>
-        </li>
-
-        <li>
-            <a class="nav-link {{ request()->is('admin/akuntabilitas/lakin*') ? 'active' : '' }}"
-               href="{{ route('admin.akuntabilitas.index', 'lakin') }}">
-                <i class="fas fa-list-check me-2"></i>Lakin
-            </a>
-        </li>
-
-        <li>
-            <a class="nav-link {{ request()->is('admin/akuntabilitas/sakai*') ? 'active' : '' }}"
-               href="{{ route('admin.akuntabilitas.index', 'sakai') }}">
-                <i class="fas fa-list-check me-2"></i>SAKAI
-            </a>
-        </li>
-    </ul>
-</li>
-
-            <!-- TOKOH -->
-            <li class="nav-item">
-                <a class="nav-link {{ request()->routeIs('admin.tokoh*') ? 'active' : '' }}"
-                    href="{{ route('admin.tokoh') }}">
-                    <i class="bi bi-person-badge me-2"></i>Tokoh
-                </a>
-             </li>
-             
             <!-- SEMBARI -->
             <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('admin.sembari*') ? 'active' : '' }}"
@@ -185,44 +216,13 @@
                 </a>
             </li>
              
-             <!-- HASIL SURVEI -->
+            <!-- HASIL SURVEI -->
             <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('admin.hasilsurvei.*') ? 'active' : '' }}"
                    href="{{ route('admin.hasilsurvei.index') }}">
                     <i class="bi bi-bar-chart me-2"></i>Hasil Survei
                 </a>
             </li>
-             
-             <!-- ZI - WBK -->
-                <li class="nav-item">
-                    <a class="nav-link d-flex justify-content-between align-items-center"
-                       href="#"
-                       onclick="toggleSubMenu(this)">
-                        <div>
-                            <i class="bi bi-shield-check me-2"></i>ZI - WBK
-                        </div>
-                        <i class="bi submenu-arrow {{ $ziwbkOpen ? 'bi-caret-down-fill' : 'bi-caret-right-fill' }}"></i>
-                    </a>
-
-                <ul class="nav flex-column ms-3 submenu-list"
-                    style="display: {{ $ziwbkOpen ? 'block' : 'none' }}">
-            
-                    <li>
-                        <a class="nav-link {{ request()->routeIs('admin.ziwbk.index') ? 'active' : '' }}"
-                           href="{{ route('admin.ziwbk.index') }}">
-                            <i class="bi bi-folder2-open me-2"></i>Daftar Dokumen
-                        </a>
-                    </li>
-
-                <li>
-                    <a class="nav-link {{ request()->routeIs('admin.ziwbk.create') ? 'active' : '' }}"
-                       href="{{ route('admin.ziwbk.create') }}">
-                        <i class="bi bi-upload me-2"></i>Upload Dokumen
-                    </a>
-                </li>
-        
-            </ul>
-        </li>
 
 
             <!-- PENGATURAN -->
