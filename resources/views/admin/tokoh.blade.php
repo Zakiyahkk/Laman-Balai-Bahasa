@@ -85,9 +85,9 @@
      data-nama="{{ $item->nama }}"
      data-kategori="{{ $item->kategori }}"
      data-deskripsi="{{ $item->deskripsi ?? '' }}"
-     data-foto="{{ $item->foto_tokoh ? asset($item->foto_tokoh) : asset('img/default-user.png') }}">
+     data-foto="{{ $item->foto_url }}">
 
-    <img src="{{ $item->foto_tokoh ? asset($item->foto_tokoh) : asset('img/default-user.png') }}"
+    <img src="{{ $item->foto_url }}"
          class="tokoh-avatar">
 
     <div class="tokoh-name-col">

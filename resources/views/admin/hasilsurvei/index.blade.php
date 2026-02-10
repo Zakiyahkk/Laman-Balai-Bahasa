@@ -107,7 +107,7 @@
                         <td class="text-center">
                             <button class="btn btn-link p-1 text-primary btn-preview"
                                     data-title="{{ $item->judul_survei }}"
-                                    data-file="{{ asset($item->file_path) }}">
+                                    data-file="{{ $item->file_url }}">
                                 <i class="bi bi-eye"></i>
                             </button>
                         </td>

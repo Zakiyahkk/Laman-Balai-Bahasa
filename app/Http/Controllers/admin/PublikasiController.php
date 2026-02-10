@@ -32,7 +32,20 @@ class PublikasiController extends Controller
             $query->where('kategori', $request->kategori);
         }
 
-        $list = $query->get();
+        $list = $query->get()->map(function ($item) {
+            if ($item->gambar) {
+                // Strip prefix lama
+                $gambar = preg_replace(
+                    '#^(storage/|/storage/|img/publikasi/|/img/publikasi/|publikasi/|/publikasi/)#',
+                    '',
+                    ltrim($item->gambar, '/')
+                );
+                $item->gambar_url = asset('storage/publikasi/' . $gambar);
+            } else {
+                $item->gambar_url = asset('img/logobbpr4.png');
+            }
+            return $item;
+        });
         $total = $list->count();
 
         return view('admin.publikasi.index', compact('list', 'total'));

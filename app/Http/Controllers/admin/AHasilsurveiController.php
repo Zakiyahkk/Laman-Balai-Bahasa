@@ -6,12 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\HasilSurvei;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class AHasilsurveiController extends Controller
 {
-    // lokasi public_html
-    private $publicHtml = '/home/balaibahasariau/public_html/';
 
     /**
      * ===============================
@@ -28,7 +26,23 @@ class AHasilsurveiController extends Controller
             });
         })
         ->orderByDesc('id')
-        ->get();
+        ->get()
+        ->map(function ($item) {
+            // Generate file URL dengan Laravel Storage
+            if ($item->file_path) {
+                // Strip prefix lama
+                $file = preg_replace(
+                    '#^(storage/|/storage/|img/survei/|/img/survei/|survei/|/survei/)#',
+                    '',
+                    ltrim($item->file_path, '/')
+                );
+                $item->file_url = asset('storage/survei/' . $file);
+            } else {
+                $item->file_url = null;
+            }
+            
+            return $item;
+        });
     
         return view('admin.hasilsurvei.index', compact('hasilsurvei'));
     }
@@ -45,7 +59,7 @@ class AHasilsurveiController extends Controller
 
     /**
      * ===============================
-     * STORE
+     * STORE (LARAVEL STORAGE)
      * ===============================
      */
     public function store(Request $request)
@@ -61,38 +75,8 @@ class AHasilsurveiController extends Controller
         $tipeFile = null;
 
         if ($request->hasFile('file')) {
-            $file = $request->file('file');
-
-            $ext  = $file->getClientOriginalExtension();
-            $name = time() . '_' .
-                    Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME))
-                    . '.' . $ext;
-
-            // ===============================
-            // SIMPAN KE PUBLIC LARAVEL
-            // ===============================
-            $laravelFolder = public_path('img/survei');
-            if (!is_dir($laravelFolder)) {
-                mkdir($laravelFolder, 0755, true);
-            }
-
-            $file->move($laravelFolder, $name);
-
-            // ===============================
-            // COPY KE PUBLIC_HTML
-            // ===============================
-            $targetFolder = $this->publicHtml . 'img/survei';
-            if (!is_dir($targetFolder)) {
-                mkdir($targetFolder, 0755, true);
-            }
-
-            copy(
-                $laravelFolder . '/' . $name,
-                $targetFolder . '/' . $name
-            );
-
-            $filePath = 'img/survei/' . $name;
-            $tipeFile = $ext;
+            $filePath = $request->file('file')->store('survei', 'public');
+            $tipeFile = $request->file('file')->getClientOriginalExtension();
         }
 
         HasilSurvei::create([
@@ -115,12 +99,24 @@ class AHasilsurveiController extends Controller
     public function edit($id)
     {
         $hasilsurvei = HasilSurvei::findOrFail($id);
+        
+        if ($hasilsurvei->file_path) {
+            $file = preg_replace(
+                '#^(storage/|/storage/|img/survei/|/img/survei/|survei/|/survei/)#',
+                '',
+                ltrim($hasilsurvei->file_path, '/')
+            );
+            $hasilsurvei->file_url = asset('storage/survei/' . $file);
+        } else {
+            $hasilsurvei->file_url = null;
+        }
+
         return view('admin.hasilsurvei.edit', compact('hasilsurvei'));
     }
 
     /**
      * ===============================
-     * UPDATE
+     * UPDATE (LARAVEL STORAGE)
      * ===============================
      */
     public function update(Request $request, $id)
@@ -139,52 +135,14 @@ class AHasilsurveiController extends Controller
         $data->status       = $request->status;
     
         if ($request->hasFile('file')) {
-
-            // ===============================
-            // HAPUS FILE LAMA DI DUA LOKASI
-            // ===============================
+            // Hapus file lama jika ada
             if ($data->file_path) {
-
-                // public_html
-                $oldPublicHtml = $this->publicHtml . $data->file_path;
-                if (file_exists($oldPublicHtml)) {
-                    unlink($oldPublicHtml);
-                }
-
-                // public laravel
-                $oldLaravel = public_path($data->file_path);
-                if (file_exists($oldLaravel)) {
-                    unlink($oldLaravel);
-                }
+                Storage::disk('public')->delete($data->file_path);
             }
 
-            $file = $request->file('file');
-            $ext  = $file->getClientOriginalExtension();
-            $name = time() . '_' .
-                    Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME))
-                    . '.' . $ext;
-
-            // simpan ke public laravel
-            $laravelFolder = public_path('img/survei');
-            if (!is_dir($laravelFolder)) {
-                mkdir($laravelFolder, 0755, true);
-            }
-
-            $file->move($laravelFolder, $name);
-
-            // copy ke public_html
-            $targetFolder = $this->publicHtml . 'img/survei';
-            if (!is_dir($targetFolder)) {
-                mkdir($targetFolder, 0755, true);
-            }
-
-            copy(
-                $laravelFolder . '/' . $name,
-                $targetFolder . '/' . $name
-            );
-
-            $data->file_path = 'img/survei/' . $name;
-            $data->tipe_file = $ext;
+            // Simpan file baru
+            $data->file_path = $request->file('file')->store('survei', 'public');
+            $data->tipe_file = $request->file('file')->getClientOriginalExtension();
         }
     
         $data->save();
@@ -195,7 +153,7 @@ class AHasilsurveiController extends Controller
 
     /**
      * ===============================
-     * DESTROY
+     * DESTROY (LARAVEL STORAGE)
      * ===============================
      */
     public function destroy($id)
@@ -203,18 +161,7 @@ class AHasilsurveiController extends Controller
         $data = HasilSurvei::findOrFail($id);
     
         if ($data->file_path) {
-
-            // hapus di public_html
-            $filePublicHtml = $this->publicHtml . $data->file_path;
-            if (file_exists($filePublicHtml)) {
-                unlink($filePublicHtml);
-            }
-
-            // hapus di public laravel
-            $fileLaravel = public_path($data->file_path);
-            if (file_exists($fileLaravel)) {
-                unlink($fileLaravel);
-            }
+            Storage::disk('public')->delete($data->file_path);
         }
     
         $data->delete();
@@ -226,7 +173,7 @@ class AHasilsurveiController extends Controller
 
     /**
      * ===============================
-     * DOWNLOAD
+     * DOWNLOAD (LARAVEL STORAGE)
      * ===============================
      */
     public function download($id)
@@ -237,7 +184,7 @@ class AHasilsurveiController extends Controller
             abort(404);
         }
 
-        $file = $this->publicHtml . $data->file_path;
+        $file = storage_path('app/public/' . $data->file_path);
 
         if (!file_exists($file)) {
             abort(404);

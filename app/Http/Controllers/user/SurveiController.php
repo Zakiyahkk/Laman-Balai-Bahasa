@@ -36,12 +36,24 @@ class SurveiController extends Controller
         // TRANSFORM KE FORMAT VIEW
         // =========================
         $surveis = $data->map(function ($item) {
+            // Generate file URL dengan Laravel Storage
+            $fileUrl = null;
+            if ($item->file_path) {
+                // Strip semua prefix lama
+                $file = preg_replace(
+                    '#^(storage/|/storage/|img/survei/|/img/survei/|survei/|/survei/)#',
+                    '',
+                    ltrim($item->file_path, '/')
+                );
+                $fileUrl = 'storage/survei/' . $file;
+            }
+            
             return [
                 'id'    => $item->id,
                 'judul' => $item->judul_survei,
                 'tahun' => Carbon::parse($item->tanggal)->year,
                 'tipe'  => $item->tipe_file,
-                'file'  => $item->file_path,
+                'file'  => $fileUrl,
             ];
         });
 
@@ -68,8 +80,21 @@ class SurveiController extends Controller
     
         if (!$data->file_path) abort(404);
     
-        $file = '/home/aajxwzdj/public_html/bbpr/' . $data->file_path;
-    
+        // Strip prefix dan construct path
+        $filePath = preg_replace(
+            '#^(storage/|/storage/|img/survei/|/img/survei/|survei/|/survei/)#',
+            '',
+            ltrim($data->file_path, '/')
+        );
+        
+        // Try storage path first
+        $file = storage_path('app/public/survei/' . $filePath);
+        
+        // Fallback ke old path jika file belum dipindahkan
+        if (!file_exists($file)) {
+            $file = public_path('img/survei/' . $filePath);
+        }
+        
         if (!file_exists($file)) abort(404);
     
         return response()->download(

@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded",()=>{
                      style="{{ in_array($hasilsurvei->tipe_file,['png','jpg','jpeg']) ? '' : 'display:none;' }}">
                     <div class="position-relative d-inline-block">
                         <img id="imagePreview"
-                             src="{{ in_array($hasilsurvei->tipe_file,['png','jpg','jpeg']) ? asset($hasilsurvei->file_path) : '' }}"
+                             src="{{ in_array($hasilsurvei->tipe_file,['png','jpg','jpeg']) ? $hasilsurvei->file_url : '' }}"
                              class="img-fluid rounded"
                              style="max-height:220px;">
                         <button type="button"
@@ -142,7 +142,7 @@ document.addEventListener("DOMContentLoaded",()=>{
                                 <strong>{{ basename($hasilsurvei->file_path) }}</strong>
                             </div>
                             <div class="d-flex gap-2">
-                                <a href="{{ asset($hasilsurvei->file_path) }}"
+                                <a href="{{ $hasilsurvei->file_url }}"
                                    target="_blank"
                                    class="btn btn-sm text-white"
                                    style="background:#067ac1">

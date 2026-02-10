@@ -107,11 +107,20 @@ class ProfileController extends Controller
             return str_contains(strtolower($item->jabatan), 'kasubbag');
         });
     
-        // Helper foto
+        // Helper foto (sama seperti di pegawai())
         $foto = function ($path) {
-            return $path
-                ? asset(ltrim($path, '/'))
-                : asset('img/default-user.png');
+            if (!$path) {
+                return asset('img/default-user.png');
+            }
+            
+            // Strip semua prefix lama
+            $cleanPath = preg_replace(
+                '#^(storage/|/storage/|img/pegawai/|/img/pegawai/|pegawai/|/pegawai/)#',
+                '',
+                ltrim($path, '/')
+            );
+            
+            return asset('storage/pegawai/' . $cleanPath);
         };
     
         $kepala = [
@@ -158,15 +167,25 @@ class ProfileController extends Controller
         })->values();
     
         // Helper foto
-        $mapFoto = function ($item) {
-            return [
-                'nama'     => $item->nama,
-                'jabatan'  => $item->jabatan,
-                'foto_url' => $item->foto
-                    ? asset(ltrim($item->foto, '/'))
-                    : asset('img/default-user.png'),
-            ];
-        };
+    $mapFoto = function ($item) {
+        $fotoUrl = asset('img/default-user.png');
+        
+        if ($item->foto) {
+            // Strip semua prefix lama
+            $foto = preg_replace(
+                '#^(storage/|/storage/|img/pegawai/|/img/pegawai/|pegawai/|/pegawai/)#',
+                '',
+                ltrim($item->foto, '/')
+            );
+            $fotoUrl = asset('storage/pegawai/' . $foto);
+        }
+        
+        return [
+            'nama'     => $item->nama,
+            'jabatan'  => $item->jabatan,
+            'foto_url' => $fotoUrl,
+        ];
+    };
     
         return view('user.profil.pegawai', [
             'kepala'   => $kepala ? $mapFoto($kepala) : null,

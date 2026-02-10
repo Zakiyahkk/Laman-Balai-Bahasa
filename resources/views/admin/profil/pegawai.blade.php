@@ -50,8 +50,8 @@
             <div class="col-md-6">
                 <div class="card pegawai-card p-3 text-center h-100">
                     <div class="avatar-wrapper mx-auto mb-2">
-                        @if($kepalaBalai && $kepalaBalai->foto)
-                            <img src="{{ asset($kepalaBalai->foto) }}" class="avatar-img">
+                        @if($kepalaBalai && $kepalaBalai->foto_url)
+                            <img src="{{ $kepalaBalai->foto_url }}" class="avatar-img">
                         @else
                             <div class="avatar-img d-flex align-items-center justify-content-center bg-light">
                                 <i class="bi bi-person fs-1 text-muted"></i>
@@ -70,8 +70,8 @@
             <div class="col-md-6">
                 <div class="card pegawai-card p-3 text-center h-100">
                     <div class="avatar-wrapper mx-auto mb-2">
-                        @if($kasubbagUmum && $kasubbagUmum->foto)
-                            <img src="{{ asset($kasubbagUmum->foto) }}" class="avatar-img">
+                        @if($kasubbagUmum && $kasubbagUmum->foto_url)
+                            <img src="{{ $kasubbagUmum->foto_url }}" class="avatar-img">
                         @else
                             <div class="avatar-img d-flex align-items-center justify-content-center bg-light">
                                 <i class="bi bi-person fs-1 text-muted"></i>
@@ -97,7 +97,7 @@
     <div class="card pegawai-card p-3 text-center">
         <div>
             <div class="avatar-wrapper mx-auto mb-2">
-                <img src="{{ asset($item->foto ?? 'img/default-user.png') }}" class="avatar-img">
+                <img src="{{ $item->foto_url }}" class="avatar-img">
             </div>
             <div class="fw-semibold small">{{ $item->nama }}</div>
             <div class="text-muted" style="font-size:12px;">{{ $item->jabatan }}</div>
@@ -121,7 +121,7 @@
                     data-id="{{ $item->pegawai_id }}"
                     data-nama="{{ $item->nama }}"
                     data-jabatan="{{ $item->jabatan }}"
-                    data-foto="{{ $item->foto }}">
+                    data-foto="{{ $item->foto_url }}">
                 <i class="bi bi-pencil"></i> Edit
             </button>
 
@@ -196,7 +196,7 @@ if (str_contains($msg,'hapus')) {
     </div>
      <div class="mb-2 text-center">
         @if(!empty($kepalaBalai->foto))
-            <img id="previewKepala" src="{{ asset($kepalaBalai->foto) }}"
+            <img id="previewKepala" src="{{ $kepalaBalai->foto_url }}"
                  style="width:96px;height:96px;border-radius:50%;object-fit:cover">
         @else
             <i id="previewKepala"
@@ -227,7 +227,7 @@ if (str_contains($msg,'hapus')) {
     </div>
     <div class="mb-2 text-center">
         @if(!empty($kasubbagUmum->foto))
-            <img id="previewKasubbag" src="{{ asset($kasubbagUmum->foto) }}"
+            <img id="previewKasubbag" src="{{ $kasubbagUmum->foto_url }}"
                  style="width:96px;height:96px;border-radius:50%;object-fit:cover">
         @else
             <i id="previewKasubbag"
@@ -370,8 +370,8 @@ document.querySelectorAll('.btn-edit-pegawai').forEach(btn => {
         const foto = this.dataset.foto;
         const preview = document.getElementById('previewFoto');
 
-        if (foto) {
-            preview.src = "{{ asset('') }}" + foto;
+        if (foto && foto !== "{{ asset('img/default-user.png') }}") {
+            preview.src = foto;
             preview.style.display = 'inline-block';
         } else {
             preview.removeAttribute('src');
@@ -462,8 +462,8 @@ resetModal('modalEditPegawai', {
     previewFoto: ''
 });
 resetModal('modalEditStrategis', {
-    previewKepala: pegawaiData.dataset.kepalaFoto,
-    previewKasubbag: pegawaiData.dataset.kasubbagFoto
+    previewKepala: "{{ $kepalaBalai->foto_url ?? '' }}",
+    previewKasubbag: "{{ $kasubbagUmum->foto_url ?? '' }}"
 });
 </script>
 

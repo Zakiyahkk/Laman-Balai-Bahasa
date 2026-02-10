@@ -29,7 +29,22 @@ class ATokohController extends Controller
             $query->where('kategori', '=', $request->kategori);
         }
 
-        $tokoh = $query->get();
+        $tokoh = $query->get()->map(function ($item) {
+            // Generate foto URL dengan Laravel Storage
+            if ($item->foto_tokoh) {
+                // Strip prefix lama
+                $foto = preg_replace(
+                    '#^(storage/|/storage/|img/tokoh/|/img/tokoh/|tokoh/|/tokoh/)#',
+                    '',
+                    ltrim($item->foto_tokoh, '/')
+                );
+                $item->foto_url = asset('storage/tokoh/' . $foto);
+            } else {
+                $item->foto_url = asset('img/default-user.png');
+            }
+            
+            return $item;
+        });
 
         return view('admin.tokoh', [
             'tokoh' => $tokoh,

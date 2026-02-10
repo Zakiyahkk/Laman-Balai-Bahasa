@@ -70,14 +70,7 @@
      data-penulis="{{ strtolower($item->penulis) }}"
      data-kategori="{{ strtolower($item->kategori) }}">
 
-    @php
-        if ($item->gambar) {
-            $img = asset($item->gambar);
-        } else {
-            $img = asset('img/logobbpr4.png');
-        }
-    @endphp
-    <img src="{{ $img }}" class="publication-thumb-lg">
+    <img src="{{ $item->gambar_url }}" class="publication-thumb-lg">
 
 
     <div class="flex-grow-1">
@@ -142,14 +135,7 @@
      data-penulis="{{ strtolower($item->penulis) }}"
      data-kategori="{{ strtolower($item->kategori) }}">
 
-    @php
-        if ($item->gambar) {
-            $img = asset($item->gambar);
-        } else {
-            $img = asset('img/logobbpr4.png');
-        }
-    @endphp
-    <img src="{{ $img }}" class="publication-thumb-lg">
+    <img src="{{ $item->gambar_url }}" class="publication-thumb-lg">
 
 
     <div class="flex-grow-1">
