@@ -1107,8 +1107,26 @@ body {
 
 /* SECTION STYLES */
 .pengumuman-section {
-    padding: 20px 10px;
+    padding: 60px 10px;
+    background-color: #f8fafc;
+    background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+    background-size: 20px 20px;
+    /* Subtle dot pattern */
+    position: relative;
 }
+
+/* White fade at top to blend with previous section if needed */
+.pengumuman-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(to bottom, #fff, transparent);
+    pointer-events: none;
+}
+
 
 .container {
     max-width: 1200px;
@@ -1119,8 +1137,9 @@ body {
 .section-header {
     margin-bottom: 40px;
     display: flex;
-    align-items: center;
-    gap: 15px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
 }
 
 .judul-section {
@@ -1129,15 +1148,24 @@ body {
     color: #1e293b;
     margin: 0;
     position: relative;
+    padding-bottom: 12px;
 }
 
-/* Garis dekorasi biru */
+/* Garis dekorasi biru di bawah teks */
+.judul-section::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: #3b82f6;
+    border-radius: 10px;
+}
+
+/* Hapus .header-line lama */
 .header-line {
-    flex: 1;
-    height: 2px;
-    background: linear-gradient(90deg, #3b82f6 0%, transparent 100%);
-    border-radius: 2px;
-    margin-top: 5px;
+    display: none;
 }
 
 /* LIST CONTAINER */
@@ -1152,21 +1180,22 @@ body {
     display: flex;
     align-items: center;
     background: #ffffff;
-    padding: 20px;
+    padding: 24px;
     border-radius: 16px;
-    border: 1px solid #e2e8f0;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    border-left: 5px solid #3b82f6;
+    /* Permanent accent */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
     cursor: pointer;
-    /* Indikasi bisa diklik */
 }
 
 .pengumuman-item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.08);
-    border-color: #3b82f6;
+    transform: translateY(-5px) scale(1.005);
+    box-shadow: 0 20px 40px -5px rgba(59, 130, 246, 0.15);
+    border-color: #bfdbfe;
 }
 
 /* Dekorasi garis kiri saat hover */
@@ -1453,31 +1482,54 @@ iframe,
 /* RESPONSIVE */
 @media (max-width: 600px) {
     .pengumuman-item {
-        padding: 15px;
+        padding: 12px 15px;
+        /* Compact padding */
+        align-items: flex-start;
+        /* Items align top */
     }
 
     .date-badge {
-        width: 55px;
-        height: 55px;
-        margin-right: 15px;
+        width: 50px !important;
+        height: 50px !important;
+        margin-right: 12px;
+        border-radius: 8px;
+        padding: 5px !important;
     }
 
     .date-badge .day {
-        font-size: 18px;
+        font-size: 16px;
+        margin-bottom: 0;
+    }
+
+    .date-badge .month {
+        font-size: 9px;
+    }
+
+    .date-badge .year {
+        display: none;
+        /* Hide year to save space */
     }
 
     .doc-icon {
-        font-size: 24px;
-        margin-right: 15px;
+        font-size: 20px;
+        margin-right: 12px;
+        margin-top: 5px;
     }
 
     .doc-title {
         font-size: 14px;
+        margin-bottom: 4px;
+        line-height: 1.4;
+    }
+
+    .doc-meta {
+        font-size: 11px;
     }
 
     .action-btn {
         display: none;
     }
+
 
     /* Hide eye button on mobile */
     .modal-container {
@@ -2950,7 +3002,7 @@ body {
     position: relative;
     width: 100%;
     max-width: 100%;
-    height: 50vh;
+    height: 120vh;
     background: #020617;
     overflow: hidden;
     font-family: "Plus Jakarta Sans", sans-serif;

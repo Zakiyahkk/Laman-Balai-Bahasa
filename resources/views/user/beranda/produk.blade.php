@@ -8,9 +8,9 @@
 
 <body>
 
-    <section class="quick-access-section">
+    <section class="quick-access-section" style="padding: 40px 0; margin-bottom: 20px; margin-top: -80px; position: relative; z-index: 20;">
         <div class="container">
-            <div class="quick-access-card">
+            <div class="quick-access-card" style="box-shadow: 0 20px 50px rgba(0,0,0,0.15); background: white; border-radius: 20px; padding: 20px;">
 
                 <!-- WRAPPER INI YANG MENGAKTIFKAN KIRI–KANAN -->
                 <div class="qa-split">
@@ -185,9 +185,6 @@
             </div>
         </div>
     </section>
-
-
-
 
 
 </body>

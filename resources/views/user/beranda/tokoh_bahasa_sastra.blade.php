@@ -4,13 +4,13 @@
 <section class="tokoh-section">
     <div class="tokoh-container">
 
-        <div class="tokoh-header" style="margin-top: -40px;">
+        <div class="tokoh-header" style="padding-top: 60px; margin-bottom: 30px;">
             <h2 class="section-title">
                 Tokoh <span>Bahasa dan Sastra Riau</span>
             </h2>
         </div>
 
-        <div class="slider-wrapper-relative" style="margin-top: -70px;">
+        <div class="slider-wrapper-relative">
 
             <div class="tokoh-next"><i class="fa-solid fa-chevron-right"></i></div>
             <div class="tokoh-prev"><i class="fa-solid fa-chevron-left"></i></div>

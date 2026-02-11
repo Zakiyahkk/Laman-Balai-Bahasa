@@ -1,9 +1,9 @@
-<section class="section pengumuman-section" style="margin-top: -10px;">
-    <div class="container" style="margin-top: -10px;">
+<section class="section pengumuman-section" style="margin-top: 60px; padding-bottom: 60px;">
+    <div class="container">
 
-        <div class="section-header">
-            <h2 class="judul-section">Pengumuman Terbaru</h2>
-            <div class="header-line"></div>
+        <div class="section-header" style="margin-bottom: 40px;">
+            <h2 class="judul-section" style="font-size: 2rem; font-weight: 800; color: #1e293b;">Pengumuman Terbaru</h2>
+            <div class="header-line" style="height: 4px; background: linear-gradient(90deg, #3b82f6, transparent); border-radius: 4px; margin-top: 10px;"></div>
         </div>
 
         <div class="pengumuman-list">
@@ -39,9 +39,10 @@
                     </div>
                 </div>
             @empty
-                <p style="text-align:center;color:#94a3b8;">Belum ada pengumuman.</p>
+                <div class="empty-state">
+                    <p>Belum ada pengumuman.</p>
+                </div>
             @endforelse
-
 
         </div>
     </div>
