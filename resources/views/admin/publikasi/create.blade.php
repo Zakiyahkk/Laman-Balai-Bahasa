@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
     </div>
 
     <div class="header-logo">
-        <img src="https://ppidbbpriau.kemendikdasmen.go.id/bbpr/img/logobbpr4.png" class="img-fluid header-logo">
+        <img src="https://balaibahasariau.kemendikdasmen.go.id/img/logobbpr4.png" class="img-fluid header-logo">
     </div>
 </div>
 

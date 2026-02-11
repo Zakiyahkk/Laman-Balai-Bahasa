@@ -17,7 +17,7 @@
 
 
     <div class="header-logo">
-        <img src="https://ppidbbpriau.kemendikdasmen.go.id/bbpr/img/logobbpr4.png"
+        <img src="https://balaibahasariau.kemendikdasmen.go.id/bbpr/img/logobbpr4.png"
              alt="Logo Balai Bahasa Provinsi Riau"
              class="img-fluid header-logo">
     </div>

@@ -33,17 +33,7 @@ class PublikasiController extends Controller
         }
 
         $list = $query->get()->map(function ($item) {
-            if ($item->gambar) {
-                // Strip prefix lama
-                $gambar = preg_replace(
-                    '#^(storage/|/storage/|img/publikasi/|/img/publikasi/|publikasi/|/publikasi/)#',
-                    '',
-                    ltrim($item->gambar, '/')
-                );
-                $item->gambar_url = asset('storage/publikasi/' . $gambar);
-            } else {
-                $item->gambar_url = asset('img/logobbpr4.png');
-            }
+            $item->gambar_url = $this->getGambarUrl($item->gambar);
             return $item;
         });
         $total = $list->count();
@@ -112,6 +102,9 @@ class PublikasiController extends Controller
 
         if (!$data) abort(404);
 
+        $data->gambar_url = $this->getGambarUrl($data->gambar);
+        $data->file_url   = $this->getFileUrl($data->file);
+
         return view('admin.publikasi.show', compact('data'));
     }
 
@@ -124,6 +117,9 @@ class PublikasiController extends Controller
         if (!$data) {
             abort(404, 'Data publikasi tidak ditemukan.');
         }
+
+        $data->gambar_url = $this->getGambarUrl($data->gambar);
+        $data->file_url   = $this->getFileUrl($data->file);
 
         return view('admin.publikasi.edit', compact('data'));
     }
@@ -240,4 +236,33 @@ class PublikasiController extends Controller
     }
 
 
+    private function getGambarUrl($gambar)
+    {
+        if (!$gambar) {
+            return asset('img/logobbpr4.png');
+        }
+
+        // Strip prefix lama
+        $gambar = preg_replace(
+            '#^(storage/|/storage/|img/publikasi/|/img/publikasi/|publikasi/|/publikasi/)#',
+            '',
+            ltrim($gambar, '/')
+        );
+
+        return asset('storage/publikasi/' . $gambar);
+    }
+
+    private function getFileUrl($file)
+    {
+        if (!$file) return null;
+
+        // Strip prefix lama
+        $file = preg_replace(
+            '#^(storage/|/storage/|img/publikasi/|/img/publikasi/|publikasi/|/publikasi/)#',
+            '',
+            ltrim($file, '/')
+        );
+
+        return asset('storage/publikasi/' . $file);
+    }
 }

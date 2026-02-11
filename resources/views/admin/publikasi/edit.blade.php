@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 
     <div class="position-relative d-inline-block mt-3">
         <img id="preview"
-            src="{{ $data->gambar ? asset($data->gambar) : asset('img/logobbpr4.png') }}"
+            src="{{ $data->gambar_url }}"
             class="img-fluid rounded"
             style="max-height:220px">
         <button type="button"
@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded",()=>{
              style="background:#fff3cd;border:1px solid #ffeeba">
             <div><strong>{{ basename($data->file) }}</strong></div>
             <div class="d-flex gap-2">
-                <a href="{{ $data->file }}" target="_blank"
+                <a href="{{ $data->file_url }}" target="_blank"
                    class="btn btn-sm text-white" style="background:#067ac1">
                     Buka
                 </a>
