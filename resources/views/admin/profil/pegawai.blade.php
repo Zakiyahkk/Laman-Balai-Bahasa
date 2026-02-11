@@ -8,7 +8,7 @@
         <h3 class="mb-1" style="color:#ffffff;">Data Pegawai</h3>
         <p class="mb-0" style="color:#ffffff;">Kelola data pegawai BBP Riau</p>
     </div>
-    <img src="https://ppidbbpriau.kemendikdasmen.go.id/bbpr/img/logobbpr4.png" class="header-logo">
+    <img src="https://balaibahasariau.kemendikdasmen.go.id/img/logobbpr4.png" class="header-logo">
 </div>
 
 {{-- ================= SEARCH + TAMBAH ================= --}}

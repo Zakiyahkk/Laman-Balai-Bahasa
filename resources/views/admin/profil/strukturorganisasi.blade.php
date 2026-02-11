@@ -9,7 +9,7 @@
     </div>
 
     <div class="header-logo">
-        <img src="https://ppidbbpriau.kemendikdasmen.go.id/bbpr/img/logobbpr4.png" class="img-fluid header-logo">
+        <img src="https://balaibahasariau.kemendikdasmen.go.id/img/logobbpr4.png" class="img-fluid header-logo">
     </div>
 </div>
 
@@ -44,7 +44,7 @@
                         @if($kepalaBalai)
                             <div class="card pegawai-card p-3 text-center">
                                 <div class="avatar-wrapper mx-auto mb-2">
-                                    <img src="{{ $kepalaBalai->foto_url }}" class="avatar-img">
+                                    <img src="{{ $kepalaBalai->foto_url }}" class="avatar-img" alt="{{ $kepalaBalai->nama }}">
                                 </div>
                                 <div class="fw-semibold">{{ $kepalaBalai->nama }}</div>
                                 <div class="text-muted small">{{ $kepalaBalai->jabatan }}</div>
@@ -57,7 +57,7 @@
                         @if($kasubbagUmum)
                             <div class="card pegawai-card p-3 text-center">
                                 <div class="avatar-wrapper mx-auto mb-2">
-                                    <img src="{{ $kasubbagUmum->foto_url }}" class="avatar-img">
+                                    <img src="{{ $kasubbagUmum->foto_url }}" class="avatar-img" alt="{{ $kasubbagUmum->nama }}">
                                 </div>
                                 <div class="fw-semibold">{{ $kasubbagUmum->nama }}</div>
                                 <div class="text-muted small">{{ $kasubbagUmum->jabatan }}</div>

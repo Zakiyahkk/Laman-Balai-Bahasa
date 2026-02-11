@@ -102,30 +102,20 @@ class AProfilController extends Controller
     {
         $search = $request->query('search');
     
-        // Helper function (bisa dipindah ke private method jika perlu reuse)
+        // Helper function (via private method)
         $processFoto = function ($item) {
-            if ($item && isset($item->foto) && $item->foto) {
-                $foto = preg_replace(
-                    '#^(storage/|/storage/|img/pegawai/|/img/pegawai/|pegawai/|/pegawai/)#',
-                    '',
-                    ltrim($item->foto, '/')
-                );
-                $item->foto_url = asset('storage/pegawai/' . $foto);
-            } elseif ($item) {
-                $item->foto_url = asset('img/default-user.png');
-            }
-            return $item;
+            return $this->getFotoUrl($item);
         };
     
         $kepalaBalai = DB::table('pegawai')
             ->where('jabatan', 'Kepala Balai')
             ->first();
-        $kepalaBalai = $processFoto($kepalaBalai);
+        $kepalaBalai = $this->getFotoUrl($kepalaBalai);
     
         $kasubbagUmum = DB::table('pegawai')
             ->where('jabatan', 'Kasubbag Umum')
             ->first();
-        $kasubbagUmum = $processFoto($kasubbagUmum);
+        $kasubbagUmum = $this->getFotoUrl($kasubbagUmum);
     
         $pegawai = DB::table('pegawai')
             ->when($search, function ($q) use ($search) {
@@ -135,7 +125,9 @@ class AProfilController extends Controller
             ->whereNotIn('jabatan', ['Kepala Balai', 'Kasubbag Umum'])
             ->orderBy('created_at', 'desc')
             ->get()
-            ->map($processFoto);
+            ->map(function($item) {
+                return $this->getFotoUrl($item);
+            });
     
         return view('admin.profil.pegawai', compact(
             'pegawai',
@@ -248,29 +240,15 @@ class AProfilController extends Controller
     $kasubbagUmum = null;
 
     if ($strukturAktif) {
-        $processFoto = function ($obj) {
-            if ($obj && isset($obj->foto) && $obj->foto) {
-                $foto = preg_replace(
-                    '#^(storage/|/storage/|img/pegawai/|/img/pegawai/|pegawai/|/pegawai/)#',
-                    '',
-                    ltrim($obj->foto, '/')
-                );
-                $obj->foto_url = asset('storage/pegawai/' . $foto);
-            } elseif ($obj) {
-                $obj->foto_url = asset('img/default-user.png');
-            }
-            return $obj;
-        };
-
         $kepalaBalai = $strukturAktif->kepala_balai
             ? json_decode($strukturAktif->kepala_balai)
             : null;
-        $kepalaBalai = $processFoto($kepalaBalai);
+        $kepalaBalai = $this->getFotoUrl($kepalaBalai);
 
         $kasubbagUmum = $strukturAktif->kasubbag_umum
             ? json_decode($strukturAktif->kasubbag_umum)
             : null;
-        $kasubbagUmum = $processFoto($kasubbagUmum);
+        $kasubbagUmum = $this->getFotoUrl($kasubbagUmum);
     }
 
     return view('admin.profil.strukturorganisasi', compact(
@@ -379,4 +357,18 @@ class AProfilController extends Controller
 
 
 
+    private function getFotoUrl($item)
+    {
+        if ($item && isset($item->foto) && $item->foto) {
+            $foto = preg_replace(
+                '#^(storage/|/storage/|img/pegawai/|/img/pegawai/|pegawai/|/pegawai/)#',
+                '',
+                ltrim($item->foto, '/')
+            );
+            $item->foto_url = asset('storage/pegawai/' . $foto);
+        } elseif ($item) {
+            $item->foto_url = asset('img/default-user.png');
+        }
+        return $item;
+    }
 }
