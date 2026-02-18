@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 <section class="mahkota-section" style="margin-top: -90px;">
     <div class="mahkota-container">
@@ -50,7 +48,7 @@
                                         )">
 
                                     <div class="mk-img-frame">
-                                        <img src="{{ $item->foto_url }}" alt="{{ $item->nama }}">
+                                        <img src="{{ $item->foto_url }}" alt="{{ $item->nama }}" width="300" height="400" loading="lazy">
                                     </div>
 
                                     <h4 class="mk-name">{{ $item->nama }}</h4>
@@ -86,7 +84,7 @@
                                     )">
 
                                     <div class="mk-img-frame">
-                                        <img src="{{ $item->foto_url }}" alt="{{ $item->nama }}">
+                                        <img src="{{ $item->foto_url }}" alt="{{ $item->nama }}" width="300" height="400" loading="lazy">
                                     </div>
 
                                     <h4 class="mk-name">{{ $item->nama }}</h4>
@@ -122,7 +120,7 @@
                                     )">
 
                                     <div class="mk-img-frame">
-                                        <img src="{{ $item->foto_url }}" alt="{{ $item->nama }}">
+                                        <img src="{{ $item->foto_url }}" alt="{{ $item->nama }}" width="300" height="400" loading="lazy">
                                     </div>
 
                                     <h4 class="mk-name">{{ $item->nama }}</h4>
@@ -171,8 +169,6 @@
         </div>
     </div>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     if (typeof Swiper === "undefined") return;

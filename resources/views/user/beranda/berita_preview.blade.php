@@ -12,7 +12,7 @@
 
                     <div class="berita-img">
                             <a href="{{ route('berita.show', $item->slug) }}">
-                            <img src="{{ $item->gambar_url }}" alt="{{ $item->judul ?? 'Berita' }}" loading="lazy"
+                            <img src="{{ $item->gambar_url }}" alt="{{ $item->judul ?? 'Berita' }}" width="400" height="225" loading="lazy"
                                 onerror="this.onerror=null;this.src='{{ asset('img/default.jpg') }}';">
                         </a>
                     </div>
